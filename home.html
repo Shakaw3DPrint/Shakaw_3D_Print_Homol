@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Shakaw 3D Print</title>
+  <link rel="stylesheet" href="css/index_styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .home-hero {
+      max-width: 900px;
+      margin: 40px auto 0 auto;
+      padding: 0 20px;
+      text-align: center;
+      color: white;
+    }
+
+    .home-hero h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: white;
+    }
+
+    .home-hero p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    .home-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+
+    .home-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #0077cc;
+      color: white;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: background 0.3s, transform 0.2s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .home-btn-primary:hover {
+      background: #005fa3;
+      transform: scale(1.05);
+    }
+
+    .home-btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 1rem;
+      border: 2px solid rgba(255,255,255,0.4);
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .home-btn-secondary:hover {
+      background: rgba(255,255,255,0.28);
+      transform: scale(1.05);
+    }
+
+    /* CARDS DE DESTAQUE */
+    .highlights {
+      max-width: 900px;
+      margin: 0 auto 60px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .highlight-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 14px;
+      padding: 30px 24px;
+      text-align: center;
+      color: white;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .highlight-card:hover {
+      background: rgba(255,255,255,0.15);
+      transform: translateY(-4px);
+    }
+
+    .highlight-card i {
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+      color: #4fc3f7;
+    }
+
+    .highlight-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: white;
+    }
+
+    .highlight-card p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.6;
+    }
+
+    /* SEÇÃO DE CONTATO */
+    .home-contact {
+      background: rgba(255,255,255,0.06);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 50px 20px;
+      text-align: center;
+      color: white;
+    }
+
+    .home-contact h2 {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+      color: white;
+    }
+
+    .home-contact p {
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 30px;
+      font-size: 1rem;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.95rem;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .contact-link:hover {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+
+    .contact-link.whatsapp {
+      background: #25d366;
+      color: white;
+    }
+
+    .contact-link.instagram {
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      color: white;
+    }
+
+    .contact-link.email {
+      background: #0077cc;
+      color: white;
+    }
+
+    /* DIVISOR */
+    .section-divider {
+      width: 60px;
+      height: 3px;
+      background: #4fc3f7;
+      margin: 0 auto 30px auto;
+      border-radius: 3px;
+    }
+
+    @media (max-width: 600px) {
+      .home-hero h2 {
+        font-size: 1.5rem;
+      }
+
+      .home-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .home-btn-primary,
+      .home-btn-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .contact-links {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .contact-link {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CABEÇALHO -->
+  <div class="header">
+    <img src="https://shakaw3dprint.github.io/Shakaw_3D_Print/assets/img/logo.webp"
+         alt="Logo Shakaw 3D Print" class="logo">
+    <h1>Shakaw 3D Print</h1>
+    <div class="header-links">
+      <a href="home.html">
+        <i class="fas fa-home"></i> Início
+      </a>
+      <a href="catalogo_diorama.html">
+        <i class="fas fa-box-open"></i> Catálogo
+      </a>
+      <a href="outros_projetos.html">
+        <i class="fas fa-images"></i> Outros Projetos
+      </a>
+      <a href="https://www.instagram.com/shakaw3dprint" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
+             alt="Instagram" class="instagram-icon">
+        @shakaw3dprint
+      </a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="home-hero">
+    <h2>Impressão 3D sob medida para seus projetos</h2>
+    <div class="section-divider"></div>
+    <p>
+      Na Shakaw 3D Print você encontra peças personalizadas com alta qualidade
+      de acabamento e atenção aos detalhes em cada impressão.<br>
+      Trabalhamos com dioramas, colecionáveis, protótipos, peças funcionais e muito mais.
+    </p>
+    <div class="home-buttons">
+      <a href="catalogo_diorama.html" class="home-btn-primary">
+        <i class="fas fa-box-open"></i> Ver Catálogo
+      </a>
+      <a href="outros_projetos.html" class="home-btn-secondary">
+        <i class="fas fa-images"></i> Outros Projetos
+      </a>
+    </div>
+  </section>
+
+  <!-- DESTAQUES -->
+  <div class="highlights">
+    <div class="highlight-card">
+      <i class="fas fa-medal"></i>
+      <h3>Qualidade</h3>
+      <p>Configurações otimizadas e revisão manual de cada impressão para garantir o melhor acabamento.</p>
+    </div>
+    <div class="highlight-card">
+      <i class="fas fa-paint-brush"></i>
+      <h3>Personalização</h3>
+      <p>Adaptamos modelos, dimensões e cores para o seu projeto. Do seu jeito, do início ao fim.</p>
+    </div>
+    <div class="highlight-card">
+      <i class="fas fa-comments"></i>
+      <h3>Atendimento direto</h3>
+      <p>Fale com a gente pelo WhatsApp ou Instagram para tirar dúvidas e receber seu orçamento.</p>
+    </div>
+  </div>
+
+  <!-- CONTATO -->
+  <section class="home-contact">
+    <h2>Entre em contato</h2>
+    <div class="section-divider"></div>
+    <p>Quer um orçamento ou tem alguma dúvida? Fale com a gente!</p>
+    <div class="contact-links">
+      <a href="https://wa.me/5511954846647" target="_blank" class="contact-link whatsapp">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+      <a href="https://www.instagram.com/shakaw3dprint" target="_blank" class="contact-link instagram">
+        <i class="fab fa-instagram"></i> Instagram
+      </a>
+      <a href="mailto:shakaw3dprint@hotmail.com" class="contact-link email">
+        <i class="fas fa-envelope"></i> E-mail
+      </a>
+    </div>
+  </section>
+
+</body>
+</html>
