@@ -2,31 +2,22 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Galeria de Projetos - Shakaw 3D Print</title>
-
-  <!-- Mesmo CSS principal do site -->
   <link rel="stylesheet" href="css/index_styles.css">
-
-  <!-- Font Awesome para ícones -->
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Estilos específicos da galeria, complementando index_styles.css */
-
     .gallery-container {
       padding: 20px;
       max-width: 1200px;
-      margin: 0 auto 40px auto;
+      margin: 0 auto;
     }
 
     .gallery-title {
       text-align: center;
       margin: 30px 0;
       font-size: 2rem;
-      color: #333;
+      color: white;
       position: relative;
     }
 
@@ -35,7 +26,7 @@
       display: block;
       width: 80px;
       height: 3px;
-      background: #405DE6;
+      background: #4fc3f7;
       margin: 15px auto;
     }
 
@@ -50,15 +41,15 @@
       position: relative;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
       transition: transform 0.3s, box-shadow 0.3s;
       cursor: pointer;
-      background: #fff;
+      background: rgba(255,255,255,0.05);
     }
 
     .gallery-item:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
 
     .gallery-item img {
@@ -69,13 +60,12 @@
     }
 
     .instagram-post {
-      border: 1px solid #ddd;
+      border: 1px solid rgba(255,255,255,0.1);
       border-radius: 8px;
       overflow: hidden;
       height: 250px;
     }
 
-    /* SnapWidget Carousel */
     .snapwidget-container {
       margin: 40px auto;
       text-align: center;
@@ -83,17 +73,16 @@
 
     .snapwidget-widget {
       border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
-    /* Seção de Contato com Degradê */
+    /* Seção de Contato */
     .contact-section {
-      background: linear-gradient(to bottom, #ffffff 0%, #f5f5f5 100%);
+      background: rgba(255,255,255,0.05);
       padding: 60px 20px;
       text-align: center;
       margin-top: 40px;
-      border-top: 1px solid #e0e0e0;
-      border-bottom: 1px solid #e0e0e0;
+      border-top: 1px solid rgba(255,255,255,0.1);
     }
 
     .contact-info {
@@ -105,14 +94,14 @@
     }
 
     .contact-card {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.1);
       padding: 25px;
       border-radius: 12px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
       min-width: 250px;
       transition: transform 0.3s;
-      backdrop-filter: blur(5px);
-      border: 1px solid rgba(0,0,0,0.05);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: white;
     }
 
     .contact-card:hover {
@@ -121,23 +110,23 @@
 
     .contact-card i {
       font-size: 2.2rem;
-      color: #405DE6;
+      color: #4fc3f7;
       margin-bottom: 15px;
     }
 
     .contact-card h3 {
       margin: 10px 0;
-      color: #333;
+      color: white;
     }
 
     .contact-card p {
       margin-bottom: 15px;
-      color: #555;
+      color: rgba(255,255,255,0.75);
     }
 
     .contact-btn {
       display: inline-block;
-      background: #405DE6;
+      background: #0077cc;
       color: white;
       padding: 10px 20px;
       border-radius: 6px;
@@ -146,10 +135,10 @@
     }
 
     .contact-btn:hover {
-      background: #344ab8;
+      background: #005fa3;
     }
 
-    /* Modal da galeria */
+    /* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -159,7 +148,6 @@
       width: 100%;
       height: 100%;
       background-color: rgba(0,0,0,0.9);
-      overflow: auto;
     }
 
     .modal-content {
@@ -204,17 +192,9 @@
       transition: background 0.3s;
     }
 
-    .modal-nav:hover {
-      background: rgba(0,0,0,0.8);
-    }
-
-    .modal-prev {
-      left: 30px;
-    }
-
-    .modal-next {
-      right: 30px;
-    }
+    .modal-nav:hover { background: rgba(0,0,0,0.8); }
+    .modal-prev { left: 30px; }
+    .modal-next { right: 30px; }
 
     .zoom-controls {
       position: absolute;
@@ -235,15 +215,13 @@
       cursor: pointer;
     }
 
-    .zoom-controls button:hover {
-      background: rgba(0,0,0,0.9);
-    }
+    .zoom-controls button:hover { background: rgba(0,0,0,0.9); }
 
-    /* Aviso de página em construção */
+    /* Banner em construção */
     .construction-banner {
       background-color: #fff8e1;
       border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
       margin: 20px auto;
       max-width: 1200px;
       padding: 20px;
@@ -277,7 +255,7 @@
 
     .construction-message p {
       color: #5d4037;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       margin: 0;
     }
 
@@ -292,81 +270,55 @@
       to { transform: translateY(-5px); }
     }
 
-    /* Mobile */
     @media (max-width: 768px) {
-      .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      }
-
-      .snapwidget-widget {
-        width: 100% !important;
-        height: 400px !important;
-      }
-
-      .contact-card {
-        padding: 20px;
-      }
-
-      .modal-nav {
-        font-size: 30px;
-        padding: 10px;
-      }
+      .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+      .snapwidget-widget { width: 100% !important; height: 400px !important; }
+      .modal-nav { font-size: 30px; padding: 10px; }
     }
 
     @media (max-width: 600px) {
-      .construction-banner {
-        flex-direction: column;
-        text-align: center;
-      }
+      .construction-banner { flex-direction: column; text-align: center; }
     }
 
     @media (max-width: 480px) {
-      .gallery-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .gallery-title {
-        font-size: 1.5rem;
-      }
-
-      .contact-info {
-        flex-direction: column;
-        gap: 20px;
-      }
-
-      #modalImg {
-        max-width: 95%;
-        max-height: 80%;
-      }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-title { font-size: 1.5rem; }
+      .contact-info { flex-direction: column; gap: 20px; }
+      #modalImg { max-width: 95%; max-height: 80%; }
     }
   </style>
 </head>
 <body>
 
-  <!-- AVISO DE PÁGINA EM CONSTRUÇÃO (se quiser manter) -->
+  <!-- AVISO DE PÁGINA EM CONSTRUÇÃO -->
   <div class="construction-banner">
     <img src="https://media1.giphy.com/media/Mah9dFWo1WZX0WM62Q/giphy.gif"
          alt="Pinguim construtor">
     <div class="construction-message">
       <h2>Ops! Estamos em obras!</h2>
-      <p>Desculpe o transtorno, esta página está em construção. Em breve mais projetos!</p>
+      <p>Esta página está em construção. Em breve mais projetos incríveis!</p>
     </div>
   </div>
 
-  <!-- CABEÇALHO (alinhado com o index.html) -->
+  <!-- CABEÇALHO -->
   <div class="header">
     <img src="https://shakaw3dprint.github.io/Shakaw_3D_Print/assets/img/logo.webp"
          alt="Logo Shakaw 3D Print" class="logo">
     <h1>Shakaw 3D Print</h1>
     <div class="header-links">
-      <a href="index.html">
-        <i class="fas fa-home"></i> Catálogo
+      <a href="home.html">
+        <i class="fas fa-home"></i> Início
+      </a>
+      <a href="catalogo_diorama.html">
+        <i class="fas fa-box-open"></i> Catálogo
       </a>
       <a href="outros_projetos.html">
         <i class="fas fa-images"></i> Outros Projetos
       </a>
       <a href="https://www.instagram.com/shakaw3dprint" target="_blank">
-        <i class="fab fa-instagram"></i> @shakaw3dprint
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
+             alt="Instagram" class="instagram-icon">
+        @shakaw3dprint
       </a>
     </div>
   </div>
@@ -387,9 +339,8 @@
   <!-- GALERIA DE PROJETOS -->
   <div class="gallery-container">
     <h2 class="gallery-title">Galeria de Projetos</h2>
-
     <div class="gallery-grid">
-      <!-- Post do Instagram incorporado -->
+
       <div class="gallery-item instagram-post">
         <blockquote
           class="instagram-media"
@@ -399,38 +350,27 @@
         </blockquote>
       </div>
 
-      <!-- Outras imagens da galeria -->
       <div class="gallery-item">
-        <img src="assets/img/projeto1.webp"
-             alt="Projeto 1"
-             loading="lazy">
+        <img src="assets/img/projeto1.webp" alt="Projeto 1" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/img/projeto2.webp" alt="Projeto 2" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/img/projeto3.webp" alt="Projeto 3" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/img/projeto4.webp" alt="Projeto 4" loading="lazy">
       </div>
 
-      <div class="gallery-item">
-        <img src="assets/img/projeto2.webp"
-             alt="Projeto 2"
-             loading="lazy">
-      </div>
-
-      <div class="gallery-item">
-        <img src="assets/img/projeto3.webp"
-             alt="Projeto 3"
-             loading="lazy">
-      </div>
-
-      <div class="gallery-item">
-        <img src="assets/img/projeto4.webp"
-             alt="Projeto 4"
-             loading="lazy">
-      </div>
     </div>
   </div>
 
   <!-- SEÇÃO DE CONTATO -->
   <section class="contact-section">
     <h2 class="gallery-title">Entre em Contato</h2>
-
     <div class="contact-info">
+
       <div class="contact-card">
         <i class="fas fa-envelope"></i>
         <h3>Email</h3>
@@ -451,26 +391,22 @@
         <i class="fab fa-instagram"></i>
         <h3>Instagram</h3>
         <p>@shakaw3dprint</p>
-        <a href="https://www.instagram.com/shakaw3dprint"
-           target="_blank"
-           class="contact-btn">
+        <a href="https://www.instagram.com/shakaw3dprint" target="_blank" class="contact-btn">
           Seguir
         </a>
       </div>
+
     </div>
   </section>
 
-  <!-- MODAL DE IMAGENS DA GALERIA -->
+  <!-- MODAL DE IMAGENS -->
   <div id="imgModal" class="modal">
     <span class="close" onclick="closeModal()">&times;</span>
     <button class="modal-nav modal-prev" onclick="navigateModal(-1)">❮</button>
-
     <div class="modal-content">
       <img id="modalImg" src="" alt="Imagem ampliada">
     </div>
-
     <button class="modal-nav modal-next" onclick="navigateModal(1)">❯</button>
-
     <div class="zoom-controls">
       <button onclick="zoomImage(0.2)">+</button>
       <button onclick="zoomImage(-0.2)">-</button>
@@ -478,24 +414,19 @@
     </div>
   </div>
 
-  <!-- BOTÕES FLUTUANTES BÁSICOS (sem painel de interesses aqui) -->
+  <!-- BOTÃO VOLTAR AO TOPO -->
   <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-          id="backToTopBtn"
-          title="Voltar ao topo">⬆️</button>
+          id="backToTopBtn" title="Voltar ao topo">⬆️</button>
 
   <!-- SCRIPTS -->
   <script async src="//www.instagram.com/embed.js"></script>
 
   <script>
-    // Lógica da galeria desta página (independente do index_script.js)
-
     let galleryImages = [];
     let currentImageIndex = 0;
 
     document.addEventListener('DOMContentLoaded', function() {
-      // Pega todas as imagens da galeria (apenas <img>, não o blockquote do Instagram)
       galleryImages = Array.from(document.querySelectorAll('.gallery-item img'));
-
       galleryImages.forEach((img, index) => {
         img.addEventListener('click', () => openModal(index));
       });
@@ -504,7 +435,6 @@
     function openModal(index) {
       const modal = document.getElementById('imgModal');
       const modalImg = document.getElementById('modalImg');
-
       currentImageIndex = index;
       modalImg.src = galleryImages[currentImageIndex].src;
       modal.style.display = 'block';
@@ -512,32 +442,22 @@
     }
 
     function closeModal() {
-      const modal = document.getElementById('imgModal');
-      modal.style.display = 'none';
+      document.getElementById('imgModal').style.display = 'none';
       document.body.style.overflow = 'auto';
     }
 
     function navigateModal(direction) {
       currentImageIndex += direction;
-
-      if (currentImageIndex >= galleryImages.length) {
-        currentImageIndex = 0;
-      } else if (currentImageIndex < 0) {
-        currentImageIndex = galleryImages.length - 1;
-      }
-
-      document.getElementById('modalImg').src =
-        galleryImages[currentImageIndex].src;
+      if (currentImageIndex >= galleryImages.length) currentImageIndex = 0;
+      else if (currentImageIndex < 0) currentImageIndex = galleryImages.length - 1;
+      document.getElementById('modalImg').src = galleryImages[currentImageIndex].src;
     }
 
     function zoomImage(scale) {
       const img = document.getElementById('modalImg');
-      const currentScale =
-        parseFloat((img.style.transform || 'scale(1)')
-          .replace('scale(', '')
-          .replace(')', '')
-        ) || 1;
-
+      const currentScale = parseFloat(
+        (img.style.transform || 'scale(1)').replace('scale(', '').replace(')', '')
+      ) || 1;
       img.style.transform = `scale(${currentScale + scale})`;
     }
 
@@ -545,27 +465,27 @@
       document.getElementById('modalImg').style.transform = 'scale(1)';
     }
 
-    // Fechar modal clicando fora da imagem
     window.addEventListener('click', function(event) {
       const modal = document.getElementById('imgModal');
-      if (event.target === modal) {
-        closeModal();
-      }
+      if (event.target === modal) closeModal();
     });
 
-    // Navegação por teclado
     document.addEventListener('keydown', function(event) {
       const modal = document.getElementById('imgModal');
       if (modal.style.display === 'block') {
-        if (event.key === 'Escape') {
-          closeModal();
-        } else if (event.key === 'ArrowLeft') {
-          navigateModal(-1);
-        } else if (event.key === 'ArrowRight') {
-          navigateModal(1);
-        }
+        if (event.key === 'Escape') closeModal();
+        else if (event.key === 'ArrowLeft') navigateModal(-1);
+        else if (event.key === 'ArrowRight') navigateModal(1);
       }
     });
+
+    // Botão voltar ao topo
+    window.onscroll = function() {
+      const btn = document.getElementById('backToTopBtn');
+      if (btn) btn.style.display =
+        (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100)
+          ? 'block' : 'none';
+    };
   </script>
 </body>
 </html>
