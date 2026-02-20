@@ -3,21 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Shakaw 3D Print</title>
+  <title>Catálogo - Shakaw 3D Print</title>
   <link rel="stylesheet" href="css/index_styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <!-- CABEÇALHO ATUALIZADO -->
+
+  <!-- CABEÇALHO -->
   <div class="header">
-    <img src="https://shakaw3dprint.github.io/Shakaw_3D_Print/assets/img/logo.webp" alt="Logo Shakaw 3D Print" class="logo">
+    <img src="https://shakaw3dprint.github.io/Shakaw_3D_Print/assets/img/logo.webp"
+         alt="Logo Shakaw 3D Print" class="logo">
     <h1>Shakaw 3D Print</h1>
     <div class="header-links">
-      <a href="https://www.instagram.com/shakaw3dprint" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="instagram-icon">
-        @shakaw3dprint
+      <a href="home.html">
+        <i class="fas fa-home"></i> Início
       </a>
-      <a href="outros_projetos.html" target="_blank">
-        Outros Projetos
+      <a href="catalogo_diorama.html">
+        <i class="fas fa-box-open"></i> Catálogo
+      </a>
+      <a href="outros_projetos.html">
+        <i class="fas fa-images"></i> Outros Projetos
+      </a>
+      <a href="https://www.instagram.com/shakaw3dprint" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
+             alt="Instagram" class="instagram-icon">
+        @shakaw3dprint
       </a>
     </div>
   </div>
@@ -47,56 +57,62 @@
     <div class="zoom-controls">
       <button onclick="zoomImage(0.2)">+</button>
       <button onclick="zoomImage(-0.2)">-</button>
-      <button onclick="resetZoom()">Reset</button>
+      <button onclick="resetZoomAndPan()">Reset</button>
     </div>
   </div>
 
   <!-- MODAL PARA FORMULÁRIO DE CONTATO -->
   <div id="contactModal" class="contact-modal">
     <div class="contact-modal-content">
-      <span class="close-contact" onclick="document.getElementById('contactModal').style.display='none'">&times;</span>
+      <span class="close-contact"
+            onclick="document.getElementById('contactModal').style.display='none'">&times;</span>
       <h2>Enviar Interesses</h2>
-      <form id="contactForm" action="https://script.google.com/macros/s/AKfycbypHVPUQFxuGJNoawgsXZFZqGwFIMNcWhcJDb0Yb2uCwuRz8QjLoR29PyMmI661wwaUyg/exec" method="POST">
-        <input type="hidden" name="_next" value="https://shakaw3dprint.github.io/Shakaw_3D_Print/obrigado.html">
+      <form id="contactForm"
+            action="https://script.google.com/macros/s/AKfycbypHVPUQFxuGJNoawgsXZFZqGwFIMNcWhcJDb0Yb2uCwuRz8QjLoR29PyMmI661wwaUyg/exec"
+            method="POST">
+        <input type="hidden" name="_next"
+               value="https://shakaw3dprint.github.io/Shakaw_3D_Print/obrigado.html">
         <input type="hidden" id="itemsData" name="items_data">
-        
+
         <div class="form-section">
           <label for="name">Nome:</label>
           <input type="text" id="name" name="name" required>
-          
+
           <label for="email">E-mail:</label>
           <input type="email" id="email" name="email" required>
-          
+
           <label for="whatsapp">WhatsApp:</label>
-          <input type="tel" id="whatsapp" name="whatsapp" placeholder="(00) 00000-0000" required>
+          <input type="tel" id="whatsapp" name="whatsapp"
+                 placeholder="(00) 00000-0000" required>
         </div>
-        
+
         <div class="form-section">
           <h3>Resumo dos Itens Selecionados</h3>
           <div id="selectedItemsSummary" class="items-summary"></div>
         </div>
-        
+
         <div class="form-section">
           <label for="customMessage">Mensagem Adicional:</label>
-          <textarea id="customMessage" name="custom_message" rows="4" placeholder="Digite aqui qualquer informação adicional..."></textarea>
+          <textarea id="customMessage" name="custom_message" rows="4"
+                    placeholder="Digite aqui qualquer informação adicional..."></textarea>
         </div>
-        
+
         <button type="submit">Enviar Interesses</button>
       </form>
     </div>
   </div>
 
-  <!-- BOTÃO "VOLTAR AO TOPO" -->
-  <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" id="backToTopBtn" title="Voltar ao topo">⬆️ Topo</button>
+  <!-- BOTÃO VOLTAR AO TOPO -->
+  <button id="backToTopBtn" title="Voltar ao topo">⬆️ Topo</button>
 
   <!-- PAINEL DE INTERESSES -->
- <div id="interestPanel">
-  <button id="closeInterestPanelBtn" class="close-interest-panel-btn">&times;</button> 
-  <h3>Lista de interesses</h3>
-  <ul id="interestList"></ul>
-  <div id="interestTotal"></div> <!-- ADICIONE ESTA LINHA AQUI -->
-     <button onclick="showContactModal()" style="...">Enviar Interesses</button>
-</div>
+  <div id="interestPanel">
+    <button id="closeInterestPanelBtn" class="close-interest-panel-btn">&times;</button>
+    <h3>Lista de interesses</h3>
+    <ul id="interestList"></ul>
+    <div id="interestTotal"></div>
+    <button onclick="showContactModal()">Enviar Interesses</button>
+  </div>
 
   <!-- BOTÃO PARA ABRIR PAINEL DE INTERESSES -->
   <button class="interest-btn">💚 Ver interesses</button>
@@ -105,4 +121,3 @@
   <script src="js/index_script.js"></script>
 </body>
 </html>
-
