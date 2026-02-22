@@ -691,7 +691,7 @@
 // =============================================
 // SENHA
 // =============================================
-const ADMIN_PASSWORD = "Er!6736**";
+var ADMIN_PASSWORD = "Er!6736**";
 
 function checkPassword() {
   var input        = document.getElementById("adminPassword");
@@ -720,62 +720,49 @@ function checkPassword() {
 }
 
 // =============================================
+// ESTADO DAS IMAGENS (declarado antes do DOM)
+// =============================================
+var mainImgData  = null;
+var thumbsData   = [];
+var carouselData = null;
+
+// =============================================
 // INICIALIZAÇÃO DO DOM
 // =============================================
 document.addEventListener("DOMContentLoaded", function() {
-  // Estado inicial
   document.getElementById("loginScreen").style.display  = "block";
   document.getElementById("adminContent").style.display = "none";
 
-  // Enter no campo de senha
   document.getElementById("adminPassword").addEventListener("keydown", function(e) {
     if (e.key === "Enter") checkPassword();
   });
 
-  // Tabs
   document.querySelectorAll(".tab-btn").forEach(function(btn) {
     btn.addEventListener("click", function() {
-      document.querySelectorAll(".tab-btn").forEach(function(b) {
-        b.classList.remove("active");
-      });
-      document.querySelectorAll(".tab-content").forEach(function(c) {
-        c.classList.remove("active");
-      });
+      document.querySelectorAll(".tab-btn").forEach(function(b) { b.classList.remove("active"); });
+      document.querySelectorAll(".tab-content").forEach(function(c) { c.classList.remove("active"); });
       btn.classList.add("active");
       document.getElementById(btn.dataset.tab).classList.add("active");
       if (btn.dataset.tab === "tab-json") updateAllJSON();
     });
   });
 
-  // Setup uploads
-  setupUpload(
-    "mainImgInput", "mainImgArea",
-    function(results) {
-      if (!results.length) return;
-      mainImgData = results[0];
-      renderPreviews("mainImgPreview", [mainImgData], true);
-    },
-    "mainProgressBar", "mainStatus"
-  );
+  setupUpload("mainImgInput", "mainImgArea", function(results) {
+    if (!results.length) return;
+    mainImgData = results[0];
+    renderPreviews("mainImgPreview", [mainImgData], true);
+  }, "mainProgressBar", "mainStatus");
 
-  setupUpload(
-    "thumbsInput", "thumbsArea",
-    function(results) {
-      thumbsData = thumbsData.concat(results);
-      renderPreviews("thumbsPreview", thumbsData, true);
-    },
-    "thumbsProgressBar", "thumbsStatus"
-  );
+  setupUpload("thumbsInput", "thumbsArea", function(results) {
+    thumbsData = thumbsData.concat(results);
+    renderPreviews("thumbsPreview", thumbsData, true);
+  }, "thumbsProgressBar", "thumbsStatus");
 
-  setupUpload(
-    "carouselImgInput", "carouselArea",
-    function(results) {
-      if (!results.length) return;
-      carouselData = results[0];
-      renderPreviews("carouselImgPreview", [carouselData], false);
-    },
-    "carouselProgressBar", "carouselStatus"
-  );
+  setupUpload("carouselImgInput", "carouselArea", function(results) {
+    if (!results.length) return;
+    carouselData = results[0];
+    renderPreviews("carouselImgPreview", [carouselData], false);
+  }, "carouselProgressBar", "carouselStatus");
 });
 
 // =============================================
@@ -813,41 +800,28 @@ var ctx    = canvas.getContext("2d");
 function convertToWebP(file, quality) {
   return new Promise(function(resolve, reject) {
     var reader = new FileReader();
-
     reader.onerror = function() { reject(new Error("Erro ao ler arquivo.")); };
-
-    reader.onload = function(e) {
+    reader.onload = function(ev) {
       var img = new Image();
-
       img.onerror = function() { reject(new Error("Erro ao carregar imagem.")); };
-
       img.onload = function() {
         var w = img.width;
         var h = img.height;
         var MAX = 1600;
-
-        if (w > MAX) {
-          h = Math.round(h * MAX / w);
-          w = MAX;
-        }
-
+        if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
         canvas.width  = w;
         canvas.height = h;
         ctx.clearRect(0, 0, w, h);
         ctx.drawImage(img, 0, 0, w, h);
-
-        var webpUrl = canvas.toDataURL("image/webp", quality);
-        resolve(webpUrl);
+        resolve(canvas.toDataURL("image/webp", quality));
       };
-
-      img.src = e.target.result;
+      img.src = ev.target.result;
     };
-
     reader.readAsDataURL(file);
   });
 }
 
-async function convertMultiple(files, quality, progressBarId, statusId) {
+function convertMultiple(files, quality, progressBarId, statusId) {
   var progressEl = document.getElementById(progressBarId).parentElement;
   var barEl      = document.getElementById(progressBarId);
   var statusEl   = document.getElementById(statusId);
@@ -856,37 +830,38 @@ async function convertMultiple(files, quality, progressBarId, statusId) {
   barEl.style.width        = "0%";
 
   var results = [];
+  var i = 0;
 
-  for (var i = 0; i < files.length; i++) {
+  function processNext() {
+    if (i >= files.length) {
+      barEl.style.width    = "100%";
+      statusEl.textContent = "Convertida(s): " + results.length + " imagem(ns) para WebP.";
+      setTimeout(function() {
+        progressEl.style.display = "none";
+        barEl.style.width        = "0%";
+      }, 2500);
+      return Promise.resolve(results);
+    }
+
     var file = files[i];
     statusEl.textContent = "Convertendo " + (i + 1) + " de " + files.length + ": " + file.name;
     barEl.style.width    = Math.round((i / files.length) * 100) + "%";
+    i++;
 
-    try {
-      var webpUrl = await convertToWebP(file, quality);
-      results.push({ name: file.name, webpUrl: webpUrl });
-    } catch(err) {
-      console.error("Erro ao converter:", file.name, err);
-    }
+    return convertToWebP(file, quality)
+      .then(function(webpUrl) {
+        results.push({ name: file.name, webpUrl: webpUrl });
+      })
+      .catch(function(err) {
+        console.error("Erro ao converter:", file.name, err);
+      })
+      .then(function() {
+        return processNext();
+      });
   }
 
-  barEl.style.width    = "100%";
-  statusEl.textContent = "Convertida(s): " + results.length + " imagem(ns) para WebP.";
-
-  setTimeout(function() {
-    progressEl.style.display = "none";
-    barEl.style.width        = "0%";
-  }, 2500);
-
-  return results;
+  return processNext();
 }
-
-// =============================================
-// ESTADO DAS IMAGENS
-// =============================================
-var mainImgData  = null;
-var thumbsData   = [];
-var carouselData = null;
 
 // =============================================
 // SETUP UPLOAD
@@ -895,16 +870,19 @@ function setupUpload(inputId, areaId, onConverted, progressBarId, statusId) {
   var input = document.getElementById(inputId);
   var area  = document.getElementById(areaId);
 
-  async function handleFiles(files) {
-    var arr = Array.from(files).filter(function(f) {
-      return f.type.startsWith("image/");
-    });
+  function handleFiles(files) {
+    var arr = [];
+    for (var i = 0; i < files.length; i++) {
+      if (files[i].type.indexOf("image/") === 0) arr.push(files[i]);
+    }
     if (!arr.length) return;
 
     var qualityEl = document.getElementById("webpQuality");
     var quality   = qualityEl ? parseInt(qualityEl.value) / 100 : 0.85;
-    var results   = await convertMultiple(arr, quality, progressBarId, statusId);
-    onConverted(results);
+
+    convertMultiple(arr, quality, progressBarId, statusId).then(function(results) {
+      onConverted(results);
+    });
   }
 
   input.addEventListener("change", function() {
@@ -931,30 +909,31 @@ function setupUpload(inputId, areaId, onConverted, progressBarId, statusId) {
 // =============================================
 // RENDER PREVIEWS
 // =============================================
+function removeExtension(filename) {
+  var lastDot = filename.lastIndexOf(".");
+  if (lastDot === -1) return filename;
+  return filename.substring(0, lastDot);
+}
+
 function renderPreviews(containerId, items, showRemove) {
   var container = document.getElementById(containerId);
   container.innerHTML = "";
 
   items.forEach(function(item, i) {
-    var div   = document.createElement("div");
+    var div = document.createElement("div");
     div.className = "preview-item";
 
-    var img   = document.createElement("img");
-    img.src   = item.webpUrl;
-    img.alt   = item.name;
+    var img = document.createElement("img");
+    img.src = item.webpUrl;
+    img.alt = item.name;
 
     var badge = document.createElement("div");
     badge.className   = "preview-badge";
     badge.textContent = "WebP";
 
-    // CORREÇÃO: regex em uma única linha sem quebra
-    var nameWithoutExt = item.name.replace(/\.[^.]+
-$
-/, "");
-
     var label = document.createElement("div");
     label.className   = "preview-label";
-    label.textContent = nameWithoutExt + ".webp";
+    label.textContent = removeExtension(item.name) + ".webp";
 
     div.appendChild(img);
     div.appendChild(badge);
@@ -962,8 +941,8 @@ $
 
     if (showRemove) {
       var btn = document.createElement("button");
-      btn.className = "remove-preview";
-      btn.textContent = "×";
+      btn.className   = "remove-preview";
+      btn.textContent = "x";
       btn.onclick = (function(index, cId) {
         return function() {
           if (cId === "mainImgPreview") {
@@ -989,16 +968,13 @@ $
 // NOME SEGURO PARA ARQUIVO
 // =============================================
 function safeName(str) {
-  // CORREÇÃO: regex em uma única linha sem quebra
-  return str.toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "_")
-    .replace(/
-^
-_+|_+
-$
-/g, "");
+  var s = str.toLowerCase();
+  s = s.normalize("NFD");
+  s = s.replace(/[\u0300-\u036f]/g, "");
+  s = s.replace(/[^a-z0-9]+/g, "_");
+  while (s.charAt(0) === "_") s = s.substring(1);
+  while (s.charAt(s.length - 1) === "_") s = s.substring(0, s.length - 1);
+  return s;
 }
 
 // =============================================
@@ -1014,33 +990,34 @@ function nextId(catalog) {
   }
 
   var nums = list.map(function(p) {
-    return parseInt((p.id || "").replace(/\D/g, "")) || 0;
+    var n = parseInt((p.id || "").replace(/[^0-9]/g, ""));
+    return isNaN(n) ? 0 : n;
   });
 
   var next = nums.length ? Math.max.apply(null, nums) + 1 : 1;
-  return prefix + "-" + (next < 10 ? "0" + next : "" + next);
+  return prefix + "-" + (next < 10 ? "0" + next : String(next));
 }
 
 // =============================================
 // ADICIONAR PRODUTO
 // =============================================
-async function addProduct() {
+function addProduct() {
   var catalog     = document.getElementById("productCatalog").value;
   var name        = document.getElementById("productName").value.trim();
   var description = document.getElementById("productDescription").value.trim();
   var price       = document.getElementById("productPrice").value.trim();
 
   if (!name)        { showToast("Preencha o nome do produto.", "error"); return; }
-  if (!description) { showToast("Preencha a descrição.", "error"); return; }
+  if (!description) { showToast("Preencha a descricao.", "error"); return; }
   if (!mainImgData) { showToast("Adicione a imagem principal.", "error"); return; }
 
   var btn = document.getElementById("addProductBtn");
-  btn.disabled   = true;
-  btn.innerHTML  = '<i class="fas fa-spinner fa-spin"></i> Salvando…';
+  btn.disabled  = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Salvando...';
 
-  var id      = nextId(catalog);
-  var sName   = safeName(name);
-  var folder  = catalog === "diorama" ? "assets/img/dioramas/" : "assets/img/outros/";
+  var id     = nextId(catalog);
+  var sName  = safeName(name);
+  var folder = catalog === "diorama" ? "assets/img/dioramas/" : "assets/img/outros/";
 
   var mainPath   = folder + sName + ".webp";
   var thumbPaths = thumbsData.map(function(t, i) {
@@ -1048,13 +1025,13 @@ async function addProduct() {
   });
 
   var product = {
-    id          : id,
-    name        : name,
-    description : description,
-    price       : price || "",
-    mainImage   : mainPath,
-    thumbnails  : thumbPaths,
-    _preview    : mainImgData.webpUrl,
+    id           : id,
+    name         : name,
+    description  : description,
+    price        : price || "",
+    mainImage    : mainPath,
+    thumbnails   : thumbPaths,
+    _preview     : mainImgData.webpUrl,
     _thumbPreviews: thumbsData.map(function(t) { return t.webpUrl; })
   };
 
@@ -1092,7 +1069,7 @@ function clearForm() {
 // =============================================
 // CARROSSEL
 // =============================================
-async function addCarouselItem() {
+function addCarouselItem() {
   var alt = document.getElementById("carouselAlt").value.trim();
 
   if (!carouselData) {
@@ -1147,12 +1124,11 @@ function loadList(key, containerId, filterCategory) {
   container.innerHTML = "";
 
   list.forEach(function(product) {
-    var catLabel =
-      product.category === "action-figures"
-        ? '<span class="cat-badge cat-action">Action Figure</span>'
-        : product.category === "produtos-funcionais"
-          ? '<span class="cat-badge cat-funcional">Funcional</span>'
-          : '<span class="cat-badge cat-diorama">Diorama</span>';
+    var catLabel = product.category === "action-figures"
+      ? '<span class="cat-badge cat-action">Action Figure</span>'
+      : product.category === "produtos-funcionais"
+        ? '<span class="cat-badge cat-funcional">Funcional</span>'
+        : '<span class="cat-badge cat-diorama">Diorama</span>';
 
     var item = document.createElement("div");
     item.className = "product-list-item";
@@ -1167,7 +1143,6 @@ function loadList(key, containerId, filterCategory) {
           '<i class="fas fa-trash"></i>' +
         '</button>' +
       '</div>';
-
     container.appendChild(item);
   });
 }
@@ -1197,7 +1172,6 @@ function loadCarouselList() {
           '<i class="fas fa-trash"></i>' +
         '</button>' +
       '</div>';
-
     container.appendChild(div);
   });
 }
@@ -1228,9 +1202,14 @@ function removeCarouselItem(idx) {
 // =============================================
 function cleanForExport(list) {
   return list.map(function(p) {
-    var c = Object.assign({}, p);
-    delete c._preview;
-    delete c._thumbPreviews;
+    var c = {};
+    var keys = Object.keys(p);
+    for (var i = 0; i < keys.length; i++) {
+      var k = keys[i];
+      if (k !== "_preview" && k !== "_thumbPreviews") {
+        c[k] = p[k];
+      }
+    }
     return c;
   });
 }
@@ -1263,6 +1242,7 @@ function showToast(msg, type) {
     toast.classList.remove("show");
   }, 3500);
 }
+
 </script>
 </body>
 </html>
