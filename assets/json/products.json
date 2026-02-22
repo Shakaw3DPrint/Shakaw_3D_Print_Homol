@@ -1,14 +1,207 @@
 [
   {
-    "id": "diorama-01",
-    "name": "Nome do Produto Diorama",
-    "description": "Descrição detalhada do produto. Material, tamanho, acabamento.",
-    "price": "R$ 00,00",
+    "id": "1",
+    "name": "Produto 01",
+    "description": "Modelo + Esteira em resina 3D pintados a mão. <br> Imagem Real <br> Escala 1/18. Tamanho entre 8cm e 11cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
+    "price": "R$ 60,00",
     "category": "diorama",
-    "mainImage": "assets/img/dioramas/produto_01.webp",
+    "mainImage": "assets/img/produtos/01.webp",
     "thumbnails": [
-      "assets/img/dioramas/produto_01_1.webp",
-      "assets/img/dioramas/produto_01_2.webp"
+      "assets/img/produtos/01.webp",
+      "assets/img/produtos/01_1.webp",
+      "assets/img/produtos/01_2.webp",
+      "assets/img/produtos/01_3.webp",
+      "assets/img/produtos/01_4.webp",
+      "assets/img/produtos/01_5.webp",
+      "assets/img/produtos/01_6.webp"
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Produto 02",
+    "description": "Modelo + 01 Pneu em resina 3D pintados a mão. <br> Imagem Real <br> Escala 1/18. Tamanho entre 8cm e 11cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
+    "price": "R$ 60,00",
+    "category": "diorama",
+    "mainImage": "assets/img/produtos/02.webp",
+    "thumbnails": [
+      "assets/img/produtos/02.webp",
+      "assets/img/produtos/02_1.webp",
+      "assets/img/produtos/02_2.webp",
+      "assets/img/produtos/02_3.webp",
+      "assets/img/produtos/02_4.webp",
+      "assets/img/produtos/02_5.webp",
+      "assets/img/produtos/02_6.webp"
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Produto 03",
+    "description": "Modelo em resina 3D pintado a mão. <br> Imagem Real <br> Escala 1/18. Tamanho entre 8cm e 11cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
+    "price": "R$ 60,00",
+    "category": "diorama",
+    "mainImage": "assets/img/produtos/03.webp",
+    "thumbnails": [
+      "assets/img/produtos/03.webp",
+      "assets/img/produtos/03_1.webp",
+      "assets/img/produtos/03_2.webp",
+      "assets/img/produtos/03_3.webp",
+      "assets/img/produtos/03_4.webp",
+      "assets/img/produtos/03_5.webp",
+      "assets/img/produtos/03_6.webp"
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Produto 04",
+    "description": "Modelo em resina 3D pintado a mão. <br> Imagem Real <br> Escala 1/18. Tamanho entre 8cm e 11cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
+    "price": "R$ 60,00",
+    "category": "diorama",
+    "mainImage": "assets/img/produtos/04.webp",
+    "thumbnails": [
+      "assets/img/produtos/04.webp",
+      "assets/img/produtos/04_1.webp",
+      "assets/img/produtos/04_2.webp",
+      "assets/img/produtos/04_3.webp",
+      "assets/img/produtos/04_4.webp",
+      "assets/img/produtos/04_5.webp",
+      "assets/img/produtos/04_6.webp"
+    ]
+  },
+  {
+    "id": "5",
+    "name": "Produto 05",
+    "description": "Modelo em resina 3D pintado a mão. <br> Imagem Real <br> Escala 1/18. Tamanho entre 8cm e 11cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
+    "price": "R$ 60,00",
+    "category": "diorama",
+    "mainImage": "assets/img/produtos/05.webp",
+    "thumbnails": [
+      "assets/img/produtos/05.webp",
+      "assets/img/produtos/05_1.webp",
+      "assets/img/produtos/05_2.webp",
+      "assets/img/produtos/05_3.webp",
+      "assets/img/produtos/05_4.webp",
+      "assets/img/produtos/05_5.webp",
+      "assets/img/produtos/05_6.webp"
+    ]
+  },
+  {
+    "id": "6",
+    "name": "Produto 06",
+    "description": "Modelo em resina 3D pintado a mão. <br> Imagem Real <br> Escala 1/18. Tamanho entre 8cm e 11cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
+    "price": "R$ 60,00",
+    "category": "diorama",
+    "mainImage": "assets/img/produtos/06.webp",
+    "thumbnails": [
+      "assets/img/produtos/06.webp",
+      "assets/img/produtos/06_1.webp",
+      "assets/img/produtos/06_2.webp",
+      "assets/img/produtos/06_3.webp",
+      "assets/img/produtos/06_4.webp",
+      "assets/img/produtos/06_5.webp",
+      "assets/img/produtos/06_6.webp"
+    ]
+  },
+  {
+    "id": "7",
+    "name": "Produto 07",
+    "description": "Modelo em resina 3D pintado a mão. <br> Imagem Real <br> Escala 1/18. Tamanho entre 8cm e 11cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
+    "price": "R$ 60,00",
+    "category": "diorama",
+    "mainImage": "assets/img/produtos/07.webp",
+    "thumbnails": [
+      "assets/img/produtos/07.webp",
+      "assets/img/produtos/07_1.webp",
+      "assets/img/produtos/07_2.webp",
+      "assets/img/produtos/07_3.webp",
+      "assets/img/produtos/07_4.webp",
+      "assets/img/produtos/07_5.webp",
+      "assets/img/produtos/07_6.webp"
+    ]
+  },
+  {
+    "id": "8",
+    "name": "Produto 08",
+    "description": "Modelo em resina 3D pintado a mão. <br> Imagem Real <br> Escala 1/18. Tamanho entre 8cm e 11cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
+    "price": "R$ 60,00",
+    "category": "diorama",
+    "mainImage": "assets/img/produtos/08.webp",
+    "thumbnails": [
+      "assets/img/produtos/08.webp",
+      "assets/img/produtos/08_1.webp",
+      "assets/img/produtos/08_2.webp",
+      "assets/img/produtos/08_3.webp",
+      "assets/img/produtos/08_4.webp",
+      "assets/img/produtos/08_5.webp",
+      "assets/img/produtos/08_6.webp"
+    ]
+  },
+  {
+    "id": "9",
+    "name": "Produto 09",
+    "description": "Modelo em resina 3D pintado a mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8cm e 11cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
+    "price": "R$ 60,00",
+    "category": "diorama",
+    "mainImage": "assets/img/produtos/09.webp",
+    "thumbnails": [
+      "assets/img/produtos/09.webp",
+      "assets/img/produtos/09_1.webp",
+      "assets/img/produtos/09_2.webp",
+      "assets/img/produtos/09_3.webp",
+      "assets/img/produtos/09_4.webp",
+      "assets/img/produtos/09_5.webp",
+      "assets/img/produtos/09_6.webp"
+    ]
+  },
+  {
+    "id": "10",
+    "name": "Produto 10",
+    "description": "Modelo em resina 3D pintado a mão. <br> Imagem Real <br> Escala 1/18. Tamanho entre 8cm e 11cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
+    "price": "R$ 60,00",
+    "category": "diorama",
+    "mainImage": "assets/img/produtos/10.webp",
+    "thumbnails": [
+      "assets/img/produtos/10.webp",
+      "assets/img/produtos/10_1.webp",
+      "assets/img/produtos/10_2.webp",
+      "assets/img/produtos/10_3.webp",
+      "assets/img/produtos/10_4.webp",
+      "assets/img/produtos/10_5.webp",
+      "assets/img/produtos/10_6.webp"
+    ]
+  },
+  {
+    "id": "11",
+    "name": "Produto 11",
+    "description": "Modelo em resina 3D pintado a mão. <br> Imagem Real <br> Escala 1/18. Tamanho entre 8cm e 11cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
+    "price": "R$ 60,00",
+    "category": "diorama",
+    "mainImage": "assets/img/produtos/11.webp",
+    "thumbnails": [
+      "assets/img/produtos/11.webp",
+      "assets/img/produtos/11_1.webp",
+      "assets/img/produtos/11_2.webp",
+      "assets/img/produtos/11_3.webp",
+      "assets/img/produtos/11_4.webp",
+      "assets/img/produtos/11_5.webp",
+      "assets/img/produtos/11_6.webp"
+    ]
+  },
+  {
+    "id": "12",
+    "name": "Produto 12",
+    "description": "Modelo em resina 3D pintado a mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8cm e 11cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
+    "price": "R$ 60,00",
+    "category": "diorama",
+    "mainImage": "assets/img/produtos/12.webp",
+    "thumbnails": [
+      "assets/img/produtos/12.webp",
+      "assets/img/produtos/12_1.webp",
+      "assets/img/produtos/12_2.webp",
+      "assets/img/produtos/12_3.webp",
+      "assets/img/produtos/12_4.webp",
+      "assets/img/produtos/12_5.webp",
+      "assets/img/produtos/12_6.webp"
     ]
   }
+  /* [... continue com os itens 13 até 32 exatamente como no seu arquivo original, só acrescentando "category": "diorama" em cada objeto ...] */
 ]
