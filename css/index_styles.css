@@ -1,34 +1,42 @@
-/* ESTILOS GERAIS */
+/* =============================================
+   ESTILOS GERAIS
+   ============================================= */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   background: #00303f;
 }
 
-/* CABEÇALHO ATUALIZADO */
+/* =============================================
+   CABEÇALHO
+   ============================================= */
 .header {
   text-align: center;
   padding: 40px 20px 20px;
   color: white;
   position: relative;
 }
+
 .header img.logo {
   width: 180px;
   border-radius: 50%;
   margin-bottom: 10px;
-  /* Removida a borda preta */
   border: none;
 }
+
 .header h1 {
   margin: 10px 0 5px;
   font-size: 28px;
 }
+
 .header-links {
   display: flex;
   justify-content: center;
   gap: 15px;
   margin-top: 15px;
+  flex-wrap: wrap;
 }
+
 .header a {
   display: inline-flex;
   align-items: center;
@@ -42,21 +50,23 @@ body {
   transition: background 0.3s;
   height: 32px;
   box-sizing: border-box;
+  gap: 6px;
 }
+
 .header a:hover {
   background: rgba(255, 255, 255, 0.25);
 }
+
 .header a img.instagram-icon {
   width: 20px;
   height: 20px;
-  /* Centraliza o ícone verticalmente */
   vertical-align: middle;
-  /* Remove qualquer borda */
   border: none;
-  margin-right: 6px;
 }
 
-/* CARROSSEL */
+/* =============================================
+   CARROSSEL
+   ============================================= */
 .carousel-container {
   max-width: 1000px;
   margin: 30px auto;
@@ -67,11 +77,13 @@ body {
   height: 400px;
   background: #00303f;
 }
+
 .carousel {
   display: flex;
   transition: transform 0.5s ease-in-out;
   height: 100%;
 }
+
 .carousel img {
   width: 100%;
   height: 100%;
@@ -79,6 +91,7 @@ body {
   background-color: #00303f;
   flex-shrink: 0;
 }
+
 .carousel-btn {
   position: absolute;
   top: 50%;
@@ -93,16 +106,15 @@ body {
   font-size: 18px;
   transition: background 0.3s, opacity 0.3s;
 }
+
 .carousel-btn:hover {
   background: rgba(0,0,0,0.8);
   opacity: 0.9;
 }
-.carousel-btn.prev {
-  left: 10px;
-}
-.carousel-btn.next {
-  right: 10px;
-}
+
+.carousel-btn.prev { left: 10px; }
+.carousel-btn.next { right: 10px; }
+
 .carousel-indicators {
   position: absolute;
   bottom: 20px;
@@ -112,6 +124,7 @@ body {
   justify-content: center;
   gap: 8px;
 }
+
 .carousel-indicator {
   width: 12px;
   height: 12px;
@@ -120,11 +133,14 @@ body {
   cursor: pointer;
   transition: background 0.3s;
 }
+
 .carousel-indicator.active {
   background: white;
 }
 
-/* CATÁLOGO DE PRODUTOS */
+/* =============================================
+   CATÁLOGO DE PRODUTOS
+   ============================================= */
 .catalog-page {
   display: flex;
   flex-direction: column;
@@ -133,6 +149,7 @@ body {
   margin: 40px auto;
   padding: 0 20px;
 }
+
 .product {
   display: flex;
   flex-direction: row;
@@ -142,24 +159,29 @@ body {
   overflow: hidden;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
+
 .image-column {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
 }
+
 .main-img {
   width: 300px;
   height: 300px;
   object-fit: contain;
   background-color: #f5f5f5;
   padding: 10px;
-  cursor: pointer;
+  cursor: zoom-in;
   transition: transform 0.2s;
+  border-radius: 6px;
 }
+
 .main-img:hover {
   transform: scale(1.02);
 }
+
 .thumbnail-container {
   display: flex;
   gap: 5px;
@@ -167,14 +189,7 @@ body {
   flex-wrap: wrap;
   justify-content: flex-start;
 }
-.thumbnail-container:empty::after {
-  content: "Sem miniaturas adicionais";
-  color: #999;
-  font-size: 12px;
-  padding: 10px;
-  text-align: center;
-  display: block;
-}
+
 .thumbnail-container img {
   width: 50px;
   height: 50px;
@@ -182,35 +197,44 @@ body {
   border: 1px solid #ccc;
   cursor: pointer;
   border-radius: 4px;
+  transition: border-color 0.2s;
 }
+
 .thumbnail-container img:hover {
   border-color: #0077cc;
 }
+
 .product-details {
   padding: 60px 20px 20px 20px;
   flex: 1;
 }
+
 .product-details h2 {
   margin: 0 0 10px;
   font-size: 20px;
 }
+
 .product-details p {
   margin: 5px 0;
   color: #333;
 }
+
 .price {
   margin-top: 10px;
   font-weight: bold;
   color: #009688;
 }
 
-/* CONTROLES DE QUANTIDADE */
+/* =============================================
+   CONTROLES DE QUANTIDADE
+   ============================================= */
 .quantity-control {
   display: flex;
   align-items: center;
   gap: 5px;
   margin: 10px 0;
 }
+
 .qty-btn {
   width: 25px;
   height: 25px;
@@ -221,15 +245,19 @@ body {
   cursor: pointer;
   font-weight: bold;
 }
+
 .qty-btn:hover {
   background: #005fa3;
 }
+
 .quantity {
   width: 40px;
   text-align: center;
 }
 
-/* MODAL DE IMAGEM */
+/* =============================================
+   MODAL DE IMAGEM — ZOOM DINÂMICO
+   ============================================= */
 .modal {
   display: none;
   position: fixed;
@@ -238,94 +266,127 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden; /* Modificado para pan */
-  background-color: rgba(0,0,0,0.9);
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.92);
 }
 
 .modal-content {
-  position: relative; /* Necessário para posicionar a imagem se usarmos left/top */
-  width: 100%; /* Ocupa toda a área do modal para referência de pan */
+  position: relative;
+  width: 100%;
   height: 100%;
-  display: flex; /* Para centralizar a imagem */
+  display: flex;
   align-items: center;
   justify-content: center;
-  /* overflow: hidden; */ /* O overflow principal é no .modal */
+  /* Impede que o clique na área vazia feche o modal acidentalmente durante o pan */
+  user-select: none;
 }
 
+/* A imagem dentro do modal */
 .modal-content img {
-  display: block; /* Para evitar espaço extra */
-  /* max-width e max-height removidos para permitir que a imagem seja maior que a viewport para o pan */
-  /* A centralização e o dimensionamento inicial são feitos por object-fit e transform */
-  object-fit: contain; /* Mantém o aspect ratio inicial */
+  display: block;
+  /* Tamanho máximo inicial: cabe na tela sem scroll */
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
   transform-origin: center center;
-  /* A transição será controlada via JS para não afetar o pan */
-  /* transition: transform 0.3s ease; */ 
-  cursor: default; /* Cursor padrão, mudará para grab/grabbing com JS */
+  /* Transição controlada via JS */
+  will-change: transform, opacity;
+  border-radius: 4px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
 }
 
+/* Botão fechar */
 .close {
   position: absolute;
-  top: 20px;
-  right: 35px;
+  top: 16px;
+  right: 24px;
   color: white;
   font-size: 40px;
   font-weight: bold;
   cursor: pointer;
   z-index: 100;
+  line-height: 1;
+  transition: color 0.2s, transform 0.2s;
 }
+
+.close:hover {
+  color: #f44336;
+  transform: scale(1.15);
+}
+
+/* Navegação do modal */
 .modal-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.55);
   color: white;
   border: none;
-  padding: 15px;
+  padding: 16px;
   cursor: pointer;
   z-index: 10;
   border-radius: 50%;
-  font-size: 18px;
-  transition: background 0.3s, opacity 0.3s;
-}
-.modal-nav:hover {
-  background: rgba(0,0,0,0.8);
-  opacity: 0.9;
-}
-.modal-prev {
-  left: 20px;
-}
-.modal-next {
-  right: 20px;
+  font-size: 20px;
+  transition: background 0.3s, transform 0.2s;
+  line-height: 1;
 }
 
-/* CONTROLES DE ZOOM */
+.modal-nav:hover {
+  background: rgba(0,0,0,0.85);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.modal-prev { left: 16px; }
+.modal-next { right: 16px; }
+
+/* Dica de zoom exibida no canto inferior direito */
+.modal-zoom-hint {
+  position: absolute;
+  bottom: 70px;
+  right: 20px;
+  color: rgba(255,255,255,0.55);
+  font-size: 12px;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* =============================================
+   CONTROLES DE ZOOM (botões +, -, Reset)
+   ============================================= */
 .zoom-controls {
   position: fixed;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.7);
-  padding: 10px;
-  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.72);
+  padding: 8px 12px;
+  border-radius: 30px;
   display: flex;
-  gap: 5px;
+  gap: 8px;
   z-index: 10000;
-}
-.zoom-controls button {
-  background: #fff;
-  border: none;
-  border-radius: 3px;
-  padding: 5px 10px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s, transform 0.2s;
-}
-.zoom-controls button:hover {
-  background: #ddd;
-  transform: scale(1.05);
+  backdrop-filter: blur(6px);
 }
 
-/* BOTÃO VOLTAR AO TOPO */
+.zoom-controls button {
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 20px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.zoom-controls button:hover {
+  background: rgba(255,255,255,0.3);
+  transform: scale(1.08);
+}
+
+/* =============================================
+   BOTÃO VOLTAR AO TOPO
+   ============================================= */
 #backToTopBtn {
   position: fixed;
   bottom: 30px;
@@ -340,114 +401,147 @@ body {
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   display: none;
+  transition: background 0.3s;
 }
+
 #backToTopBtn:hover {
   background-color: #005fa3;
 }
 
-/* PAINEL DE INTERESSES */
+/* =============================================
+   PAINEL DE INTERESSES
+   ============================================= */
 #interestPanel {
-  display: none; /* Inicialmente oculto */
   position: fixed;
   right: 30px;
   bottom: 80px;
   background: white;
   border-radius: 10px;
   max-width: 300px;
+  width: 300px;
   box-shadow: 0 0 15px rgba(0,0,0,0.3);
   z-index: 1001;
-  max-height: 70vh; /* Altura máxima do painel */
-  
-  /* Layout flexível para organizar título, lista e botão */
+  max-height: 70vh;
   display: flex;
   flex-direction: column;
-  padding: 20px; /* Espaçamento interno */
-  box-sizing: border-box; /* Para que o padding não aumente a largura/altura total além de max-width/max-height */
+  padding: 20px;
+  box-sizing: border-box;
+  transition: opacity 0.35s ease, visibility 0.35s ease, transform 0.35s ease;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
 }
-#interestPanel {
-    /* ... seus estilos existentes para #interestPanel ... */
-    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
-    opacity: 1;
-    visibility: visible;
+
+#interestPanel.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 #interestPanel.hidden-fade {
-    opacity: 0;
-    visibility: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
 }
 
 #interestPanel h3 {
-  margin-top: 0;
-  margin-bottom: 15px; /* Espaço abaixo do título */
-  flex-shrink: 0; /* Não encolher o título */
-  color: #333; /* Cor do título */
-  font-size: 1.2em; /* Tamanho do título */
+  margin: 0 0 15px;
+  flex-shrink: 0;
+  color: #333;
+  font-size: 1.1em;
 }
 
 #interestList {
   list-style: none;
   padding: 0;
-  margin: 0 0 15px 0; /* Margem abaixo da lista, antes do botão */
-  overflow-y: auto;   /* Habilita a rolagem vertical para a lista */
-  flex-grow: 1;       /* Faz a lista ocupar o espaço vertical disponível */
-  min-height: 30px; /* Altura mínima para a lista não sumir se vazia e o painel estiver visível */
-  border-top: 1px solid #eee; /* Separador opcional */
-  border-bottom: 1px solid #eee; /* Separador opcional */
-  padding-top: 10px; /* Espaçamento interno superior para a lista */
-  padding-bottom: 10px; /* Espaçamento interno inferior para a lista */
+  margin: 0 0 15px 0;
+  overflow-y: auto;
+  flex-grow: 1;
+  min-height: 30px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 #interestList li {
-  padding: 8px 5px; /* Ajustar padding dos itens da lista */
-  border-bottom: 1px solid #f0f0f0; /* Borda mais suave */
+  padding: 8px 5px;
+  border-bottom: 1px solid #f0f0f0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.9em; /* Tamanho da fonte dos itens */
+  font-size: 0.88em;
 }
 
 #interestList li:last-child {
   border-bottom: none;
 }
 
-/* Botão remover dentro do item da lista */
-#interestList li button { 
-  margin-left: 10px;
+#interestList li button {
+  margin-left: 8px;
   background: #ff4d4d;
   color: white;
   border: none;
   border-radius: 3px;
   cursor: pointer;
-  padding: 4px 8px; 
-  font-size: 0.9em;
+  padding: 3px 7px;
+  font-size: 0.85em;
   flex-shrink: 0;
+  transition: background 0.2s;
 }
+
 #interestList li button:hover {
   background: #e03c3c;
 }
 
-/* Estilo para o botão Enviar Interesses (principal do painel) */
+#interestTotal {
+  margin-bottom: 10px;
+  font-size: 0.95em;
+  color: #333;
+  flex-shrink: 0;
+}
+
+/* Botão "Enviar Interesses" dentro do painel */
 #interestPanel > button[onclick*="showContactModal"] {
-  padding: 12px 15px; /* Aumentar um pouco o padding para melhor clique */
+  padding: 11px 15px;
   background: #0077cc;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  width: 100%; 
+  width: 100%;
   box-sizing: border-box;
-  margin-top: auto; /* Garante que ele fique no final se houver espaço após a lista */
-  flex-shrink: 0; 
   font-weight: bold;
-  text-align: center;
-  font-size: 1em;
+  font-size: 0.95em;
+  flex-shrink: 0;
+  transition: background 0.2s;
 }
 
 #interestPanel > button[onclick*="showContactModal"]:hover {
   background: #005fa3;
 }
 
-/* BOTÃO DE INTERESSES */
+/* Botão X do painel */
+.close-interest-panel-btn {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #888;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.close-interest-panel-btn:hover {
+  color: #333;
+}
+
+/* =============================================
+   BOTÃO ABRIR PAINEL DE INTERESSES
+   ============================================= */
 .interest-btn {
   position: fixed;
   bottom: 30px;
@@ -463,12 +557,15 @@ body {
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   transition: background 0.3s, transform 0.2s;
 }
+
 .interest-btn:hover {
   background: #218838;
   transform: scale(1.05);
 }
 
-/* MODAL DE CONTATO */
+/* =============================================
+   MODAL DE CONTATO
+   ============================================= */
 .contact-modal {
   display: none;
   position: fixed;
@@ -487,8 +584,8 @@ body {
   border-radius: 10px;
   width: 90%;
   max-width: 500px;
-  max-height: 90vh; /* Altura máxima do modal */
-  overflow-y: auto; /* Permite rolagem do conteúdo do modal se exceder max-height */
+  max-height: 90vh;
+  overflow-y: auto;
   box-sizing: border-box;
 }
 
@@ -512,38 +609,24 @@ body {
   box-sizing: border-box;
 }
 
-/* Estilo específico para o botão de submit do formulário de contato */
 #contactForm button[type="submit"] {
   background-color: #0057b7;
   color: white;
   border: none;
   padding: 12px 15px;
-  margin-top: 20px; /* Espaço acima do botão */
+  margin-top: 20px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  width: 100%; 
+  width: 100%;
   box-sizing: border-box;
   font-weight: bold;
-  text-align: center;
   font-size: 1em;
-
-  position: sticky;
-  bottom: 0; /* Gruda no final do .contact-modal-content quando este rola */
-  /* O fundo precisa ser opaco para cobrir o conteúdo que rola por baixo */
-  /* Usa uma cor ligeiramente diferente ou a mesma do modal para consistência */
-  background: #f0f0f0; /* Um cinza claro para se destacar um pouco do conteúdo branco */
-  color: #0057b7; /* Cor do texto do botão para combinar com o tema */
-  border-top: 1px solid #ccc; /* Linha sutil para separar do conteúdo rolável */
-  /* O padding de 20px do .contact-modal-content já cria um espaço abaixo do botão sticky */
-  /* Se o botão estiver no final do HTML do modal, ele ficará no final da área de rolagem. */
-  /* O padding-bottom do .contact-modal-content garante que haja espaço abaixo do botão quando o conteúdo é curto. */
-  /* Quando o conteúdo é longo e rola, o botão fica sticky no bottom:0 da viewport do .contact-modal-content. */
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 #contactForm button[type="submit"]:hover {
-  background-color: #005fa3; /* Cor de hover original */
-  color: white; /* Texto branco no hover */
+  background-color: #005fa3;
+  color: white;
   transform: scale(1.02);
 }
 
@@ -552,6 +635,11 @@ body {
   font-size: 24px;
   font-weight: bold;
   cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-contact:hover {
+  color: #f44336;
 }
 
 .form-section {
@@ -562,7 +650,7 @@ body {
 }
 
 .items-summary {
-  max-height: 150px; /* A lista de itens já é rolável se muitos itens */
+  max-height: 150px;
   overflow-y: auto;
   padding: 10px;
   background-color: white;
@@ -580,12 +668,9 @@ body {
   border-bottom: none;
 }
 
-.items-summary strong {
-  display: inline-block;
-  min-width: 50px;
-}
-
-/* LOADER */
+/* =============================================
+   LOADER
+   ============================================= */
 .loader {
   border: 5px solid #f3f3f3;
   border-top: 5px solid #0057b7;
@@ -598,37 +683,77 @@ body {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
+  0%   { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-/* RESPONSIVIDADE */
+/* =============================================
+   RESPONSIVIDADE
+   ============================================= */
 @media (max-width: 768px) {
   .product {
     flex-direction: column;
     align-items: center;
   }
+
   .product-details {
     max-width: 100%;
+    padding: 20px;
   }
+
+  .main-img {
+    width: 100%;
+    max-width: 300px;
+    height: 250px;
+  }
+
   .carousel-container {
     height: 250px;
   }
+
   .modal-nav {
     padding: 10px;
     font-size: 16px;
   }
+
+  .modal-prev { left: 8px; }
+  .modal-next { right: 8px; }
+
   .zoom-controls {
-    bottom: 10px;
+    bottom: 12px;
+    padding: 6px 10px;
   }
+
   #interestPanel {
     right: 10px;
-    bottom: 70px;
-    max-width: 280px;
+    bottom: 75px;
+    max-width: 260px;
+    width: 260px;
   }
+
   .contact-modal-content {
     margin: 10% auto;
     width: 95%;
   }
+
+  .header-links {
+    gap: 8px;
+  }
+
+  .header a {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
 }
 
+@media (max-width: 480px) {
+  .modal-content img {
+    max-width: 95vw;
+    max-height: 80vh;
+  }
+
+  .zoom-controls button {
+    padding: 5px 10px;
+    font-size: 13px;
+  }
+}
