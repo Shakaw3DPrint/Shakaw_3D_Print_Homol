@@ -16,7 +16,6 @@
       min-height: 100vh;
     }
 
-    /* CABEÇALHO */
     .admin-header {
       background: rgba(0,0,0,0.3);
       padding: 20px 30px;
@@ -44,7 +43,6 @@
 
     .admin-header a:hover { color: white; }
 
-    /* LOGIN */
     #loginScreen {
       max-width: 380px;
       margin: 80px auto;
@@ -55,10 +53,7 @@
       text-align: center;
     }
 
-    #loginScreen h2 {
-      margin-bottom: 20px;
-      font-size: 1.3rem;
-    }
+    #loginScreen h2 { margin-bottom: 20px; font-size: 1.3rem; }
 
     #loginScreen input {
       width: 100%;
@@ -80,10 +75,13 @@
       display: none;
     }
 
-    /* CONTEÚDO */
-    #adminContent { display: none; padding: 30px 20px; max-width: 1100px; margin: 0 auto; }
+    #adminContent {
+      display: none;
+      padding: 30px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
 
-    /* TABS */
     .tabs {
       display: flex;
       gap: 8px;
@@ -109,7 +107,6 @@
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    /* CARDS */
     .admin-card {
       background: rgba(255,255,255,0.07);
       border: 1px solid rgba(255,255,255,0.12);
@@ -127,7 +124,6 @@
       color: #4fc3f7;
     }
 
-    /* FORMULÁRIOS */
     label {
       display: block;
       font-size: 13px;
@@ -155,15 +151,11 @@
     input[type="text"]:focus,
     input[type="number"]:focus,
     textarea:focus,
-    select:focus {
-      outline: none;
-      border-color: #4fc3f7;
-    }
+    select:focus { outline: none; border-color: #4fc3f7; }
 
     select option { background: #00303f; color: white; }
     textarea { resize: vertical; min-height: 80px; }
 
-    /* UPLOAD AREA */
     .upload-area {
       border: 2px dashed rgba(255,255,255,0.25);
       border-radius: 10px;
@@ -199,7 +191,6 @@
       height: 100%;
     }
 
-    /* BARRA DE PROGRESSO DE CONVERSÃO */
     .convert-progress {
       display: none;
       margin-top: 14px;
@@ -225,7 +216,6 @@
       min-height: 18px;
     }
 
-    /* PREVIEW */
     .image-preview-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
@@ -291,7 +281,6 @@
       padding: 0;
     }
 
-    /* BOTÕES */
     .btn {
       padding: 11px 24px;
       border-radius: 8px;
@@ -307,12 +296,10 @@
 
     .btn:hover { transform: scale(1.03); }
     .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-    .btn-primary   { background: #0077cc; color: white; }
+    .btn-primary { background: #0077cc; color: white; }
     .btn-primary:hover { background: #005fa3; }
-    .btn-success   { background: #28a745; color: white; }
+    .btn-success { background: #28a745; color: white; }
     .btn-success:hover { background: #1e7e34; }
-    .btn-danger    { background: #dc3545; color: white; }
-    .btn-danger:hover { background: #c82333; }
     .btn-secondary {
       background: rgba(255,255,255,0.12);
       color: white;
@@ -327,7 +314,6 @@
       flex-wrap: wrap;
     }
 
-    /* LISTA DE PRODUTOS */
     .product-list-item {
       display: flex;
       align-items: center;
@@ -361,10 +347,7 @@
       text-overflow: ellipsis;
     }
 
-    .product-list-info span {
-      font-size: 12px;
-      color: rgba(255,255,255,0.5);
-    }
+    .product-list-info span { font-size: 12px; color: rgba(255,255,255,0.5); }
 
     .product-list-actions { display: flex; gap: 6px; flex-shrink: 0; }
 
@@ -384,7 +367,6 @@
     .btn-icon:hover { transform: scale(1.1); }
     .btn-icon-delete { background: rgba(220,53,69,0.3); color: #ff6b6b; }
 
-    /* BADGES */
     .cat-badge {
       display: inline-block;
       font-size: 10px;
@@ -395,11 +377,10 @@
       vertical-align: middle;
     }
 
-    .cat-diorama  { background: #e8f4ff; color: #0057b7; }
-    .cat-action   { background: #fff3e8; color: #b74f00; }
-    .cat-funcional{ background: #e8fff1; color: #1b7a3e; }
+    .cat-diorama   { background: #e8f4ff; color: #0057b7; }
+    .cat-action    { background: #fff3e8; color: #b74f00; }
+    .cat-funcional { background: #e8fff1; color: #1b7a3e; }
 
-    /* INFO BOX */
     .info-box {
       background: rgba(79,195,247,0.08);
       border: 1px solid rgba(79,195,247,0.25);
@@ -413,7 +394,6 @@
 
     .info-box i { color: #4fc3f7; margin-right: 6px; }
 
-    /* JSON PREVIEW */
     .json-preview {
       background: rgba(0,0,0,0.4);
       border-radius: 8px;
@@ -429,14 +409,12 @@
       border: 1px solid rgba(255,255,255,0.08);
     }
 
-    /* SEPARADOR */
     .divider {
       border: none;
       border-top: 1px solid rgba(255,255,255,0.1);
       margin: 24px 0;
     }
 
-    /* TOAST */
     .toast {
       position: fixed;
       bottom: 30px;
@@ -456,18 +434,12 @@
       pointer-events: none;
     }
 
-    .toast.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
-
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
     .toast.error { background: #dc3545; }
     .toast.info  { background: #0077cc; }
 
-    /* CANVAS OCULTO PARA CONVERSÃO */
     #convertCanvas { display: none; }
 
-    /* RESPONSIVO */
     @media (max-width: 600px) {
       .admin-header { padding: 15px; }
       #adminContent { padding: 20px 12px; }
@@ -479,16 +451,13 @@
 </head>
 <body>
 
-<!-- CANVAS OCULTO (conversão WebP) -->
 <canvas id="convertCanvas"></canvas>
 
-<!-- CABEÇALHO -->
 <div class="admin-header">
   <h1><i class="fas fa-tools"></i> Painel Admin — Shakaw 3D Print</h1>
   <a href="home.html"><i class="fas fa-arrow-left"></i> Voltar ao site</a>
 </div>
 
-<!-- LOGIN -->
 <div id="loginScreen">
   <h2><i class="fas fa-lock"></i> Acesso Restrito</h2>
   <p style="color:rgba(255,255,255,0.55);font-size:13px;margin-bottom:20px">
@@ -502,10 +471,8 @@
   <p id="loginError">Senha incorreta. Tente novamente.</p>
 </div>
 
-<!-- CONTEÚDO ADMIN -->
 <div id="adminContent">
 
-  <!-- TABS -->
   <div class="tabs">
     <button class="tab-btn active" data-tab="tab-add">
       <i class="fas fa-plus"></i> Adicionar Produto
@@ -521,7 +488,6 @@
     </button>
   </div>
 
-  <!-- TAB: ADICIONAR -->
   <div class="tab-content active" id="tab-add">
     <div class="admin-card">
       <h2><i class="fas fa-plus-circle"></i> Novo Produto</h2>
@@ -529,11 +495,9 @@
       <div class="info-box">
         <i class="fas fa-magic"></i>
         As imagens são <strong>convertidas automaticamente para WebP</strong>
-        no navegador antes de serem processadas. Após salvar, exporte o JSON
-        e substitua o arquivo correspondente no GitHub.
+        no navegador. Após salvar, exporte o JSON e substitua no GitHub.
       </div>
 
-      <!-- DESTINO -->
       <label>Catálogo de destino *</label>
       <select id="productCatalog" onchange="updateCatalogInfo()">
         <option value="diorama">Catálogo Diorama → products.json</option>
@@ -541,28 +505,22 @@
         <option value="produtos-funcionais">Outros Projetos → Produtos Funcionais</option>
       </select>
 
-      <!-- INFO DESTINO -->
       <div id="catalogInfo" class="info-box" style="margin-top:10px;margin-bottom:0">
         <i class="fas fa-link"></i>
         Este produto será exibido em:
         <strong id="catalogInfoLink">catalogo_diorama.html</strong>
       </div>
 
-      <!-- NOME -->
       <label>Nome do produto *</label>
-      <input type="text" id="productName"
-             placeholder="Ex.: Garagem Miniatura 1:18">
+      <input type="text" id="productName" placeholder="Ex.: Garagem Miniatura 1:18">
 
-      <!-- DESCRIÇÃO -->
       <label>Descrição *</label>
       <textarea id="productDescription"
                 placeholder="Descreva o produto: material, tamanho, acabamento..."></textarea>
 
-      <!-- PREÇO -->
-      <label>Preço (deixe vazio para exibir "Sob consulta")</label>
+      <label>Preço (deixe vazio para "Sob consulta")</label>
       <input type="text" id="productPrice" placeholder="Ex.: R$ 45,00">
 
-      <!-- QUALIDADE WEBP -->
       <label>
         Qualidade da conversão WebP:
         <strong id="qualityLabel" style="color:#4fc3f7">85%</strong>
@@ -571,12 +529,11 @@
              style="width:100%;accent-color:#4fc3f7"
              oninput="document.getElementById('qualityLabel').textContent=this.value+'%'">
 
-      <!-- IMAGEM PRINCIPAL -->
       <label>Imagem principal *</label>
       <div class="upload-area" id="mainImgArea">
         <i class="fas fa-image"></i>
         <p>Clique ou arraste a imagem principal aqui</p>
-        <p style="font-size:11px">JPG, PNG, GIF, BMP, WEBP — será convertida para WebP</p>
+        <p style="font-size:11px">JPG, PNG, GIF, BMP, WEBP — convertida para WebP</p>
         <input type="file" id="mainImgInput" accept="image/*">
       </div>
       <div class="convert-progress" id="mainProgress">
@@ -585,7 +542,6 @@
       <p class="convert-status" id="mainStatus"></p>
       <div class="image-preview-grid" id="mainImgPreview"></div>
 
-      <!-- MINIATURAS -->
       <label>Imagens adicionais / miniaturas</label>
       <div class="upload-area" id="thumbsArea">
         <i class="fas fa-images"></i>
@@ -610,7 +566,6 @@
     </div>
   </div>
 
-  <!-- TAB: GERENCIAR -->
   <div class="tab-content" id="tab-manage">
     <div class="admin-card">
       <h2><i class="fas fa-warehouse"></i> Catálogo Diorama
@@ -646,16 +601,13 @@
     </div>
   </div>
 
-  <!-- TAB: JSON -->
   <div class="tab-content" id="tab-json">
     <div class="admin-card">
       <h2><i class="fas fa-file-code"></i> products.json — Catálogo Diorama</h2>
       <div class="info-box">
         <i class="fas fa-info-circle"></i>
-        Copie e substitua o arquivo
-        <strong>assets/json/products.json</strong> no GitHub.
-        Depois faça o upload das imagens WebP geradas para
-        <strong>assets/img/dioramas/</strong>.
+        Copie e substitua <strong>assets/json/products.json</strong> no GitHub.
+        Faça upload das imagens em <strong>assets/img/dioramas/</strong>.
       </div>
       <button class="btn btn-primary" onclick="copyJSON('diorama')">
         <i class="fas fa-copy"></i> Copiar JSON
@@ -664,13 +616,11 @@
     </div>
 
     <div class="admin-card">
-      <h2><i class="fas fa-file-code"></i> outros_produtos.json — Action Figures e Funcionais</h2>
+      <h2><i class="fas fa-file-code"></i> outros_produtos.json</h2>
       <div class="info-box">
         <i class="fas fa-info-circle"></i>
-        Copie e substitua o arquivo
-        <strong>assets/json/outros_produtos.json</strong> no GitHub.
-        Depois faça o upload das imagens WebP geradas para
-        <strong>assets/img/outros/</strong>.
+        Copie e substitua <strong>assets/json/outros_produtos.json</strong> no GitHub.
+        Faça upload das imagens em <strong>assets/img/outros/</strong>.
       </div>
       <button class="btn btn-primary" onclick="copyJSON('outros')">
         <i class="fas fa-copy"></i> Copiar JSON
@@ -679,24 +629,22 @@
     </div>
   </div>
 
-  <!-- TAB: CARROSSEL -->
   <div class="tab-content" id="tab-carousel">
     <div class="admin-card">
       <h2><i class="fas fa-film"></i> Imagens do Carrossel</h2>
 
       <div class="info-box">
         <i class="fas fa-info-circle"></i>
-        As imagens do carrossel aparecem em
-        <strong>catalogo_diorama.html</strong>.
+        Carrossel exibido em <strong>catalogo_diorama.html</strong>.
         Após adicionar, copie o JSON e substitua
         <strong>assets/json/carousel.json</strong> no GitHub.
       </div>
 
       <label>Imagem do carrossel</label>
-      <div class="upload-area">
+      <div class="upload-area" id="carouselArea">
         <i class="fas fa-image"></i>
         <p>Clique ou arraste a imagem aqui</p>
-        <p style="font-size:11px">Será convertida automaticamente para WebP</p>
+        <p style="font-size:11px">Convertida automaticamente para WebP</p>
         <input type="file" id="carouselImgInput" accept="image/*">
       </div>
       <div class="convert-progress" id="carouselProgress">
@@ -737,7 +685,6 @@
 
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
@@ -747,30 +694,23 @@
 const ADMIN_PASSWORD = "Er!6736**";
 
 function checkPassword() {
-  const input        = document.getElementById("adminPassword");
-  const loginScreen  = document.getElementById("loginScreen");
-  const adminContent = document.getElementById("adminContent");
-  const loginError   = document.getElementById("loginError");
-
-  const typed = input.value;
+  var input        = document.getElementById("adminPassword");
+  var loginScreen  = document.getElementById("loginScreen");
+  var adminContent = document.getElementById("adminContent");
+  var loginError   = document.getElementById("loginError");
+  var typed        = input.value;
 
   if (!typed) {
-    loginError.textContent = "Digite a senha.";
+    loginError.textContent   = "Digite a senha.";
     loginError.style.display = "block";
     return;
   }
 
   if (typed === ADMIN_PASSWORD) {
-    // Esconde tela de login
     loginScreen.style.setProperty("display", "none", "important");
-
-    // Mostra conteúdo admin
     adminContent.style.setProperty("display", "block", "important");
-
-    // Inicializa listas e JSON
-    try { loadAllLists();   } catch(e) { console.error("loadAllLists:", e); }
-    try { updateAllJSON();  } catch(e) { console.error("updateAllJSON:", e); }
-
+    loadAllLists();
+    updateAllJSON();
   } else {
     loginError.textContent   = "Senha incorreta. Tente novamente.";
     loginError.style.display = "block";
@@ -779,78 +719,112 @@ function checkPassword() {
   }
 }
 
-// Garante que o listener só é adicionado após o DOM estar pronto
+// =============================================
+// INICIALIZAÇÃO DO DOM
+// =============================================
 document.addEventListener("DOMContentLoaded", function() {
-  const passwordInput = document.getElementById("adminPassword");
-  if (passwordInput) {
-    passwordInput.addEventListener("keydown", function(e) {
-      if (e.key === "Enter") checkPassword();
-    });
-  }
+  // Estado inicial
+  document.getElementById("loginScreen").style.display  = "block";
+  document.getElementById("adminContent").style.display = "none";
 
-  // Garante estado inicial correto
-  const loginScreen  = document.getElementById("loginScreen");
-  const adminContent = document.getElementById("adminContent");
-  if (loginScreen)  loginScreen.style.display  = "block";
-  if (adminContent) adminContent.style.display = "none";
-});
-
-
-// =============================================
-// TABS
-// =============================================
-document.querySelectorAll(".tab-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-    document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
-    btn.classList.add("active");
-    document.getElementById(btn.dataset.tab).classList.add("active");
-    if (btn.dataset.tab === "tab-json") updateAllJSON();
+  // Enter no campo de senha
+  document.getElementById("adminPassword").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") checkPassword();
   });
+
+  // Tabs
+  document.querySelectorAll(".tab-btn").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      document.querySelectorAll(".tab-btn").forEach(function(b) {
+        b.classList.remove("active");
+      });
+      document.querySelectorAll(".tab-content").forEach(function(c) {
+        c.classList.remove("active");
+      });
+      btn.classList.add("active");
+      document.getElementById(btn.dataset.tab).classList.add("active");
+      if (btn.dataset.tab === "tab-json") updateAllJSON();
+    });
+  });
+
+  // Setup uploads
+  setupUpload(
+    "mainImgInput", "mainImgArea",
+    function(results) {
+      if (!results.length) return;
+      mainImgData = results[0];
+      renderPreviews("mainImgPreview", [mainImgData], true);
+    },
+    "mainProgressBar", "mainStatus"
+  );
+
+  setupUpload(
+    "thumbsInput", "thumbsArea",
+    function(results) {
+      thumbsData = thumbsData.concat(results);
+      renderPreviews("thumbsPreview", thumbsData, true);
+    },
+    "thumbsProgressBar", "thumbsStatus"
+  );
+
+  setupUpload(
+    "carouselImgInput", "carouselArea",
+    function(results) {
+      if (!results.length) return;
+      carouselData = results[0];
+      renderPreviews("carouselImgPreview", [carouselData], false);
+    },
+    "carouselProgressBar", "carouselStatus"
+  );
 });
 
 // =============================================
-// INFO DE DESTINO
+// INFO DESTINO
 // =============================================
-const catalogPageMap = {
+var catalogPageMap = {
   "diorama"            : "catalogo_diorama.html",
   "action-figures"     : "outros_projetos.html (filtro: Action Figures)",
   "produtos-funcionais": "outros_projetos.html (filtro: Produtos Funcionais)"
 };
 
 function updateCatalogInfo() {
-  const val  = document.getElementById("productCatalog").value;
+  var val = document.getElementById("productCatalog").value;
   document.getElementById("catalogInfoLink").textContent = catalogPageMap[val];
 }
 
 // =============================================
 // LOCALSTORAGE
 // =============================================
-function getData(key)        { try { return JSON.parse(localStorage.getItem(key) || "[]"); } catch { return []; } }
-function setData(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
+function getData(key) {
+  try { return JSON.parse(localStorage.getItem(key) || "[]"); }
+  catch(e) { return []; }
+}
+
+function setData(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
+}
 
 // =============================================
-// CONVERTER IMAGEM → WEBP (Canvas API)
+// CANVAS — CONVERSÃO WEBP
 // =============================================
-const canvas = document.getElementById("convertCanvas");
-const ctx    = canvas.getContext("2d");
+var canvas = document.getElementById("convertCanvas");
+var ctx    = canvas.getContext("2d");
 
-function convertToWebP(file, quality = 0.85) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
+function convertToWebP(file, quality) {
+  return new Promise(function(resolve, reject) {
+    var reader = new FileReader();
 
-    reader.onerror = () => reject(new Error("Erro ao ler o arquivo."));
+    reader.onerror = function() { reject(new Error("Erro ao ler arquivo.")); };
 
-    reader.onload = e => {
-      const img = new Image();
+    reader.onload = function(e) {
+      var img = new Image();
 
-      img.onerror = () => reject(new Error("Erro ao carregar a imagem."));
+      img.onerror = function() { reject(new Error("Erro ao carregar imagem.")); };
 
-      img.onload = () => {
-        // Redimensiona se muito grande (máx 1600px de largura)
-        let w = img.width;
-        let h = img.height;
-        const MAX = 1600;
+      img.onload = function() {
+        var w = img.width;
+        var h = img.height;
+        var MAX = 1600;
 
         if (w > MAX) {
           h = Math.round(h * MAX / w);
@@ -862,8 +836,8 @@ function convertToWebP(file, quality = 0.85) {
         ctx.clearRect(0, 0, w, h);
         ctx.drawImage(img, 0, 0, w, h);
 
-        const webpDataUrl = canvas.toDataURL("image/webp", quality);
-        resolve(webpDataUrl);
+        var webpUrl = canvas.toDataURL("image/webp", quality);
+        resolve(webpUrl);
       };
 
       img.src = e.target.result;
@@ -873,36 +847,33 @@ function convertToWebP(file, quality = 0.85) {
   });
 }
 
-// Converte múltiplos arquivos com barra de progresso
 async function convertMultiple(files, quality, progressBarId, statusId) {
-  const progressEl = document.getElementById(progressBarId).parentElement;
-  const barEl      = document.getElementById(progressBarId);
-  const statusEl   = document.getElementById(statusId);
+  var progressEl = document.getElementById(progressBarId).parentElement;
+  var barEl      = document.getElementById(progressBarId);
+  var statusEl   = document.getElementById(statusId);
 
   progressEl.style.display = "block";
   barEl.style.width        = "0%";
 
-  const results = [];
+  var results = [];
 
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i];
-    statusEl.textContent = `Convertendo ${i + 1} de ${files.length}: ${file.name}…`;
-    barEl.style.width = `${Math.round(((i) / files.length) * 100)}%`;
+  for (var i = 0; i < files.length; i++) {
+    var file = files[i];
+    statusEl.textContent = "Convertendo " + (i + 1) + " de " + files.length + ": " + file.name;
+    barEl.style.width    = Math.round((i / files.length) * 100) + "%";
 
     try {
-      const webpUrl = await convertToWebP(file, quality);
-      results.push({ name: file.name, webpUrl });
-    } catch (err) {
+      var webpUrl = await convertToWebP(file, quality);
+      results.push({ name: file.name, webpUrl: webpUrl });
+    } catch(err) {
       console.error("Erro ao converter:", file.name, err);
-      statusEl.textContent = `Erro em ${file.name} — pulando.`;
     }
   }
 
-  barEl.style.width = "100%";
-  statusEl.textContent =
-    `✅ ${results.length} imagem${results.length !== 1 ? "ns" : ""} convertida${results.length !== 1 ? "s" : ""} para WebP.`;
+  barEl.style.width    = "100%";
+  statusEl.textContent = "Convertida(s): " + results.length + " imagem(ns) para WebP.";
 
-  setTimeout(() => {
+  setTimeout(function() {
     progressEl.style.display = "none";
     barEl.style.width        = "0%";
   }, 2500);
@@ -913,34 +884,43 @@ async function convertMultiple(files, quality, progressBarId, statusId) {
 // =============================================
 // ESTADO DAS IMAGENS
 // =============================================
-let mainImgData  = null;  // { name, webpUrl }
-let thumbsData   = [];    // [{ name, webpUrl }, ...]
-let carouselData = null;  // { name, webpUrl }
+var mainImgData  = null;
+var thumbsData   = [];
+var carouselData = null;
 
 // =============================================
-// SETUP DE INPUTS DE IMAGEM
+// SETUP UPLOAD
 // =============================================
-function setupUpload(inputId, areaId, onConverted, multiple, progressBarId, statusId) {
-  const input = document.getElementById(inputId);
-  const area  = document.getElementById(areaId) || input.closest(".upload-area");
+function setupUpload(inputId, areaId, onConverted, progressBarId, statusId) {
+  var input = document.getElementById(inputId);
+  var area  = document.getElementById(areaId);
 
-  const handleFiles = async (files) => {
-    const arr     = Array.from(files).filter(f => f.type.startsWith("image/"));
+  async function handleFiles(files) {
+    var arr = Array.from(files).filter(function(f) {
+      return f.type.startsWith("image/");
+    });
     if (!arr.length) return;
-    const quality = parseInt(document.getElementById("webpQuality")?.value || 85) / 100;
-    const results = await convertMultiple(arr, quality, progressBarId, statusId);
-    onConverted(results);
-  };
 
-  input.addEventListener("change", () => {
+    var qualityEl = document.getElementById("webpQuality");
+    var quality   = qualityEl ? parseInt(qualityEl.value) / 100 : 0.85;
+    var results   = await convertMultiple(arr, quality, progressBarId, statusId);
+    onConverted(results);
+  }
+
+  input.addEventListener("change", function() {
     if (input.files.length) handleFiles(input.files);
     input.value = "";
   });
 
   if (area) {
-    area.addEventListener("dragover", e => { e.preventDefault(); area.classList.add("drag-over"); });
-    area.addEventListener("dragleave", () => area.classList.remove("drag-over"));
-    area.addEventListener("drop", e => {
+    area.addEventListener("dragover", function(e) {
+      e.preventDefault();
+      area.classList.add("drag-over");
+    });
+    area.addEventListener("dragleave", function() {
+      area.classList.remove("drag-over");
+    });
+    area.addEventListener("drop", function(e) {
       e.preventDefault();
       area.classList.remove("drag-over");
       handleFiles(e.dataTransfer.files);
@@ -948,83 +928,56 @@ function setupUpload(inputId, areaId, onConverted, multiple, progressBarId, stat
   }
 }
 
-// Imagem principal
-setupUpload(
-  "mainImgInput", "mainImgArea",
-  results => {
-    if (!results.length) return;
-    mainImgData = results[0];
-    renderPreviews("mainImgPreview", [mainImgData], true);
-  },
-  false, "mainProgressBar", "mainStatus"
-);
-
-// Miniaturas
-setupUpload(
-  "thumbsInput", "thumbsArea",
-  results => {
-    thumbsData = [...thumbsData, ...results];
-    renderPreviews("thumbsPreview", thumbsData, true);
-  },
-  true, "thumbsProgressBar", "thumbsStatus"
-);
-
-// Carrossel
-setupUpload(
-  "carouselImgInput", null,
-  results => {
-    if (!results.length) return;
-    carouselData = results[0];
-    renderPreviews("carouselImgPreview", [carouselData], false);
-  },
-  false, "carouselProgressBar", "carouselStatus"
-);
-
 // =============================================
 // RENDER PREVIEWS
 // =============================================
 function renderPreviews(containerId, items, showRemove) {
-  const container = document.getElementById(containerId);
+  var container = document.getElementById(containerId);
   container.innerHTML = "";
 
-  items.forEach((item, i) => {
-    const div = document.createElement("div");
+  items.forEach(function(item, i) {
+    var div   = document.createElement("div");
     div.className = "preview-item";
 
-    const img = document.createElement("img");
-    img.src = item.webpUrl;
-    img.alt = item.name;
+    var img   = document.createElement("img");
+    img.src   = item.webpUrl;
+    img.alt   = item.name;
 
-    const badge = document.createElement("div");
-    badge.className = "preview-badge";
+    var badge = document.createElement("div");
+    badge.className   = "preview-badge";
     badge.textContent = "WebP";
 
-    const label = document.createElement("div");
-    label.className = "preview-label";
-    label.textContent = item.name.replace(/\.[^.]+
+    // CORREÇÃO: regex em uma única linha sem quebra
+    var nameWithoutExt = item.name.replace(/\.[^.]+
 $
-/, "") + ".webp";
+/, "");
+
+    var label = document.createElement("div");
+    label.className   = "preview-label";
+    label.textContent = nameWithoutExt + ".webp";
 
     div.appendChild(img);
     div.appendChild(badge);
     div.appendChild(label);
 
     if (showRemove) {
-      const btn = document.createElement("button");
+      var btn = document.createElement("button");
       btn.className = "remove-preview";
-      btn.innerHTML = "&times;";
-      btn.onclick = () => {
-        if (containerId === "mainImgPreview") {
-          mainImgData = null;
-        } else if (containerId === "thumbsPreview") {
-          thumbsData.splice(i, 1);
-          renderPreviews(containerId, thumbsData, showRemove);
-          return;
-        } else if (containerId === "carouselImgPreview") {
-          carouselData = null;
-        }
-        div.remove();
-      };
+      btn.textContent = "×";
+      btn.onclick = (function(index, cId) {
+        return function() {
+          if (cId === "mainImgPreview") {
+            mainImgData = null;
+          } else if (cId === "thumbsPreview") {
+            thumbsData.splice(index, 1);
+            renderPreviews(cId, thumbsData, true);
+            return;
+          } else if (cId === "carouselImgPreview") {
+            carouselData = null;
+          }
+          div.remove();
+        };
+      })(i, containerId);
       div.appendChild(btn);
     }
 
@@ -1033,15 +986,17 @@ $
 }
 
 // =============================================
-// GERAR NOME DE ARQUIVO SEGURO
+// NOME SEGURO PARA ARQUIVO
 // =============================================
 function safeName(str) {
+  // CORREÇÃO: regex em uma única linha sem quebra
   return str.toLowerCase()
-    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9]+/g, "_")
     .replace(/
 ^
-_|_
+_+|_+
 $
 /g, "");
 }
@@ -1050,69 +1005,72 @@ $
 // PRÓXIMO ID SEQUENCIAL
 // =============================================
 function nextId(catalog) {
-  const key  = catalog === "diorama" ? "products_diorama" : "products_outros";
-  const list = getData(key).filter(p =>
-    catalog === "diorama" ? true : p.category === catalog
-  );
+  var key    = catalog === "diorama" ? "products_diorama" : "products_outros";
+  var list   = getData(key);
+  var prefix = catalog === "diorama" ? "d" : catalog === "action-figures" ? "af" : "pf";
 
-  const prefix = catalog === "diorama" ? "d" : catalog === "action-figures" ? "af" : "pf";
-  const nums   = list
-    .map(p => parseInt((p.id || "").replace(/\D/g, "")) || 0)
-    .filter(n => !isNaN(n));
+  if (catalog !== "diorama") {
+    list = list.filter(function(p) { return p.category === catalog; });
+  }
 
-  const next = nums.length ? Math.max(...nums) + 1 : 1;
-  return `${prefix}-${String(next).padStart(2, "0")}`;
+  var nums = list.map(function(p) {
+    return parseInt((p.id || "").replace(/\D/g, "")) || 0;
+  });
+
+  var next = nums.length ? Math.max.apply(null, nums) + 1 : 1;
+  return prefix + "-" + (next < 10 ? "0" + next : "" + next);
 }
 
 // =============================================
 // ADICIONAR PRODUTO
 // =============================================
 async function addProduct() {
-  const catalog     = document.getElementById("productCatalog").value;
-  const name        = document.getElementById("productName").value.trim();
-  const description = document.getElementById("productDescription").value.trim();
-  const price       = document.getElementById("productPrice").value.trim();
+  var catalog     = document.getElementById("productCatalog").value;
+  var name        = document.getElementById("productName").value.trim();
+  var description = document.getElementById("productDescription").value.trim();
+  var price       = document.getElementById("productPrice").value.trim();
 
   if (!name)        { showToast("Preencha o nome do produto.", "error"); return; }
   if (!description) { showToast("Preencha a descrição.", "error"); return; }
   if (!mainImgData) { showToast("Adicione a imagem principal.", "error"); return; }
 
-  const btn = document.getElementById("addProductBtn");
-  btn.disabled = true;
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Salvando…';
+  var btn = document.getElementById("addProductBtn");
+  btn.disabled   = true;
+  btn.innerHTML  = '<i class="fas fa-spinner fa-spin"></i> Salvando…';
 
-  const id       = nextId(catalog);
-  const sName    = safeName(name);
-  const folder   = catalog === "diorama" ? "assets/img/dioramas/" : "assets/img/outros/";
+  var id      = nextId(catalog);
+  var sName   = safeName(name);
+  var folder  = catalog === "diorama" ? "assets/img/dioramas/" : "assets/img/outros/";
 
-  const mainPath   = `${folder}${sName}.webp`;
-  const thumbPaths = thumbsData.map((t, i) => `${folder}${sName}_${i + 1}.webp`);
+  var mainPath   = folder + sName + ".webp";
+  var thumbPaths = thumbsData.map(function(t, i) {
+    return folder + sName + "_" + (i + 1) + ".webp";
+  });
 
-  const product = {
-    id,
-    name,
-    description,
-    price : price || "",
-    mainImage  : mainPath,
-    thumbnails : thumbPaths,
-    // Dados temporários (prévia local — removidos na exportação)
-    _preview   : mainImgData.webpUrl,
-    _thumbPreviews: thumbsData.map(t => t.webpUrl)
+  var product = {
+    id          : id,
+    name        : name,
+    description : description,
+    price       : price || "",
+    mainImage   : mainPath,
+    thumbnails  : thumbPaths,
+    _preview    : mainImgData.webpUrl,
+    _thumbPreviews: thumbsData.map(function(t) { return t.webpUrl; })
   };
 
   if (catalog !== "diorama") product.category = catalog;
 
-  const key  = catalog === "diorama" ? "products_diorama" : "products_outros";
-  const list = getData(key);
+  var key  = catalog === "diorama" ? "products_diorama" : "products_outros";
+  var list = getData(key);
   list.push(product);
   setData(key, list);
 
-  showToast(`"${name}" adicionado! ID: ${id}`);
+  showToast('"' + name + '" adicionado! ID: ' + id);
   clearForm();
   loadAllLists();
   updateAllJSON();
 
-  btn.disabled = false;
+  btn.disabled  = false;
   btn.innerHTML = '<i class="fas fa-check"></i> Adicionar Produto';
 }
 
@@ -1132,30 +1090,30 @@ function clearForm() {
 }
 
 // =============================================
-// ADICIONAR AO CARROSSEL
+// CARROSSEL
 // =============================================
 async function addCarouselItem() {
-  const alt = document.getElementById("carouselAlt").value.trim();
+  var alt = document.getElementById("carouselAlt").value.trim();
 
   if (!carouselData) {
     showToast("Selecione uma imagem para o carrossel.", "error");
     return;
   }
 
-  const sName = safeName(alt || "carrossel");
-  const item  = {
-    src     : `assets/img/dioramas/${sName}.webp`,
+  var sName = safeName(alt || "carrossel");
+  var item  = {
+    src     : "assets/img/dioramas/" + sName + ".webp",
     alt     : alt || "Imagem do carrossel",
     _preview: carouselData.webpUrl
   };
 
-  const list = getData("carousel");
+  var list = getData("carousel");
   list.push(item);
   setData("carousel", list);
 
-  document.getElementById("carouselAlt").value             = "";
-  document.getElementById("carouselImgPreview").innerHTML  = "";
-  document.getElementById("carouselStatus").textContent    = "";
+  document.getElementById("carouselAlt").value            = "";
+  document.getElementById("carouselImgPreview").innerHTML = "";
+  document.getElementById("carouselStatus").textContent   = "";
   carouselData = null;
 
   showToast("Imagem adicionada ao carrossel!");
@@ -1174,76 +1132,72 @@ function loadAllLists() {
 }
 
 function loadList(key, containerId, filterCategory) {
-  const container = document.getElementById(containerId);
-  let list = getData(key);
+  var container = document.getElementById(containerId);
+  var list      = getData(key);
 
   if (filterCategory !== "diorama") {
-    list = list.filter(p => p.category === filterCategory);
+    list = list.filter(function(p) { return p.category === filterCategory; });
   }
 
   if (!list.length) {
-    container.innerHTML =
-      `<p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhum produto cadastrado.</p>`;
+    container.innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhum produto cadastrado.</p>';
     return;
   }
 
   container.innerHTML = "";
-  list.forEach(product => {
-    const catLabel =
-      product.category === "action-figures"
-        ? `<span class="cat-badge cat-action">Action Figure</span>`
-        : product.category === "produtos-funcionais"
-          ? `<span class="cat-badge cat-funcional">Funcional</span>`
-          : `<span class="cat-badge cat-diorama">Diorama</span>`;
 
-    const item = document.createElement("div");
+  list.forEach(function(product) {
+    var catLabel =
+      product.category === "action-figures"
+        ? '<span class="cat-badge cat-action">Action Figure</span>'
+        : product.category === "produtos-funcionais"
+          ? '<span class="cat-badge cat-funcional">Funcional</span>'
+          : '<span class="cat-badge cat-diorama">Diorama</span>';
+
+    var item = document.createElement("div");
     item.className = "product-list-item";
-    item.innerHTML = `
-      <img src="${product._preview || product.mainImage}"
-           onerror="this.style.background='rgba(255,255,255,0.1)'">
-      <div class="product-list-info">
-        <strong>${product.name} ${catLabel}</strong>
-        <span>ID: ${product.id} — ${product.price || "Sob consulta"}</span>
-      </div>
-      <div class="product-list-actions">
-        <button class="btn-icon btn-icon-delete" title="Remover"
-                onclick="removeProduct('${key}','${product.id}')">
-          <i class="fas fa-trash"></i>
-        </button>
-      </div>
-    `;
+    item.innerHTML =
+      '<img src="' + (product._preview || product.mainImage) + '" onerror="this.style.background=\'rgba(255,255,255,0.1)\'">' +
+      '<div class="product-list-info">' +
+        '<strong>' + product.name + ' ' + catLabel + '</strong>' +
+        '<span>ID: ' + product.id + ' — ' + (product.price || "Sob consulta") + '</span>' +
+      '</div>' +
+      '<div class="product-list-actions">' +
+        '<button class="btn-icon btn-icon-delete" title="Remover" onclick="removeProduct(\'' + key + '\',\'' + product.id + '\')">' +
+          '<i class="fas fa-trash"></i>' +
+        '</button>' +
+      '</div>';
+
     container.appendChild(item);
   });
 }
 
 function loadCarouselList() {
-  const container = document.getElementById("carouselList");
-  const list      = getData("carousel");
+  var container = document.getElementById("carouselList");
+  var list      = getData("carousel");
 
   if (!list.length) {
-    container.innerHTML =
-      `<p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhuma imagem adicionada.</p>`;
+    container.innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhuma imagem adicionada.</p>';
     return;
   }
 
   container.innerHTML = "";
-  list.forEach((item, idx) => {
-    const div = document.createElement("div");
+
+  list.forEach(function(item, idx) {
+    var div = document.createElement("div");
     div.className = "product-list-item";
-    div.innerHTML = `
-      <img src="${item._preview || item.src}"
-           onerror="this.style.background='rgba(255,255,255,0.1)'">
-      <div class="product-list-info">
-        <strong>${item.alt}</strong>
-        <span>${item.src}</span>
-      </div>
-      <div class="product-list-actions">
-        <button class="btn-icon btn-icon-delete" title="Remover"
-                onclick="removeCarouselItem(${idx})">
-          <i class="fas fa-trash"></i>
-        </button>
-      </div>
-    `;
+    div.innerHTML =
+      '<img src="' + (item._preview || item.src) + '" onerror="this.style.background=\'rgba(255,255,255,0.1)\'">' +
+      '<div class="product-list-info">' +
+        '<strong>' + item.alt + '</strong>' +
+        '<span>' + item.src + '</span>' +
+      '</div>' +
+      '<div class="product-list-actions">' +
+        '<button class="btn-icon btn-icon-delete" title="Remover" onclick="removeCarouselItem(' + idx + ')">' +
+          '<i class="fas fa-trash"></i>' +
+        '</button>' +
+      '</div>';
+
     container.appendChild(div);
   });
 }
@@ -1253,7 +1207,7 @@ function loadCarouselList() {
 // =============================================
 function removeProduct(key, id) {
   if (!confirm("Remover este produto?")) return;
-  setData(key, getData(key).filter(p => p.id !== id));
+  setData(key, getData(key).filter(function(p) { return p.id !== id; }));
   loadAllLists();
   updateAllJSON();
   showToast("Produto removido.");
@@ -1261,7 +1215,7 @@ function removeProduct(key, id) {
 
 function removeCarouselItem(idx) {
   if (!confirm("Remover esta imagem do carrossel?")) return;
-  const list = getData("carousel");
+  var list = getData("carousel");
   list.splice(idx, 1);
   setData("carousel", list);
   loadCarouselList();
@@ -1270,47 +1224,44 @@ function removeCarouselItem(idx) {
 }
 
 // =============================================
-// JSON — EXPORTAR
+// JSON
 // =============================================
 function cleanForExport(list) {
-  return list.map(p => {
-    const c = { ...p };
+  return list.map(function(p) {
+    var c = Object.assign({}, p);
     delete c._preview;
     delete c._thumbPreviews;
-    delete c._mainImgPreview;
-    delete c._thumbsPreviews;
     return c;
   });
 }
 
 function updateAllJSON() {
-  const diorama = cleanForExport(getData("products_diorama"));
-  const outros  = cleanForExport(getData("products_outros"));
-  const carousel= cleanForExport(getData("carousel"));
-
-  document.getElementById("jsonDiorama").textContent  = JSON.stringify(diorama,  null, 2);
-  document.getElementById("jsonOutros").textContent   = JSON.stringify(outros,   null, 2);
-  document.getElementById("jsonCarousel").textContent = JSON.stringify(carousel, null, 2);
+  document.getElementById("jsonDiorama").textContent  = JSON.stringify(cleanForExport(getData("products_diorama")), null, 2);
+  document.getElementById("jsonOutros").textContent   = JSON.stringify(cleanForExport(getData("products_outros")),  null, 2);
+  document.getElementById("jsonCarousel").textContent = JSON.stringify(cleanForExport(getData("carousel")),         null, 2);
 }
 
 function copyJSON(type) {
-  const map = { diorama:"jsonDiorama", outros:"jsonOutros", carousel:"jsonCarousel" };
-  const text = document.getElementById(map[type]).textContent;
+  var map  = { diorama: "jsonDiorama", outros: "jsonOutros", carousel: "jsonCarousel" };
+  var text = document.getElementById(map[type]).textContent;
   navigator.clipboard.writeText(text)
-    .then(()  => showToast("JSON copiado! Cole no arquivo correspondente no GitHub.", "info"))
-    .catch(() => showToast("Erro ao copiar. Selecione e copie manualmente.", "error"));
+    .then(function()  { showToast("JSON copiado! Cole no arquivo no GitHub.", "info"); })
+    .catch(function() { showToast("Erro ao copiar. Selecione e copie manualmente.", "error"); });
 }
 
 // =============================================
 // TOAST
 // =============================================
-let toastTimeout;
-function showToast(msg, type = "success") {
-  const toast = document.getElementById("toast");
+var toastTimeout;
+function showToast(msg, type) {
+  type = type || "success";
+  var toast = document.getElementById("toast");
   toast.textContent = msg;
-  toast.className   = `toast ${type} show`;
+  toast.className   = "toast " + type + " show";
   clearTimeout(toastTimeout);
-  toastTimeout = setTimeout(() => toast.classList.remove("show"), 3500);
+  toastTimeout = setTimeout(function() {
+    toast.classList.remove("show");
+  }, 3500);
 }
 </script>
 </body>
