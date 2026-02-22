@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Catálogo - Shakaw 3D Print</title>
+  <title>Catálogo Diorama - Shakaw 3D Print</title>
   <link rel="stylesheet" href="css/index_styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -15,15 +15,9 @@
          alt="Logo Shakaw 3D Print" class="logo">
     <h1>Shakaw 3D Print</h1>
     <div class="header-links">
-      <a href="home.html">
-        <i class="fas fa-home"></i> Início
-      </a>
-      <a href="catalogo_diorama.html">
-        <i class="fas fa-box-open"></i> Catálogo
-      </a>
-      <a href="outros_projetos.html">
-        <i class="fas fa-images"></i> Outros Projetos
-      </a>
+      <a href="home.html"><i class="fas fa-home"></i> Início</a>
+      <a href="catalogo_diorama.html"><i class="fas fa-box-open"></i> Catálogo</a>
+      <a href="outros_projetos.html"><i class="fas fa-images"></i> Outros Projetos</a>
       <a href="https://www.instagram.com/shakaw3dprint" target="_blank">
         <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
              alt="Instagram" class="instagram-icon">
@@ -32,40 +26,39 @@
     </div>
   </div>
 
-  <!-- CARROSSEL DE IMAGENS -->
+  <!-- CARROSSEL -->
   <div class="carousel-container">
     <div class="carousel" id="carousel"></div>
-    <button class="carousel-btn prev" onclick="moveSlide(-1)">❮</button>
-    <button class="carousel-btn next" onclick="moveSlide(1)">❯</button>
+    <button class="carousel-btn prev">❮</button>
+    <button class="carousel-btn next">❯</button>
     <div class="carousel-indicators" id="carouselIndicators"></div>
   </div>
 
-  <!-- INDICADOR DE CARREGAMENTO -->
+  <!-- LOADER -->
   <div class="loader" id="loader"></div>
 
-  <!-- ÁREA PRINCIPAL DO CATÁLOGO -->
+  <!-- CATÁLOGO -->
   <div class="catalog-page" id="catalog"></div>
 
-  <!-- MODAL PARA IMAGENS AMPLIADAS -->
+  <!-- MODAL IMAGEM -->
   <div id="imgModal" class="modal">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <button class="modal-nav modal-prev" onclick="navigateModal(-1)">❮</button>
+    <span class="close">&times;</span>
+    <button class="modal-nav modal-prev">❮</button>
     <div class="modal-content">
       <img id="modalImg" src="" alt="Imagem ampliada">
     </div>
-    <button class="modal-nav modal-next" onclick="navigateModal(1)">❯</button>
+    <button class="modal-nav modal-next">❯</button>
     <div class="zoom-controls">
-      <button onclick="zoomImage(0.2)">+</button>
-      <button onclick="zoomImage(-0.2)">-</button>
-      <button onclick="resetZoomAndPan()">Reset</button>
+      <button id="zoomInBtn">+</button>
+      <button id="zoomOutBtn">-</button>
+      <button id="zoomResetBtn">Reset</button>
     </div>
   </div>
 
-  <!-- MODAL PARA FORMULÁRIO DE CONTATO -->
+  <!-- MODAL CONTATO -->
   <div id="contactModal" class="contact-modal">
     <div class="contact-modal-content">
-      <span class="close-contact"
-            onclick="document.getElementById('contactModal').style.display='none'">&times;</span>
+      <span class="close-contact">&times;</span>
       <h2>Enviar Interesses</h2>
       <form id="contactForm"
             action="https://script.google.com/macros/s/AKfycbypHVPUQFxuGJNoawgsXZFZqGwFIMNcWhcJDb0Yb2uCwuRz8QjLoR29PyMmI661wwaUyg/exec"
@@ -77,10 +70,8 @@
         <div class="form-section">
           <label for="name">Nome:</label>
           <input type="text" id="name" name="name" required>
-
           <label for="email">E-mail:</label>
           <input type="email" id="email" name="email" required>
-
           <label for="whatsapp">WhatsApp:</label>
           <input type="tel" id="whatsapp" name="whatsapp"
                  placeholder="(00) 00000-0000" required>
@@ -102,10 +93,10 @@
     </div>
   </div>
 
-  <!-- BOTÃO VOLTAR AO TOPO -->
+  <!-- BOTÃO TOPO -->
   <button id="backToTopBtn" title="Voltar ao topo">⬆️ Topo</button>
 
-  <!-- PAINEL DE INTERESSES -->
+  <!-- PAINEL INTERESSES -->
   <div id="interestPanel">
     <button id="closeInterestPanelBtn" class="close-interest-panel-btn">&times;</button>
     <h3>Lista de interesses</h3>
@@ -114,10 +105,9 @@
     <button onclick="showContactModal()">Enviar Interesses</button>
   </div>
 
-  <!-- BOTÃO PARA ABRIR PAINEL DE INTERESSES -->
+  <!-- BOTÃO INTERESSES -->
   <button class="interest-btn">💚 Ver interesses</button>
 
-  <!-- SCRIPT JAVASCRIPT -->
   <script src="js/index_script.js"></script>
 </body>
 </html>
