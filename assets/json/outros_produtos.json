@@ -2,26 +2,13 @@
   {
     "id": "af-01",
     "name": "Action Figure 01",
-    "description": "Descrição do action figure. Material, tamanho, detalhes de acabamento.",
+    "description": "Descrição do action figure. Material, tamanho, detalhes.",
     "price": "R$ 00,00",
     "category": "action-figures",
     "mainImage": "assets/img/outros/af_01.webp",
     "thumbnails": [
-      "assets/img/outros/af_01.webp",
       "assets/img/outros/af_01_1.webp",
       "assets/img/outros/af_01_2.webp"
-    ]
-  },
-  {
-    "id": "af-02",
-    "name": "Action Figure 02",
-    "description": "Descrição do action figure. Material, tamanho, detalhes de acabamento.",
-    "price": "R$ 00,00",
-    "category": "action-figures",
-    "mainImage": "assets/img/outros/af_02.webp",
-    "thumbnails": [
-      "assets/img/outros/af_02.webp",
-      "assets/img/outros/af_02_1.webp"
     ]
   },
   {
@@ -32,7 +19,6 @@
     "category": "produtos-funcionais",
     "mainImage": "assets/img/outros/pf_porta_oculos.webp",
     "thumbnails": [
-      "assets/img/outros/pf_porta_oculos.webp",
       "assets/img/outros/pf_porta_oculos_1.webp"
     ]
   },
@@ -44,7 +30,6 @@
     "category": "produtos-funcionais",
     "mainImage": "assets/img/outros/pf_porta_lapis.webp",
     "thumbnails": [
-      "assets/img/outros/pf_porta_lapis.webp",
       "assets/img/outros/pf_porta_lapis_1.webp"
     ]
   }
