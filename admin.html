@@ -747,21 +747,54 @@
 const ADMIN_PASSWORD = "Er!6736**";
 
 function checkPassword() {
-  const input = document.getElementById("adminPassword");
-  if (input.value === ADMIN_PASSWORD) {
-    document.getElementById("loginScreen").style.display  = "none";
-    document.getElementById("adminContent").style.display = "block";
-    loadAllLists();
-    updateAllJSON();
+  const input        = document.getElementById("adminPassword");
+  const loginScreen  = document.getElementById("loginScreen");
+  const adminContent = document.getElementById("adminContent");
+  const loginError   = document.getElementById("loginError");
+
+  const typed = input.value;
+
+  if (!typed) {
+    loginError.textContent = "Digite a senha.";
+    loginError.style.display = "block";
+    return;
+  }
+
+  if (typed === ADMIN_PASSWORD) {
+    // Esconde tela de login
+    loginScreen.style.setProperty("display", "none", "important");
+
+    // Mostra conteúdo admin
+    adminContent.style.setProperty("display", "block", "important");
+
+    // Inicializa listas e JSON
+    try { loadAllLists();   } catch(e) { console.error("loadAllLists:", e); }
+    try { updateAllJSON();  } catch(e) { console.error("updateAllJSON:", e); }
+
   } else {
-    document.getElementById("loginError").style.display = "block";
+    loginError.textContent   = "Senha incorreta. Tente novamente.";
+    loginError.style.display = "block";
     input.value = "";
     input.focus();
   }
 }
 
-document.getElementById("adminPassword")
-  .addEventListener("keydown", e => { if (e.key === "Enter") checkPassword(); });
+// Garante que o listener só é adicionado após o DOM estar pronto
+document.addEventListener("DOMContentLoaded", function() {
+  const passwordInput = document.getElementById("adminPassword");
+  if (passwordInput) {
+    passwordInput.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") checkPassword();
+    });
+  }
+
+  // Garante estado inicial correto
+  const loginScreen  = document.getElementById("loginScreen");
+  const adminContent = document.getElementById("adminContent");
+  if (loginScreen)  loginScreen.style.display  = "block";
+  if (adminContent) adminContent.style.display = "none";
+});
+
 
 // =============================================
 // TABS
