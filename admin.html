@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin - Shakaw 3D Print</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #00303f;
+      color: white;
+      min-height: 100vh;
+    }
+
+    /* CABEÇALHO */
+    .admin-header {
+      background: rgba(0,0,0,0.3);
+      padding: 20px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .admin-header h1 {
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .admin-header a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .admin-header a:hover { color: white; }
+
+    /* SENHA */
+    #loginScreen {
+      max-width: 380px;
+      margin: 80px auto;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 40px 30px;
+      text-align: center;
+    }
+
+    #loginScreen h2 {
+      margin-bottom: 20px;
+      font-size: 1.3rem;
+    }
+
+    #loginScreen input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.1);
+      color: white;
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+
+    #loginScreen input::placeholder { color: rgba(255,255,255,0.4); }
+
+    #loginError {
+      color: #ff6b6b;
+      font-size: 13px;
+      margin-top: 8px;
+      display: none;
+    }
+
+    /* CONTEÚDO ADMIN */
+    #adminContent { display: none; padding: 30px 20px; max-width: 1100px; margin: 0 auto; }
+
+    /* TABS */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 10px 22px;
+      border-radius: 25px;
+      border: 2px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.07);
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: all 0.25s;
+    }
+
+    .tab-btn:hover { background: rgba(255,255,255,0.15); }
+
+    .tab-btn.active {
+      background: #0077cc;
+      border-color: #0077cc;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* CARDS DE SEÇÃO */
+    .admin-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .admin-card h2 {
+      font-size: 1.15rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #4fc3f7;
+    }
+
+    /* FORMULÁRIOS */
+    label {
+      display: block;
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 5px;
+      margin-top: 14px;
+    }
+
+    label:first-of-type { margin-top: 0; }
+
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: #4fc3f7;
+    }
+
+    select option { background: #00303f; color: white; }
+    textarea { resize: vertical; min-height: 80px; }
+
+    /* UPLOAD AREA */
+    .upload-area {
+      border: 2px dashed rgba(255,255,255,0.25);
+      border-radius: 10px;
+      padding: 30px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.3s, background 0.3s;
+      margin-top: 14px;
+      position: relative;
+    }
+
+    .upload-area:hover,
+    .upload-area.drag-over {
+      border-color: #4fc3f7;
+      background: rgba(79,195,247,0.06);
+    }
+
+    .upload-area i { font-size: 2.5rem; color: rgba(255,255,255,0.4); margin-bottom: 10px; }
+    .upload-area p { color: rgba(255,255,255,0.55); font-size: 14px; }
+    .upload-area input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* PREVIEW IMAGENS */
+    .image-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .preview-item {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(0,0,0,0.3);
+      aspect-ratio: 1;
+    }
+
+    .preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .preview-item .preview-name {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.7);
+      font-size: 10px;
+      padding: 3px 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .preview-item .remove-preview {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: #ff4d4d;
+      border: none;
+      color: white;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* BOTÕES */
+    .btn {
+      padding: 11px 24px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background 0.25s, transform 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn:hover { transform: scale(1.03); }
+    .btn-primary { background: #0077cc; color: white; }
+    .btn-primary:hover { background: #005fa3; }
+    .btn-success { background: #28a745; color: white; }
+    .btn-success:hover { background: #1e7e34; }
+    .btn-danger { background: #dc3545; color: white; }
+    .btn-danger:hover { background: #c82333; }
+    .btn-secondary { background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,255,255,0.2); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.2); }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* LISTA DE PRODUTOS */
+    .product-list { margin-top: 10px; }
+
+    .product-list-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      transition: background 0.2s;
+    }
+
+    .product-list-item:hover { background: rgba(255,255,255,0.09); }
+
+    .product-list-item img {
+      width: 56px;
+      height: 56px;
+      object-fit: cover;
+      border-radius: 6px;
+      flex-shrink: 0;
+      background: rgba(0,0,0,0.3);
+    }
+
+    .product-list-info { flex: 1; min-width: 0; }
+    .product-list-info strong { display: block; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .product-list-info span { font-size: 12px; color: rgba(255,255,255,0.5); }
+
+    .product-list-actions { display: flex; gap: 6px; flex-shrink: 0; }
+
+    .btn-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-icon:hover { transform: scale(1.1); }
+    .btn-icon-edit { background: rgba(0,119,204,0.35); color: #4fc3f7; }
+    .btn-icon-delete { background: rgba(220,53,69,0.3); color: #ff6b6b; }
+
+    /* BADGE CATEGORIA */
+    .cat-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    .cat-diorama { background: #e8f4ff; color: #0057b7; }
+    .cat-action { background: #fff3e8; color: #b74f00; }
+    .cat-funcional { background: #e8fff1; color: #1b7a3e; }
+
+    /* NOTIFICAÇÃO */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #28a745;
+      color: white;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: bold;
+      z-index: 9999;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+      opacity: 0;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .toast.error { background: #dc3545; }
+
+    /* SEPARADOR */
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin: 24px 0;
+    }
+
+    /* INSTRUÇÕES */
+    .info-box {
+      background: rgba(79,195,247,0.08);
+      border: 1px solid rgba(79,195,247,0.25);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .info-box i { color: #4fc3f7; margin-right: 6px; }
+
+    /* JSON PREVIEW */
+    .json-preview {
+      background: rgba(0,0,0,0.4);
+      border-radius: 8px;
+      padding: 16px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #a8d8a8;
+      max-height: 300px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+      margin-top: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 600px) {
+      .admin-header { padding: 15px; }
+      #adminContent { padding: 20px 12px; }
+      .admin-card { padding: 18px; }
+      .tabs { gap: 6px; }
+      .tab-btn { padding: 8px 14px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CABEÇALHO ADMIN -->
+  <div class="admin-header">
+    <h1><i class="fas fa-tools"></i> Painel Admin — Shakaw 3D Print</h1>
+    <a href="home.html"><i class="fas fa-arrow-left"></i> Voltar ao site</a>
+  </div>
+
+  <!-- TELA DE LOGIN -->
+  <div id="loginScreen">
+    <h2><i class="fas fa-lock"></i> Acesso Restrito</h2>
+    <p style="color:rgba(255,255,255,0.55);font-size:13px;margin-bottom:20px">
+      Digite a senha para acessar o painel.
+    </p>
+    <input type="password" id="adminPassword" placeholder="Senha" autocomplete="off">
+    <button class="btn btn-primary" style="width:100%" onclick="checkPassword()">
+      <i class="fas fa-sign-in-alt"></i> Entrar
+    </button>
+    <p id="loginError">Senha incorreta. Tente novamente.</p>
+  </div>
+
+  <!-- CONTEÚDO ADMIN -->
+  <div id="adminContent">
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="tab-add">
+        <i class="fas fa-plus"></i> Adicionar Produto
+      </button>
+      <button class="tab-btn" data-tab="tab-manage">
+        <i class="fas fa-list"></i> Gerenciar Produtos
+      </button>
+      <button class="tab-btn" data-tab="tab-json">
+        <i class="fas fa-code"></i> Ver / Exportar JSON
+      </button>
+      <button class="tab-btn" data-tab="tab-carousel">
+        <i class="fas fa-images"></i> Carrossel
+      </button>
+    </div>
+
+    <!-- TAB: ADICIONAR PRODUTO -->
+    <div class="tab-content active" id="tab-add">
+      <div class="admin-card">
+        <h2><i class="fas fa-plus-circle"></i> Novo Produto</h2>
+
+        <div class="info-box">
+          <i class="fas fa-info-circle"></i>
+          Preencha os dados e selecione as imagens. Depois clique em
+          <strong>Adicionar Produto</strong>. O JSON será gerado automaticamente.
+          Para publicar no GitHub Pages, copie o JSON gerado na aba
+          <strong>Ver / Exportar JSON</strong> e substitua o arquivo correspondente.
+        </div>
+
+        <label>Catálogo de destino</label>
+        <select id="productCatalog">
+          <option value="diorama">Catálogo Diorama (products.json)</option>
+          <option value="outros-action">Outros Projetos — Action Figures</option>
+          <option value="outros-funcional">Outros Projetos — Produtos Funcionais</option>
+        </select>
+
+        <label>Nome do produto *</label>
+        <input type="text" id="productName" placeholder="Ex.: Garagem Miniatura 1:18">
+
+        <label>Descrição *</label>
+        <textarea id="productDescription"
+                  placeholder="Descreva o produto: material, tamanho, acabamento..."></textarea>
+
+        <label>Preço (opcional — deixe vazio para exibir "Sob consulta")</label>
+        <input type="text" id="productPrice" placeholder="Ex.: R$ 45,00">
+
+        <label>Imagem principal *</label>
+        <div class="upload-area" id="mainImgArea">
+          <i class="fas fa-image"></i>
+          <p>Clique ou arraste a imagem principal aqui</p>
+          <p style="font-size:11px;margin-top:4px">JPG, PNG, WEBP — máx. 5 MB</p>
+          <input type="file" id="mainImgInput" accept="image/*">
+        </div>
+        <div class="image-preview-grid" id="mainImgPreview"></div>
+
+        <label>Imagens adicionais (miniaturas)</label>
+        <div class="upload-area" id="thumbsArea">
+          <i class="fas fa-images"></i>
+          <p>Clique ou arraste as imagens adicionais aqui</p>
+          <p style="font-size:11px;margin-top:4px">Selecione uma ou mais imagens</p>
+          <input type="file" id="thumbsInput" accept="image/*" multiple>
+        </div>
+        <div class="image-preview-grid" id="thumbsPreview"></div>
+
+        <div class="btn-row">
+          <button class="btn btn-success" onclick="addProduct()">
+            <i class="fas fa-check"></i> Adicionar Produto
+          </button>
+          <button class="btn btn-secondary" onclick="clearForm()">
+            <i class="fas fa-times"></i> Limpar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: GERENCIAR PRODUTOS -->
+    <div class="tab-content" id="tab-manage">
+      <div class="admin-card">
+        <h2><i class="fas fa-box-open"></i> Catálogo Diorama</h2>
+        <div class="product-list" id="listDiorama">
+          <p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhum produto cadastrado.</p>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <h2><i class="fas fa-user-astronaut"></i> Action Figures</h2>
+        <div class="product-list" id="listActionFigures">
+          <p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhum produto cadastrado.</p>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <h2><i class="fas fa-toolbox"></i> Produtos Funcionais</h2>
+        <div class="product-list" id="listFuncionais">
+          <p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhum produto cadastrado.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: JSON -->
+    <div class="tab-content" id="tab-json">
+      <div class="admin-card">
+        <h2><i class="fas fa-file-code"></i> products.json (Catálogo Diorama)</h2>
+        <div class="info-box">
+          <i class="fas fa-info-circle"></i>
+          Copie o conteúdo abaixo e substitua o arquivo
+          <strong>assets/json/products.json</strong> no seu repositório GitHub.
+        </div>
+        <button class="btn btn-primary" onclick="copyJSON('diorama')">
+          <i class="fas fa-copy"></i> Copiar JSON
+        </button>
+        <div class="json-preview" id="jsonDiorama">[ ]</div>
+      </div>
+
+      <div class="admin-card">
+        <h2><i class="fas fa-file-code"></i> outros_produtos.json</h2>
+        <div class="info-box">
+          <i class="fas fa-info-circle"></i>
+          Copie o conteúdo abaixo e substitua o arquivo
+          <strong>assets/json/outros_produtos.json</strong> no seu repositório GitHub.
+        </div>
+        <button class="btn btn-primary" onclick="copyJSON('outros')">
+          <i class="fas fa-copy"></i> Copiar JSON
+        </button>
+        <div class="json-preview" id="jsonOutros">[ ]</div>
+      </div>
+    </div>
+
+    <!-- TAB: CARROSSEL -->
+    <div class="tab-content" id="tab-carousel">
+      <div class="admin-card">
+        <h2><i class="fas fa-film"></i> Imagens do Carrossel</h2>
+
+        <div class="info-box">
+          <i class="fas fa-info-circle"></i>
+          Adicione imagens ao carrossel da página de catálogo.
+          Após adicionar, copie o JSON gerado e substitua
+          <strong>assets/json/carousel.json</strong> no GitHub.
+        </div>
+
+        <label>Imagem</label>
+        <div class="upload-area">
+          <i class="fas fa-image"></i>
+          <p>Clique ou arraste a imagem do carrossel aqui</p>
+          <input type="file" id="carouselImgInput" accept="image/*">
+        </div>
+        <div class="image-preview-grid" id="carouselImgPreview"></div>
+
+        <label>Texto alternativo (alt)</label>
+        <input type="text" id="carouselAlt" placeholder="Ex.: Diorama Garagem">
+
+        <div class="btn-row">
+          <button class="btn btn-success" onclick="addCarouselItem()">
+            <i class="fas fa-plus"></i> Adicionar ao Carrossel
+          </button>
+        </div>
+
+        <hr class="divider">
+
+        <h2 style="font-size:1rem;color:#4fc3f7;margin-bottom:14px">
+          <i class="fas fa-list"></i> Itens no Carrossel
+        </h2>
+        <div class="product-list" id="carouselList">
+          <p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhuma imagem adicionada.</p>
+        </div>
+
+        <hr class="divider">
+
+        <h2 style="font-size:1rem;color:#4fc3f7;margin-bottom:8px">
+          <i class="fas fa-code"></i> carousel.json gerado
+        </h2>
+        <button class="btn btn-primary" onclick="copyJSON('carousel')">
+          <i class="fas fa-copy"></i> Copiar JSON
+        </button>
+        <div class="json-preview" id="jsonCarousel">[ ]</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // =============================================
+    // SENHA DE ACESSO
+    // =============================================
+    // Troque "shakaw2024" pela senha que você quiser
+    const ADMIN_PASSWORD = "shakaw2024";
+
+    function checkPassword() {
+      const input = document.getElementById("adminPassword");
+      if (input.value === ADMIN_PASSWORD) {
+        document.getElementById("loginScreen").style.display  = "none";
+        document.getElementById("adminContent").style.display = "block";
+        loadAllLists();
+        updateAllJSON();
+      } else {
+        document.getElementById("loginError").style.display = "block";
+        input.value = "";
+        input.focus();
+      }
+    }
+
+    document.getElementById("adminPassword").addEventListener("keydown", e => {
+      if (e.key === "Enter") checkPassword();
+    });
+
+    // =============================================
+    // TABS
+    // =============================================
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById(btn.dataset.tab).classList.add("active");
+        if (btn.dataset.tab === "tab-json") updateAllJSON();
+      });
+    });
+
+    // =============================================
+    // DADOS (localStorage)
+    // =============================================
+    function getData(key) {
+      try { return JSON.parse(localStorage.getItem(key) || "[]"); }
+      catch { return []; }
+    }
+
+    function setData(key, value) {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    // =============================================
+    // PREVIEW DE IMAGENS
+    // =============================================
+    let mainImgFile    = null;
+    let thumbFiles     = [];
+    let carouselFile   = null;
+
+    function setupPreview(inputId, previewId, multiple, onUpdate) {
+      const input   = document.getElementById(inputId);
+      const preview = document.getElementById(previewId);
+
+      input.addEventListener("change", () => {
+        const files = Array.from(input.files);
+        onUpdate(files);
+        renderPreviews(preview, files);
+        input.value = "";
+      });
+
+      // Drag & drop
+      const area = input.closest(".upload-area");
+      if (area) {
+        area.addEventListener("dragover", e => {
+          e.preventDefault();
+          area.classList.add("drag-over");
+        });
+        area.addEventListener("dragleave", () => area.classList.remove("drag-over"));
+        area.addEventListener("drop", e => {
+          e.preventDefault();
+          area.classList.remove("drag-over");
+          const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith("image/"));
+          onUpdate(files);
+          renderPreviews(preview, files);
+        });
+      }
+    }
+
+    function renderPreviews(container, files) {
+      container.innerHTML = "";
+      files.forEach((file, i) => {
+        const item = document.createElement("div");
+        item.className = "preview-item";
+
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(file);
+
+        const name = document.createElement("div");
+        name.className = "preview-name";
+        name.textContent = file.name;
+
+        const removeBtn = document.createElement("button");
+        removeBtn.className = "remove-preview";
+        removeBtn.innerHTML = "&times;";
+        removeBtn.onclick = () => {
+          item.remove();
+          files.splice(i, 1);
+        };
+
+        item.appendChild(img);
+        item.appendChild(name);
+        item.appendChild(removeBtn);
+        container.appendChild(item);
+      });
+    }
+
+    // Configura previews
+    setupPreview("mainImgInput", "mainImgPreview", false, files => {
+      mainImgFile = files[0] || null;
+    });
+
+    setupPreview("thumbsInput", "thumbsPreview", true, files => {
+      thumbFiles = files;
+    });
+
+    setupPreview("carouselImgInput", "carouselImgPreview", false, files => {
+      carouselFile = files[0] || null;
+    });
+
+    // =============================================
+    // CONVERTER IMAGEM → BASE64 (para prévia local)
+    // =============================================
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload  = e => resolve(e.target.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // =============================================
+    // ADICIONAR PRODUTO
+    // =============================================
+    async function addProduct() {
+      const catalog     = document.getElementById("productCatalog").value;
+      const name        = document.getElementById("productName").value.trim();
+      const description = document.getElementById("productDescription").value.trim();
+      const price       = document.getElementById("productPrice").value.trim();
+
+      if (!name || !description) {
+        showToast("Preencha nome e descrição.", "error");
+        return;
+      }
+
+      if (!mainImgFile) {
+        showToast("Selecione a imagem principal.", "error");
+        return;
+      }
+
+      // Converte imagens para base64 (prévia local)
+      // Na versão final, substitua pelo caminho real no GitHub
+      const mainImgBase64   = await fileToBase64(mainImgFile);
+      const thumbsBase64    = await Promise.all(thumbFiles.map(fileToBase64));
+
+      // Gera caminho sugerido
+      const folderMap = {
+        "diorama"         : "assets/img/dioramas/",
+        "outros-action"   : "assets/img/outros/",
+        "outros-funcional": "assets/img/outros/"
+      };
+      const folder = folderMap[catalog];
+
+      const safeName = name.toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]/g, "_");
+
+      const mainImgPath  = `${folder}${safeName}.webp`;
+      const thumbsPaths  = thumbFiles.map((f, i) => `${folder}${safeName}_${i+1}.webp`);
+
+      // Monta produto
+      const id = `${catalog.replace("outros-","")}-${Date.now()}`;
+      const product = {
+        id,
+        name,
+        description,
+        price: price || "",
+        mainImage: mainImgPath,
+        thumbnails: thumbsPaths,
+        _mainImgPreview: mainImgBase64,
+        _thumbsPreviews: thumbsBase64
+      };
+
+      // Adiciona categoria para "outros"
+      if (catalog === "outros-action")    product.category = "action-figures";
+      if (catalog === "outros-funcional") product.category = "produtos-funcionais";
+
+      // Salva no localStorage
+      const key = catalog === "diorama" ? "products_diorama" : "products_outros";
+      const list = getData(key);
+      list.push(product);
+      setData(key, list);
+
+      showToast(`"${name}" adicionado com sucesso!`);
+      clearForm();
+      loadAllLists();
+      updateAllJSON();
+    }
+
+    // =============================================
+    // LIMPAR FORMULÁRIO
+    // =============================================
+    function clearForm() {
+      document.getElementById("productName").value        = "";
+      document.getElementById("productDescription").value = "";
+      document.getElementById("productPrice").value       = "";
+      document.getElementById("mainImgPreview").innerHTML = "";
+      document.getElementById("thumbsPreview").innerHTML  = "";
+      mainImgFile = null;
+      thumbFiles  = [];
+    }
+
+    // =============================================
+    // ADICIONAR AO CARROSSEL
+    // =============================================
+    async function addCarouselItem() {
+      const alt = document.getElementById("carouselAlt").value.trim();
+
+      if (!carouselFile) {
+        showToast("Selecione uma imagem para o carrossel.", "error");
+        return;
+      }
+
+      const base64 = await fileToBase64(carouselFile);
+      const safeName = (alt || "imagem").toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]/g, "_");
+
+      const item = {
+        src    : `assets/img/${safeName}.webp`,
+        alt    : alt || "Imagem do carrossel",
+        _preview: base64
+      };
+
+      const list = getData("carousel");
+      list.push(item);
+      setData("carousel", list);
+
+      document.getElementById("carouselAlt").value          = "";
+      document.getElementById("carouselImgPreview").innerHTML = "";
+      carouselFile = null;
+
+      showToast("Imagem adicionada ao carrossel!");
+      loadCarouselList();
+      updateAllJSON();
+    }
+
+    // =============================================
+    // CARREGAR LISTAS
+    // =============================================
+    function loadAllLists() {
+      loadList("products_diorama", "listDiorama",      "diorama");
+      loadList("products_outros",  "listActionFigures","action-figures");
+      loadList("products_outros",  "listFuncionais",   "produtos-funcionais");
+      loadCarouselList();
+    }
+
+    function loadList(key, containerId, filterCategory) {
+      const container = document.getElementById(containerId);
+      let   list      = getData(key);
+
+      if (filterCategory !== "diorama") {
+        list = list.filter(p => p.category === filterCategory);
+      }
+
+      if (list.length === 0) {
+        container.innerHTML = `<p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhum produto cadastrado.</p>`;
+        return;
+      }
+
+      container.innerHTML = "";
+      list.forEach((product, idx) => {
+        const realIdx = getData(key).findIndex(p => p.id === product.id);
+        const item = document.createElement("div");
+        item.className = "product-list-item";
+
+        const catLabel = product.category === "action-figures"
+          ? `<span class="cat-badge cat-action">Action Figure</span>`
+          : product.category === "produtos-funcionais"
+            ? `<span class="cat-badge cat-funcional">Funcional</span>`
+            : `<span class="cat-badge cat-diorama">Diorama</span>`;
+
+        item.innerHTML = `
+          <img src="${product._mainImgPreview || product.mainImage}"
+               onerror="this.style.background='rgba(255,255,255,0.1)'">
+          <div class="product-list-info">
+            <strong>${product.name} ${catLabel}</strong>
+            <span>${product.price || "Sob consulta"} — ${product.mainImage}</span>
+          </div>
+          <div class="product-list-actions">
+            <button class="btn-icon btn-icon-delete" title="Remover"
+                    onclick="removeProduct('${key}', '${product.id}')">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function loadCarouselList() {
+      const container = document.getElementById("carouselList");
+      const list      = getData("carousel");
+
+      if (list.length === 0) {
+        container.innerHTML = `<p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhuma imagem adicionada.</p>`;
+        return;
+      }
+
+      container.innerHTML = "";
+      list.forEach((item, idx) => {
+        const div = document.createElement("div");
+        div.className = "product-list-item";
+        div.innerHTML = `
+          <img src="${item._preview || item.src}"
+               onerror="this.style.background='rgba(255,255,255,0.1)'">
+          <div class="product-list-info">
+            <strong>${item.alt}</strong>
+            <span>${item.src}</span>
+          </div>
+          <div class="product-list-actions">
+            <button class="btn-icon btn-icon-delete" title="Remover"
+                    onclick="removeCarouselItem(${idx})">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // =============================================
+    // REMOVER PRODUTO
+    // =============================================
+    function removeProduct(key, id) {
+      if (!confirm("Remover este produto?")) return;
+      const list = getData(key).filter(p => p.id !== id);
+      setData(key, list);
+      loadAllLists();
+      updateAllJSON();
+      showToast("Produto removido.");
+    }
+
+    function removeCarouselItem(idx) {
+      if (!confirm("Remover esta imagem do carrossel?")) return;
+      const list = getData("carousel");
+      list.splice(idx, 1);
+      setData("carousel", list);
+      loadCarouselList();
+      updateAllJSON();
+      showToast("Imagem removida do carrossel.");
+    }
+
+    // =============================================
+    // JSON — GERAÇÃO E CÓPIA
+    // =============================================
+    function cleanForExport(list) {
+      return list.map(p => {
+        const clean = { ...p };
+        delete clean._mainImgPreview;
+        delete clean._thumbsPreviews;
+        delete clean._preview;
+        return clean;
+      });
+    }
+
+    function updateAllJSON() {
+      const diorama = cleanForExport(getData("products_diorama"));
+      const outros  = cleanForExport(getData("products_outros"));
+      const carousel= cleanForExport(getData("carousel"));
+
+      document.getElementById("jsonDiorama").textContent  = JSON.stringify(diorama,  null, 2);
+      document.getElementById("jsonOutros").textContent   = JSON.stringify(outros,   null, 2);
+      document.getElementById("jsonCarousel").textContent = JSON.stringify(carousel, null, 2);
+    }
+
+    function copyJSON(type) {
+      const map = {
+        diorama : "jsonDiorama",
+        outros  : "jsonOutros",
+        carousel: "jsonCarousel"
+      };
+      const text = document.getElementById(map[type]).textContent;
+      navigator.clipboard.writeText(text)
+        .then(() => showToast("JSON copiado! Cole no arquivo correspondente no GitHub."))
+        .catch(() => showToast("Erro ao copiar. Selecione e copie manualmente.", "error"));
+    }
+
+    // =============================================
+    // TOAST
+    // =============================================
+    let toastTimeout;
+    function showToast(msg, type = "success") {
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.className   = `toast ${type === "error" ? "error" : ""} show`;
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 3200);
+    }
+  </script>
+</body>
+</html>
