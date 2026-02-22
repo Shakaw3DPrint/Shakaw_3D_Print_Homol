@@ -2,7 +2,7 @@
   {
     "id": "af-01",
     "name": "Action Figure 01",
-    "description": "Descrição do action figure. Material, tamanho, detalhes.",
+    "description": "DescriÃ§Ã£o do action figure. Material, tamanho, detalhes.",
     "price": "R$ 00,00",
     "category": "action-figures",
     "mainImage": "assets/img/outros/af_01.webp",
@@ -13,8 +13,8 @@
   },
   {
     "id": "pf-01",
-    "name": "Porta Óculos",
-    "description": "Porta óculos em impressão 3D. Acabamento premium, cores variadas.",
+    "name": "Porta Ãculos",
+    "description": "Porta Ã³culos em impressÃ£o 3D. Acabamento premium, cores variadas.",
     "price": "R$ 00,00",
     "category": "produtos-funcionais",
     "mainImage": "assets/img/outros/pf_porta_oculos.webp",
@@ -24,13 +24,25 @@
   },
   {
     "id": "pf-02",
-    "name": "Porta Lápis",
-    "description": "Porta lápis em impressão 3D. Design exclusivo, cores variadas.",
+    "name": "Porta LÃ¡pis",
+    "description": "Porta lÃ¡pis em impressÃ£o 3D. Design exclusivo, cores variadas.",
     "price": "R$ 00,00",
     "category": "produtos-funcionais",
     "mainImage": "assets/img/outros/pf_porta_lapis.webp",
     "thumbnails": [
       "assets/img/outros/pf_porta_lapis_1.webp"
     ]
+  },
+  {
+    "id": "pf-01",
+    "name": "Suporte de Celular D&D - Dragão",
+    "description": "Produzido em filamento PLA",
+    "price": "20,00",
+    "mainImage": "assets/img/outros/suporte_de_celular_d_d_dragao.webp",
+    "thumbnails": [
+      "assets/img/outros/suporte_de_celular_d_d_dragao_1.webp",
+      "assets/img/outros/suporte_de_celular_d_d_dragao_2.webp"
+    ],
+    "category": "produtos-funcionais"
   }
 ]
