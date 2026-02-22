@@ -8,103 +8,47 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: Arial, sans-serif; background: #00303f; color: white; min-height: 100vh; }
-
-    .admin-header {
-      background: rgba(0,0,0,0.3);
-      padding: 20px 30px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 15px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
+    .admin-header { background: rgba(0,0,0,0.3); padding: 20px 30px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); }
     .admin-header h1 { font-size: 1.4rem; display: flex; align-items: center; gap: 10px; }
     .admin-header a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; }
     .admin-header a:hover { color: white; }
-
-    #loginScreen {
-      max-width: 380px;
-      margin: 80px auto;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 12px;
-      padding: 40px 30px;
-      text-align: center;
-    }
+    #loginScreen { max-width: 380px; margin: 80px auto; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 40px 30px; text-align: center; }
     #loginScreen h2 { margin-bottom: 20px; font-size: 1.3rem; }
-    #loginScreen input {
-      width: 100%; padding: 10px 14px; border-radius: 6px;
-      border: 1px solid rgba(255,255,255,0.2);
-      background: rgba(255,255,255,0.1);
-      color: white; font-size: 15px; margin-bottom: 14px;
-    }
+    #loginScreen input { width: 100%; padding: 10px 14px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: white; font-size: 15px; margin-bottom: 14px; }
     #loginScreen input::placeholder { color: rgba(255,255,255,0.4); }
     #loginError { color: #ff6b6b; font-size: 13px; margin-top: 8px; display: none; }
-
     #adminContent { display: none; padding: 30px 20px; max-width: 1100px; margin: 0 auto; }
-
     .tabs { display: flex; gap: 8px; margin-bottom: 30px; flex-wrap: wrap; }
-    .tab-btn {
-      padding: 10px 22px; border-radius: 25px;
-      border: 2px solid rgba(255,255,255,0.2);
-      background: rgba(255,255,255,0.07);
-      color: white; cursor: pointer; font-size: 14px; font-weight: bold;
-    }
+    .tab-btn { padding: 10px 22px; border-radius: 25px; border: 2px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.07); color: white; cursor: pointer; font-size: 14px; font-weight: bold; }
     .tab-btn.active { background: #0077cc; border-color: #0077cc; }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
-
-    .admin-card {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 12px; padding: 28px; margin-bottom: 24px;
-    }
-    .admin-card h2 {
-      font-size: 1.15rem; margin-bottom: 20px;
-      display: flex; align-items: center; gap: 10px; color: #4fc3f7;
-    }
-
+    .admin-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 28px; margin-bottom: 24px; }
+    .admin-card h2 { font-size: 1.15rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; color: #4fc3f7; }
     label { display: block; font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 5px; margin-top: 14px; }
-    input[type="text"], textarea, select {
-      width: 100%; padding: 10px 14px; border-radius: 6px;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: rgba(255,255,255,0.08);
-      color: white; font-size: 14px;
-    }
+    input[type="text"], textarea, select { width: 100%; padding: 10px 14px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.08); color: white; font-size: 14px; }
     select option { background: #00303f; }
     textarea { resize: vertical; min-height: 80px; }
-
-    .upload-area {
-      border: 2px dashed rgba(255,255,255,0.25);
-      border-radius: 10px; padding: 30px; text-align: center;
-      cursor: pointer; margin-top: 14px; position: relative;
-    }
+    .upload-area { border: 2px dashed rgba(255,255,255,0.25); border-radius: 10px; padding: 30px; text-align: center; cursor: pointer; margin-top: 14px; position: relative; }
     .upload-area:hover { border-color: #4fc3f7; background: rgba(79,195,247,0.06); }
     .upload-area i { font-size: 2.5rem; color: rgba(255,255,255,0.4); margin-bottom: 10px; display: block; }
     .upload-area p { color: rgba(255,255,255,0.55); font-size: 14px; margin: 4px 0; }
-    .upload-area input[type="file"] {
-      position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
-    }
-
+    .upload-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
     .convert-progress { display: none; margin-top: 14px; background: rgba(0,0,0,0.3); border-radius: 999px; height: 8px; overflow: hidden; }
     .convert-progress-bar { height: 100%; background: linear-gradient(90deg, #4fc3f7, #0077cc); border-radius: 999px; width: 0%; transition: width 0.3s; }
     .convert-status { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 6px; text-align: center; min-height: 18px; }
-
     .image-preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px,1fr)); gap: 10px; margin-top: 16px; }
     .preview-item { position: relative; border-radius: 8px; overflow: hidden; background: rgba(0,0,0,0.3); aspect-ratio: 1; border: 1px solid rgba(255,255,255,0.1); }
     .preview-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .preview-item .preview-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.75); font-size: 10px; padding: 3px 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .preview-item .preview-badge { position: absolute; top: 4px; left: 4px; background: #28a745; border-radius: 4px; font-size: 9px; padding: 2px 5px; font-weight: bold; }
     .preview-item .remove-preview { position: absolute; top: 4px; right: 4px; background: rgba(255,77,77,0.9); border: none; color: white; border-radius: 50%; width: 20px; height: 20px; cursor: pointer; font-size: 11px; display: flex; align-items: center; justify-content: center; padding: 0; }
-
     .btn { padding: 11px 24px; border-radius: 8px; border: none; cursor: pointer; font-size: 14px; font-weight: bold; display: inline-flex; align-items: center; gap: 8px; transition: background 0.2s; }
     .btn:disabled { opacity: 0.5; cursor: not-allowed; }
     .btn-primary { background: #0077cc; color: white; }
     .btn-success { background: #28a745; color: white; }
     .btn-secondary { background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,255,255,0.2); }
     .btn-row { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
-
     .product-list-item { display: flex; align-items: center; gap: 14px; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; margin-bottom: 8px; }
     .product-list-item img { width: 56px; height: 56px; object-fit: cover; border-radius: 6px; flex-shrink: 0; background: rgba(0,0,0,0.3); }
     .product-list-info { flex: 1; min-width: 0; }
@@ -113,31 +57,20 @@
     .product-list-actions { display: flex; gap: 6px; flex-shrink: 0; }
     .btn-icon { width: 32px; height: 32px; border-radius: 6px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 13px; }
     .btn-icon-delete { background: rgba(220,53,69,0.3); color: #ff6b6b; }
-
     .cat-badge { display: inline-block; font-size: 10px; font-weight: bold; padding: 2px 8px; border-radius: 10px; margin-left: 6px; vertical-align: middle; }
     .cat-diorama { background: #e8f4ff; color: #0057b7; }
     .cat-action { background: #fff3e8; color: #b74f00; }
     .cat-funcional { background: #e8fff1; color: #1b7a3e; }
-
     .info-box { background: rgba(79,195,247,0.08); border: 1px solid rgba(79,195,247,0.25); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.6; margin-bottom: 18px; }
     .info-box i { color: #4fc3f7; margin-right: 6px; }
-
     .json-preview { background: rgba(0,0,0,0.4); border-radius: 8px; padding: 16px; font-family: monospace; font-size: 12px; color: #a8d8a8; max-height: 300px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; margin-top: 14px; border: 1px solid rgba(255,255,255,0.08); }
-
     .divider { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 24px 0; }
-
     .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(80px); background: #28a745; color: white; padding: 12px 28px; border-radius: 30px; font-size: 14px; font-weight: bold; z-index: 9999; transition: transform 0.35s, opacity 0.35s; opacity: 0; pointer-events: none; }
     .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
     .toast.error { background: #dc3545; }
     .toast.info { background: #0077cc; }
-
     #convertCanvas { display: none; }
-
-    @media (max-width: 600px) {
-      .admin-header { padding: 15px; }
-      #adminContent { padding: 20px 12px; }
-      .admin-card { padding: 18px; }
-    }
+    @media (max-width: 600px) { .admin-header { padding: 15px; } #adminContent { padding: 20px 12px; } .admin-card { padding: 18px; } }
   </style>
 </head>
 <body>
@@ -151,9 +84,7 @@
 
 <div id="loginScreen">
   <h2><i class="fas fa-lock"></i> Acesso Restrito</h2>
-  <p style="color:rgba(255,255,255,0.55);font-size:13px;margin-bottom:20px">
-    Digite a senha para acessar o painel.
-  </p>
+  <p style="color:rgba(255,255,255,0.55);font-size:13px;margin-bottom:20px">Digite a senha para acessar o painel.</p>
   <input type="password" id="adminPassword" placeholder="Senha" autocomplete="off">
   <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="checkPassword()">
     <i class="fas fa-sign-in-alt"></i> Entrar
@@ -169,41 +100,27 @@
     <button class="tab-btn" data-tab="tab-carousel"><i class="fas fa-images"></i> Carrossel</button>
   </div>
 
-  <!-- TAB ADICIONAR -->
   <div class="tab-content active" id="tab-add">
     <div class="admin-card">
       <h2><i class="fas fa-plus-circle"></i> Novo Produto</h2>
-
-      <div class="info-box">
-        <i class="fas fa-magic"></i>
-        Imagens convertidas automaticamente para <strong>WebP</strong>.
-        Após salvar, as imagens e o JSON são enviados direto ao GitHub.
-      </div>
-
+      <div class="info-box"><i class="fas fa-magic"></i> Imagens convertidas para <strong>WebP</strong> automaticamente. Salvo direto no GitHub.</div>
       <label>Catálogo de destino</label>
       <select id="productCatalog" onchange="updateCatalogInfo()">
         <option value="diorama">Catálogo Diorama</option>
         <option value="action-figures">Outros Projetos — Action Figures</option>
         <option value="produtos-funcionais">Outros Projetos — Produtos Funcionais</option>
       </select>
-
       <div class="info-box" id="catalogInfo" style="margin-top:10px;margin-bottom:0">
         <i class="fas fa-link"></i> Será exibido em: <strong id="catalogInfoLink">catalogo_diorama.html</strong>
       </div>
-
       <label>Nome do produto *</label>
       <input type="text" id="productName" placeholder="Ex.: Garagem Miniatura 1:18">
-
       <label>Descrição *</label>
       <textarea id="productDescription" placeholder="Material, tamanho, acabamento..."></textarea>
-
       <label>Preço (vazio = Sob consulta)</label>
       <input type="text" id="productPrice" placeholder="Ex.: R$ 45,00">
-
       <label>Qualidade WebP: <strong id="qualityLabel" style="color:#4fc3f7">85%</strong></label>
-      <input type="range" id="webpQuality" min="50" max="100" value="85" style="width:100%;accent-color:#4fc3f7"
-             oninput="document.getElementById('qualityLabel').textContent=this.value+'%'">
-
+      <input type="range" id="webpQuality" min="50" max="100" value="85" style="width:100%;accent-color:#4fc3f7" oninput="document.getElementById('qualityLabel').textContent=this.value+'%'">
       <label>Imagem principal *</label>
       <div class="upload-area" id="mainImgArea">
         <i class="fas fa-image"></i>
@@ -214,7 +131,6 @@
       <div class="convert-progress" id="mainProgress"><div class="convert-progress-bar" id="mainProgressBar"></div></div>
       <p class="convert-status" id="mainStatus"></p>
       <div class="image-preview-grid" id="mainImgPreview"></div>
-
       <label>Miniaturas (opcional)</label>
       <div class="upload-area" id="thumbsArea">
         <i class="fas fa-images"></i>
@@ -225,19 +141,13 @@
       <div class="convert-progress" id="thumbsProgress"><div class="convert-progress-bar" id="thumbsProgressBar"></div></div>
       <p class="convert-status" id="thumbsStatus"></p>
       <div class="image-preview-grid" id="thumbsPreview"></div>
-
       <div class="btn-row">
-        <button class="btn btn-success" id="addProductBtn" onclick="addProduct()">
-          <i class="fas fa-check"></i> Adicionar Produto
-        </button>
-        <button class="btn btn-secondary" onclick="clearForm()">
-          <i class="fas fa-times"></i> Limpar
-        </button>
+        <button class="btn btn-success" id="addProductBtn" onclick="addProduct()"><i class="fas fa-check"></i> Adicionar Produto</button>
+        <button class="btn btn-secondary" onclick="clearForm()"><i class="fas fa-times"></i> Limpar</button>
       </div>
     </div>
   </div>
 
-  <!-- TAB GERENCIAR -->
   <div class="tab-content" id="tab-manage">
     <div class="admin-card">
       <h2><i class="fas fa-warehouse"></i> Dioramas</h2>
@@ -253,7 +163,6 @@
     </div>
   </div>
 
-  <!-- TAB JSON -->
   <div class="tab-content" id="tab-json">
     <div class="admin-card">
       <h2><i class="fas fa-file-code"></i> products.json — Dioramas</h2>
@@ -269,12 +178,10 @@
     </div>
   </div>
 
-  <!-- TAB CARROSSEL -->
   <div class="tab-content" id="tab-carousel">
     <div class="admin-card">
       <h2><i class="fas fa-film"></i> Carrossel</h2>
-      <div class="info-box"><i class="fas fa-info-circle"></i> Imagens exibidas em <strong>catalogo_diorama.html</strong>.</div>
-
+      <div class="info-box"><i class="fas fa-info-circle"></i> Exibido em <strong>catalogo_diorama.html</strong>.</div>
       <label>Imagem do carrossel</label>
       <div class="upload-area" id="carouselArea">
         <i class="fas fa-image"></i>
@@ -284,20 +191,14 @@
       <div class="convert-progress" id="carouselProgress"><div class="convert-progress-bar" id="carouselProgressBar"></div></div>
       <p class="convert-status" id="carouselStatus"></p>
       <div class="image-preview-grid" id="carouselImgPreview"></div>
-
       <label>Texto alternativo</label>
       <input type="text" id="carouselAlt" placeholder="Ex.: Diorama Garagem">
-
       <div class="btn-row">
-        <button class="btn btn-success" onclick="addCarouselItem()">
-          <i class="fas fa-plus"></i> Adicionar ao Carrossel
-        </button>
+        <button class="btn btn-success" onclick="addCarouselItem()"><i class="fas fa-plus"></i> Adicionar ao Carrossel</button>
       </div>
-
       <hr class="divider">
       <h2 style="font-size:1rem;color:#4fc3f7;margin-bottom:14px"><i class="fas fa-list"></i> Itens no Carrossel</h2>
       <div id="carouselList"><p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhuma imagem.</p></div>
-
       <hr class="divider">
       <h2 style="font-size:1rem;color:#4fc3f7;margin-bottom:8px"><i class="fas fa-code"></i> carousel.json</h2>
       <button class="btn btn-primary" onclick="copyJSON('carousel')"><i class="fas fa-copy"></i> Copiar JSON</button>
@@ -307,72 +208,48 @@
 </div>
 
 <div class="toast" id="toast"></div>
-
 <script>
-/* ----------------------------------------------------------
-   CONFIGURAÇÕES
----------------------------------------------------------- */
-var GITHUB_OWNER  = "Shakaw3DPrint";
-var GITHUB_REPO   = "Shakaw_3D_Print";
-var GITHUB_BRANCH = "main";
-var GITHUB_API    = "https://api.github.com";
 var ADMIN_PASSWORD = "Er!6736**";
-
-/* ----------------------------------------------------------
-   TOKEN GITHUB
----------------------------------------------------------- */
-var GITHUB_TOKEN = sessionStorage.getItem("gh_token") || null;
+var GITHUB_OWNER   = "Shakaw3DPrint";
+var GITHUB_REPO    = "Shakaw_3D_Print";
+var GITHUB_BRANCH  = "main";
+var GITHUB_API     = "https://api.github.com";
+var GITHUB_TOKEN   = sessionStorage.getItem("gh_token") || null;
+var mainImgData    = null;
+var thumbsData     = [];
+var carouselData   = null;
 
 function askForToken() {
-  var t = prompt("Cole seu GitHub Personal Access Token (PAT).\nEle fica salvo só nesta sessão.");
+  var t = prompt("Cole seu GitHub Personal Access Token (PAT). Fica salvo so nesta sessao.");
   if (t && t.trim().length) {
     GITHUB_TOKEN = t.trim();
     sessionStorage.setItem("gh_token", GITHUB_TOKEN);
     showToast("Token salvo!", "info");
   } else {
-    showToast("Token não informado. Upload não vai funcionar.", "error");
+    showToast("Token nao informado.", "error");
   }
 }
 
-/* ----------------------------------------------------------
-   LOGIN
----------------------------------------------------------- */
 function checkPassword() {
   var input   = document.getElementById("adminPassword");
   var screen  = document.getElementById("loginScreen");
   var content = document.getElementById("adminContent");
   var error   = document.getElementById("loginError");
   var typed   = input.value;
-
-  if (!typed) {
-    error.textContent   = "Digite a senha.";
-    error.style.display = "block";
-    return;
-  }
-
+  if (!typed) { error.textContent = "Digite a senha."; error.style.display = "block"; return; }
   if (typed === ADMIN_PASSWORD) {
-    screen.style.setProperty("display",  "none",  "important");
+    screen.style.setProperty("display", "none", "important");
     content.style.setProperty("display", "block", "important");
     loadAllLists();
     updateAllJSON();
   } else {
-    error.textContent   = "Senha incorreta.";
+    error.textContent = "Senha incorreta.";
     error.style.display = "block";
     input.value = "";
     input.focus();
   }
 }
 
-/* ----------------------------------------------------------
-   ESTADO DAS IMAGENS
----------------------------------------------------------- */
-var mainImgData  = null;
-var thumbsData   = [];
-var carouselData = null;
-
-/* ----------------------------------------------------------
-   UTILITÁRIOS
----------------------------------------------------------- */
 function safeName(str) {
   var s = str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "_");
   while (s.length > 0 && s.charAt(0) === "_") { s = s.substring(1); }
@@ -387,44 +264,40 @@ function stripExt(name) {
 
 function showToast(msg, type) {
   type = type || "success";
-  var t = document.getElementById("toast");
-  t.textContent = msg;
-  t.className = "toast " + type + " show";
-  clearTimeout(showToast._tid);
-  showToast._tid = setTimeout(function() { t.classList.remove("show"); }, 3500);
+  var el = document.getElementById("toast");
+  el.textContent = msg;
+  el.className = "toast " + type + " show";
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(function() { el.classList.remove("show"); }, 3500);
 }
 
-function getData(key) {
-  try { return JSON.parse(localStorage.getItem(key) || "[]"); } catch(e) { return []; }
-}
+function getData(key) { try { return JSON.parse(localStorage.getItem(key) || "[]"); } catch(e) { return []; } }
 function setData(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
 
 var catalogPageMap = {
-  "diorama"            : "catalogo_diorama.html",
-  "action-figures"     : "outros_projetos.html (Action Figures)",
+  "diorama": "catalogo_diorama.html",
+  "action-figures": "outros_projetos.html (Action Figures)",
   "produtos-funcionais": "outros_projetos.html (Funcionais)"
 };
+
 function updateCatalogInfo() {
   var v = document.getElementById("productCatalog").value;
   document.getElementById("catalogInfoLink").textContent = catalogPageMap[v] || "";
 }
 
-/* ----------------------------------------------------------
-   CANVAS / CONVERSÃO WEBP
----------------------------------------------------------- */
 var canvas = document.getElementById("convertCanvas");
-var ctx    = canvas.getContext("2d");
+var ctx = canvas.getContext("2d");
 
 function convertToWebP(file, quality) {
   return new Promise(function(resolve, reject) {
     var reader = new FileReader();
-    reader.onerror = function() { reject(new Error("Erro ao ler arquivo")); };
-    reader.onload  = function(ev) {
+    reader.onerror = function() { reject(new Error("Erro leitura")); };
+    reader.onload = function(ev) {
       var img = new Image();
-      img.onerror = function() { reject(new Error("Erro ao carregar imagem")); };
-      img.onload  = function() {
-        var w = img.width, h = img.height, MAX = 1600;
-        if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+      img.onerror = function() { reject(new Error("Erro imagem")); };
+      img.onload = function() {
+        var w = img.width, h = img.height;
+        if (w > 1600) { h = Math.round(h * 1600 / w); w = 1600; }
         canvas.width = w; canvas.height = h;
         ctx.clearRect(0, 0, w, h);
         ctx.drawImage(img, 0, 0, w, h);
@@ -436,106 +309,292 @@ function convertToWebP(file, quality) {
   });
 }
 
-/* ----------------------------------------------------------
-   SETUP UPLOAD
----------------------------------------------------------- */
-function setupUpload(inputId, areaId, onResult, progressBarId, statusId) {
+function setupUpload(inputId, areaId, onResult, barId, statusId) {
   var input = document.getElementById(inputId);
   var area  = document.getElementById(areaId);
 
-  function handleFiles(files) {
+  function run(files) {
     var arr = [];
     for (var i = 0; i < files.length; i++) {
       if (files[i].type.indexOf("image/") === 0) arr.push(files[i]);
     }
     if (!arr.length) return;
-
-    var quality  = parseInt(document.getElementById("webpQuality").value) / 100;
-    var barEl    = document.getElementById(progressBarId);
-    var statusEl = document.getElementById(statusId);
-    var boxEl    = barEl.parentElement;
-
-    boxEl.style.display = "block";
-    barEl.style.width   = "0%";
-
-    var results = [], idx = 0;
-    function next() {
-      if (idx >= arr.length) {
-        barEl.style.width    = "100%";
-        statusEl.textContent = "Convertida(s): " + results.length + " imagem(ns)";
-        setTimeout(function() { boxEl.style.display = "none"; barEl.style.width = "0%"; }, 1500);
-        onResult(results);
-        return;
+    var q   = parseInt(document.getElementById("webpQuality").value) / 100;
+    var bar = document.getElementById(barId);
+    var st  = document.getElementById(statusId);
+    var box = bar.parentElement;
+    box.style.display = "block"; bar.style.width = "0%";
+    var out = [], n = 0;
+    function step() {
+      if (n >= arr.length) {
+        bar.style.width = "100%";
+        st.textContent  = "Convertida(s): " + out.length;
+        setTimeout(function() { box.style.display = "none"; bar.style.width = "0%"; }, 1500);
+        onResult(out); return;
       }
-      var file = arr[idx];
-      statusEl.textContent = "Convertendo " + (idx + 1) + "/" + arr.length + ": " + file.name;
-      barEl.style.width    = Math.round((idx / arr.length) * 100) + "%";
-      idx++;
-      convertToWebP(file, quality).then(function(dataUrl) {
-        results.push({ file: file, name: file.name, dataUrl: dataUrl });
-        next();
-      }).catch(function(err) { console.error(err); next(); });
+      var f = arr[n];
+      st.textContent  = "Convertendo " + (n+1) + "/" + arr.length + ": " + f.name;
+      bar.style.width = Math.round((n / arr.length) * 100) + "%";
+      n++;
+      convertToWebP(f, q).then(function(url) { out.push({ file: f, name: f.name, dataUrl: url }); step(); }).catch(function() { step(); });
     }
-    next();
+    step();
   }
 
-  input.addEventListener("change", function() {
-    if (input.files.length) handleFiles(input.files);
-    input.value = "";
-  });
-
+  input.addEventListener("change", function() { if (input.files.length) run(input.files); input.value = ""; });
   if (area) {
     area.addEventListener("dragover",  function(e) { e.preventDefault(); area.classList.add("drag-over"); });
     area.addEventListener("dragleave", function()  { area.classList.remove("drag-over"); });
-    area.addEventListener("drop", function(e) {
-      e.preventDefault(); area.classList.remove("drag-over"); handleFiles(e.dataTransfer.files);
-    });
+    area.addEventListener("drop",      function(e) { e.preventDefault(); area.classList.remove("drag-over"); run(e.dataTransfer.files); });
   }
 }
 
-/* ----------------------------------------------------------
-   RENDER PREVIEWS
----------------------------------------------------------- */
-function renderPreviews(containerId, items, removable) {
-  var container = document.getElementById(containerId);
-  container.innerHTML = "";
-  items.forEach(function(it, idx) {
-    var div = document.createElement("div"); div.className = "preview-item";
-    var img = document.createElement("img"); img.src = it.dataUrl; img.alt = it.name; div.appendChild(img);
-    var badge = document.createElement("div"); badge.className = "preview-badge"; badge.textContent = "WebP"; div.appendChild(badge);
-    var label = document.createElement("div"); label.className = "preview-label"; label.textContent = stripExt(it.name) + ".webp"; div.appendChild(label);
-    if (removable) {
-      var btn = document.createElement("button"); btn.className = "remove-preview"; btn.textContent = "x";
-      btn.onclick = (function(i, cId) {
-        return function() {
-          if (cId === "mainImgPreview") { mainImgData = null; }
-          else if (cId === "thumbsPreview") { thumbsData.splice(i, 1); renderPreviews(cId, thumbsData, true); return; }
-          else if (cId === "carouselImgPreview") { carouselData = null; }
-          div.remove();
-        };
-      })(idx, containerId);
-      div.appendChild(btn);
+function renderPreviews(cId, items, rm) {
+  var c = document.getElementById(cId); c.innerHTML = "";
+  items.forEach(function(it, i) {
+    var d = document.createElement("div"); d.className = "preview-item";
+    var im = document.createElement("img"); im.src = it.dataUrl; im.alt = it.name; d.appendChild(im);
+    var b = document.createElement("div"); b.className = "preview-badge"; b.textContent = "WebP"; d.appendChild(b);
+    var l = document.createElement("div"); l.className = "preview-label"; l.textContent = stripExt(it.name) + ".webp"; d.appendChild(l);
+    if (rm) {
+      var x = document.createElement("button"); x.className = "remove-preview"; x.textContent = "x";
+      x.onclick = (function(idx, id) { return function() {
+        if (id === "mainImgPreview") { mainImgData = null; }
+        else if (id === "thumbsPreview") { thumbsData.splice(idx, 1); renderPreviews(id, thumbsData, true); return; }
+        else if (id === "carouselImgPreview") { carouselData = null; }
+        d.remove();
+      }; })(i, cId);
+      d.appendChild(x);
     }
-    container.appendChild(div);
+    c.appendChild(d);
   });
 }
 
-/* ----------------------------------------------------------
-   GITHUB API
----------------------------------------------------------- */
-function githubRequest(method, path, body) {
+function ghReq(method, path, body) {
   if (!GITHUB_TOKEN) { askForToken(); return Promise.reject(new Error("Token ausente")); }
-  var opts = {
-    method: method,
-    headers: { "Authorization": "token " + GITHUB_TOKEN, "Accept": "application/vnd.github.v3+json" }
-  };
-  if (body) opts.body = JSON.stringify(body);
-  return fetch(GITHUB_API + path, opts).then(function(r) {
+  var o = { method: method, headers: { "Authorization": "token " + GITHUB_TOKEN, "Accept": "application/vnd.github.v3+json" } };
+  if (body) o.body = JSON.stringify(body);
+  return fetch(GITHUB_API + path, o).then(function(r) {
     if (!r.ok) return r.json().then(function(e) { throw new Error(e.message || "Erro GitHub"); });
     return r.json();
   });
 }
 
-function githubGetFile(path) {
-  return githubRequest("GET", "/repos/" + GITHUB_OWNER + "/" + GITHUB_REPO + "/contents
+function ghGet(path) {
+  return ghReq("GET", "/repos/" + GITHUB_OWNER + "/" + GITHUB_REPO + "/contents/" + path + "?ref=" + GITHUB_BRANCH)
+    .then(function(d) { return { content: atob(d.content.replace(/\n/g, "")), sha: d.sha }; });
+}
+
+function ghPut(path, content, sha, msg) {
+  var body = { message: msg || "Admin update", content: btoa(unescape(encodeURIComponent(content))), branch: GITHUB_BRANCH };
+  if (sha) body.sha = sha;
+  return ghReq("PUT", "/repos/" + GITHUB_OWNER + "/" + GITHUB_REPO + "/contents/" + path, body);
+}
+
+function uploadImg(file, dest) {
+  var q = parseInt(document.getElementById("webpQuality").value) / 100;
+  return convertToWebP(file, q).then(function(url) {
+    var b64 = url.split(",")[1];
+    return ghGet(dest).then(function(i) { return i.sha; }).catch(function() { return null; })
+      .then(function(sha) {
+        var body = { message: "Upload via admin", content: b64, branch: GITHUB_BRANCH };
+                if (sha) body.sha = sha;
+        return ghReq("PUT", "/repos/" + GITHUB_OWNER + "/" + GITHUB_REPO + "/contents/" + dest, body);
+      });
+  });
+}
+
+function generateId(catalog) {
+  var key    = catalog === "diorama" ? "products_diorama" : "products_outros";
+  var list   = getData(key);
+  var prefix = catalog === "diorama" ? "d" : catalog === "action-figures" ? "af" : "pf";
+  if (catalog !== "diorama") { list = list.filter(function(p) { return p.category === catalog; }); }
+  var nums = list.map(function(p) { var n = parseInt((p.id || "").replace(/[^0-9]/g, "")); return isNaN(n) ? 0 : n; });
+  var next = nums.length ? Math.max.apply(null, nums) + 1 : 1;
+  return prefix + "-" + (next < 10 ? "0" + next : String(next));
+}
+
+function addProduct() {
+  var catalog = document.getElementById("productCatalog").value;
+  var name    = document.getElementById("productName").value.trim();
+  var desc    = document.getElementById("productDescription").value.trim();
+  var price   = document.getElementById("productPrice").value.trim();
+  if (!name)        { showToast("Preencha o nome.", "error"); return; }
+  if (!desc)        { showToast("Preencha a descricao.", "error"); return; }
+  if (!mainImgData) { showToast("Selecione a imagem principal.", "error"); return; }
+
+  var btn = document.getElementById("addProductBtn");
+  btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Salvando...';
+
+  var safe   = safeName(name);
+  var folder = catalog === "diorama" ? "assets/img/dioramas/" : "assets/img/outros/";
+  var mainPath = folder + safe + ".webp";
+
+  uploadImg(mainImgData.file, mainPath).then(function() {
+    var thumbPaths = [], ti = 0;
+    function nextThumb() {
+      if (ti >= thumbsData.length) return Promise.resolve();
+      var tp = folder + safe + "_" + (ti + 1) + ".webp";
+      thumbPaths.push(tp);
+      return uploadImg(thumbsData[ti].file, tp).then(function() { ti++; return nextThumb(); });
+    }
+    return nextThumb().then(function() {
+      var product = { id: generateId(catalog), name: name, description: desc, price: price || "", mainImage: mainPath, thumbnails: thumbPaths };
+      if (catalog !== "diorama") product.category = catalog;
+      var jsonPath = catalog === "diorama" ? "assets/json/products.json" : "assets/json/outros_produtos.json";
+      return ghGet(jsonPath).then(function(f) { return f; }).catch(function() { return { content: "[]", sha: null }; })
+        .then(function(f) {
+          var arr = JSON.parse(f.content);
+          arr.push(product);
+          return ghPut(jsonPath, JSON.stringify(arr, null, 2), f.sha, "Adiciona produto via admin");
+        });
+    });
+  }).then(function() {
+    showToast('"' + name + '" adicionado!', "info");
+    clearForm(); loadAllLists(); updateAllJSON();
+  }).catch(function(err) {
+    console.error(err); showToast(err.message || "Erro ao salvar.", "error");
+  }).then(function() {
+    btn.disabled = false; btn.innerHTML = '<i class="fas fa-check"></i> Adicionar Produto';
+  });
+}
+
+function addCarouselItem() {
+  var alt = document.getElementById("carouselAlt").value.trim();
+  if (!carouselData) { showToast("Selecione uma imagem.", "error"); return; }
+  var sName = safeName(alt || "carrossel");
+  var imgPath  = "assets/img/dioramas/" + sName + ".webp";
+  var jsonPath = "assets/json/carousel.json";
+  uploadImg(carouselData.file, imgPath).then(function() {
+    return ghGet(jsonPath).catch(function() { return { content: "[]", sha: null }; });
+  }).then(function(f) {
+    var arr = JSON.parse(f.content);
+    arr.push({ src: imgPath, alt: alt || "Imagem do carrossel" });
+    return ghPut(jsonPath, JSON.stringify(arr, null, 2), f.sha, "Carrossel via admin");
+  }).then(function() {
+    document.getElementById("carouselAlt").value = "";
+    document.getElementById("carouselImgPreview").innerHTML = "";
+    document.getElementById("carouselStatus").textContent = "";
+    carouselData = null;
+    showToast("Imagem adicionada ao carrossel!", "info");
+    loadCarouselList(); updateAllJSON();
+  }).catch(function(err) { console.error(err); showToast(err.message || "Erro.", "error"); });
+}
+
+function clearForm() {
+  document.getElementById("productName").value = "";
+  document.getElementById("productDescription").value = "";
+  document.getElementById("productPrice").value = "";
+  document.getElementById("mainImgPreview").innerHTML = "";
+  document.getElementById("thumbsPreview").innerHTML = "";
+  document.getElementById("mainStatus").textContent = "";
+  document.getElementById("thumbsStatus").textContent = "";
+  mainImgData = null; thumbsData = [];
+}
+
+function loadAllLists() {
+  loadList("products_diorama", "listDiorama",      "diorama");
+  loadList("products_outros",  "listActionFigures","action-figures");
+  loadList("products_outros",  "listFuncionais",   "produtos-funcionais");
+  loadCarouselList();
+}
+
+function loadList(key, cId, filter) {
+  var container = document.getElementById(cId);
+  var list = getData(key);
+  if (filter !== "diorama") { list = list.filter(function(p) { return p.category === filter; }); }
+  if (!list.length) { container.innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhum produto.</p>'; return; }
+  container.innerHTML = "";
+  list.forEach(function(p) {
+    var badge = p.category === "action-figures" ? '<span class="cat-badge cat-action">Action</span>' : p.category === "produtos-funcionais" ? '<span class="cat-badge cat-funcional">Funcional</span>' : '<span class="cat-badge cat-diorama">Diorama</span>';
+    var d = document.createElement("div"); d.className = "product-list-item";
+    d.innerHTML = '<img src="' + (p._preview || p.mainImage) + '" onerror="this.style.background=\'#333\'">' +
+      '<div class="product-list-info"><strong>' + p.name + ' ' + badge + '</strong><span>ID: ' + p.id + ' — ' + (p.price || "Sob consulta") + '</span></div>' +
+      '<div class="product-list-actions"><button class="btn-icon btn-icon-delete" onclick="removeProduct(\'' + key + '\',\'' + p.id + '\')"><i class="fas fa-trash"></i></button></div>';
+    container.appendChild(d);
+  });
+}
+
+function loadCarouselList() {
+  var container = document.getElementById("carouselList");
+  var list = getData("carousel");
+  if (!list.length) { container.innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhuma imagem.</p>'; return; }
+  container.innerHTML = "";
+  list.forEach(function(item, idx) {
+    var d = document.createElement("div"); d.className = "product-list-item";
+    d.innerHTML = '<img src="' + (item._preview || item.src) + '" onerror="this.style.background=\'#333\'">' +
+      '<div class="product-list-info"><strong>' + item.alt + '</strong><span>' + item.src + '</span></div>' +
+      '<div class="product-list-actions"><button class="btn-icon btn-icon-delete" onclick="removeCarouselItem(' + idx + ')"><i class="fas fa-trash"></i></button></div>';
+    container.appendChild(d);
+  });
+}
+
+function removeProduct(key, id) {
+  if (!confirm("Remover este produto?")) return;
+  setData(key, getData(key).filter(function(p) { return p.id !== id; }));
+  loadAllLists(); updateAllJSON(); showToast("Removido.", "info");
+}
+
+function removeCarouselItem(idx) {
+  if (!confirm("Remover esta imagem?")) return;
+  var list = getData("carousel"); list.splice(idx, 1);
+  setData("carousel", list); loadCarouselList(); updateAllJSON(); showToast("Removido.", "info");
+}
+
+function cleanForExport(arr) {
+  return arr.map(function(p) {
+    var c = {}, keys = Object.keys(p);
+    for (var i = 0; i < keys.length; i++) { if (keys[i].charAt(0) !== "_") c[keys[i]] = p[keys[i]]; }
+    return c;
+  });
+}
+
+function updateAllJSON() {
+  document.getElementById("jsonDiorama").textContent  = JSON.stringify(cleanForExport(getData("products_diorama")), null, 2);
+  document.getElementById("jsonOutros").textContent   = JSON.stringify(cleanForExport(getData("products_outros")),  null, 2);
+  document.getElementById("jsonCarousel").textContent = JSON.stringify(cleanForExport(getData("carousel")),         null, 2);
+}
+
+function copyJSON(type) {
+  var map = { diorama: "jsonDiorama", outros: "jsonOutros", carousel: "jsonCarousel" };
+  navigator.clipboard.writeText(document.getElementById(map[type]).textContent)
+    .then(function() { showToast("JSON copiado!", "info"); })
+    .catch(function() { showToast("Erro ao copiar.", "error"); });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById("loginScreen").style.display  = "block";
+  document.getElementById("adminContent").style.display = "none";
+
+  document.getElementById("adminPassword").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") checkPassword();
+  });
+
+  document.querySelectorAll(".tab-btn").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      document.querySelectorAll(".tab-btn").forEach(function(b) { b.classList.remove("active"); });
+      document.querySelectorAll(".tab-content").forEach(function(c) { c.classList.remove("active"); });
+      btn.classList.add("active");
+      document.getElementById(btn.dataset.tab).classList.add("active");
+      if (btn.dataset.tab === "tab-json") updateAllJSON();
+    });
+  });
+
+  setupUpload("mainImgInput", "mainImgArea", function(r) {
+    if (!r.length) return; mainImgData = r[0]; renderPreviews("mainImgPreview", [mainImgData], true);
+  }, "mainProgressBar", "mainStatus");
+
+  setupUpload("thumbsInput", "thumbsArea", function(r) {
+    thumbsData = thumbsData.concat(r); renderPreviews("thumbsPreview", thumbsData, true);
+  }, "thumbsProgressBar", "thumbsStatus");
+
+  setupUpload("carouselImgInput", "carouselArea", function(r) {
+    if (!r.length) return; carouselData = r[0]; renderPreviews("carouselImgPreview", [carouselData], false);
+  }, "carouselProgressBar", "carouselStatus");
+});
+</script>
+
+</body>
+</html>
+
 
