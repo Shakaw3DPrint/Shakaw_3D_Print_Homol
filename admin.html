@@ -688,217 +688,307 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// =============================================
-// SENHA
-// =============================================
-var ADMIN_PASSWORD = "Er!6736**";
+/* ==========================================================
+   CONFIGURAÇÕES (preencha apenas o usuário e o repo)
+   ========================================================== */
+const GITHUB_OWNER   = "Shakaw3DPrint";
+const GITHUB_REPO    = "Shakaw_3D_Print";
+const GITHUB_BRANCH  = "main";               // ou a branch que seu site usa
+const GITHUB_API_URL = "https://api.github.com";
 
-function checkPassword() {
-  var input        = document.getElementById("adminPassword");
-  var loginScreen  = document.getElementById("loginScreen");
-  var adminContent = document.getElementById("adminContent");
-  var loginError   = document.getElementById("loginError");
-  var typed        = input.value;
+/* ==========================================================
+   TOKEN – será solicitado ao usuário na primeira visita
+   ========================================================== */
+let GITHUB_TOKEN = sessionStorage.getItem("gh_token") || null;
 
-  if (!typed) {
-    loginError.textContent   = "Digite a senha.";
-    loginError.style.display = "block";
-    return;
-  }
-
-  if (typed === ADMIN_PASSWORD) {
-    loginScreen.style.setProperty("display", "none", "important");
-    adminContent.style.setProperty("display", "block", "important");
-    loadAllLists();
-    updateAllJSON();
+function askForToken() {
+  const token = prompt(
+    "⚠️  Para salvar imagens e JSON no GitHub, cole aqui seu Personal Access Token (PAT).\n" +
+    "Ele será guardado apenas nesta sessão (sessionStorage) e não será enviado a terceiros."
+  );
+  if (token && token.trim().length) {
+    GITHUB_TOKEN = token.trim();
+    sessionStorage.setItem("gh_token", GITHUB_TOKEN);
+    showToast("Token armazenado. Você já pode salvar produtos.", "info");
   } else {
-    loginError.textContent   = "Senha incorreta. Tente novamente.";
-    loginError.style.display = "block";
-    input.value = "";
-    input.focus();
+    showToast("Token não informado. O upload não funcionará.", "error");
   }
 }
 
-// =============================================
-// ESTADO DAS IMAGENS (declarado antes do DOM)
-// =============================================
-var mainImgData  = null;
-var thumbsData   = [];
-var carouselData = null;
-
-// =============================================
-// INICIALIZAÇÃO DO DOM
-// =============================================
-document.addEventListener("DOMContentLoaded", function() {
-  document.getElementById("loginScreen").style.display  = "block";
-  document.getElementById("adminContent").style.display = "none";
-
-  document.getElementById("adminPassword").addEventListener("keydown", function(e) {
-    if (e.key === "Enter") checkPassword();
-  });
-
-  document.querySelectorAll(".tab-btn").forEach(function(btn) {
-    btn.addEventListener("click", function() {
-      document.querySelectorAll(".tab-btn").forEach(function(b) { b.classList.remove("active"); });
-      document.querySelectorAll(".tab-content").forEach(function(c) { c.classList.remove("active"); });
-      btn.classList.add("active");
-      document.getElementById(btn.dataset.tab).classList.add("active");
-      if (btn.dataset.tab === "tab-json") updateAllJSON();
-    });
-  });
-
-  setupUpload("mainImgInput", "mainImgArea", function(results) {
-    if (!results.length) return;
-    mainImgData = results[0];
-    renderPreviews("mainImgPreview", [mainImgData], true);
-  }, "mainProgressBar", "mainStatus");
-
-  setupUpload("thumbsInput", "thumbsArea", function(results) {
-    thumbsData = thumbsData.concat(results);
-    renderPreviews("thumbsPreview", thumbsData, true);
-  }, "thumbsProgressBar", "thumbsStatus");
-
-  setupUpload("carouselImgInput", "carouselArea", function(results) {
-    if (!results.length) return;
-    carouselData = results[0];
-    renderPreviews("carouselImgPreview", [carouselData], false);
-  }, "carouselProgressBar", "carouselStatus");
-});
-
-// =============================================
-// INFO DESTINO
-// =============================================
-var catalogPageMap = {
-  "diorama"            : "catalogo_diorama.html",
-  "action-figures"     : "outros_projetos.html (filtro: Action Figures)",
-  "produtos-funcionais": "outros_projetos.html (filtro: Produtos Funcionais)"
-};
-
-function updateCatalogInfo() {
-  var val = document.getElementById("productCatalog").value;
-  document.getElementById("catalogInfoLink").textContent = catalogPageMap[val];
+/* ==========================================================
+   UTILIDADES
+   ========================================================== */
+function safeName(str) {
+  let s = str.toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/[^a-z0-9]+/g, "_")
+            .replace(/
+^
+_+|_+
+$
+/g, "");
+  return s;
 }
 
-// =============================================
-// LOCALSTORAGE
-// =============================================
-function getData(key) {
-  try { return JSON.parse(localStorage.getItem(key) || "[]"); }
-  catch(e) { return []; }
+/* Remove a extensão do nome do arquivo (ex.: foto.jpg → foto) */
+function stripExt(name) {
+  const i = name.lastIndexOf(".");
+  return i === -1 ? name : name.substring(0, i);
 }
 
-function setData(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
+/* Toast simples */
+let toastTimeout;
+function showToast(msg, type = "success") {
+  const toast = document.getElementById("toast");
+  toast.textContent = msg;
+  toast.className = `toast ${type} show`;
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => toast.classList.remove("show"), 3500);
 }
 
-// =============================================
-// CANVAS — CONVERSÃO WEBP
-// =============================================
-var canvas = document.getElementById("convertCanvas");
-var ctx    = canvas.getContext("2d");
+/* ==========================================================
+   GITHUB API – GET e PUT
+   ========================================================== */
+async function githubRequest(method, path, body = null) {
+  if (!GITHUB_TOKEN) {
+    askForToken();
+    throw new Error("Token ausente");
+  }
 
-function convertToWebP(file, quality) {
-  return new Promise(function(resolve, reject) {
-    var reader = new FileReader();
-    reader.onerror = function() { reject(new Error("Erro ao ler arquivo.")); };
-    reader.onload = function(ev) {
-      var img = new Image();
-      img.onerror = function() { reject(new Error("Erro ao carregar imagem.")); };
-      img.onload = function() {
-        var w = img.width;
-        var h = img.height;
-        var MAX = 1600;
+  const url = `${GITHUB_API_URL}${path}`;
+  const opts = {
+    method,
+    headers: {
+      Authorization: `token ${GITHUB_TOKEN}`,
+      Accept: "application/vnd.github.v3+json"
+    }
+  };
+  if (body) opts.body = JSON.stringify(body);
+  const resp = await fetch(url, opts);
+  if (!resp.ok) {
+    const err = await resp.json();
+    console.error("GitHub error:", err);
+    throw new Error(err.message || "Erro na API GitHub");
+  }
+  return resp.json();
+}
+
+/* GET conteúdo bruto de um arquivo (base64) */
+async function githubGetFile(path) {
+  const data = await githubRequest("GET", `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}?ref=${GITHUB_BRANCH}`);
+  return {
+    content: atob(data.content.replace(/\n/g, "")),
+    sha: data.sha
+  };
+}
+
+/* PUT (cria ou atualiza) um arquivo */
+async function githubPutFile(path, rawContent, sha = null, message = "Atualização via admin") {
+  const body = {
+    message,
+    content: btoa(rawContent),
+    branch: GITHUB_BRANCH
+  };
+  if (sha) body.sha = sha;
+  return githubRequest("PUT", `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`, body);
+}
+
+/* ==========================================================
+   CONVERSÃO DE IMAGEM → WEBP (já existente)
+   ========================================================== */
+const canvas = document.getElementById("convertCanvas");
+const ctx    = canvas.getContext("2d");
+
+function convertToWebP(file, quality = 0.85) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error("Falha ao ler o arquivo"));
+    reader.onload = e => {
+      const img = new Image();
+      img.onerror = () => reject(new Error("Falha ao carregar a imagem"));
+      img.onload = () => {
+        let w = img.width, h = img.height;
+        const MAX = 1600;
         if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
-        canvas.width  = w;
-        canvas.height = h;
-        ctx.clearRect(0, 0, w, h);
-        ctx.drawImage(img, 0, 0, w, h);
+        canvas.width = w; canvas.height = h;
+        ctx.clearRect(0,0,w,h);
+        ctx.drawImage(img,0,0,w,h);
         resolve(canvas.toDataURL("image/webp", quality));
       };
-      img.src = ev.target.result;
+      img.src = e.target.result;
     };
     reader.readAsDataURL(file);
   });
 }
 
-function convertMultiple(files, quality, progressBarId, statusId) {
-  var progressEl = document.getElementById(progressBarId).parentElement;
-  var barEl      = document.getElementById(progressBarId);
-  var statusEl   = document.getElementById(statusId);
-
-  progressEl.style.display = "block";
-  barEl.style.width        = "0%";
-
-  var results = [];
-  var i = 0;
-
-  function processNext() {
-    if (i >= files.length) {
-      barEl.style.width    = "100%";
-      statusEl.textContent = "Convertida(s): " + results.length + " imagem(ns) para WebP.";
-      setTimeout(function() {
-        progressEl.style.display = "none";
-        barEl.style.width        = "0%";
-      }, 2500);
-      return Promise.resolve(results);
-    }
-
-    var file = files[i];
-    statusEl.textContent = "Convertendo " + (i + 1) + " de " + files.length + ": " + file.name;
-    barEl.style.width    = Math.round((i / files.length) * 100) + "%";
-    i++;
-
-    return convertToWebP(file, quality)
-      .then(function(webpUrl) {
-        results.push({ name: file.name, webpUrl: webpUrl });
-      })
-      .catch(function(err) {
-        console.error("Erro ao converter:", file.name, err);
-      })
-      .then(function() {
-        return processNext();
-      });
+/* ==========================================================
+   UPLOAD DE IMAGENS (principal + miniaturas)
+   ========================================================== */
+async function uploadImage(file, targetPath) {
+  const webpDataUrl = await convertToWebP(file, parseInt(document.getElementById("webpQuality").value)/100);
+  const base64 = webpDataUrl.split(",")[1]; // remove o prefixo data:image/webp;base64,
+  // Verifica se o arquivo já existe para obter o SHA
+  let sha = null;
+  try {
+    const info = await githubGetFile(targetPath);
+    sha = info.sha; // se já existir, precisamos enviar o SHA
+  } catch (e) {
+    // arquivo ainda não existe – tudo bem
   }
-
-  return processNext();
+  await githubPutFile(targetPath, atob(base64), sha, "Upload via admin");
+  return targetPath; // devolve o caminho que será usado no JSON
 }
 
-// =============================================
-// SETUP UPLOAD
-// =============================================
-function setupUpload(inputId, areaId, onConverted, progressBarId, statusId) {
-  var input = document.getElementById(inputId);
-  var area  = document.getElementById(areaId);
+/* ==========================================================
+   ADICIONAR PRODUTO (inclui upload das imagens)
+   ========================================================== */
+async function addProduct() {
+  const catalog   = document.getElementById("productCatalog").value; // diorama / action-figures / produtos-funcionais
+  const name      = document.getElementById("productName").value.trim();
+  const desc      = document.getElementById("productDescription").value.trim();
+  const priceRaw  = document.getElementById("productPrice").value.trim();
+  const price     = priceRaw || ""; // pode ficar vazio → “Sob consulta”
 
-  function handleFiles(files) {
-    var arr = [];
-    for (var i = 0; i < files.length; i++) {
-      if (files[i].type.indexOf("image/") === 0) arr.push(files[i]);
+  if (!name)        { showToast("Preencha o nome do produto.", "error"); return; }
+  if (!desc)        { showToast("Preencha a descrição.", "error"); return; }
+  if (!mainImgData) { showToast("Selecione a imagem principal.", "error"); return; }
+
+  const btn = document.getElementById("addProductBtn");
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Salvando…';
+
+  try {
+    const safe = safeName(name);
+    const folder = catalog === "diorama"
+      ? "assets/img/dioramas/"
+      : "assets/img/outros/";
+
+    // ---------- 1️⃣ UPLOAD da imagem principal ----------
+    const mainPath = folder + safe + ".webp";
+    await uploadImage(mainImgData.file, mainPath);
+
+    // ---------- 2️⃣ UPLOAD das miniaturas ----------
+    const thumbPaths = [];
+    for (let i = 0; i < thumbsData.length; i++) {
+      const t = thumbsData[i];
+      const thumbPath = folder + safe + "_" + (i + 1) + ".webp";
+      await uploadImage(t.file, thumbPath);
+      thumbPaths.push(thumbPath);
     }
+
+    // ---------- 3️⃣ PREPARA o objeto do produto ----------
+    const product = {
+      id: generateId(catalog),
+      name,
+      description: desc,
+      price,
+      mainImage: mainPath,
+      thumbnails: thumbPaths
+    };
+    if (catalog !== "diorama") product.category = catalog; // action-figures ou produtos-funcionais
+
+    // ---------- 4️⃣ LÊ o JSON existente ----------
+    const jsonPath = catalog === "diorama"
+      ? "assets/json/products.json"
+      : "assets/json/outros_produtos.json";
+
+    let jsonContent, jsonSha;
+    try {
+      const fileInfo = await githubGetFile(jsonPath);
+      jsonContent = fileInfo.content;
+      jsonSha = fileInfo.sha;
+    } catch (e) {
+      // Se o arquivo ainda não existir, criamos um array vazio
+      jsonContent = "[]";
+      jsonSha = null;
+    }
+
+    const arr = JSON.parse(jsonContent);
+    arr.push(product);
+    const newJson = JSON.stringify(arr, null, 2);
+
+    // ---------- 5️⃣ SALVA o JSON ----------
+    await githubPutFile(jsonPath, newJson, jsonSha, "Atualiza catálogo via admin");
+
+    showToast(`Produto "${name}" adicionado com sucesso!`, "info");
+    clearForm();
+    loadAllLists(); // atualiza a visualização da lista
+  } catch (err) {
+    console.error(err);
+    showToast(err.message || "Erro ao salvar o produto.", "error");
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-check"></i> Adicionar Produto';
+  }
+}
+
+/* ==========================================================
+   GERAÇÃO DE ID (sequencial por categoria)
+   ========================================================== */
+function generateId(catalog) {
+  const key = catalog === "diorama" ? "products_diorama" : "products_outros";
+  const list = getData(key);
+  const prefix = catalog === "diorama"
+    ? "d"
+    : catalog === "action-figures"
+      ? "af"
+      : "pf";
+
+  const nums = list.map(p => parseInt((p.id || "").replace(/\D/g, "")) || 0);
+  const next = nums.length ? Math.max(...nums) + 1 : 1;
+  return `${prefix}-${String(next).padStart(2, "0")}`;
+}
+
+/* ==========================================================
+   PREVIEW DE IMAGENS (agora guardamos o File original)
+   ========================================================== */
+let mainImgData = null;   // { file: File, name: string }
+let thumbsData  = [];     // array de { file: File, name: string }
+
+function setupUpload(inputId, areaId, onResult, progressBarId, statusId) {
+  const input = document.getElementById(inputId);
+  const area  = document.getElementById(areaId);
+
+  async function handleFiles(files) {
+    const arr = Array.from(files).filter(f => f.type.startsWith("image/"));
     if (!arr.length) return;
 
-    var qualityEl = document.getElementById("webpQuality");
-    var quality   = qualityEl ? parseInt(qualityEl.value) / 100 : 0.85;
+    const quality = parseInt(document.getElementById("webpQuality").value) / 100;
+    const progressBar = document.getElementById(progressBarId);
+    const statusEl    = document.getElementById(statusId);
+    const progressBox = progressBar.parentElement;
 
-    convertMultiple(arr, quality, progressBarId, statusId).then(function(results) {
-      onConverted(results);
-    });
+    progressBox.style.display = "block";
+    progressBar.style.width = "0%";
+
+    const results = [];
+    for (let i = 0; i < arr.length; i++) {
+      statusEl.textContent = `Convertendo ${i + 1}/${arr.length}: ${arr[i].name}`;
+      progressBar.style.width = `${Math.round((i / arr.length) * 100)}%`;
+      const dataUrl = await convertToWebP(arr[i], quality);
+      results.push({ file: arr[i], name: arr[i].name, dataUrl });
+    }
+
+    progressBar.style.width = "100%";
+    statusEl.textContent = `Convertida(s): ${results.length} imagem(ns)`;
+    setTimeout(() => {
+      progressBox.style.display = "none";
+      progressBar.style.width = "0%";
+    }, 1500);
+
+    onResult(results);
   }
 
-  input.addEventListener("change", function() {
+  input.addEventListener("change", () => {
     if (input.files.length) handleFiles(input.files);
     input.value = "";
   });
 
   if (area) {
-    area.addEventListener("dragover", function(e) {
-      e.preventDefault();
-      area.classList.add("drag-over");
-    });
-    area.addEventListener("dragleave", function() {
-      area.classList.remove("drag-over");
-    });
-    area.addEventListener("drop", function(e) {
+    area.addEventListener("dragover", e => { e.preventDefault(); area.classList.add("drag-over"); });
+    area.addEventListener("dragleave", () => area.classList.remove("drag-over"));
+    area.addEventListener("drop", e => {
       e.preventDefault();
       area.classList.remove("drag-over");
       handleFiles(e.dataTransfer.files);
@@ -906,57 +996,43 @@ function setupUpload(inputId, areaId, onConverted, progressBarId, statusId) {
   }
 }
 
-// =============================================
-// RENDER PREVIEWS
-// =============================================
-function removeExtension(filename) {
-  var lastDot = filename.lastIndexOf(".");
-  if (lastDot === -1) return filename;
-  return filename.substring(0, lastDot);
-}
-
-function renderPreviews(containerId, items, showRemove) {
-  var container = document.getElementById(containerId);
+/* ---------- PREVIEW DE IMAGENS ---------- */
+function renderPreviews(containerId, items, removable) {
+  const container = document.getElementById(containerId);
   container.innerHTML = "";
-
-  items.forEach(function(item, i) {
-    var div = document.createElement("div");
+  items.forEach((it, idx) => {
+    const div = document.createElement("div");
     div.className = "preview-item";
 
-    var img = document.createElement("img");
-    img.src = item.webpUrl;
-    img.alt = item.name;
-
-    var badge = document.createElement("div");
-    badge.className   = "preview-badge";
-    badge.textContent = "WebP";
-
-    var label = document.createElement("div");
-    label.className   = "preview-label";
-    label.textContent = removeExtension(item.name) + ".webp";
-
+    const img = document.createElement("img");
+    img.src = it.dataUrl;
+    img.alt = it.name;
     div.appendChild(img);
+
+    const badge = document.createElement("div");
+    badge.className = "preview-badge";
+    badge.textContent = "WebP";
     div.appendChild(badge);
+
+    const label = document.createElement("div");
+    label.className = "preview-label";
+    label.textContent = stripExt(it.name) + ".webp";
     div.appendChild(label);
 
-    if (showRemove) {
-      var btn = document.createElement("button");
-      btn.className   = "remove-preview";
-      btn.textContent = "x";
-      btn.onclick = (function(index, cId) {
-        return function() {
-          if (cId === "mainImgPreview") {
-            mainImgData = null;
-          } else if (cId === "thumbsPreview") {
-            thumbsData.splice(index, 1);
-            renderPreviews(cId, thumbsData, true);
-            return;
-          } else if (cId === "carouselImgPreview") {
-            carouselData = null;
-          }
-          div.remove();
-        };
-      })(i, containerId);
+    if (removable) {
+      const btn = document.createElement("button");
+      btn.className = "remove-preview";
+      btn.textContent = "×";
+      btn.onclick = () => {
+        if (containerId === "mainImgPreview") {
+          mainImgData = null;
+        } else if (containerId === "thumbsPreview") {
+          thumbsData.splice(idx, 1);
+          renderPreviews(containerId, thumbsData, true);
+          return;
+        }
+        div.remove();
+      };
       div.appendChild(btn);
     }
 
@@ -964,157 +1040,75 @@ function renderPreviews(containerId, items, showRemove) {
   });
 }
 
-// =============================================
-// NOME SEGURO PARA ARQUIVO
-// =============================================
-function safeName(str) {
-  var s = str.toLowerCase();
-  s = s.normalize("NFD");
-  s = s.replace(/[\u0300-\u036f]/g, "");
-  s = s.replace(/[^a-z0-9]+/g, "_");
-  while (s.charAt(0) === "_") s = s.substring(1);
-  while (s.charAt(s.length - 1) === "_") s = s.substring(0, s.length - 1);
-  return s;
-}
+/* ==========================================================
+   INICIALIZAÇÃO (DOM ready)
+   ========================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+  // Estado inicial
+  document.getElementById("loginScreen").style.display  = "block";
+  document.getElementById("adminContent").style.display = "none";
 
-// =============================================
-// PRÓXIMO ID SEQUENCIAL
-// =============================================
-function nextId(catalog) {
-  var key    = catalog === "diorama" ? "products_diorama" : "products_outros";
-  var list   = getData(key);
-  var prefix = catalog === "diorama" ? "d" : catalog === "action-figures" ? "af" : "pf";
-
-  if (catalog !== "diorama") {
-    list = list.filter(function(p) { return p.category === catalog; });
-  }
-
-  var nums = list.map(function(p) {
-    var n = parseInt((p.id || "").replace(/[^0-9]/g, ""));
-    return isNaN(n) ? 0 : n;
+  // Login via Enter
+  document.getElementById("adminPassword").addEventListener("keydown", e => {
+    if (e.key === "Enter") checkPassword();
   });
 
-  var next = nums.length ? Math.max.apply(null, nums) + 1 : 1;
-  return prefix + "-" + (next < 10 ? "0" + next : String(next));
-}
-
-// =============================================
-// ADICIONAR PRODUTO
-// =============================================
-function addProduct() {
-  var catalog     = document.getElementById("productCatalog").value;
-  var name        = document.getElementById("productName").value.trim();
-  var description = document.getElementById("productDescription").value.trim();
-  var price       = document.getElementById("productPrice").value.trim();
-
-  if (!name)        { showToast("Preencha o nome do produto.", "error"); return; }
-  if (!description) { showToast("Preencha a descricao.", "error"); return; }
-  if (!mainImgData) { showToast("Adicione a imagem principal.", "error"); return; }
-
-  var btn = document.getElementById("addProductBtn");
-  btn.disabled  = true;
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Salvando...';
-
-  var id     = nextId(catalog);
-  var sName  = safeName(name);
-  var folder = catalog === "diorama" ? "assets/img/dioramas/" : "assets/img/outros/";
-
-  var mainPath   = folder + sName + ".webp";
-  var thumbPaths = thumbsData.map(function(t, i) {
-    return folder + sName + "_" + (i + 1) + ".webp";
+  // Tabs
+  document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+      btn.classList.add("active");
+      document.getElementById(btn.dataset.tab).classList.add("active");
+      if (btn.dataset.tab === "tab-json") updateAllJSON();
+    });
   });
 
-  var product = {
-    id           : id,
-    name         : name,
-    description  : description,
-    price        : price || "",
-    mainImage    : mainPath,
-    thumbnails   : thumbPaths,
-    _preview     : mainImgData.webpUrl,
-    _thumbPreviews: thumbsData.map(function(t) { return t.webpUrl; })
-  };
+  // Uploads
+  setupUpload(
+    "mainImgInput", "mainImgArea",
+    results => {
+      if (!results.length) return;
+      mainImgData = results[0]; // guarda o File original
+      renderPreviews("mainImgPreview", [mainImgData], true);
+    },
+    "mainProgressBar", "mainStatus"
+  );
 
-  if (catalog !== "diorama") product.category = catalog;
+  setupUpload(
+    "thumbsInput", "thumbsArea",
+    results => {
+      thumbsData = thumbsData.concat(results);
+      renderPreviews("thumbsPreview", thumbsData, true);
+    },
+    "thumbsProgressBar", "thumbsStatus"
+  );
 
-  var key  = catalog === "diorama" ? "products_diorama" : "products_outros";
-  var list = getData(key);
-  list.push(product);
-  setData(key, list);
+  setupUpload(
+    "carouselImgInput", "carouselArea",
+    results => {
+      if (!results.length) return;
+      carouselData = results[0];
+      renderPreviews("carouselImgPreview", [carouselData], false);
+    },
+    "carouselProgressBar", "carouselStatus"
+  );
+});
 
-  showToast('"' + name + '" adicionado! ID: ' + id);
-  clearForm();
-  loadAllLists();
-  updateAllJSON();
-
-  btn.disabled  = false;
-  btn.innerHTML = '<i class="fas fa-check"></i> Adicionar Produto';
-}
-
-// =============================================
-// LIMPAR FORMULÁRIO
-// =============================================
-function clearForm() {
-  document.getElementById("productName").value        = "";
-  document.getElementById("productDescription").value = "";
-  document.getElementById("productPrice").value       = "";
-  document.getElementById("mainImgPreview").innerHTML = "";
-  document.getElementById("thumbsPreview").innerHTML  = "";
-  document.getElementById("mainStatus").textContent   = "";
-  document.getElementById("thumbsStatus").textContent = "";
-  mainImgData = null;
-  thumbsData  = [];
-}
-
-// =============================================
-// CARROSSEL
-// =============================================
-function addCarouselItem() {
-  var alt = document.getElementById("carouselAlt").value.trim();
-
-  if (!carouselData) {
-    showToast("Selecione uma imagem para o carrossel.", "error");
-    return;
-  }
-
-  var sName = safeName(alt || "carrossel");
-  var item  = {
-    src     : "assets/img/dioramas/" + sName + ".webp",
-    alt     : alt || "Imagem do carrossel",
-    _preview: carouselData.webpUrl
-  };
-
-  var list = getData("carousel");
-  list.push(item);
-  setData("carousel", list);
-
-  document.getElementById("carouselAlt").value            = "";
-  document.getElementById("carouselImgPreview").innerHTML = "";
-  document.getElementById("carouselStatus").textContent   = "";
-  carouselData = null;
-
-  showToast("Imagem adicionada ao carrossel!");
-  loadCarouselList();
-  updateAllJSON();
-}
-
-// =============================================
-// LISTAS
-// =============================================
+/* ==========================================================
+   LISTAS (exibição na aba “Gerenciar”)
+   ========================================================== */
 function loadAllLists() {
-  loadList("products_diorama", "listDiorama",      "diorama");
-  loadList("products_outros",  "listActionFigures","action-figures");
-  loadList("products_outros",  "listFuncionais",   "produtos-funcionais");
+  loadList("products_diorama", "listDiorama", "diorama");
+  loadList("products_outros",  "listActionFigures", "action-figures");
+  loadList("products_outros",  "listFuncionais",    "produtos-funcionais");
   loadCarouselList();
 }
 
-function loadList(key, containerId, filterCategory) {
-  var container = document.getElementById(containerId);
-  var list      = getData(key);
-
-  if (filterCategory !== "diorama") {
-    list = list.filter(function(p) { return p.category === filterCategory; });
-  }
+/* ---------- LISTA DE PRODUTOS ---------- */
+function loadList(key, containerId, filterCat) {
+  const container = document.getElementById(containerId);
+  const list = getData(key).filter(p => filterCat === "diorama" || p.category === filterCat);
 
   if (!list.length) {
     container.innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhum produto cadastrado.</p>';
@@ -1122,127 +1116,130 @@ function loadList(key, containerId, filterCategory) {
   }
 
   container.innerHTML = "";
-
-  list.forEach(function(product) {
-    var catLabel = product.category === "action-figures"
+  list.forEach(p => {
+    const catLabel = p.category === "action-figures"
       ? '<span class="cat-badge cat-action">Action Figure</span>'
-      : product.category === "produtos-funcionais"
+      : p.category === "produtos-funcionais"
         ? '<span class="cat-badge cat-funcional">Funcional</span>'
         : '<span class="cat-badge cat-diorama">Diorama</span>';
 
-    var item = document.createElement("div");
-    item.className = "product-list-item";
-    item.innerHTML =
-      '<img src="' + (product._preview || product.mainImage) + '" onerror="this.style.background=\'rgba(255,255,255,0.1)\'">' +
-      '<div class="product-list-info">' +
-        '<strong>' + product.name + ' ' + catLabel + '</strong>' +
-        '<span>ID: ' + product.id + ' — ' + (product.price || "Sob consulta") + '</span>' +
-      '</div>' +
-      '<div class="product-list-actions">' +
-        '<button class="btn-icon btn-icon-delete" title="Remover" onclick="removeProduct(\'' + key + '\',\'' + product.id + '\')">' +
-          '<i class="fas fa-trash"></i>' +
-        '</button>' +
-      '</div>';
-    container.appendChild(item);
-  });
-}
-
-function loadCarouselList() {
-  var container = document.getElementById("carouselList");
-  var list      = getData("carousel");
-
-  if (!list.length) {
-    container.innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhuma imagem adicionada.</p>';
-    return;
-  }
-
-  container.innerHTML = "";
-
-  list.forEach(function(item, idx) {
-    var div = document.createElement("div");
+    const div = document.createElement("div");
     div.className = "product-list-item";
-    div.innerHTML =
-      '<img src="' + (item._preview || item.src) + '" onerror="this.style.background=\'rgba(255,255,255,0.1)\'">' +
-      '<div class="product-list-info">' +
-        '<strong>' + item.alt + '</strong>' +
-        '<span>' + item.src + '</span>' +
-      '</div>' +
-      '<div class="product-list-actions">' +
-        '<button class="btn-icon btn-icon-delete" title="Remover" onclick="removeCarouselItem(' + idx + ')">' +
-          '<i class="fas fa-trash"></i>' +
-        '</button>' +
-      '</div>';
+    div.innerHTML = `
+      <img src="${p._preview || p.mainImage}" onerror="this.style.background='rgba(255,255,255,0.1)'">
+      <div class="product-list-info">
+        <strong>${p.name} ${catLabel}</strong>
+        <span>ID: ${p.id} — ${p.price || "Sob consulta"}</span>
+      </div>
+      <div class="product-list-actions">
+        <button class="btn-icon btn-icon-delete" title="Remover"
+                onclick="removeProduct('${key}','${p.id}')">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>`;
     container.appendChild(div);
   });
 }
 
-// =============================================
-// REMOVER
-// =============================================
+/* ---------- LISTA DO CARROSSEL ---------- */
+function loadCarouselList() {
+  const container = document.getElementById("carouselList");
+  const list = getData("carousel");
+  if (!list.length) {
+    container.innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhuma imagem adicionada.</p>';
+    return;
+  }
+  container.innerHTML = "";
+  list.forEach((item, idx) => {
+    const div = document.createElement("div");
+    div.className = "product-list-item";
+    div.innerHTML = `
+      <img src="${item._preview || item.src}" onerror="this.style.background='rgba(255,255,255,0.1)'">
+      <div class="product-list-info">
+        <strong>${item.alt}</strong>
+        <span>${item.src}</span>
+      </div>
+      <div class="product-list-actions">
+        <button class="btn-icon btn-icon-delete" title="Remover"
+                onclick="removeCarouselItem(${idx})">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>`;
+    container.appendChild(div);
+  });
+}
+
+/* ==========================================================
+   REMOVER PRODUTOS / CARROSSEL
+   ========================================================== */
 function removeProduct(key, id) {
   if (!confirm("Remover este produto?")) return;
-  setData(key, getData(key).filter(function(p) { return p.id !== id; }));
+  const list = getData(key).filter(p => p.id !== id);
+  setData(key, list);
   loadAllLists();
   updateAllJSON();
-  showToast("Produto removido.");
+  showToast("Produto removido.", "info");
 }
 
 function removeCarouselItem(idx) {
   if (!confirm("Remover esta imagem do carrossel?")) return;
-  var list = getData("carousel");
+  const list = getData("carousel");
   list.splice(idx, 1);
   setData("carousel", list);
   loadCarouselList();
   updateAllJSON();
-  showToast("Imagem removida.");
+  showToast("Imagem removida.", "info");
 }
 
-// =============================================
-// JSON
-// =============================================
-function cleanForExport(list) {
-  return list.map(function(p) {
-    var c = {};
-    var keys = Object.keys(p);
-    for (var i = 0; i < keys.length; i++) {
-      var k = keys[i];
-      if (k !== "_preview" && k !== "_thumbPreviews") {
-        c[k] = p[k];
-      }
-    }
+/* ==========================================================
+   JSON – exportar / copiar (mantido)
+   ========================================================== */
+function cleanForExport(arr) {
+  return arr.map(p => {
+    const c = {};
+    for (const k in p) if (!k.startsWith("_")) c[k] = p[k];
     return c;
   });
 }
-
 function updateAllJSON() {
   document.getElementById("jsonDiorama").textContent  = JSON.stringify(cleanForExport(getData("products_diorama")), null, 2);
   document.getElementById("jsonOutros").textContent   = JSON.stringify(cleanForExport(getData("products_outros")),  null, 2);
   document.getElementById("jsonCarousel").textContent = JSON.stringify(cleanForExport(getData("carousel")),         null, 2);
 }
-
 function copyJSON(type) {
-  var map  = { diorama: "jsonDiorama", outros: "jsonOutros", carousel: "jsonCarousel" };
-  var text = document.getElementById(map[type]).textContent;
-  navigator.clipboard.writeText(text)
-    .then(function()  { showToast("JSON copiado! Cole no arquivo no GitHub.", "info"); })
-    .catch(function() { showToast("Erro ao copiar. Selecione e copie manualmente.", "error"); });
+  const map = { diorama: "jsonDiorama", outros: "jsonOutros", carousel: "jsonCarousel" };
+  const txt = document.getElementById(map[type]).textContent;
+  navigator.clipboard.writeText(txt)
+    .then(() => showToast("JSON copiado!", "info"))
+    .catch(() => showToast("Erro ao copiar.", "error"));
 }
 
-// =============================================
-// TOAST
-// =============================================
-var toastTimeout;
-function showToast(msg, type) {
-  type = type || "success";
-  var toast = document.getElementById("toast");
-  toast.textContent = msg;
-  toast.className   = "toast " + type + " show";
-  clearTimeout(toastTimeout);
-  toastTimeout = setTimeout(function() {
-    toast.classList.remove("show");
-  }, 3500);
+/* ==========================================================
+   LOCAL STORAGE (para os dados temporários)
+   ========================================================== */
+function getData(key) {
+  try { return JSON.parse(localStorage.getItem(key) || "[]"); }
+  catch { return []; }
+}
+function setData(key, val) {
+  localStorage.setItem(key, JSON.stringify(val));
 }
 
+/* ==========================================================
+   LIMPAR FORMULÁRIO
+   ========================================================== */
+function clearForm() {
+  document.getElementById("productName").value = "";
+  document.getElementById("productDescription").value = "";
+  document.getElementById("productPrice").value = "";
+  document.getElementById("mainImgPreview").innerHTML = "";
+  document.getElementById("thumbsPreview").innerHTML = "";
+  document.getElementById("mainStatus").textContent = "";
+  document.getElementById("thumbsStatus").textContent = "";
+  mainImgData = null;
+  thumbsData  = [];
+}
 </script>
+
 </body>
 </html>
