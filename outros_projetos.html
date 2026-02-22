@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="css/index_styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Filtros de categoria */
+    /* Filtros */
     .category-filters {
       display: flex;
       justify-content: center;
@@ -40,22 +40,7 @@
       color: #00303f;
     }
 
-    /* Título da seção */
-    .section-heading {
-      text-align: center;
-      color: white;
-      font-size: 1.5rem;
-      margin: 30px 0 5px 0;
-      padding: 0 20px;
-    }
-
-    .section-heading span {
-      display: inline-block;
-      border-bottom: 3px solid #4fc3f7;
-      padding-bottom: 6px;
-    }
-
-    /* Contador de resultados */
+    /* Contador */
     .results-count {
       text-align: center;
       color: rgba(255,255,255,0.55);
@@ -63,7 +48,7 @@
       margin-bottom: 10px;
     }
 
-    /* Mensagem sem produtos */
+    /* Sem produtos */
     .no-products {
       text-align: center;
       color: rgba(255,255,255,0.6);
@@ -71,7 +56,7 @@
       font-size: 1.1rem;
     }
 
-    /* Botão adicionar interesse (igual ao catálogo) */
+    /* Botão interesse */
     .add-interest-btn {
       margin-top: 15px;
       padding: 10px 20px;
@@ -91,7 +76,7 @@
       transform: scale(1.02);
     }
 
-    /* Badge de categoria no card */
+    /* Badge categoria */
     .category-badge {
       display: inline-block;
       font-size: 11px;
@@ -113,7 +98,7 @@
       color: #1b7a3e;
     }
 
-    /* Animação de entrada dos cards */
+    /* Animação cards */
     .product {
       animation: fadeInUp 0.35s ease both;
     }
@@ -159,32 +144,31 @@
   <!-- CONTADOR -->
   <p class="results-count" id="resultsCount"></p>
 
-  <!-- INDICADOR DE CARREGAMENTO -->
+  <!-- LOADER -->
   <div class="loader" id="loader"></div>
 
   <!-- CATÁLOGO -->
   <div class="catalog-page" id="catalog"></div>
 
-  <!-- MODAL PARA IMAGENS AMPLIADAS -->
+  <!-- MODAL IMAGEM -->
   <div id="imgModal" class="modal">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <button class="modal-nav modal-prev" onclick="navigateModal(-1)">❮</button>
+    <span class="close">&times;</span>
+    <button class="modal-nav modal-prev">❮</button>
     <div class="modal-content">
       <img id="modalImg" src="" alt="Imagem ampliada">
     </div>
-    <button class="modal-nav modal-next" onclick="navigateModal(1)">❯</button>
+    <button class="modal-nav modal-next">❯</button>
     <div class="zoom-controls">
-      <button onclick="zoomImage(0.15)">+</button>
-      <button onclick="zoomImage(-0.15)">-</button>
-      <button onclick="resetZoomAndPan()">Reset</button>
+      <button id="zoomInBtn">+</button>
+      <button id="zoomOutBtn">-</button>
+      <button id="zoomResetBtn">Reset</button>
     </div>
   </div>
 
-  <!-- MODAL DE CONTATO -->
+  <!-- MODAL CONTATO -->
   <div id="contactModal" class="contact-modal">
     <div class="contact-modal-content">
-      <span class="close-contact"
-            onclick="document.getElementById('contactModal').style.display='none'">&times;</span>
+      <span class="close-contact">&times;</span>
       <h2>Enviar Interesses</h2>
       <form id="contactForm"
             action="https://script.google.com/macros/s/AKfycbypHVPUQFxuGJNoawgsXZFZqGwFIMNcWhcJDb0Yb2uCwuRz8QjLoR29PyMmI661wwaUyg/exec"
@@ -196,10 +180,8 @@
         <div class="form-section">
           <label for="name">Nome:</label>
           <input type="text" id="name" name="name" required>
-
           <label for="email">E-mail:</label>
           <input type="email" id="email" name="email" required>
-
           <label for="whatsapp">WhatsApp:</label>
           <input type="tel" id="whatsapp" name="whatsapp"
                  placeholder="(00) 00000-0000" required>
@@ -221,10 +203,10 @@
     </div>
   </div>
 
-  <!-- BOTÃO VOLTAR AO TOPO -->
+  <!-- BOTÃO TOPO -->
   <button id="backToTopBtn" title="Voltar ao topo">⬆️ Topo</button>
 
-  <!-- PAINEL DE INTERESSES -->
+  <!-- PAINEL INTERESSES -->
   <div id="interestPanel">
     <button id="closeInterestPanelBtn" class="close-interest-panel-btn">&times;</button>
     <h3>Lista de interesses</h3>
@@ -233,10 +215,9 @@
     <button onclick="showContactModal()">Enviar Interesses</button>
   </div>
 
-  <!-- BOTÃO ABRIR PAINEL -->
+  <!-- BOTÃO INTERESSES -->
   <button class="interest-btn">💚 Ver interesses</button>
 
-  <!-- SCRIPT ESPECÍFICO DESTA PÁGINA -->
   <script src="js/outros_script.js"></script>
 </body>
 </html>
