@@ -2,238 +2,325 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Shakaw 3D Print</title>
   <link rel="stylesheet" href="css/index_styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
+    /* --- LAYOUT GERAL DA HOME --- */
+
+    .home-wrapper {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 20px 40px;
+      color: white;
+    }
+
+    /* HERO PRINCIPAL */
+
     .home-hero {
-      max-width: 900px;
-      margin: 40px auto 0 auto;
-      padding: 0 20px;
-      text-align: center;
-      color: white;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: 30px;
+      align-items: center;
+      padding-top: 10px;
+      padding-bottom: 30px;
     }
 
-    .home-hero h2 {
-      font-size: 2rem;
-      margin-bottom: 15px;
-      color: white;
+    .hero-text {
+      text-align: left;
     }
 
-    .home-hero p {
-      font-size: 1.1rem;
-      color: rgba(255,255,255,0.85);
+    .hero-title {
+      font-size: clamp(1.9rem, 3vw, 2.3rem);
+      margin: 0 0 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: rgba(255,255,255,0.78);
       line-height: 1.7;
-      margin-bottom: 30px;
+      margin-bottom: 22px;
+    }
+
+    .hero-subtitle strong {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      margin-bottom: 12px;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .hero-pill i {
+      color: #4fc3f7;
     }
 
     .home-buttons {
       display: flex;
-      justify-content: center;
-      gap: 15px;
       flex-wrap: wrap;
-      margin-bottom: 60px;
+      gap: 10px;
     }
 
-    .home-btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #0077cc;
-      color: white;
-      text-decoration: none;
-      padding: 14px 28px;
-      border-radius: 30px;
-      font-weight: bold;
-      font-size: 1rem;
-      transition: background 0.3s, transform 0.2s;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
-
-    .home-btn-primary:hover {
-      background: #005fa3;
-      transform: scale(1.05);
-    }
-
+    .home-btn-primary,
     .home-btn-secondary {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(255,255,255,0.15);
-      color: white;
+      border-radius: 999px;
+      padding: 10px 20px;
+      font-size: 0.95rem;
+      font-weight: 600;
       text-decoration: none;
-      padding: 14px 28px;
-      border-radius: 30px;
-      font-weight: bold;
-      font-size: 1rem;
-      border: 2px solid rgba(255,255,255,0.4);
-      transition: background 0.3s, transform 0.2s;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .home-btn-primary {
+      background: #4fc3f7;
+      color: #00303f;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    }
+
+    .home-btn-primary:hover {
+      background: #33b5e5;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.5);
+    }
+
+    .home-btn-secondary {
+      background: rgba(255,255,255,0.04);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.2);
     }
 
     .home-btn-secondary:hover {
-      background: rgba(255,255,255,0.28);
-      transform: scale(1.05);
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-1px);
     }
 
-    /* CARDS DE DESTAQUE */
+    /* BLOCO DESTAQUE (CARD À DIREITA) */
+
+    .hero-card {
+      background: radial-gradient(circle at top left, rgba(79,195,247,0.25), transparent 55%),
+                  rgba(0,0,0,0.35);
+      border-radius: 18px;
+      padding: 20px 18px;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .hero-card-sub {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 14px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+      font-size: 0.75rem;
+    }
+
+    .hero-tag {
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(0,0,0,0.45);
+      color: rgba(255,255,255,0.82);
+    }
+
+    .hero-card-note {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.65);
+      margin-top: 6px;
+    }
+
+    /* SEÇÃO DESTAQUES MÍNIMA */
+
     .highlights {
-      max-width: 900px;
-      margin: 0 auto 60px auto;
-      padding: 0 20px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 18px;
+      margin-top: 10px;
     }
 
     .highlight-card {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(0,0,0,0.35);
       border-radius: 14px;
-      padding: 30px 24px;
-      text-align: center;
-      color: white;
-      transition: background 0.3s, transform 0.2s;
+      padding: 16px 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      text-align: left;
+      transition: background 0.2s ease, transform 0.15s ease;
     }
 
     .highlight-card:hover {
-      background: rgba(255,255,255,0.15);
-      transform: translateY(-4px);
+      background: rgba(0,0,0,0.55);
+      transform: translateY(-2px);
     }
 
-    .highlight-card i {
-      font-size: 2.2rem;
-      margin-bottom: 15px;
+    .highlight-icon {
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: rgba(79,195,247,0.16);
       color: #4fc3f7;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
     }
 
     .highlight-card h3 {
-      font-size: 1.1rem;
-      margin-bottom: 10px;
-      color: white;
+      font-size: 0.9rem;
+      margin: 0 0 6px;
     }
 
     .highlight-card p {
-      font-size: 0.95rem;
-      color: rgba(255,255,255,0.75);
-      line-height: 1.6;
+      font-size: 0.8rem;
+      margin: 0;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.5;
     }
 
-    /* SEÇÃO DE CONTATO */
-    .home-contact {
-      background: rgba(255,255,255,0.06);
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding: 50px 20px;
-      text-align: center;
-      color: white;
+    /* SEÇÃO "VER MAIS" (CATÁLOGOS) */
+
+    .catalog-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 14px;
+      margin-top: 28px;
     }
 
-    .home-contact h2 {
-      font-size: 1.6rem;
-      margin-bottom: 10px;
-      color: white;
-    }
-
-    .home-contact p {
-      color: rgba(255,255,255,0.75);
-      margin-bottom: 30px;
-      font-size: 1rem;
-    }
-
-    .contact-links {
+    .catalog-card {
+      background: rgba(0,0,0,0.35);
+      border-radius: 14px;
+      padding: 14px 14px 16px;
+      border: 1px solid rgba(255,255,255,0.12);
       display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 6px;
     }
 
-    .contact-link {
+    .catalog-card-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+    }
+
+    .catalog-card-text {
+      font-size: 0.83rem;
+      color: rgba(255,255,255,0.72);
+      flex: 1;
+    }
+
+    .catalog-card a {
+      align-self: flex-start;
+      margin-top: 6px;
+      font-size: 0.82rem;
+      color: #4fc3f7;
+      text-decoration: none;
       display: inline-flex;
       align-items: center;
+      gap: 4px;
+    }
+
+    .catalog-card a:hover {
+      text-decoration: underline;
+    }
+
+    /* RODAPÉ SIMPLES */
+
+    .home-footer {
+      margin-top: 34px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
       gap: 8px;
-      padding: 12px 22px;
-      border-radius: 30px;
+    }
+
+    .home-footer a {
+      color: rgba(255,255,255,0.75);
       text-decoration: none;
-      font-weight: bold;
-      font-size: 0.95rem;
-      transition: transform 0.2s, opacity 0.2s;
     }
 
-    .contact-link:hover {
-      transform: scale(1.05);
-      opacity: 0.9;
+    .home-footer a:hover {
+      text-decoration: underline;
     }
 
-    .contact-link.whatsapp {
-      background: #25d366;
-      color: white;
+    /* RESPONSIVO */
+
+    @media (max-width: 860px) {
+      .home-hero {
+        grid-template-columns: minmax(0,1fr);
+      }
+      .hero-text {
+        text-align: left;
+      }
     }
 
-    .contact-link.instagram {
-      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-      color: white;
-    }
+    @media (max-width: 640px) {
+      .highlights {
+        grid-template-columns: minmax(0,1fr);
+      }
 
-    .contact-link.email {
-      background: #0077cc;
-      color: white;
-    }
-
-    /* DIVISOR */
-    .section-divider {
-      width: 60px;
-      height: 3px;
-      background: #4fc3f7;
-      margin: 0 auto 30px auto;
-      border-radius: 3px;
-    }
-
-    @media (max-width: 600px) {
-      .home-hero h2 {
-        font-size: 1.5rem;
+      .catalog-links {
+        grid-template-columns: minmax(0,1fr);
       }
 
       .home-buttons {
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
       }
 
       .home-btn-primary,
       .home-btn-secondary {
-        width: 100%;
         justify-content: center;
-      }
-
-      .contact-links {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .contact-link {
         width: 100%;
-        max-width: 280px;
-        justify-content: center;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- CABEÇALHO -->
+  <!-- CABEÇALHO PADRÃO -->
   <div class="header">
     <img src="https://shakaw3dprint.github.io/Shakaw_3D_Print/assets/img/logo.webp"
          alt="Logo Shakaw 3D Print" class="logo">
     <h1>Shakaw 3D Print</h1>
     <div class="header-links">
-      <a href="home.html">
-        <i class="fas fa-home"></i> Início
-      </a>
-      <a href="catalogo_diorama.html">
-        <i class="fas fa-box-open"></i> Catálogo
-      </a>
-      <a href="outros_projetos.html">
-        <i class="fas fa-images"></i> Outros Projetos
-      </a>
+      <a href="home.html"><i class="fas fa-home"></i> Início</a>
+      <a href="catalogo_diorama.html"><i class="fas fa-box-open"></i> Catálogo</a>
+      <a href="outros_projetos.html"><i class="fas fa-images"></i> Outros Projetos</a>
       <a href="https://www.instagram.com/shakaw3dprint" target="_blank">
         <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
              alt="Instagram" class="instagram-icon">
@@ -242,61 +329,125 @@
     </div>
   </div>
 
-  <!-- HERO -->
-  <section class="home-hero">
-    <h2>Impressão 3D sob medida para seus projetos</h2>
-    <div class="section-divider"></div>
-    <p>
-      Na Shakaw 3D Print você encontra peças personalizadas com alta qualidade
-      de acabamento e atenção aos detalhes em cada impressão.<br>
-      Trabalhamos com dioramas, colecionáveis, protótipos, peças funcionais e muito mais.
-    </p>
-    <div class="home-buttons">
-      <a href="catalogo_diorama.html" class="home-btn-primary">
-        <i class="fas fa-box-open"></i> Ver Catálogo
-      </a>
-      <a href="outros_projetos.html" class="home-btn-secondary">
-        <i class="fas fa-images"></i> Outros Projetos
-      </a>
-    </div>
-  </section>
+  <main class="home-wrapper">
 
-  <!-- DESTAQUES -->
-  <div class="highlights">
-    <div class="highlight-card">
-      <i class="fas fa-medal"></i>
-      <h3>Qualidade</h3>
-      <p>Configurações otimizadas e revisão manual de cada impressão para garantir o melhor acabamento.</p>
-    </div>
-    <div class="highlight-card">
-      <i class="fas fa-paint-brush"></i>
-      <h3>Personalização</h3>
-      <p>Adaptamos modelos, dimensões e cores para o seu projeto. Do seu jeito, do início ao fim.</p>
-    </div>
-    <div class="highlight-card">
-      <i class="fas fa-comments"></i>
-      <h3>Atendimento direto</h3>
-      <p>Fale com a gente pelo WhatsApp ou Instagram para tirar dúvidas e receber seu orçamento.</p>
-    </div>
-  </div>
+    <!-- HERO PRINCIPAL -->
+    <section class="home-hero">
 
-  <!-- CONTATO -->
-  <section class="home-contact">
-    <h2>Entre em contato</h2>
-    <div class="section-divider"></div>
-    <p>Quer um orçamento ou tem alguma dúvida? Fale com a gente!</p>
-    <div class="contact-links">
-      <a href="https://wa.me/5511954846647" target="_blank" class="contact-link whatsapp">
-        <i class="fab fa-whatsapp"></i> WhatsApp
-      </a>
-      <a href="https://www.instagram.com/shakaw3dprint" target="_blank" class="contact-link instagram">
-        <i class="fab fa-instagram"></i> Instagram
-      </a>
-      <a href="mailto:shakaw3dprint@hotmail.com" class="contact-link email">
-        <i class="fas fa-envelope"></i> E-mail
-      </a>
-    </div>
-  </section>
+      <div class="hero-text">
+        <div class="hero-pill">
+          <i class="fas fa-cube"></i>
+          Impressão 3D para colecionadores e projetos especiais
+        </div>
+
+        <h2 class="hero-title">
+          Peças em 3D para dar vida aos seus cenários e coleções
+        </h2>
+
+        <p class="hero-subtitle">
+          Criação de <strong>dioramas automotivos</strong>, miniaturas e objetos
+          funcionais impressos em 3D, com acabamento manual e atenção aos detalhes.
+          Ideal para quem quer montar cenas marcantes na estante ou na bancada.
+        </p>
+
+        <div class="home-buttons">
+          <a href="catalogo_diorama.html" class="home-btn-primary">
+            <i class="fas fa-warehouse"></i>
+            Ver catálogo de dioramas
+          </a>
+          <a href="outros_projetos.html" class="home-btn-secondary">
+            <i class="fas fa-shapes"></i>
+            Ver outros projetos
+          </a>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <p class="hero-card-title">O que você encontra por aqui</p>
+        <p class="hero-card-sub">
+          Impressão 3D pensada para colecionadores e uso no dia a dia.
+        </p>
+
+        <div class="hero-tags">
+          <span class="hero-tag">Dioramas e cenários de garagem</span>
+          <span class="hero-tag">Peças para miniaturas automotivas</span>
+          <span class="hero-tag">Action figures e personagens</span>
+          <span class="hero-tag">Suportes e organizadores</span>
+        </div>
+
+        <p class="hero-card-note">
+          Fale com a gente para adaptar tamanho, cores e detalhes para o seu projeto.
+        </p>
+      </aside>
+    </section>
+
+    <!-- DESTAQUES (3 pontos fortes) -->
+    <section class="highlights">
+      <article class="highlight-card">
+        <div class="highlight-icon"><i class="fas fa-medal"></i></div>
+        <h3>Detalhe e acabamento</h3>
+        <p>
+          Ajuste fino de impressão e pintura manual em cada peça, para ficar bem na
+          foto e de perto.
+        </p>
+      </article>
+
+      <article class="highlight-card">
+        <div class="highlight-icon"><i class="fas fa-sliders-h"></i></div>
+        <h3>Personalização</h3>
+        <p>
+          Possibilidade de adaptar modelos, escalas e combinações de cores para combinar
+          com a sua coleção.
+        </p>
+      </article>
+
+      <article class="highlight-card">
+        <div class="highlight-icon"><i class="fas fa-comments"></i></div>
+        <h3>Contato direto</h3>
+        <p>
+          Atendimento via WhatsApp e Instagram para tirar dúvidas e alinhar expectativas
+          antes da impressão.
+        </p>
+      </article>
+    </section>
+
+    <!-- LINKS RÁPIDOS PARA CATÁLOGOS -->
+    <section class="catalog-links">
+      <div class="catalog-card">
+        <div class="catalog-card-title">Catálogo de Dioramas</div>
+        <p class="catalog-card-text">
+          Modelos pensados para cenários de oficina e garagem, em escalas para
+          miniaturas automotivas.
+        </p>
+        <a href="catalogo_diorama.html">
+          Abrir catálogo <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="catalog-card">
+        <div class="catalog-card-title">Outros Projetos</div>
+        <p class="catalog-card-text">
+          Action figures, suportes, organizadores e outras ideias criadas a partir de
+          impressões 3D.
+        </p>
+        <a href="outros_projetos.html">
+          Ver projetos <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- RODAPÉ SIMPLES -->
+    <footer class="home-footer">
+      <span>Shakaw 3D Print • Impressão 3D personalizada</span>
+      <span>
+        Contato:
+        <a href="mailto:shakaw3dprint@hotmail.com">shakaw3dprint@hotmail.com</a>
+        ·
+        <a href="https://wa.me/5511954846647" target="_blank">WhatsApp</a>
+      </span>
+    </footer>
+
+  </main>
 
 </body>
 </html>
