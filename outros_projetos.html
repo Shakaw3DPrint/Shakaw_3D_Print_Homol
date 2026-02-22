@@ -3,302 +3,128 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Galeria de Projetos - Shakaw 3D Print</title>
+  <title>Outros Projetos - Shakaw 3D Print</title>
   <link rel="stylesheet" href="css/index_styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    .gallery-container {
-      padding: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .gallery-title {
-      text-align: center;
-      margin: 30px 0;
-      font-size: 2rem;
-      color: white;
-      position: relative;
-    }
-
-    .gallery-title::after {
-      content: '';
-      display: block;
-      width: 80px;
-      height: 3px;
-      background: #4fc3f7;
-      margin: 15px auto;
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
-      margin-bottom: 40px;
-    }
-
-    .gallery-item {
-      position: relative;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: pointer;
-      background: rgba(255,255,255,0.05);
-    }
-
-    .gallery-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .instagram-post {
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 8px;
-      overflow: hidden;
-      height: 250px;
-    }
-
-    .snapwidget-container {
-      margin: 40px auto;
-      text-align: center;
-    }
-
-    .snapwidget-widget {
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-
-    /* Seção de Contato */
-    .contact-section {
-      background: rgba(255,255,255,0.05);
-      padding: 60px 20px;
-      text-align: center;
-      margin-top: 40px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .contact-info {
+    /* Filtros de categoria */
+    .category-filters {
       display: flex;
       justify-content: center;
-      gap: 30px;
+      gap: 10px;
+      margin: 30px 0 10px 0;
       flex-wrap: wrap;
-      margin-top: 30px;
+      padding: 0 20px;
     }
 
-    .contact-card {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-      min-width: 250px;
-      transition: transform 0.3s;
-      border: 1px solid rgba(255,255,255,0.15);
+    .filter-btn {
+      background: rgba(255,255,255,0.1);
       color: white;
+      border: 2px solid rgba(255,255,255,0.2);
+      padding: 9px 22px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background 0.3s, border-color 0.3s, transform 0.2s;
     }
 
-    .contact-card:hover {
-      transform: translateY(-5px);
+    .filter-btn:hover {
+      background: rgba(255,255,255,0.2);
+      transform: scale(1.04);
     }
 
-    .contact-card i {
-      font-size: 2.2rem;
-      color: #4fc3f7;
-      margin-bottom: 15px;
+    .filter-btn.active {
+      background: #4fc3f7;
+      border-color: #4fc3f7;
+      color: #00303f;
     }
 
-    .contact-card h3 {
-      margin: 10px 0;
+    /* Título da seção */
+    .section-heading {
+      text-align: center;
       color: white;
+      font-size: 1.5rem;
+      margin: 30px 0 5px 0;
+      padding: 0 20px;
     }
 
-    .contact-card p {
-      margin-bottom: 15px;
-      color: rgba(255,255,255,0.75);
-    }
-
-    .contact-btn {
+    .section-heading span {
       display: inline-block;
+      border-bottom: 3px solid #4fc3f7;
+      padding-bottom: 6px;
+    }
+
+    /* Contador de resultados */
+    .results-count {
+      text-align: center;
+      color: rgba(255,255,255,0.55);
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    /* Mensagem sem produtos */
+    .no-products {
+      text-align: center;
+      color: rgba(255,255,255,0.6);
+      padding: 60px 20px;
+      font-size: 1.1rem;
+    }
+
+    /* Botão adicionar interesse (igual ao catálogo) */
+    .add-interest-btn {
+      margin-top: 15px;
+      padding: 10px 20px;
       background: #0077cc;
       color: white;
-      padding: 10px 20px;
-      border-radius: 6px;
-      text-decoration: none;
-      transition: background 0.3s;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background 0.3s, transform 0.2s;
+      width: 100%;
     }
 
-    .contact-btn:hover {
+    .add-interest-btn:hover {
       background: #005fa3;
+      transform: scale(1.02);
     }
 
-    /* Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.9);
-    }
-
-    .modal-content {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      width: 100%;
-    }
-
-    #modalImg {
-      max-width: 90%;
-      max-height: 90%;
-      object-fit: contain;
-      transition: transform 0.3s;
-    }
-
-    .close {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      color: white;
-      font-size: 35px;
+    /* Badge de categoria no card */
+    .category-badge {
+      display: inline-block;
+      font-size: 11px;
       font-weight: bold;
-      cursor: pointer;
-      z-index: 10;
+      padding: 3px 10px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    .modal-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      color: white;
-      font-size: 40px;
-      font-weight: bold;
-      cursor: pointer;
-      background: rgba(0,0,0,0.5);
-      border: none;
-      padding: 15px;
-      border-radius: 50%;
-      z-index: 10;
-      transition: background 0.3s;
+    .badge-action-figures {
+      background: #e8f4ff;
+      color: #0057b7;
     }
 
-    .modal-nav:hover { background: rgba(0,0,0,0.8); }
-    .modal-prev { left: 30px; }
-    .modal-next { right: 30px; }
-
-    .zoom-controls {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 10px;
-      z-index: 10;
+    .badge-produtos-funcionais {
+      background: #e8fff1;
+      color: #1b7a3e;
     }
 
-    .zoom-controls button {
-      background: rgba(0,0,0,0.7);
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 4px;
-      cursor: pointer;
+    /* Animação de entrada dos cards */
+    .product {
+      animation: fadeInUp 0.35s ease both;
     }
 
-    .zoom-controls button:hover { background: rgba(0,0,0,0.9); }
-
-    /* Banner em construção */
-    .construction-banner {
-      background-color: #fff8e1;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      margin: 20px auto;
-      max-width: 1200px;
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      animation: pulse 2s infinite ease-in-out;
-      border: 2px dashed #ffc107;
-    }
-
-    .construction-banner img {
-      width: 120px;
-      height: 120px;
-      object-fit: contain;
-    }
-
-    .construction-message {
-      flex: 1;
-      min-width: 280px;
-      text-align: center;
-    }
-
-    .construction-message h2 {
-      color: #ff6f00;
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-      animation: bounce 1s infinite alternate;
-    }
-
-    .construction-message p {
-      color: #5d4037;
-      font-size: 1.1rem;
-      margin: 0;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.02); }
-      100% { transform: scale(1); }
-    }
-
-    @keyframes bounce {
-      from { transform: translateY(0); }
-      to { transform: translateY(-5px); }
-    }
-
-    @media (max-width: 768px) {
-      .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
-      .snapwidget-widget { width: 100% !important; height: 400px !important; }
-      .modal-nav { font-size: 30px; padding: 10px; }
-    }
-
-    @media (max-width: 600px) {
-      .construction-banner { flex-direction: column; text-align: center; }
-    }
-
-    @media (max-width: 480px) {
-      .gallery-grid { grid-template-columns: 1fr; }
-      .gallery-title { font-size: 1.5rem; }
-      .contact-info { flex-direction: column; gap: 20px; }
-      #modalImg { max-width: 95%; max-height: 80%; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-
-  <!-- AVISO DE PÁGINA EM CONSTRUÇÃO -->
-  <div class="construction-banner">
-    <img src="https://media1.giphy.com/media/Mah9dFWo1WZX0WM62Q/giphy.gif"
-         alt="Pinguim construtor">
-    <div class="construction-message">
-      <h2>Ops! Estamos em obras!</h2>
-      <p>Esta página está em construção. Em breve mais projetos incríveis!</p>
-    </div>
-  </div>
 
   <!-- CABEÇALHO -->
   <div class="header">
@@ -306,15 +132,9 @@
          alt="Logo Shakaw 3D Print" class="logo">
     <h1>Shakaw 3D Print</h1>
     <div class="header-links">
-      <a href="home.html">
-        <i class="fas fa-home"></i> Início
-      </a>
-      <a href="catalogo_diorama.html">
-        <i class="fas fa-box-open"></i> Catálogo
-      </a>
-      <a href="outros_projetos.html">
-        <i class="fas fa-images"></i> Outros Projetos
-      </a>
+      <a href="home.html"><i class="fas fa-home"></i> Início</a>
+      <a href="catalogo_diorama.html"><i class="fas fa-box-open"></i> Catálogo</a>
+      <a href="outros_projetos.html"><i class="fas fa-images"></i> Outros Projetos</a>
       <a href="https://www.instagram.com/shakaw3dprint" target="_blank">
         <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
              alt="Instagram" class="instagram-icon">
@@ -323,83 +143,29 @@
     </div>
   </div>
 
-  <!-- CARROSSEL SNAPWIDGET -->
-  <div class="snapwidget-container">
-    <iframe
-      src="https://snapwidget.com/embed/1096859"
-      class="snapwidget-widget"
-      allowtransparency="true"
-      frameborder="0"
-      scrolling="no"
-      style="border:none; overflow:hidden; width:602px; height:602px"
-      title="Posts from Instagram">
-    </iframe>
+  <!-- FILTROS -->
+  <div class="category-filters">
+    <button class="filter-btn active" data-category="all">
+      <i class="fas fa-th"></i> Todos
+    </button>
+    <button class="filter-btn" data-category="action-figures">
+      <i class="fas fa-user-astronaut"></i> Action Figures
+    </button>
+    <button class="filter-btn" data-category="produtos-funcionais">
+      <i class="fas fa-toolbox"></i> Produtos Funcionais
+    </button>
   </div>
 
-  <!-- GALERIA DE PROJETOS -->
-  <div class="gallery-container">
-    <h2 class="gallery-title">Galeria de Projetos</h2>
-    <div class="gallery-grid">
+  <!-- CONTADOR -->
+  <p class="results-count" id="resultsCount"></p>
 
-      <div class="gallery-item instagram-post">
-        <blockquote
-          class="instagram-media"
-          data-instgrm-captioned
-          data-instgrm-permalink="https://www.instagram.com/reel/C6NM74nLqAn/?utm_source=ig_embed&utm_campaign=loading"
-          data-instgrm-version="14">
-        </blockquote>
-      </div>
+  <!-- INDICADOR DE CARREGAMENTO -->
+  <div class="loader" id="loader"></div>
 
-      <div class="gallery-item">
-        <img src="assets/img/projeto1.webp" alt="Projeto 1" loading="lazy">
-      </div>
-      <div class="gallery-item">
-        <img src="assets/img/projeto2.webp" alt="Projeto 2" loading="lazy">
-      </div>
-      <div class="gallery-item">
-        <img src="assets/img/projeto3.webp" alt="Projeto 3" loading="lazy">
-      </div>
-      <div class="gallery-item">
-        <img src="assets/img/projeto4.webp" alt="Projeto 4" loading="lazy">
-      </div>
+  <!-- CATÁLOGO -->
+  <div class="catalog-page" id="catalog"></div>
 
-    </div>
-  </div>
-
-  <!-- SEÇÃO DE CONTATO -->
-  <section class="contact-section">
-    <h2 class="gallery-title">Entre em Contato</h2>
-    <div class="contact-info">
-
-      <div class="contact-card">
-        <i class="fas fa-envelope"></i>
-        <h3>Email</h3>
-        <p>shakaw3dprint@hotmail.com</p>
-        <a href="mailto:shakaw3dprint@hotmail.com" class="contact-btn">Enviar Email</a>
-      </div>
-
-      <div class="contact-card">
-        <i class="fab fa-whatsapp"></i>
-        <h3>WhatsApp</h3>
-        <p>(11) 95484-6647</p>
-        <a href="https://wa.me/5511954846647" target="_blank" class="contact-btn">
-          Enviar Mensagem
-        </a>
-      </div>
-
-      <div class="contact-card">
-        <i class="fab fa-instagram"></i>
-        <h3>Instagram</h3>
-        <p>@shakaw3dprint</p>
-        <a href="https://www.instagram.com/shakaw3dprint" target="_blank" class="contact-btn">
-          Seguir
-        </a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- MODAL DE IMAGENS -->
+  <!-- MODAL PARA IMAGENS AMPLIADAS -->
   <div id="imgModal" class="modal">
     <span class="close" onclick="closeModal()">&times;</span>
     <button class="modal-nav modal-prev" onclick="navigateModal(-1)">❮</button>
@@ -408,84 +174,69 @@
     </div>
     <button class="modal-nav modal-next" onclick="navigateModal(1)">❯</button>
     <div class="zoom-controls">
-      <button onclick="zoomImage(0.2)">+</button>
-      <button onclick="zoomImage(-0.2)">-</button>
-      <button onclick="resetZoom()">Reset</button>
+      <button onclick="zoomImage(0.15)">+</button>
+      <button onclick="zoomImage(-0.15)">-</button>
+      <button onclick="resetZoomAndPan()">Reset</button>
+    </div>
+  </div>
+
+  <!-- MODAL DE CONTATO -->
+  <div id="contactModal" class="contact-modal">
+    <div class="contact-modal-content">
+      <span class="close-contact"
+            onclick="document.getElementById('contactModal').style.display='none'">&times;</span>
+      <h2>Enviar Interesses</h2>
+      <form id="contactForm"
+            action="https://script.google.com/macros/s/AKfycbypHVPUQFxuGJNoawgsXZFZqGwFIMNcWhcJDb0Yb2uCwuRz8QjLoR29PyMmI661wwaUyg/exec"
+            method="POST">
+        <input type="hidden" name="_next"
+               value="https://shakaw3dprint.github.io/Shakaw_3D_Print/obrigado.html">
+        <input type="hidden" id="itemsData" name="items_data">
+
+        <div class="form-section">
+          <label for="name">Nome:</label>
+          <input type="text" id="name" name="name" required>
+
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="whatsapp">WhatsApp:</label>
+          <input type="tel" id="whatsapp" name="whatsapp"
+                 placeholder="(00) 00000-0000" required>
+        </div>
+
+        <div class="form-section">
+          <h3>Resumo dos Itens Selecionados</h3>
+          <div id="selectedItemsSummary" class="items-summary"></div>
+        </div>
+
+        <div class="form-section">
+          <label for="customMessage">Mensagem Adicional:</label>
+          <textarea id="customMessage" name="custom_message" rows="4"
+                    placeholder="Digite aqui qualquer informação adicional..."></textarea>
+        </div>
+
+        <button type="submit">Enviar Interesses</button>
+      </form>
     </div>
   </div>
 
   <!-- BOTÃO VOLTAR AO TOPO -->
-  <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-          id="backToTopBtn" title="Voltar ao topo">⬆️</button>
+  <button id="backToTopBtn" title="Voltar ao topo">⬆️ Topo</button>
 
-  <!-- SCRIPTS -->
-  <script async src="//www.instagram.com/embed.js"></script>
+  <!-- PAINEL DE INTERESSES -->
+  <div id="interestPanel">
+    <button id="closeInterestPanelBtn" class="close-interest-panel-btn">&times;</button>
+    <h3>Lista de interesses</h3>
+    <ul id="interestList"></ul>
+    <div id="interestTotal"></div>
+    <button onclick="showContactModal()">Enviar Interesses</button>
+  </div>
 
-  <script>
-    let galleryImages = [];
-    let currentImageIndex = 0;
+  <!-- BOTÃO ABRIR PAINEL -->
+  <button class="interest-btn">💚 Ver interesses</button>
 
-    document.addEventListener('DOMContentLoaded', function() {
-      galleryImages = Array.from(document.querySelectorAll('.gallery-item img'));
-      galleryImages.forEach((img, index) => {
-        img.addEventListener('click', () => openModal(index));
-      });
-    });
-
-    function openModal(index) {
-      const modal = document.getElementById('imgModal');
-      const modalImg = document.getElementById('modalImg');
-      currentImageIndex = index;
-      modalImg.src = galleryImages[currentImageIndex].src;
-      modal.style.display = 'block';
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-      document.getElementById('imgModal').style.display = 'none';
-      document.body.style.overflow = 'auto';
-    }
-
-    function navigateModal(direction) {
-      currentImageIndex += direction;
-      if (currentImageIndex >= galleryImages.length) currentImageIndex = 0;
-      else if (currentImageIndex < 0) currentImageIndex = galleryImages.length - 1;
-      document.getElementById('modalImg').src = galleryImages[currentImageIndex].src;
-    }
-
-    function zoomImage(scale) {
-      const img = document.getElementById('modalImg');
-      const currentScale = parseFloat(
-        (img.style.transform || 'scale(1)').replace('scale(', '').replace(')', '')
-      ) || 1;
-      img.style.transform = `scale(${currentScale + scale})`;
-    }
-
-    function resetZoom() {
-      document.getElementById('modalImg').style.transform = 'scale(1)';
-    }
-
-    window.addEventListener('click', function(event) {
-      const modal = document.getElementById('imgModal');
-      if (event.target === modal) closeModal();
-    });
-
-    document.addEventListener('keydown', function(event) {
-      const modal = document.getElementById('imgModal');
-      if (modal.style.display === 'block') {
-        if (event.key === 'Escape') closeModal();
-        else if (event.key === 'ArrowLeft') navigateModal(-1);
-        else if (event.key === 'ArrowRight') navigateModal(1);
-      }
-    });
-
-    // Botão voltar ao topo
-    window.onscroll = function() {
-      const btn = document.getElementById('backToTopBtn');
-      if (btn) btn.style.display =
-        (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100)
-          ? 'block' : 'none';
-    };
-  </script>
+  <!-- SCRIPT ESPECÍFICO DESTA PÁGINA -->
+  <script src="js/outros_script.js"></script>
 </body>
 </html>
