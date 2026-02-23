@@ -14,7 +14,7 @@
   {
     "id": "af-01",
     "name": "Funko Pop Taylor Swift",
-    "description": "Produto artesanal produzido em resina e pintado a mÃÂ£o. Altura aproximada de 14cm",
+    "description": "Produto artesanal produzido em resina e pintado a mÃÂÃÂ£o. Altura aproximada de 14cm",
     "price": "100,00",
     "mainImage": "assets/img/outros/funko_pop_taylor_swift.webp",
     "thumbnails": [
@@ -25,8 +25,8 @@
   },
   {
     "id": "af-01",
-    "name": "Legolas - Senhor dos AnÃ©is",
-    "description": "Produto artesanal produzido em resina e pintado a mÃ£o. Altura aproximada de 15cm",
+    "name": "Legolas - Senhor dos AnÃÂ©is",
+    "description": "Produto artesanal produzido em resina e pintado a mÃÂ£o. Altura aproximada de 15cm",
     "price": "150,00",
     "mainImage": "assets/img/outros/legolas_senhor_dos_aneis.webp",
     "thumbnails": [
@@ -41,8 +41,8 @@
   },
   {
     "id": "af-01",
-    "name": "Dragão Branco de Olhos Azuis do mundo de Toon - Yugi-Oh",
-    "description": "Produto artesanal produzido em resina e pintado a mão. Altura aproximada de 24cm",
+    "name": "DragÃ£o Branco de Olhos Azuis do mundo de Toon - Yugi-Oh",
+    "description": "Produto artesanal produzido em resina e pintado a mÃ£o. Altura aproximada de 24cm",
     "price": "250,00",
     "mainImage": "assets/img/outros/dragao_branco_de_olhos_azuis_do_mundo_de_toon_yugi_oh.webp",
     "thumbnails": [
@@ -54,6 +54,21 @@
       "assets/img/outros/dragao_branco_de_olhos_azuis_do_mundo_de_toon_yugi_oh_6.webp",
       "assets/img/outros/dragao_branco_de_olhos_azuis_do_mundo_de_toon_yugi_oh_7.webp",
       "assets/img/outros/dragao_branco_de_olhos_azuis_do_mundo_de_toon_yugi_oh_8.webp"
+    ],
+    "category": "action-figures"
+  },
+  {
+    "id": "af-02",
+    "name": "Dragão Articulado",
+    "description": "Produto artesanal produzido em resina ou filamento PLA.",
+    "price": "",
+    "mainImage": "assets/img/outros/dragao_articulado.webp",
+    "thumbnails": [
+      "assets/img/outros/dragao_articulado_1.webp",
+      "assets/img/outros/dragao_articulado_2.webp",
+      "assets/img/outros/dragao_articulado_3.webp",
+      "assets/img/outros/dragao_articulado_4.webp",
+      "assets/img/outros/dragao_articulado_5.webp"
     ],
     "category": "action-figures"
   }
