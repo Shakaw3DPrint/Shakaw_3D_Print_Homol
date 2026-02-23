@@ -51,7 +51,7 @@
     .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
     .btn-primary { background: #0077cc; color: white; }
     .btn-success { background: #28a745; color: white; }
-    .btn-warning { background: #f39c12; color: white; }
+    .btn-danger  { background: #dc3545; color: white; }
     .btn-secondary { background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,255,255,0.2); }
     .btn-row { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
     .product-list-item { display: flex; align-items: center; gap: 14px; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; margin-bottom: 8px; transition: background 0.2s; }
@@ -82,9 +82,9 @@
     .calc-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .calc-result-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: rgba(255,255,255,0.05); border-radius: 6px; margin-bottom: 8px; }
     .calc-result-row.total { background: rgba(79,195,247,0.1); border: 1px solid rgba(79,195,247,0.25); }
-    .calc-result-row strong { font-size: 1rem; }
     .calc-profit-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-radius: 6px; margin-bottom: 8px; background: rgba(255,255,255,0.05); }
     .calc-notify { display: none; margin-top: 12px; padding: 12px 16px; border-radius: 8px; font-weight: bold; text-align: center; }
+    .sync-status { font-size: 12px; color: rgba(255,255,255,0.5); margin-left: 10px; }
     @media (max-width: 600px) {
       .admin-header { padding: 15px; }
       #adminContent { padding: 20px 12px; }
@@ -103,7 +103,6 @@
   <a href="home.html"><i class="fas fa-arrow-left"></i> Voltar ao site</a>
 </div>
 
-<!-- LOGIN -->
 <div id="loginScreen">
   <h2><i class="fas fa-lock"></i> Acesso Restrito</h2>
   <p style="color:rgba(255,255,255,0.55);font-size:13px;margin-bottom:20px">Digite a senha para acessar o painel.</p>
@@ -114,7 +113,6 @@
   <p id="loginError">Senha incorreta.</p>
 </div>
 
-<!-- PAINEL -->
 <div id="adminContent">
   <div class="tabs">
     <button class="tab-btn active" data-tab="tab-add"><i class="fas fa-plus"></i> Adicionar Produto</button>
@@ -176,16 +174,32 @@
   <!-- TAB: GERENCIAR -->
   <div class="tab-content" id="tab-manage">
     <div class="admin-card">
+      <h2>
+        <i class="fas fa-sync-alt"></i> Sincronização
+        <span class="sync-status" id="syncStatus">Clique em sincronizar para carregar os produtos do site.</span>
+      </h2>
+      <div class="info-box">
+        <i class="fas fa-info-circle"></i>
+        Clique em <strong>Sincronizar com GitHub</strong> para carregar os produtos reais do site.
+        Após remover, clique em <strong>Salvar Alterações no GitHub</strong> para publicar.
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="syncFromGitHub()"><i class="fas fa-cloud-download-alt"></i> Sincronizar com GitHub</button>
+        <button class="btn btn-success" id="saveChangesBtn" onclick="saveAllToGitHub()" disabled><i class="fas fa-cloud-upload-alt"></i> Salvar Alterações no GitHub</button>
+      </div>
+    </div>
+
+    <div class="admin-card">
       <h2><i class="fas fa-warehouse"></i> Dioramas</h2>
-      <div id="listDiorama"><p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhum produto.</p></div>
+      <div id="listDiorama"><p style="color:rgba(255,255,255,0.4);font-size:13px">Sincronize para ver os produtos.</p></div>
     </div>
     <div class="admin-card">
       <h2><i class="fas fa-user-astronaut"></i> Action Figures</h2>
-      <div id="listActionFigures"><p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhum produto.</p></div>
+      <div id="listActionFigures"><p style="color:rgba(255,255,255,0.4);font-size:13px">Sincronize para ver os produtos.</p></div>
     </div>
     <div class="admin-card">
       <h2><i class="fas fa-toolbox"></i> Produtos Funcionais</h2>
-      <div id="listFuncionais"><p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhum produto.</p></div>
+      <div id="listFuncionais"><p style="color:rgba(255,255,255,0.4);font-size:13px">Sincronize para ver os produtos.</p></div>
     </div>
   </div>
 
@@ -236,169 +250,72 @@
 
   <!-- TAB: CALCULADORA -->
   <div class="tab-content" id="tab-calc">
-
     <div class="admin-card">
       <h2><i class="fas fa-calculator"></i> Calculadora de Impressão 3D</h2>
-      <div class="info-box"><i class="fas fa-info-circle"></i> Calcule custos e preços sugeridos por complexidade de pintura e acabamento. Os resultados atualizam automaticamente.</div>
-
+      <div class="info-box"><i class="fas fa-info-circle"></i> Calcule custos e preços sugeridos. Os resultados atualizam automaticamente.</div>
       <div class="calc-grid-2">
-        <div>
-          <label>Nome do Projeto</label>
-          <input type="text" id="calc_projectName" placeholder="Ex: Suporte para smartphone">
-        </div>
-        <div>
-          <label>Nome do Cliente</label>
-          <input type="text" id="calc_clientName" placeholder="Ex: João Silva">
-        </div>
+        <div><label>Nome do Projeto</label><input type="text" id="calc_projectName" placeholder="Ex: Suporte para smartphone"></div>
+        <div><label>Nome do Cliente</label><input type="text" id="calc_clientName" placeholder="Ex: João Silva"></div>
       </div>
-
       <hr class="divider">
       <h2 style="font-size:1rem;color:#4fc3f7;margin-bottom:4px"><i class="fas fa-print"></i> Dados da Impressão</h2>
-
       <div class="calc-grid-2">
-        <div>
-          <label>Tempo — Horas</label>
-          <input type="number" id="calc_hours" min="0" value="1" oninput="calcRun()">
-        </div>
-        <div>
-          <label>Tempo — Minutos</label>
-          <input type="number" id="calc_minutes" min="0" max="59" value="0" oninput="calcRun()">
-        </div>
-        <div>
-          <label>Peso do Filamento / Resina (g)</label>
-          <input type="number" id="calc_weight" min="0" step="0.01" value="0" oninput="calcRun()">
-        </div>
-        <div>
-          <label>Preço do Filamento / Resina (R$/kg)</label>
-          <input type="number" id="calc_filamentPrice" min="0" step="0.01" value="85" oninput="calcRun()">
-        </div>
-        <div>
-          <label>Potência da Impressora (W)</label>
-          <input type="number" id="calc_power" min="0" value="90" oninput="calcRun()">
-        </div>
-        <div>
-          <label>Tarifa de Energia (R$/kWh)</label>
-          <input type="number" id="calc_energyRate" min="0" step="0.01" value="0.73" oninput="calcRun()">
-        </div>
-        <div>
-          <label>Custo de Manutenção (R$/h)</label>
-          <input type="number" id="calc_maintenance" min="0" step="0.01" value="0.80" oninput="calcRun()">
-        </div>
-        <div>
-          <label>Custo de Mão de Obra (R$/h)</label>
-          <input type="number" id="calc_labor" min="0" step="0.01" value="5" oninput="calcRun()">
-        </div>
+        <div><label>Tempo — Horas</label><input type="number" id="calc_hours" min="0" value="1" oninput="calcRun()"></div>
+        <div><label>Tempo — Minutos</label><input type="number" id="calc_minutes" min="0" max="59" value="0" oninput="calcRun()"></div>
+        <div><label>Peso do Filamento / Resina (g)</label><input type="number" id="calc_weight" min="0" step="0.01" value="0" oninput="calcRun()"></div>
+        <div><label>Preço do Filamento / Resina (R$/kg)</label><input type="number" id="calc_filamentPrice" min="0" step="0.01" value="85" oninput="calcRun()"></div>
+        <div><label>Potência da Impressora (W)</label><input type="number" id="calc_power" min="0" value="90" oninput="calcRun()"></div>
+        <div><label>Tarifa de Energia (R$/kWh)</label><input type="number" id="calc_energyRate" min="0" step="0.01" value="0.73" oninput="calcRun()"></div>
+        <div><label>Custo de Manutenção (R$/h)</label><input type="number" id="calc_maintenance" min="0" step="0.01" value="0.80" oninput="calcRun()"></div>
+        <div><label>Custo de Mão de Obra (R$/h)</label><input type="number" id="calc_labor" min="0" step="0.01" value="5" oninput="calcRun()"></div>
       </div>
-
       <div class="btn-row">
         <button class="btn btn-secondary" onclick="calcReset()"><i class="fas fa-undo"></i> Limpar</button>
       </div>
     </div>
-
-    <!-- RESULTADOS -->
     <div class="admin-card">
       <h2><i class="fas fa-chart-bar"></i> Resultados</h2>
-
-      <div class="calc-result-row">
-        <span>Custo de Filamento / Resina</span>
-        <strong id="calc_r_filament" style="color:#4fc3f7">R$ 0,00</strong>
-      </div>
-      <div class="calc-result-row">
-        <span>Custo de Energia</span>
-        <strong id="calc_r_energy" style="color:#4fc3f7">R$ 0,00</strong>
-      </div>
-      <div class="calc-result-row">
-        <span>Custo de Manutenção</span>
-        <strong id="calc_r_maintenance" style="color:#4fc3f7">R$ 0,00</strong>
-      </div>
-      <div class="calc-result-row">
-        <span>Custo de Mão de Obra</span>
-        <strong id="calc_r_labor" style="color:#4fc3f7">R$ 0,00</strong>
-      </div>
-      <div class="calc-result-row total">
-        <span style="font-weight:bold;font-size:1.05rem">Custo Total</span>
-        <strong id="calc_r_total" style="color:#4fc3f7;font-size:1.1rem">R$ 0,00</strong>
-      </div>
-
+      <div class="calc-result-row"><span>Custo de Filamento / Resina</span><strong id="calc_r_filament" style="color:#4fc3f7">R$ 0,00</strong></div>
+      <div class="calc-result-row"><span>Custo de Energia</span><strong id="calc_r_energy" style="color:#4fc3f7">R$ 0,00</strong></div>
+      <div class="calc-result-row"><span>Custo de Manutenção</span><strong id="calc_r_maintenance" style="color:#4fc3f7">R$ 0,00</strong></div>
+      <div class="calc-result-row"><span>Custo de Mão de Obra</span><strong id="calc_r_labor" style="color:#4fc3f7">R$ 0,00</strong></div>
+      <div class="calc-result-row total"><span style="font-weight:bold;font-size:1.05rem">Custo Total</span><strong id="calc_r_total" style="color:#4fc3f7;font-size:1.1rem">R$ 0,00</strong></div>
       <hr class="divider">
       <h2 style="font-size:1rem;color:#4fc3f7;margin-bottom:12px"><i class="fas fa-tags"></i> Preços por Complexidade de Pintura</h2>
-
-      <div class="calc-profit-row" style="border-left:4px solid #2ecc71">
-        <span>Simples — 30%</span>
-        <strong id="calc_r_30" style="color:#2ecc71">R$ 0,00</strong>
-      </div>
-      <div class="calc-profit-row" style="border-left:4px solid #3498db">
-        <span>Baixa Complexidade — 50%</span>
-        <strong id="calc_r_50" style="color:#3498db">R$ 0,00</strong>
-      </div>
-      <div class="calc-profit-row" style="border-left:4px solid #f39c12">
-        <span>Média Complexidade — 100%</span>
-        <strong id="calc_r_100" style="color:#f39c12">R$ 0,00</strong>
-      </div>
-      <div class="calc-profit-row" style="border-left:4px solid #e74c3c">
-        <span>Alta Complexidade — 150%</span>
-        <strong id="calc_r_150" style="color:#e74c3c">R$ 0,00</strong>
-      </div>
-      <div class="calc-profit-row" style="border-left:4px solid #9b59b6">
-        <span>Extrema Complexidade — 200%</span>
-        <strong id="calc_r_200" style="color:#9b59b6">R$ 0,00</strong>
-      </div>
+      <div class="calc-profit-row" style="border-left:4px solid #2ecc71"><span>Simples — 30%</span><strong id="calc_r_30" style="color:#2ecc71">R$ 0,00</strong></div>
+      <div class="calc-profit-row" style="border-left:4px solid #3498db"><span>Baixa Complexidade — 50%</span><strong id="calc_r_50" style="color:#3498db">R$ 0,00</strong></div>
+      <div class="calc-profit-row" style="border-left:4px solid #f39c12"><span>Média Complexidade — 100%</span><strong id="calc_r_100" style="color:#f39c12">R$ 0,00</strong></div>
+      <div class="calc-profit-row" style="border-left:4px solid #e74c3c"><span>Alta Complexidade — 150%</span><strong id="calc_r_150" style="color:#e74c3c">R$ 0,00</strong></div>
+      <div class="calc-profit-row" style="border-left:4px solid #9b59b6"><span>Extrema Complexidade — 200%</span><strong id="calc_r_200" style="color:#9b59b6">R$ 0,00</strong></div>
     </div>
-
-    <!-- E-MAIL -->
     <div class="admin-card">
       <h2><i class="fas fa-envelope"></i> Registrar Orçamento por E-mail</h2>
-
       <div id="calc_emailSetup" class="info-box info-box-warn">
         <i class="fas fa-key"></i> <strong>Configuração EmailJS</strong> — preencha uma vez e ficará salvo.
         <div class="calc-grid-2" style="margin-top:12px">
-          <div>
-            <label>Service ID</label>
-            <input type="text" id="calc_ejsService" placeholder="service_xxxxxxxx">
-          </div>
-          <div>
-            <label>Template ID</label>
-            <input type="text" id="calc_ejsTemplate" placeholder="template_xxxxxxxx">
-          </div>
-          <div style="grid-column:1/-1">
-            <label>Public Key</label>
-            <input type="text" id="calc_ejsPublicKey" placeholder="xxxxxxxxxxxxxxxx">
-          </div>
+          <div><label>Service ID</label><input type="text" id="calc_ejsService" placeholder="service_xxxxxxxx"></div>
+          <div><label>Template ID</label><input type="text" id="calc_ejsTemplate" placeholder="template_xxxxxxxx"></div>
+          <div style="grid-column:1/-1"><label>Public Key</label><input type="text" id="calc_ejsPublicKey" placeholder="xxxxxxxxxxxxxxxx"></div>
         </div>
         <div class="btn-row">
           <button class="btn btn-primary" onclick="calcSaveEmailConfig()"><i class="fas fa-save"></i> Salvar Configuração</button>
         </div>
       </div>
-
       <div class="calc-grid-2" style="margin-top:16px">
-        <div>
-          <label>Seu Nome</label>
-          <input type="text" id="calc_senderName" value="Shakaw 3D Print">
-        </div>
-        <div>
-          <label>Seu E-mail</label>
-          <input type="email" id="calc_senderEmail" value="shakaw3dprint@hotmail.com">
-        </div>
-        <div style="grid-column:1/-1">
-          <label>Observações (opcional)</label>
-          <textarea id="calc_emailMsg" rows="3" placeholder="Observações sobre este orçamento..."></textarea>
-        </div>
+        <div><label>Seu Nome</label><input type="text" id="calc_senderName" value="Shakaw 3D Print"></div>
+        <div><label>Seu E-mail</label><input type="email" id="calc_senderEmail" value="shakaw3dprint@hotmail.com"></div>
+        <div style="grid-column:1/-1"><label>Observações (opcional)</label><textarea id="calc_emailMsg" rows="3" placeholder="Observações sobre este orçamento..."></textarea></div>
       </div>
-
       <div class="btn-row">
         <button class="btn btn-success" id="calc_sendBtn" onclick="calcSendEmail()" disabled>
           <i class="fas fa-paper-plane"></i> Registrar Orçamento por E-mail
         </button>
       </div>
-
       <div id="calc_notification" class="calc-notify"></div>
     </div>
-
   </div>
-  <!-- FIM TAB CALCULADORA -->
 
 </div>
-<!-- FIM adminContent -->
 
 <div class="toast" id="toast"></div>
 
@@ -412,6 +329,7 @@ var GITHUB_TOKEN   = sessionStorage.getItem("gh_token") || null;
 var mainImgData    = null;
 var thumbsData     = [];
 var carouselData   = null;
+var pendingChanges = false;
 
 function askForToken() {
   var t = prompt("Cole seu GitHub Personal Access Token (PAT). Fica salvo so nesta sessao.");
@@ -597,6 +515,71 @@ function uploadImg(file, dest) {
   });
 }
 
+/* ============================================================
+   SINCRONIZAR DO GITHUB
+   ============================================================ */
+function syncFromGitHub() {
+  var statusEl = document.getElementById("syncStatus");
+  statusEl.textContent = "Sincronizando...";
+
+  var p1 = fetch("https://raw.githubusercontent.com/" + GITHUB_OWNER + "/" + GITHUB_REPO + "/" + GITHUB_BRANCH + "/assets/json/products.json")
+    .then(function(r) { return r.json(); })
+    .then(function(data) { setData("products_diorama", data); });
+
+  var p2 = fetch("https://raw.githubusercontent.com/" + GITHUB_OWNER + "/" + GITHUB_REPO + "/" + GITHUB_BRANCH + "/assets/json/outros_produtos.json")
+    .then(function(r) { return r.json(); })
+    .then(function(data) { setData("products_outros", data); });
+
+  var p3 = fetch("https://raw.githubusercontent.com/" + GITHUB_OWNER + "/" + GITHUB_REPO + "/" + GITHUB_BRANCH + "/assets/json/carousel.json")
+    .then(function(r) { return r.json(); })
+    .then(function(data) { setData("carousel", data); });
+
+  Promise.all([p1, p2, p3]).then(function() {
+    statusEl.textContent = "Sincronizado com sucesso!";
+    loadAllLists();
+    updateAllJSON();
+    showToast("Produtos carregados do GitHub!", "info");
+    document.getElementById("saveChangesBtn").disabled = false;
+    pendingChanges = false;
+  }).catch(function(err) {
+    console.error(err);
+    statusEl.textContent = "Erro ao sincronizar.";
+    showToast("Erro ao sincronizar com GitHub.", "error");
+  });
+}
+
+/* ============================================================
+   SALVAR ALTERAÇÕES NO GITHUB
+   ============================================================ */
+function saveAllToGitHub() {
+  var btn = document.getElementById("saveChangesBtn");
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Salvando...';
+
+  var diorama = cleanForExport(getData("products_diorama"));
+  var outros  = cleanForExport(getData("products_outros"));
+
+  var p1 = ghGet("assets/json/products.json")
+    .catch(function() { return { sha: null }; })
+    .then(function(f) { return ghPut("assets/json/products.json", JSON.stringify(diorama, null, 2), f.sha, "Remove produto via admin"); });
+
+  var p2 = ghGet("assets/json/outros_produtos.json")
+    .catch(function() { return { sha: null }; })
+    .then(function(f) { return ghPut("assets/json/outros_produtos.json", JSON.stringify(outros, null, 2), f.sha, "Remove produto via admin"); });
+
+  Promise.all([p1, p2]).then(function() {
+    showToast("Alteracoes salvas no GitHub!", "info");
+    btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Salvar Alteracoes no GitHub';
+    btn.disabled = false;
+    pendingChanges = false;
+  }).catch(function(err) {
+    console.error(err);
+    showToast(err.message || "Erro ao salvar.", "error");
+    btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Salvar Alteracoes no GitHub';
+    btn.disabled = false;
+  });
+}
+
 function generateId(catalog) {
   var key    = catalog === "diorama" ? "products_diorama" : "products_outros";
   var list   = getData(key);
@@ -693,12 +676,13 @@ function loadList(key, cId, filter) {
   var container = document.getElementById(cId);
   var list = getData(key);
   if (filter !== "diorama") { list = list.filter(function(p) { return p.category === filter; }); }
-  if (!list.length) { container.innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhum produto.</p>'; return; }
+  if (!list.length) { container.innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhum produto. Sincronize para carregar.</p>'; return; }
   container.innerHTML = "";
   list.forEach(function(p) {
     var badge = p.category === "action-figures" ? '<span class="cat-badge cat-action">Action</span>' : p.category === "produtos-funcionais" ? '<span class="cat-badge cat-funcional">Funcional</span>' : '<span class="cat-badge cat-diorama">Diorama</span>';
+    var imgSrc = p.mainImage ? "https://raw.githubusercontent.com/" + GITHUB_OWNER + "/" + GITHUB_REPO + "/" + GITHUB_BRANCH + "/" + p.mainImage : "";
     var d = document.createElement("div"); d.className = "product-list-item";
-    d.innerHTML = '<img src="' + (p._preview || p.mainImage) + '" onerror="this.style.background=\'#333\'">' +
+    d.innerHTML = '<img src="' + imgSrc + '" onerror="this.style.background=\'#333\'">' +
       '<div class="product-list-info"><strong>' + p.name + ' ' + badge + '</strong><span>ID: ' + p.id + ' — ' + (p.price || "Sob consulta") + '</span></div>' +
       '<div class="product-list-actions"><button class="btn-icon btn-icon-delete" onclick="removeProduct(\'' + key + '\',\'' + p.id + '\')"><i class="fas fa-trash"></i></button></div>';
     container.appendChild(d);
@@ -711,8 +695,9 @@ function loadCarouselList() {
   if (!list.length) { container.innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhuma imagem.</p>'; return; }
   container.innerHTML = "";
   list.forEach(function(item, idx) {
+    var imgSrc = item.src ? "https://raw.githubusercontent.com/" + GITHUB_OWNER + "/" + GITHUB_REPO + "/" + GITHUB_BRANCH + "/" + item.src : "";
     var d = document.createElement("div"); d.className = "product-list-item";
-    d.innerHTML = '<img src="' + (item._preview || item.src) + '" onerror="this.style.background=\'#333\'">' +
+    d.innerHTML = '<img src="' + imgSrc + '" onerror="this.style.background=\'#333\'">' +
       '<div class="product-list-info"><strong>' + item.alt + '</strong><span>' + item.src + '</span></div>' +
       '<div class="product-list-actions"><button class="btn-icon btn-icon-delete" onclick="removeCarouselItem(' + idx + ')"><i class="fas fa-trash"></i></button></div>';
     container.appendChild(d);
@@ -722,13 +707,17 @@ function loadCarouselList() {
 function removeProduct(key, id) {
   if (!confirm("Remover este produto?")) return;
   setData(key, getData(key).filter(function(p) { return p.id !== id; }));
-  loadAllLists(); updateAllJSON(); showToast("Removido.", "info");
+  loadAllLists(); updateAllJSON();
+  pendingChanges = true;
+  document.getElementById("saveChangesBtn").disabled = false;
+  showToast("Produto removido. Clique em Salvar para publicar.", "info");
 }
 
 function removeCarouselItem(idx) {
   if (!confirm("Remover esta imagem?")) return;
   var list = getData("carousel"); list.splice(idx, 1);
-  setData("carousel", list); loadCarouselList(); updateAllJSON(); showToast("Removido.", "info");
+  setData("carousel", list); loadCarouselList(); updateAllJSON();
+  showToast("Imagem removida.", "info");
 }
 
 function cleanForExport(arr) {
@@ -755,25 +744,23 @@ function copyJSON(type) {
 /* ============================================================
    CALCULADORA 3D
    ============================================================ */
-function calcFmt(v) {
-  return "R$ " + v.toFixed(2).replace(".", ",");
-}
+function calcFmt(v) { return "R$ " + v.toFixed(2).replace(".", ","); }
 
 function calcRun() {
-  var h  = parseFloat(document.getElementById("calc_hours").value)        || 0;
-  var m  = parseFloat(document.getElementById("calc_minutes").value)      || 0;
-  var w  = parseFloat(document.getElementById("calc_weight").value)       || 0;
+  var h  = parseFloat(document.getElementById("calc_hours").value)         || 0;
+  var m  = parseFloat(document.getElementById("calc_minutes").value)       || 0;
+  var w  = parseFloat(document.getElementById("calc_weight").value)        || 0;
   var fp = parseFloat(document.getElementById("calc_filamentPrice").value) || 0;
-  var pw = parseFloat(document.getElementById("calc_power").value)        || 0;
-  var er = parseFloat(document.getElementById("calc_energyRate").value)   || 0;
-  var mc = parseFloat(document.getElementById("calc_maintenance").value)  || 0;
-  var lc = parseFloat(document.getElementById("calc_labor").value)        || 0;
+  var pw = parseFloat(document.getElementById("calc_power").value)         || 0;
+  var er = parseFloat(document.getElementById("calc_energyRate").value)    || 0;
+  var mc = parseFloat(document.getElementById("calc_maintenance").value)   || 0;
+  var lc = parseFloat(document.getElementById("calc_labor").value)         || 0;
   var totalH = h + (m / 60);
-  var cFil   = (w / 1000) * fp;
-  var cEng   = totalH * (pw / 1000) * er;
-  var cMnt   = totalH * mc;
-  var cLab   = totalH * lc;
-  var cTot   = cFil + cEng + cMnt + cLab;
+  var cFil = (w / 1000) * fp;
+  var cEng = totalH * (pw / 1000) * er;
+  var cMnt = totalH * mc;
+  var cLab = totalH * lc;
+  var cTot = cFil + cEng + cMnt + cLab;
   document.getElementById("calc_r_filament").textContent    = calcFmt(cFil);
   document.getElementById("calc_r_energy").textContent      = calcFmt(cEng);
   document.getElementById("calc_r_maintenance").textContent = calcFmt(cMnt);
@@ -799,8 +786,7 @@ function calcReset() {
   document.getElementById("calc_maintenance").value   = "0.80";
   document.getElementById("calc_labor").value         = "5";
   calcRun();
-  var n = document.getElementById("calc_notification");
-  n.style.display = "none";
+   document.getElementById("calc_notification").style.display = "none";
 }
 
 function calcSaveEmailConfig() {
@@ -809,7 +795,7 @@ function calcSaveEmailConfig() {
   var p = document.getElementById("calc_ejsPublicKey").value.trim();
   if (!s || !t || !p) { calcNotify("Preencha todas as credenciais.", "error"); return; }
   localStorage.setItem("shakawEmailJSConfig", JSON.stringify({ serviceId: s, templateId: t, publicKey: p }));
-  emailjs.init(p);
+  if (typeof emailjs !== "undefined") emailjs.init(p);
   document.getElementById("calc_sendBtn").disabled = false;
   document.getElementById("calc_emailSetup").style.display = "none";
   calcNotify("Configuracao salva com sucesso!", "success");
@@ -862,7 +848,7 @@ function calcSendEmail() {
     }, function(err) {
       calcNotify("Erro: " + JSON.stringify(err), "error");
       btn.innerHTML = '<i class="fas fa-paper-plane"></i> Registrar Orcamento por E-mail';
-          btn.disabled = false;
+      btn.disabled = false;
     });
 }
 
@@ -877,9 +863,7 @@ function calcNotify(msg, type) {
   el.style.padding = "12px 16px";
   el.style.fontWeight = "bold";
   el.style.textAlign = "center";
-  if (type !== "error") {
-    setTimeout(function() { el.style.display = "none"; }, 5000);
-  }
+  if (type !== "error") { setTimeout(function() { el.style.display = "none"; }, 5000); }
 }
 
 /* ============================================================
