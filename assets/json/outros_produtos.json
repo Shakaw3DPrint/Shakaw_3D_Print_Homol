@@ -10,5 +10,17 @@
       "assets/img/outros/suporte_hotweels_2.webp"
     ],
     "category": "produtos-funcionais"
+  },
+  {
+    "id": "af-01",
+    "name": "Funko Pop Taylor Swift",
+    "description": "Produto artesanal produzido em resina e pintado a mão. Altura aproximada de 14cm",
+    "price": "100,00",
+    "mainImage": "assets/img/outros/funko_pop_taylor_swift.webp",
+    "thumbnails": [
+      "assets/img/outros/funko_pop_taylor_swift_1.webp",
+      "assets/img/outros/funko_pop_taylor_swift_2.webp"
+    ],
+    "category": "action-figures"
   }
 ]
