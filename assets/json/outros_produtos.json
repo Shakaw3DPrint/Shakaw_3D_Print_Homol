@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "pf-01",
+    "name": "Suporte Hotweels",
+    "description": "Produzido em Filamento PLA",
+    "price": "22,00",
+    "mainImage": "assets/img/outros/suporte_hotweels.webp",
+    "thumbnails": [
+      "assets/img/outros/suporte_hotweels_1.webp",
+      "assets/img/outros/suporte_hotweels_2.webp"
+    ],
+    "category": "produtos-funcionais"
+  }
+]
