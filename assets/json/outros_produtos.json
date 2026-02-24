@@ -104,5 +104,14 @@
       "assets/img/outros/mascotes_futebol_13.webp"
     ],
     "category": "action-figures"
+  },
+  {
+    "id": "pf-03",
+    "name": "Suporte de Mesa para Headset",
+    "description": "Produzido em filamento PLA. Informar a espessura da mesa utilizada.",
+    "price": "35,00",
+    "mainImage": "assets/img/outros/suporte_de_mesa_para_headset.webp",
+    "thumbnails": [],
+    "category": "produtos-funcionais"
   }
 ]
