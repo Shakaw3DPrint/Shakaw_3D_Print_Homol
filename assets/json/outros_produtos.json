@@ -135,5 +135,19 @@
       "assets/img/outros/suporte_alexa_boo_super_mario_world_1.webp"
     ],
     "category": "produtos-funcionais"
+  },
+  {
+    "id": "af-02",
+    "name": "Scar - O Rei Leão",
+    "description": "Produto artesanal produzido em resina e pintado a mão. Altura aproximada de 14cm",
+    "price": "130,00",
+    "mainImage": "assets/img/outros/scar_o_rei_leao.webp",
+    "thumbnails": [
+      "assets/img/outros/scar_o_rei_leao_1.webp",
+      "assets/img/outros/scar_o_rei_leao_2.webp",
+      "assets/img/outros/scar_o_rei_leao_3.webp",
+      "assets/img/outros/scar_o_rei_leao_4.webp"
+    ],
+    "category": "action-figures"
   }
 ]
