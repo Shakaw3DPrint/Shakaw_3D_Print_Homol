@@ -67,5 +67,19 @@
       "assets/img/outros/porta_lapis_dragao_1.webp"
     ],
     "category": "produtos-funcionais"
+  },
+  {
+    "id": "af-02",
+    "name": "Deusa da Justiça Themis",
+    "description": "Produto artesanal produzido em resina e pintado a mão. Altura aproximada de 16cm",
+    "price": "120,00",
+    "mainImage": "assets/img/outros/deusa_da_justica_themis.webp",
+    "thumbnails": [
+      "assets/img/outros/deusa_da_justica_themis_1.webp",
+      "assets/img/outros/deusa_da_justica_themis_2.webp",
+      "assets/img/outros/deusa_da_justica_themis_3.webp",
+      "assets/img/outros/deusa_da_justica_themis_4.webp"
+    ],
+    "category": "action-figures"
   }
 ]
