@@ -124,5 +124,16 @@
       "assets/img/outros/suporte_alexa_t800_1.webp"
     ],
     "category": "produtos-funcionais"
+  },
+  {
+    "id": "pf-03",
+    "name": "Suporte Alexa Boo - Super Mario World",
+    "description": "Produzido em Filamento PLA.",
+    "price": "60,00",
+    "mainImage": "assets/img/outros/suporte_alexa_boo_super_mario_world.webp",
+    "thumbnails": [
+      "assets/img/outros/suporte_alexa_boo_super_mario_world_1.webp"
+    ],
+    "category": "produtos-funcionais"
   }
 ]
