@@ -113,5 +113,16 @@
     "mainImage": "assets/img/outros/suporte_de_mesa_para_headset.webp",
     "thumbnails": [],
     "category": "produtos-funcionais"
+  },
+  {
+    "id": "pf-03",
+    "name": "Suporte Alexa T800",
+    "description": "Produzido em Filamento PLA.",
+    "price": "60,00",
+    "mainImage": "assets/img/outros/suporte_alexa_t800.webp",
+    "thumbnails": [
+      "assets/img/outros/suporte_alexa_t800_1.webp"
+    ],
+    "category": "produtos-funcionais"
   }
 ]
