@@ -81,5 +81,27 @@
       "assets/img/outros/deusa_da_justica_themis_4.webp"
     ],
     "category": "action-figures"
+  },
+  {
+    "id": "af-02",
+    "name": "Mascotes de Futebol",
+    "description": "Produto artesanal produzido em resina e pintado a mão. Altura aproximada de 10cm Mascotes: Palmeiras, São Paulo, Flamengo, Corinthians e mais.",
+    "price": "70,00",
+    "mainImage": "assets/img/outros/mascotes_de_futebol.webp",
+    "thumbnails": [
+      "assets/img/outros/mascotes_de_futebol_1.webp",
+      "assets/img/outros/mascotes_de_futebol_2.webp",
+      "assets/img/outros/mascotes_de_futebol_3.webp",
+      "assets/img/outros/mascotes_de_futebol_4.webp",
+      "assets/img/outros/mascotes_de_futebol_5.webp",
+      "assets/img/outros/mascotes_de_futebol_6.webp",
+      "assets/img/outros/mascotes_de_futebol_7.webp",
+      "assets/img/outros/mascotes_de_futebol_8.webp",
+      "assets/img/outros/mascotes_de_futebol_9.webp",
+      "assets/img/outros/mascotes_de_futebol_10.webp",
+      "assets/img/outros/mascotes_de_futebol_11.webp",
+      "assets/img/outros/mascotes_de_futebol_12.webp"
+    ],
+    "category": "action-figures"
   }
 ]
