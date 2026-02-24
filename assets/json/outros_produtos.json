@@ -58,21 +58,6 @@
     "category": "action-figures"
   },
   {
-    "id": "af-02",
-    "name": "Dragão Articulado",
-    "description": "Produto artesanal produzido em resina ou filamento PLA.",
-    "price": "",
-    "mainImage": "assets/img/outros/dragao_articulado.webp",
-    "thumbnails": [
-      "assets/img/outros/dragao_articulado_1.webp",
-      "assets/img/outros/dragao_articulado_2.webp",
-      "assets/img/outros/dragao_articulado_3.webp",
-      "assets/img/outros/dragao_articulado_4.webp",
-      "assets/img/outros/dragao_articulado_5.webp"
-    ],
-    "category": "action-figures"
-  },
-  {
     "id": "pf-02",
     "name": "Porta lápis dragão",
     "description": "Produto artesanal produzido em filamento PLA",
@@ -82,28 +67,5 @@
       "assets/img/outros/porta_lapis_dragao_1.webp"
     ],
     "category": "produtos-funcionais"
-  },
-  {
-    "id": "af-02",
-    "name": "Deusa Themis (Justiça)",
-    "description": "Produto artesanal produzido em resina e pintado a mão. Altura aproximada de 17cm",
-    "price": "120,00",
-    "mainImage": "assets/img/outros/deusa_themis_justica.webp",
-    "thumbnails": [
-      "assets/img/outros/deusa_themis_justica_1.webp",
-      "assets/img/outros/deusa_themis_justica_2.webp",
-      "assets/img/outros/deusa_themis_justica_3.webp",
-      "assets/img/outros/deusa_themis_justica_4.webp"
-    ],
-    "category": "action-figures"
-  },
-  {
-    "id": "af-02",
-    "name": "Mascotes Futebol",
-    "description": "Produto artesanal produzido em resina e pintado a mão. Altura aproximada de 10cm\nMascotes: Palmeiras, São Paulo, Flamengo, Corinthians e mais.",
-    "price": "70,00",
-    "mainImage": "assets/img/outros/mascotes_futebol.webp",
-    "thumbnails": [],
-    "category": "action-figures"
   }
 ]
