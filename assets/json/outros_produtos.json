@@ -162,5 +162,14 @@
       "assets/img/outros/yennefer_the_witcher_3.webp"
     ],
     "category": "action-figures"
+  },
+  {
+    "id": "af-02",
+    "name": "Mecha Gengar - Pokémon",
+    "description": "Produto artesanal produzido em resina e pintado a mão. Altura aproximada de 13cm",
+    "price": "130,00",
+    "mainImage": "assets/img/outros/mecha_gengar_pokemon.webp",
+    "thumbnails": [],
+    "category": "action-figures"
   }
 ]
