@@ -171,5 +171,22 @@
     "mainImage": "assets/img/outros/mecha_gengar_pokemon.webp",
     "thumbnails": [],
     "category": "action-figures"
+  },
+  {
+    "id": "af-01",
+    "name": "Klee - Genshin Impact",
+    "description": "Produto artesanal produzido em resina e pintado a mão. Altura aproximada de 13cm",
+    "price": "120,00",
+    "mainImage": "assets/img/outros/klee_genshin_impact.webp",
+    "thumbnails": [
+      "assets/img/outros/klee_genshin_impact_1.webp",
+      "assets/img/outros/klee_genshin_impact_2.webp",
+      "assets/img/outros/klee_genshin_impact_3.webp",
+      "assets/img/outros/klee_genshin_impact_4.webp",
+      "assets/img/outros/klee_genshin_impact_5.webp",
+      "assets/img/outros/klee_genshin_impact_6.webp",
+      "assets/img/outros/klee_genshin_impact_7.webp"
+    ],
+    "category": "action-figures"
   }
 ]
