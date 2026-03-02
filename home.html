@@ -2,452 +2,1193 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Shakaw 3D Print</title>
-  <link rel="stylesheet" href="css/index_styles.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin - Shakaw 3D Print</title>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* --- LAYOUT GERAL DA HOME --- */
-
-    .home-wrapper {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0 20px 40px;
-      color: white;
-    }
-
-    /* HERO PRINCIPAL */
-
-    .home-hero {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
-      gap: 30px;
-      align-items: center;
-      padding-top: 10px;
-      padding-bottom: 30px;
-    }
-
-    .hero-text {
-      text-align: left;
-    }
-
-    .hero-title {
-      font-size: clamp(1.9rem, 3vw, 2.3rem);
-      margin: 0 0 12px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-
-    .hero-subtitle {
-      font-size: 0.98rem;
-      color: rgba(255,255,255,0.78);
-      line-height: 1.7;
-      margin-bottom: 22px;
-    }
-
-    .hero-subtitle strong {
-      color: #ffffff;
-      font-weight: 600;
-    }
-
-    .hero-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.8rem;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.18);
-      margin-bottom: 12px;
-      color: rgba(255,255,255,0.8);
-    }
-
-    .hero-pill i {
-      color: #4fc3f7;
-    }
-
-    .home-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .home-btn-primary,
-    .home-btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border-radius: 999px;
-      padding: 10px 20px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.2s ease;
-      white-space: nowrap;
-    }
-
-    .home-btn-primary {
-      background: #4fc3f7;
-      color: #00303f;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
-    }
-
-    .home-btn-primary:hover {
-      background: #33b5e5;
-      transform: translateY(-1px);
-      box-shadow: 0 10px 24px rgba(0,0,0,0.5);
-    }
-
-    .home-btn-secondary {
-      background: rgba(255,255,255,0.04);
-      color: white;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-
-    .home-btn-secondary:hover {
-      background: rgba(255,255,255,0.12);
-      transform: translateY(-1px);
-    }
-
-    /* BLOCO DESTAQUE (CARD À DIREITA) */
-
-    .hero-card {
-      background: radial-gradient(circle at top left, rgba(79,195,247,0.25), transparent 55%),
-                  rgba(0,0,0,0.35);
-      border-radius: 18px;
-      padding: 20px 18px;
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      backdrop-filter: blur(10px);
-    }
-
-    .hero-card-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .hero-card-sub {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.75);
-      margin-bottom: 14px;
-    }
-
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 10px;
-      font-size: 0.75rem;
-    }
-
-    .hero-tag {
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(0,0,0,0.45);
-      color: rgba(255,255,255,0.82);
-    }
-
-    .hero-card-note {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.65);
-      margin-top: 6px;
-    }
-
-    /* SEÇÃO DESTAQUES MÍNIMA */
-
-    .highlights {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 18px;
-      margin-top: 10px;
-    }
-
-    .highlight-card {
-      background: rgba(0,0,0,0.35);
-      border-radius: 14px;
-      padding: 16px 14px;
-      border: 1px solid rgba(255,255,255,0.12);
-      text-align: left;
-      transition: background 0.2s ease, transform 0.15s ease;
-    }
-
-    .highlight-card:hover {
-      background: rgba(0,0,0,0.55);
-      transform: translateY(-2px);
-    }
-
-    .highlight-icon {
-      width: 28px;
-      height: 28px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 999px;
-      background: rgba(79,195,247,0.16);
-      color: #4fc3f7;
-      margin-bottom: 8px;
-      font-size: 0.9rem;
-    }
-
-    .highlight-card h3 {
-      font-size: 0.9rem;
-      margin: 0 0 6px;
-    }
-
-    .highlight-card p {
-      font-size: 0.8rem;
-      margin: 0;
-      color: rgba(255,255,255,0.72);
-      line-height: 1.5;
-    }
-
-    /* SEÇÃO "VER MAIS" (CATÁLOGOS) */
-
-    .catalog-links {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 14px;
-      margin-top: 28px;
-    }
-
-    .catalog-card {
-      background: rgba(0,0,0,0.35);
-      border-radius: 14px;
-      padding: 14px 14px 16px;
-      border: 1px solid rgba(255,255,255,0.12);
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .catalog-card-title {
-      font-size: 0.98rem;
-      font-weight: 600;
-    }
-
-    .catalog-card-text {
-      font-size: 0.83rem;
-      color: rgba(255,255,255,0.72);
-      flex: 1;
-    }
-
-    .catalog-card a {
-      align-self: flex-start;
-      margin-top: 6px;
-      font-size: 0.82rem;
-      color: #4fc3f7;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .catalog-card a:hover {
-      text-decoration: underline;
-    }
-
-    /* RODAPÉ SIMPLES */
-
-    .home-footer {
-      margin-top: 34px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(255,255,255,0.12);
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.6);
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .home-footer a {
-      color: rgba(255,255,255,0.75);
-      text-decoration: none;
-    }
-
-    .home-footer a:hover {
-      text-decoration: underline;
-    }
-
-    /* RESPONSIVO */
-
-    @media (max-width: 860px) {
-      .home-hero {
-        grid-template-columns: minmax(0,1fr);
-      }
-      .hero-text {
-        text-align: left;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .highlights {
-        grid-template-columns: minmax(0,1fr);
-      }
-
-      .catalog-links {
-        grid-template-columns: minmax(0,1fr);
-      }
-
-      .home-buttons {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .home-btn-primary,
-      .home-btn-secondary {
-        justify-content: center;
-        width: 100%;
-      }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #00303f; color: white; min-height: 100vh; }
+    .admin-header { background: rgba(0,0,0,0.3); padding: 20px 30px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .admin-header h1 { font-size: 1.4rem; display: flex; align-items: center; gap: 10px; }
+    .admin-header a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; }
+    .admin-header a:hover { color: white; }
+    #loginScreen { max-width: 380px; margin: 80px auto; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 40px 30px; text-align: center; }
+    #loginScreen h2 { margin-bottom: 20px; font-size: 1.3rem; }
+    #loginScreen input { width: 100%; padding: 10px 14px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: white; font-size: 15px; margin-bottom: 14px; }
+    #loginScreen input::placeholder { color: rgba(255,255,255,0.4); }
+    #adminContent { display: none; padding: 30px 20px; max-width: 1100px; margin: 0 auto; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 30px; flex-wrap: wrap; }
+    .tab-btn { padding: 10px 22px; border-radius: 25px; border: 2px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.07); color: white; cursor: pointer; font-size: 14px; font-weight: bold; transition: all 0.2s; }
+    .tab-btn:hover { background: rgba(255,255,255,0.15); }
+    .tab-btn.active { background: #0077cc; border-color: #0077cc; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .admin-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 28px; margin-bottom: 24px; }
+    .admin-card h2 { font-size: 1.15rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; color: #4fc3f7; }
+    label { display: block; font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 5px; margin-top: 14px; }
+    input[type="text"], input[type="email"], input[type="number"], textarea, select { width: 100%; padding: 10px 14px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.08); color: white; font-size: 14px; }
+    input[type="range"] { width: 100%; accent-color: #4fc3f7; }
+    select option { background: #00303f; }
+    textarea { resize: vertical; min-height: 80px; }
+    .upload-area { border: 2px dashed rgba(255,255,255,0.25); border-radius: 10px; padding: 30px; text-align: center; cursor: pointer; margin-top: 14px; position: relative; transition: all 0.3s; }
+    .upload-area:hover, .upload-area.drag-over { border-color: #4fc3f7; background: rgba(79,195,247,0.06); }
+    .upload-area i { font-size: 2.5rem; color: rgba(255,255,255,0.4); margin-bottom: 10px; display: block; }
+    .upload-area p { color: rgba(255,255,255,0.55); font-size: 14px; margin: 4px 0; }
+    .upload-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    .convert-progress { display: none; margin-top: 14px; background: rgba(0,0,0,0.3); border-radius: 999px; height: 8px; overflow: hidden; }
+    .convert-progress-bar { height: 100%; background: linear-gradient(90deg, #4fc3f7, #0077cc); border-radius: 999px; width: 0%; transition: width 0.3s; }
+    .convert-status { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 6px; text-align: center; min-height: 18px; }
+    .image-preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px,1fr)); gap: 10px; margin-top: 16px; }
+    .preview-item { position: relative; border-radius: 8px; overflow: hidden; background: rgba(0,0,0,0.3); aspect-ratio: 1; border: 1px solid rgba(255,255,255,0.1); }
+    .preview-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .preview-item .preview-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.75); font-size: 10px; padding: 3px 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .preview-item .preview-badge { position: absolute; top: 4px; left: 4px; background: #28a745; border-radius: 4px; font-size: 9px; padding: 2px 5px; font-weight: bold; }
+    .preview-item .remove-preview { position: absolute; top: 4px; right: 4px; background: rgba(255,77,77,0.9); border: none; color: white; border-radius: 50%; width: 20px; height: 20px; cursor: pointer; font-size: 11px; display: flex; align-items: center; justify-content: center; padding: 0; }
+    .btn { padding: 11px 24px; border-radius: 8px; border: none; cursor: pointer; font-size: 14px; font-weight: bold; display: inline-flex; align-items: center; gap: 8px; transition: background 0.2s, transform 0.15s; }
+    .btn:hover { transform: scale(1.02); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .btn-primary { background: #0077cc; color: white; }
+    .btn-success { background: #28a745; color: white; }
+    .btn-danger  { background: #dc3545; color: white; }
+    .btn-secondary { background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,255,255,0.2); }
+    .btn-warning { background: #f39c12; color: white; }
+    .btn-row { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+    .product-list-item { display: flex; align-items: center; gap: 14px; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; margin-bottom: 8px; transition: background 0.2s; }
+    .product-list-item:hover { background: rgba(255,255,255,0.09); }
+    .product-list-item img { width: 56px; height: 56px; object-fit: cover; border-radius: 6px; flex-shrink: 0; background: rgba(0,0,0,0.3); }
+    .product-list-info { flex: 1; min-width: 0; }
+    .product-list-info strong { display: block; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .product-list-info span { font-size: 12px; color: rgba(255,255,255,0.5); }
+    .product-list-actions { display: flex; gap: 6px; flex-shrink: 0; }
+    .btn-icon { width: 32px; height: 32px; border-radius: 6px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 13px; transition: transform 0.15s; }
+    .btn-icon:hover { transform: scale(1.1); }
+    .btn-icon-delete { background: rgba(220,53,69,0.3); color: #ff6b6b; }
+    .btn-icon-edit   { background: rgba(243,156,18,0.3); color: #f39c12; }
+    .cat-badge { display: inline-block; font-size: 10px; font-weight: bold; padding: 2px 8px; border-radius: 10px; margin-left: 6px; vertical-align: middle; }
+    .cat-diorama  { background: #e8f4ff; color: #0057b7; }
+    .cat-action   { background: #fff3e8; color: #b74f00; }
+    .cat-funcional{ background: #e8fff1; color: #1b7a3e; }
+    .info-box { background: rgba(79,195,247,0.08); border: 1px solid rgba(79,195,247,0.25); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.6; margin-bottom: 18px; }
+    .info-box i { color: #4fc3f7; margin-right: 6px; }
+    .info-box-warn { background: rgba(255,193,7,0.08); border-color: rgba(255,193,7,0.3); }
+    .info-box-warn i { color: #ffc107; }
+    .json-preview { background: rgba(0,0,0,0.4); border-radius: 8px; padding: 16px; font-family: monospace; font-size: 12px; color: #a8d8a8; max-height: 300px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; margin-top: 14px; border: 1px solid rgba(255,255,255,0.08); }
+    .divider { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 24px 0; }
+    .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(80px); background: #28a745; color: white; padding: 12px 28px; border-radius: 30px; font-size: 14px; font-weight: bold; z-index: 9999; transition: transform 0.35s, opacity 0.35s; opacity: 0; pointer-events: none; white-space: nowrap; }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    .toast.error { background: #dc3545; }
+    .toast.info  { background: #0077cc; }
+    #convertCanvas { display: none; }
+    .calc-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .calc-result-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: rgba(255,255,255,0.05); border-radius: 6px; margin-bottom: 8px; }
+    .calc-result-row.total { background: rgba(79,195,247,0.1); border: 1px solid rgba(79,195,247,0.25); }
+    .calc-profit-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-radius: 6px; margin-bottom: 8px; background: rgba(255,255,255,0.05); }
+    .calc-notify { display: none; margin-top: 12px; padding: 12px 16px; border-radius: 8px; font-weight: bold; text-align: center; }
+    .sync-status { font-size: 12px; color: rgba(255,255,255,0.5); margin-left: 10px; font-weight: normal; }
+    /* ACCORDION */
+    .catalog-section { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; margin-bottom: 16px; overflow: hidden; }
+    .catalog-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; cursor: pointer; user-select: none; transition: background 0.2s; }
+    .catalog-header:hover { background: rgba(255,255,255,0.05); }
+    .catalog-header-left { display: flex; align-items: center; gap: 10px; font-size: 1rem; font-weight: bold; color: #4fc3f7; }
+    .catalog-count { font-size: 12px; color: rgba(255,255,255,0.45); font-weight: normal; }
+    .catalog-toggle-icon { font-size: 13px; color: rgba(255,255,255,0.5); transition: transform 0.25s; }
+    .catalog-toggle-icon.open { transform: rotate(180deg); }
+    .catalog-body { display: none; padding: 0 20px 20px; }
+    .catalog-body.open { display: block; }
+    /* MODAL EDICAO */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 1000; align-items: center; justify-content: center; }
+    .modal-overlay.open { display: flex; }
+    .modal-box { background: #00485a; border: 1px solid rgba(255,255,255,0.15); border-radius: 14px; padding: 30px; width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; position: relative; margin: 20px; }
+    .modal-box h3 { font-size: 1.1rem; color: #4fc3f7; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .modal-close { position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.1); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; }
+    .modal-close:hover { background: rgba(255,77,77,0.4); }
+    .edit-current-imgs { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+    .edit-img-wrap { position: relative; }
+    .edit-img-wrap img { width: 70px; height: 70px; object-fit: cover; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15); display: block; }
+    .edit-img-wrap span { position: absolute; top: 2px; left: 2px; background: rgba(0,0,0,0.65); font-size: 9px; padding: 2px 4px; border-radius: 3px; }
+    @media (max-width: 600px) {
+      .admin-header { padding: 15px; }
+      #adminContent { padding: 20px 12px; }
+      .admin-card { padding: 18px; }
+      .tab-btn { padding: 8px 14px; font-size: 13px; }
+      .calc-grid-2 { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
+<canvas id="convertCanvas"></canvas>
+<div id="toast" class="toast"></div>
 
-  <!-- CABEÇALHO PADRÃO -->
-  <div class="header">
-    <img src="https://shakaw3dprint.github.io/Shakaw_3D_Print/assets/img/logo.webp"
-         alt="Logo Shakaw 3D Print" class="logo">
-    <h1>Shakaw 3D Print</h1>
-    <div class="header-links">
-      <a href="home.html"><i class="fas fa-home"></i> Início</a>
-      <a href="catalogo_diorama.html"><i class="fas fa-box-open"></i> Catálogo</a>
-      <a href="outros_projetos.html"><i class="fas fa-images"></i> Outros Projetos</a>
-      <a href="https://www.instagram.com/shakaw3dprint" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
-             alt="Instagram" class="instagram-icon">
-        @shakaw3dprint
-      </a>
+<div class="admin-header">
+  <h1><i class="fas fa-tools"></i> Painel Admin — Shakaw 3D Print</h1>
+  <a href="home.html"><i class="fas fa-arrow-left"></i> Voltar ao site</a>
+</div>
+
+<div id="loginScreen">
+  <h2><i class="fas fa-lock"></i> Acesso Restrito</h2>
+  <p style="color:rgba(255,255,255,0.55);font-size:13px;margin-bottom:20px">Digite a senha para acessar o painel.</p>
+  <input type="password" id="adminPassword" placeholder="Senha" autocomplete="off">
+  <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:4px" onclick="checkPassword()">
+    <i class="fas fa-sign-in-alt"></i> Entrar
+  </button>
+  <p id="loginError" style="display:none;color:#ff6b6b;font-size:13px;margin-top:10px"></p>
+</div>
+
+<div id="adminContent">
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="tab-add"><i class="fas fa-plus"></i> Adicionar Produto</button>
+    <button class="tab-btn" data-tab="tab-manage"><i class="fas fa-list"></i> Gerenciar</button>
+    <button class="tab-btn" data-tab="tab-json"><i class="fas fa-code"></i> Exportar JSON</button>
+    <button class="tab-btn" data-tab="tab-carousel"><i class="fas fa-images"></i> Carrossel</button>
+    <button class="tab-btn" data-tab="tab-calc"><i class="fas fa-calculator"></i> Calculadora 3D</button>
+  </div>
+
+  <!-- TAB ADICIONAR -->
+  <div class="tab-content active" id="tab-add">
+    <div class="admin-card">
+      <h2><i class="fas fa-plus-circle"></i> Novo Produto</h2>
+      <div class="info-box"><i class="fas fa-magic"></i> Imagens convertidas para <strong>WebP</strong> automaticamente. Salvo direto no GitHub.</div>
+      <label>Catalogo de destino</label>
+      <select id="productCatalog" onchange="updateCatalogInfo()">
+        <option value="diorama">Catalogo Diorama</option>
+        <option value="action-figures">Outros Projetos — Action Figures</option>
+        <option value="produtos-funcionais">Outros Projetos — Produtos Funcionais</option>
+      </select>
+      <div class="info-box" id="catalogInfo" style="margin-top:10px;margin-bottom:0">
+        <i class="fas fa-link"></i> Sera exibido em: <strong id="catalogInfoLink">catalogo_diorama.html</strong>
+      </div>
+      <label>Nome do produto *</label>
+      <input type="text" id="productName" placeholder="Ex.: Garagem Miniatura 1:18">
+      <label>Descricao *</label>
+      <textarea id="productDescription" placeholder="Material, tamanho, acabamento..."></textarea>
+      <label>Preco (vazio = Sob consulta)</label>
+      <input type="text" id="productPrice" placeholder="Ex.: R$ 45,00">
+      <label>Qualidade WebP: <strong id="qualityLabel" style="color:#4fc3f7">85%</strong></label>
+      <input type="range" id="webpQuality" min="50" max="100" value="85" oninput="document.getElementById('qualityLabel').textContent=this.value+'%'">
+      <label>Imagem principal *</label>
+      <div class="upload-area" id="mainImgArea">
+        <i class="fas fa-image"></i>
+        <p>Clique ou arraste a imagem principal aqui</p>
+        <p style="font-size:11px">JPG, PNG, GIF — convertida para WebP</p>
+        <input type="file" id="mainImgInput" accept="image/*">
+      </div>
+      <div class="convert-progress" id="mainProgress"><div class="convert-progress-bar" id="mainProgressBar"></div></div>
+      <p class="convert-status" id="mainStatus"></p>
+      <div class="image-preview-grid" id="mainImgPreview"></div>
+      <label>Miniaturas (opcional)</label>
+      <div class="upload-area" id="thumbsArea">
+        <i class="fas fa-images"></i>
+        <p>Clique ou arraste as miniaturas aqui</p>
+        <p style="font-size:11px">Selecione uma ou mais</p>
+        <input type="file" id="thumbsInput" accept="image/*" multiple>
+      </div>
+      <div class="convert-progress" id="thumbsProgress"><div class="convert-progress-bar" id="thumbsProgressBar"></div></div>
+      <p class="convert-status" id="thumbsStatus"></p>
+      <div class="image-preview-grid" id="thumbsPreview"></div>
+      <div class="btn-row">
+        <button class="btn btn-success" id="addProductBtn" onclick="addProduct()"><i class="fas fa-check"></i> Adicionar Produto</button>
+        <button class="btn btn-secondary" onclick="clearForm()"><i class="fas fa-times"></i> Limpar</button>
+      </div>
     </div>
   </div>
 
-  <main class="home-wrapper">
-
-    <!-- HERO PRINCIPAL -->
-    <section class="home-hero">
-
-      <div class="hero-text">
-        <div class="hero-pill">
-          <i class="fas fa-cube"></i>
-          Impressão 3D para colecionadores e projetos especiais
-        </div>
-
-        <h2 class="hero-title">
-          Peças em 3D para dar vida aos seus cenários e coleções
-        </h2>
-
-        <p class="hero-subtitle">
-          Criação de <strong>dioramas automotivos</strong>, miniaturas e objetos
-          funcionais impressos em 3D, com acabamento manual e atenção aos detalhes.
-          Ideal para quem quer montar cenas marcantes na estante ou na bancada.
-        </p>
-
-        <div class="home-buttons">
-          <a href="catalogo_diorama.html" class="home-btn-primary">
-            <i class="fas fa-warehouse"></i>
-            Ver catálogo de dioramas
-          </a>
-          <a href="outros_projetos.html" class="home-btn-secondary">
-            <i class="fas fa-shapes"></i>
-            Ver outros projetos
-          </a>
-        </div>
+  <!-- TAB GERENCIAR -->
+  <div class="tab-content" id="tab-manage">
+    <div class="admin-card">
+      <h2><i class="fas fa-sync-alt"></i> Sincronizacao <span class="sync-status" id="syncStatus">Clique em sincronizar para carregar os produtos.</span></h2>
+      <div class="info-box"><i class="fas fa-info-circle"></i> Sincronize para carregar os produtos reais do GitHub. Edicao e remocao salvam automaticamente.</div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="syncFromGitHub()"><i class="fas fa-cloud-download-alt"></i> Sincronizar com GitHub</button>
+        <button class="btn btn-warning" onclick="fixEncodingAndSave()" title="Reescreve os JSONs com acentos corretos"><i class="fas fa-wrench"></i> Corrigir Acentos</button>
       </div>
-
-      <aside class="hero-card">
-        <p class="hero-card-title">O que você encontra por aqui</p>
-        <p class="hero-card-sub">
-          Impressão 3D pensada para colecionadores e uso no dia a dia.
-        </p>
-
-        <div class="hero-tags">
-          <span class="hero-tag">Dioramas e cenários de garagem</span>
-          <span class="hero-tag">Peças para miniaturas automotivas</span>
-          <span class="hero-tag">Action figures e personagens</span>
-          <span class="hero-tag">Suportes e organizadores</span>
-        </div>
-
-        <p class="hero-card-note">
-          Fale com a gente para adaptar tamanho, cores e detalhes para o seu projeto.
-        </p>
-      </aside>
-    </section>
-
-    <!-- DESTAQUES (3 pontos fortes) -->
-    <section class="highlights">
-      <article class="highlight-card">
-        <div class="highlight-icon"><i class="fas fa-medal"></i></div>
-        <h3>Detalhe e acabamento</h3>
-        <p>
-          Ajuste fino de impressão e pintura manual em cada peça, para ficar bem na
-          foto e de perto.
-        </p>
-      </article>
-
-      <article class="highlight-card">
-        <div class="highlight-icon"><i class="fas fa-sliders-h"></i></div>
-        <h3>Personalização</h3>
-        <p>
-          Possibilidade de adaptar modelos, escalas e combinações de cores para combinar
-          com a sua coleção.
-        </p>
-      </article>
-
-      <article class="highlight-card">
-        <div class="highlight-icon"><i class="fas fa-comments"></i></div>
-        <h3>Contato direto</h3>
-        <p>
-          Atendimento via WhatsApp e Instagram para tirar dúvidas e alinhar expectativas
-          antes da impressão.
-        </p>
-      </article>
-    </section>
-
-    <!-- LINKS RÁPIDOS PARA CATÁLOGOS -->
-    <section class="catalog-links">
-      <div class="catalog-card">
-        <div class="catalog-card-title">Catálogo de Dioramas</div>
-        <p class="catalog-card-text">
-          Modelos pensados para cenários de oficina e garagem, em escalas para
-          miniaturas automotivas.
-        </p>
-        <a href="catalogo_diorama.html">
-          Abrir catálogo <i class="fas fa-arrow-right"></i>
-        </a>
+    </div>
+    <div class="catalog-section">
+      <div class="catalog-header" onclick="toggleCatalog('diorama')">
+        <div class="catalog-header-left"><i class="fas fa-warehouse"></i> Dioramas <span class="catalog-count" id="count-diorama">0 produtos</span></div>
+        <i class="fas fa-chevron-down catalog-toggle-icon" id="icon-diorama"></i>
       </div>
-
-      <div class="catalog-card">
-        <div class="catalog-card-title">Outros Projetos</div>
-        <p class="catalog-card-text">
-          Action figures, suportes, organizadores e outras ideias criadas a partir de
-          impressões 3D.
-        </p>
-        <a href="outros_projetos.html">
-          Ver projetos <i class="fas fa-arrow-right"></i>
-        </a>
+      <div class="catalog-body" id="body-diorama">
+        <div id="listDiorama"><p style="color:rgba(255,255,255,0.4);font-size:13px">Sincronize para ver os produtos.</p></div>
       </div>
-    </section>
+    </div>
+    <div class="catalog-section">
+      <div class="catalog-header" onclick="toggleCatalog('action')">
+        <div class="catalog-header-left"><i class="fas fa-user-astronaut"></i> Action Figures <span class="catalog-count" id="count-action">0 produtos</span></div>
+        <i class="fas fa-chevron-down catalog-toggle-icon" id="icon-action"></i>
+      </div>
+      <div class="catalog-body" id="body-action">
+        <div id="listActionFigures"><p style="color:rgba(255,255,255,0.4);font-size:13px">Sincronize para ver os produtos.</p></div>
+      </div>
+    </div>
+    <div class="catalog-section">
+      <div class="catalog-header" onclick="toggleCatalog('funcionais')">
+        <div class="catalog-header-left"><i class="fas fa-toolbox"></i> Produtos Funcionais <span class="catalog-count" id="count-funcionais">0 produtos</span></div>
+        <i class="fas fa-chevron-down catalog-toggle-icon" id="icon-funcionais"></i>
+      </div>
+      <div class="catalog-body" id="body-funcionais">
+        <div id="listFuncionais"><p style="color:rgba(255,255,255,0.4);font-size:13px">Sincronize para ver os produtos.</p></div>
+      </div>
+    </div>
+  </div>
 
-    <!-- RODAPÉ SIMPLES -->
-    <footer class="home-footer">
-      <span>Shakaw 3D Print • Impressão 3D personalizada</span>
-      <span>
-        Contato:
-        <a href="mailto:shakaw3dprint@hotmail.com">shakaw3dprint@hotmail.com</a>
-        ·
-        <a href="https://wa.me/5511954846647" target="_blank">WhatsApp</a>
-      </span>
-    </footer>
+  <!-- TAB JSON -->
+  <div class="tab-content" id="tab-json">
+    <div class="admin-card">
+      <h2><i class="fas fa-file-code"></i> products.json — Dioramas</h2>
+      <div class="info-box"><i class="fas fa-info-circle"></i> Substitua <strong>assets/json/products.json</strong> no GitHub.</div>
+      <button class="btn btn-primary" onclick="copyJSON('diorama')"><i class="fas fa-copy"></i> Copiar JSON</button>
+      <div class="json-preview" id="jsonDiorama">[ ]</div>
+    </div>
+    <div class="admin-card">
+      <h2><i class="fas fa-file-code"></i> outros_produtos.json</h2>
+      <div class="info-box"><i class="fas fa-info-circle"></i> Substitua <strong>assets/json/outros_produtos.json</strong> no GitHub.</div>
+      <button class="btn btn-primary" onclick="copyJSON('outros')"><i class="fas fa-copy"></i> Copiar JSON</button>
+      <div class="json-preview" id="jsonOutros">[ ]</div>
+    </div>
+  </div>
 
-  </main>
+  <!-- TAB CARROSSEL -->
+  <div class="tab-content" id="tab-carousel">
+    <div class="admin-card">
+      <h2><i class="fas fa-film"></i> Carrossel</h2>
+      <div class="info-box"><i class="fas fa-info-circle"></i> Exibido em <strong>catalogo_diorama.html</strong>.</div>
+      <label>Imagem do carrossel</label>
+      <div class="upload-area" id="carouselArea">
+        <i class="fas fa-image"></i>
+        <p>Clique ou arraste a imagem aqui</p>
+        <input type="file" id="carouselImgInput" accept="image/*">
+      </div>
+      <div class="convert-progress" id="carouselProgress"><div class="convert-progress-bar" id="carouselProgressBar"></div></div>
+      <p class="convert-status" id="carouselStatus"></p>
+      <div class="image-preview-grid" id="carouselImgPreview"></div>
+      <label>Texto alternativo</label>
+      <input type="text" id="carouselAlt" placeholder="Ex.: Diorama Garagem">
+      <div class="btn-row">
+        <button class="btn btn-success" onclick="addCarouselItem()"><i class="fas fa-plus"></i> Adicionar ao Carrossel</button>
+      </div>
+      <hr class="divider">
+      <h2 style="font-size:1rem;color:#4fc3f7;margin-bottom:14px"><i class="fas fa-list"></i> Itens no Carrossel</h2>
+      <div id="carouselList"><p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhuma imagem.</p></div>
+      <hr class="divider">
+      <h2 style="font-size:1rem;color:#4fc3f7;margin-bottom:8px"><i class="fas fa-code"></i> carousel.json</h2>
+      <button class="btn btn-primary" onclick="copyJSON('carousel')"><i class="fas fa-copy"></i> Copiar JSON</button>
+      <div class="json-preview" id="jsonCarousel">[ ]</div>
+    </div>
+  </div>
+
+  <!-- TAB CALCULADORA -->
+  <div class="tab-content" id="tab-calc">
+    <div class="admin-card">
+      <h2><i class="fas fa-calculator"></i> Calculadora de Impressao 3D</h2>
+      <div class="info-box"><i class="fas fa-info-circle"></i> Os resultados atualizam automaticamente ao digitar.</div>
+      <div class="calc-grid-2">
+        <div><label>Nome do Projeto</label><input type="text" id="calc_projectName" placeholder="Ex: Suporte para smartphone"></div>
+        <div><label>Nome do Cliente</label><input type="text" id="calc_clientName" placeholder="Ex: Joao Silva"></div>
+      </div>
+      <hr class="divider">
+      <h2 style="font-size:1rem;color:#4fc3f7;margin-bottom:4px"><i class="fas fa-print"></i> Dados da Impressao</h2>
+      <div class="calc-grid-2">
+        <div><label>Tempo — Horas</label><input type="number" id="calc_hours" min="0" value="1" oninput="calcRun()"></div>
+        <div><label>Tempo — Minutos</label><input type="number" id="calc_minutes" min="0" max="59" value="0" oninput="calcRun()"></div>
+        <div><label>Peso do Filamento / Resina (g)</label><input type="number" id="calc_weight" min="0" step="0.01" value="0" oninput="calcRun()"></div>
+        <div><label>Preco do Filamento / Resina (R$/kg)</label><input type="number" id="calc_filamentPrice" min="0" step="0.01" value="85" oninput="calcRun()"></div>
+        <div><label>Potencia da Impressora (W)</label><input type="number" id="calc_power" min="0" value="90" oninput="calcRun()"></div>
+        <div><label>Tarifa de Energia (R$/kWh)</label><input type="number" id="calc_energyRate" min="0" step="0.01" value="0.73" oninput="calcRun()"></div>
+        <div><label>Custo de Manutencao (R$/h)</label><input type="number" id="calc_maintenance" min="0" step="0.01" value="0.80" oninput="calcRun()"></div>
+        <div><label>Custo de Mao de Obra (R$/h)</label><input type="number" id="calc_labor" min="0" step="0.01" value="5" oninput="calcRun()"></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="calcReset()"><i class="fas fa-undo"></i> Limpar</button>
+      </div>
+      <hr class="divider">
+      <h2 style="font-size:1rem;color:#4fc3f7;margin-bottom:14px"><i class="fas fa-chart-bar"></i> Resultado</h2>
+      <div class="calc-result-row"><span>Filamento / Resina</span><strong id="calc_r_filament">R$ 0,00</strong></div>
+      <div class="calc-result-row"><span>Energia Eletrica</span><strong id="calc_r_energy">R$ 0,00</strong></div>
+      <div class="calc-result-row"><span>Manutencao</span><strong id="calc_r_maintenance">R$ 0,00</strong></div>
+      <div class="calc-result-row"><span>Mao de Obra</span><strong id="calc_r_labor">R$ 0,00</strong></div>
+      <div class="calc-result-row total"><span><strong>Custo Total</strong></span><strong id="calc_r_total">R$ 0,00</strong></div>
+      <hr class="divider">
+      <h2 style="font-size:1rem;color:#4fc3f7;margin-bottom:14px"><i class="fas fa-tags"></i> Sugestoes de Preco de Venda</h2>
+      <div class="calc-profit-row"><span>Margem 30%</span><strong id="calc_r_30">R$ 0,00</strong></div>
+      <div class="calc-profit-row"><span>Margem 50%</span><strong id="calc_r_50">R$ 0,00</strong></div>
+      <div class="calc-profit-row"><span>Margem 100%</span><strong id="calc_r_100">R$ 0,00</strong></div>
+      <div class="calc-profit-row"><span>Margem 150%</span><strong id="calc_r_150">R$ 0,00</strong></div>
+      <div class="calc-profit-row"><span>Margem 200%</span><strong id="calc_r_200">R$ 0,00</strong></div>
+      <hr class="divider">
+      <h2 style="font-size:1rem;color:#4fc3f7;margin-bottom:14px"><i class="fas fa-envelope"></i> Registrar Orcamento por E-mail</h2>
+      <div id="calc_emailSetup" style="background:rgba(255,193,7,0.08);border:1px solid rgba(255,193,7,0.3);border-radius:8px;padding:16px;margin-bottom:16px">
+        <p style="font-size:13px;color:#ffc107;margin-bottom:12px"><i class="fas fa-exclamation-triangle"></i> Configure o EmailJS para enviar orcamentos.</p>
+        <label>Service ID</label><input type="text" id="calc_ejsService" placeholder="service_xxxxxxx">
+        <label>Template ID</label><input type="text" id="calc_ejsTemplate" placeholder="template_xxxxxxx">
+        <label>Public Key</label><input type="text" id="calc_ejsPublicKey" placeholder="xxxxxxxxxxxxxxxxxxx">
+        <div class="btn-row"><button class="btn btn-warning" onclick="calcSaveEmailConfig()"><i class="fas fa-save"></i> Salvar Configuracao</button></div>
+      </div>
+      <div class="calc-grid-2">
+        <div><label>Seu Nome</label><input type="text" id="calc_senderName" placeholder="Shakaw 3D Print"></div>
+        <div><label>E-mail do Cliente</label><input type="email" id="calc_senderEmail" placeholder="cliente@email.com"></div>
+      </div>
+      <label>Mensagem personalizada (opcional)</label>
+      <textarea id="calc_emailMsg" placeholder="Observacoes sobre o orcamento..."></textarea>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="calc_sendBtn" onclick="calcSendEmail()" disabled>
+          <i class="fas fa-paper-plane"></i> Registrar Orcamento por E-mail
+        </button>
+      </div>
+      <div id="calc_notification" style="display:none;margin-top:12px"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL EDICAO -->
+<div class="modal-overlay" id="editModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeEditModal()">×</button>
+    <h3><i class="fas fa-pen"></i> Editar Produto</h3>
+    <input type="hidden" id="editProductId">
+    <input type="hidden" id="editProductKey">
+    <label>Nome *</label>
+    <input type="text" id="editName">
+    <label>Descricao *</label>
+    <textarea id="editDescription" rows="4"></textarea>
+    <label>Preco (vazio = Sob consulta)</label>
+    <input type="text" id="editPrice" placeholder="Ex.: R$ 45,00">
+    <label>Imagens atuais</label>
+    <div class="edit-current-imgs" id="editCurrentImgs"></div>
+    <label style="margin-top:18px">Substituir imagem principal (opcional)</label>
+    <div class="upload-area" id="editMainArea" style="padding:18px">
+      <i class="fas fa-image"></i>
+      <p>Clique ou arraste nova imagem principal</p>
+      <input type="file" id="editMainInput" accept="image/*">
+    </div>
+    <p class="convert-status" id="editMainStatus"></p>
+    <div class="image-preview-grid" id="editMainPreview"></div>
+    <label>Adicionar miniaturas (opcional)</label>
+    <div class="upload-area" id="editThumbsArea" style="padding:18px">
+      <i class="fas fa-images"></i>
+      <p>Clique ou arraste miniaturas para adicionar</p>
+      <input type="file" id="editThumbsInput" accept="image/*" multiple>
+    </div>
+    <p class="convert-status" id="editThumbsStatus"></p>
+    <div class="image-preview-grid" id="editThumbsPreview"></div>
+    <div class="btn-row" style="margin-top:24px">
+      <button class="btn btn-success" id="editSaveBtn" onclick="saveEdit()"><i class="fas fa-save"></i> Salvar Alteracoes</button>
+      <button class="btn btn-secondary" onclick="closeEditModal()"><i class="fas fa-times"></i> Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   CONFIGURACAO — EDITE AQUI
+   ============================================================ */
+var ADMIN_PASSWORD = "Er!6736**";
+var GITHUB_OWNER   = "Shakaw3DPrint";
+var GITHUB_REPO    = "Shakaw_3D_Print";
+var GITHUB_BRANCH  = "main";
+var GITHUB_API     = "https://api.github.com";
+var GITHUB_TOKEN   = sessionStorage.getItem("gh_token") || "";
+var EJS_SERVICE    = "SEU_SERVICE_ID";
+var EJS_TEMPLATE   = "SEU_TEMPLATE_ID";
+var EJS_KEY        = "SUA_PUBLIC_KEY";
+
+/* ============================================================
+   ESTADO
+   ============================================================ */
+var mainImgData  = null;
+var thumbsData   = [];
+var carouselData = null;
+var editNewMainImg = null;
+var editNewThumbs  = [];
+
+/* ============================================================
+   ACCORDION
+   ============================================================ */
+function toggleCatalog(id) {
+  var body   = document.getElementById("body-"+id);
+  var icon   = document.getElementById("icon-"+id);
+  var isOpen = body.classList.contains("open");
+  ["diorama","action","funcionais"].forEach(function(c) {
+    document.getElementById("body-"+c).classList.remove("open");
+    document.getElementById("icon-"+c).classList.remove("open");
+  });
+  if (!isOpen) { body.classList.add("open"); icon.classList.add("open"); }
+}
+
+/* ============================================================
+   TOKEN
+   ============================================================ */
+function askForToken() {
+  var t = prompt("Cole seu GitHub Personal Access Token (PAT).\nFica salvo so nesta sessao.");
+  if (t && t.trim().length) {
+    GITHUB_TOKEN = t.trim();
+    sessionStorage.setItem("gh_token", GITHUB_TOKEN);
+    showToast("Token salvo!", "info");
+  } else {
+    showToast("Token nao informado.", "error");
+  }
+}
+
+/* ============================================================
+   LOGIN
+   ============================================================ */
+function checkPassword() {
+  var input   = document.getElementById("adminPassword");
+  var screen  = document.getElementById("loginScreen");
+  var content = document.getElementById("adminContent");
+  var error   = document.getElementById("loginError");
+  if (!input.value) { error.textContent = "Digite a senha."; error.style.display = "block"; return; }
+  if (input.value === ADMIN_PASSWORD) {
+    screen.style.setProperty("display","none","important");
+    content.style.setProperty("display","block","important");
+    loadAllLists(); updateAllJSON(); calcRun();
+  } else {
+    error.textContent = "Senha incorreta."; error.style.display = "block";
+    input.value = ""; input.focus();
+  }
+}
+
+/* ============================================================
+   UTILITARIOS
+   ============================================================ */
+function safeName(str) {
+  var s = str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"_");
+  while (s.length > 0 && s[0] === "_") s = s.slice(1);
+  while (s.length > 0 && s[s.length-1] === "_") s = s.slice(0,-1);
+  return s || "produto";
+}
+function stripExt(name) { var i = name.lastIndexOf("."); return i===-1 ? name : name.slice(0,i); }
+function showToast(msg, type) {
+  type = type || "success";
+  var el = document.getElementById("toast");
+  el.textContent = msg; el.className = "toast " + type + " show";
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(function(){ el.classList.remove("show"); }, 3500);
+}
+function getData(key) { try { return JSON.parse(localStorage.getItem(key)||"[]"); } catch(e){ return []; } }
+function setData(key,val) { localStorage.setItem(key,JSON.stringify(val)); }
+
+var catalogPageMap = {
+  "diorama":"catalogo_diorama.html",
+  "action-figures":"outros_projetos.html (Action Figures)",
+  "produtos-funcionais":"outros_projetos.html (Funcionais)"
+};
+function updateCatalogInfo() {
+  var v = document.getElementById("productCatalog").value;
+  document.getElementById("catalogInfoLink").textContent = catalogPageMap[v] || "";
+}
+
+/* ============================================================
+   CANVAS / WEBP
+   ============================================================ */
+var canvas = document.getElementById("convertCanvas");
+var ctx    = canvas.getContext("2d");
+
+function convertToWebP(file, quality) {
+  return new Promise(function(resolve, reject) {
+    var reader = new FileReader();
+    reader.onerror = function(){ reject(new Error("Erro leitura")); };
+    reader.onload  = function(ev){
+      var img = new Image();
+      img.onerror = function(){ reject(new Error("Erro imagem")); };
+      img.onload  = function(){
+        var w = img.width, h = img.height;
+        if (w > 1600) { h = Math.round(h*1600/w); w = 1600; }
+        canvas.width = w; canvas.height = h;
+        ctx.clearRect(0,0,w,h); ctx.drawImage(img,0,0,w,h);
+        resolve(canvas.toDataURL("image/webp", quality));
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+/* ============================================================
+   UPLOAD
+   ============================================================ */
+function setupUpload(inputId, areaId, onResult, barId, statusId) {
+  var input = document.getElementById(inputId);
+  var area  = document.getElementById(areaId);
+  function run(files) {
+    var arr = [];
+    for (var i=0;i<files.length;i++) { if (files[i].type.indexOf("image/")===0) arr.push(files[i]); }
+    if (!arr.length) return;
+    var q   = parseInt(document.getElementById("webpQuality").value)/100;
+    var bar = document.getElementById(barId);
+    var st  = document.getElementById(statusId);
+    var box = bar.parentElement;
+    box.style.display="block"; bar.style.width="0%";
+    var out=[],n=0;
+    function step(){
+      if (n>=arr.length){
+        bar.style.width="100%"; st.textContent="Convertida(s): "+out.length;
+        setTimeout(function(){ box.style.display="none"; bar.style.width="0%"; },1500);
+        onResult(out); return;
+      }
+      var f=arr[n]; st.textContent="Convertendo "+(n+1)+"/"+arr.length+": "+f.name;
+      bar.style.width=Math.round((n/arr.length)*100)+"%"; n++;
+      convertToWebP(f,q).then(function(url){ out.push({file:f,name:f.name,dataUrl:url}); step(); }).catch(function(){ step(); });
+    }
+    step();
+  }
+  input.addEventListener("change",function(){ if(input.files.length) run(input.files); input.value=""; });
+  if (area) {
+    area.addEventListener("dragover", function(e){ e.preventDefault(); area.classList.add("drag-over"); });
+    area.addEventListener("dragleave",function(){ area.classList.remove("drag-over"); });
+    area.addEventListener("drop",     function(e){ e.preventDefault(); area.classList.remove("drag-over"); run(e.dataTransfer.files); });
+  }
+}
+
+/* ============================================================
+   PREVIEWS
+   ============================================================ */
+function renderPreviews(cId, items, rm) {
+  var c = document.getElementById(cId); c.innerHTML="";
+  items.forEach(function(it,i){
+    var d=document.createElement("div"); d.className="preview-item";
+    var im=document.createElement("img"); im.src=it.dataUrl; im.alt=it.name; d.appendChild(im);
+    var b=document.createElement("div"); b.className="preview-badge"; b.textContent="WebP"; d.appendChild(b);
+    var l=document.createElement("div"); l.className="preview-label"; l.textContent=stripExt(it.name)+".webp"; d.appendChild(l);
+    if (rm) {
+      var x=document.createElement("button"); x.className="remove-preview"; x.textContent="x";
+      x.onclick=(function(idx,id){ return function(){
+        if (id==="mainImgPreview")      { mainImgData=null; }
+        else if (id==="thumbsPreview")  { thumbsData.splice(idx,1); renderPreviews(id,thumbsData,true); return; }
+        else if (id==="carouselImgPreview") { carouselData=null; }
+        d.remove();
+      }; })(i,cId);
+      d.appendChild(x);
+    }
+    c.appendChild(d);
+  });
+}
+
+/* ============================================================
+   GITHUB API — UTF-8 CORRETO
+   ============================================================ */
+function ghReq(method, path, body) {
+  if (!GITHUB_TOKEN) { askForToken(); return Promise.reject(new Error("Token ausente")); }
+  var o = { method:method, headers:{ "Authorization":"token "+GITHUB_TOKEN, "Accept":"application/vnd.github.v3+json" } };
+  if (body) o.body = JSON.stringify(body);
+  return fetch(GITHUB_API+path, o).then(function(r){
+    if (!r.ok) return r.json().then(function(e){ throw new Error(e.message||"Erro GitHub"); });
+    return r.json();
+  });
+}
+
+function ghGet(path) {
+  return ghReq("GET","/repos/"+GITHUB_OWNER+"/"+GITHUB_REPO+"/contents/"+path+"?ref="+GITHUB_BRANCH)
+    .then(function(d){
+      var binary=atob(d.content.replace(/\n/g,""));
+      var bytes=new Uint8Array(binary.length);
+      for (var i=0;i<binary.length;i++) bytes[i]=binary.charCodeAt(i);
+      return { content: new TextDecoder("utf-8").decode(bytes), sha: d.sha };
+    });
+}
+
+function ghPut(path, content, sha, msg) {
+  var bytes=new TextEncoder().encode(content);
+  var binary="";
+  for (var i=0;i<bytes.length;i++) binary+=String.fromCharCode(bytes[i]);
+  var body={ message:msg||"Admin update", content:btoa(binary), branch:GITHUB_BRANCH };
+  if (sha) body.sha=sha;
+  return ghReq("PUT","/repos/"+GITHUB_OWNER+"/"+GITHUB_REPO+"/contents/"+path, body);
+}
+
+function ghGetSHA(path) {
+  return ghReq("GET","/repos/"+GITHUB_OWNER+"/"+GITHUB_REPO+"/contents/"+path+"?ref="+GITHUB_BRANCH)
+    .then(function(d){ return d.sha; }).catch(function(){ return null; });
+}
+
+function uploadImg(file, dest) {
+  var q=parseInt(document.getElementById("webpQuality").value)/100;
+  return convertToWebP(file,q).then(function(url){
+    var b64raw=url.split(",")[1];
+    return ghGetSHA(dest).then(function(sha){
+      var body={ message:"Upload via admin", content:b64raw, branch:GITHUB_BRANCH };
+      if (sha) body.sha=sha;
+      return ghReq("PUT","/repos/"+GITHUB_OWNER+"/"+GITHUB_REPO+"/contents/"+dest, body);
+    });
+  });
+}
+
+/* ============================================================
+   SINCRONIZAR DO GITHUB
+   ============================================================ */
+function syncFromGitHub() {
+  var statusEl=document.getElementById("syncStatus");
+  statusEl.textContent="Sincronizando...";
+  var base="https://raw.githubusercontent.com/"+GITHUB_OWNER+"/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/";
+  var p1=fetch(base+"assets/json/products.json?t="+Date.now()).then(function(r){ return r.json(); }).then(function(d){ setData("products_diorama",d); });
+  var p2=fetch(base+"assets/json/outros_produtos.json?t="+Date.now()).then(function(r){ return r.json(); }).then(function(d){ setData("products_outros",d); });
+  var p3=fetch(base+"assets/json/carousel.json?t="+Date.now()).then(function(r){ return r.json(); }).then(function(d){ setData("carousel",d); });
+  Promise.all([p1,p2,p3]).then(function(){
+    statusEl.textContent="Sincronizado!";
+    loadAllLists(); updateAllJSON();
+    showToast("Produtos carregados do GitHub!","info");
+  }).catch(function(err){
+    console.error(err); statusEl.textContent="Erro ao sincronizar.";
+    showToast("Erro ao sincronizar.","error");
+  });
+}
+
+/* ============================================================
+   CORRIGIR ENCODING E SALVAR
+   ============================================================ */
+function fixEncodingAndSave() {
+  var btn = document.querySelector('.btn-warning[onclick="fixEncodingAndSave()"]');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Corrigindo...';
+
+  var p1 = saveJsonToGitHub("products_diorama", "Corrige encoding products.json");
+  var p2 = saveJsonToGitHub("products_outros", "Corrige encoding outros_produtos.json");
+  var p3 = saveJsonToGitHub("carousel", "Corrige encoding carousel.json");
+
+  Promise.all([p1, p2, p3]).then(function() {
+    showToast("Acentos corrigidos e JSONs salvos no GitHub!", "success");
+    btn.innerHTML = '<i class="fas fa-wrench"></i> Corrigir Acentos';
+    btn.disabled = false;
+    syncFromGitHub(); // Recarrega para garantir que o local está com o encoding correto
+  }).catch(function(err) {
+    console.error(err);
+    showToast("Erro ao corrigir acentos: " + err.message, "error");
+    btn.innerHTML = '<i class="fas fa-wrench"></i> Corrigir Acentos';
+    btn.disabled = false;
+  });
+}
+
+/* ============================================================
+   SALVAR JSON NO GITHUB — SHA FRESCO
+   ============================================================ */
+function saveJsonToGitHub(jsonKey, commitMessage) {
+  var path = "";
+  if (jsonKey === "products_diorama") path = "assets/json/products.json";
+  else if (jsonKey === "products_outros") path = "assets/json/outros_produtos.json";
+  else if (jsonKey === "carousel") path = "assets/json/carousel.json";
+  else return Promise.reject(new Error("Chave JSON desconhecida: " + jsonKey));
+
+  var content = JSON.stringify(cleanForExport(getData(jsonKey)), null, 2);
+  return ghGetSHA(path).then(function(sha){ return ghPut(path, content, sha, commitMessage || "Atualiza via admin"); });
+}
+
+/* ============================================================
+   PRODUTOS — ADICIONAR
+   ============================================================ */
+function generateId(catalog) {
+  var key=catalog==="diorama"?"products_diorama":"products_outros";
+  var list=getData(key);
+  var prefix=catalog==="diorama"?"d":catalog==="action-figures"?"af":"pf";
+  if (catalog!=="diorama") list=list.filter(function(p){ return p.category===catalog; });
+  var nums=list.map(function(p){ var n=parseInt((p.id||"").replace(/[^0-9]/g,"")); return isNaN(n)?0:n; });
+  var next=nums.length?Math.max.apply(null,nums)+1:1;
+  return prefix+"-"+(next<10?"0"+next:String(next));
+}
+
+function addProduct() {
+  var catalog=document.getElementById("productCatalog").value;
+  var name=document.getElementById("productName").value.trim();
+  var desc=document.getElementById("productDescription").value.trim();
+  var price=document.getElementById("productPrice").value.trim();
+  if (!name)        { showToast("Preencha o nome.","error"); return; }
+  if (!desc)        { showToast("Preencha a descricao.","error"); return; }
+  if (!mainImgData) { showToast("Selecione a imagem principal.","error"); return; }
+  var btn=document.getElementById("addProductBtn");
+  btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Salvando...';
+  var safe=safeName(name);
+  var folder=catalog==="diorama"?"assets/img/dioramas/":"assets/img/outros/";
+  var mainPath=folder+safe+".webp";
+  uploadImg(mainImgData.file,mainPath).then(function(){
+    var thumbPaths=[],ti=0;
+    function nextThumb(){
+      if (ti>=thumbsData.length) return Promise.resolve();
+      var tp=folder+safe+"_"+(ti+1)+".webp"; thumbPaths.push(tp);
+      return uploadImg(thumbsData[ti].file,tp).then(function(){ ti++; return nextThumb(); });
+    }
+    return nextThumb().then(function(){
+      var product={ id:generateId(catalog), name:name, description:desc, price:price||"", mainImage:mainPath, thumbnails:thumbPaths };
+      if (catalog!=="diorama") product.category=catalog;
+      var jsonKey=catalog==="diorama"?"products_diorama":"products_outros";
+      var list=getData(jsonKey); list.push(product); setData(jsonKey,list);
+      return saveJsonToGitHub(jsonKey,"Adiciona produto via admin");
+    });
+  }).then(function(){
+    showToast('"'+name+'" adicionado!','info');
+    clearForm(); loadAllLists(); updateAllJSON();
+  }).catch(function(err){
+    console.error(err); showToast(err.message||"Erro ao salvar.","error");
+  }).then(function(){
+    btn.disabled=false;
+    btn.innerHTML='<i class="fas fa-check"></i> Adicionar Produto';
+  });
+}
+
+function addCarouselItem() {
+  var alt=document.getElementById("carouselAlt").value.trim();
+  if (!carouselData) { showToast("Selecione uma imagem.","error"); return; }
+  var sName=safeName(alt||"carrossel");
+  var imgPath="assets/img/dioramas/"+sName+".webp";
+  var jsonKey="carousel";
+  uploadImg(carouselData.file,imgPath)
+    .then(function(){
+      var list=getData(jsonKey);
+      list.push({ src:imgPath, alt:alt||"Imagem do carrossel" });
+      setData(jsonKey,list);
+      return saveJsonToGitHub(jsonKey,"Carrossel via admin");
+    }).then(function(){
+      document.getElementById("carouselAlt").value="";
+      document.getElementById("carouselImgPreview").innerHTML="";
+      document.getElementById("carouselStatus").textContent="";
+      carouselData=null;
+      showToast("Imagem adicionada ao carrossel!","info");
+      loadCarouselList(); updateAllJSON();
+    }).catch(function(err){ console.error(err); showToast(err.message||"Erro.","error"); });
+}
+
+function clearForm() {
+  document.getElementById("productName").value="";
+  document.getElementById("productDescription").value="";
+  document.getElementById("productPrice").value="";
+  document.getElementById("mainImgPreview").innerHTML="";
+  document.getElementById("thumbsPreview").innerHTML="";
+  document.getElementById("mainStatus").textContent="";
+  document.getElementById("thumbsStatus").textContent="";
+  mainImgData=null; thumbsData=[];
+}
+
+/* ============================================================
+   LISTAS E ACCORDION
+   ============================================================ */
+function loadAllLists() {
+  loadList("products_diorama","listDiorama","diorama");
+  loadList("products_outros","listActionFigures","action-figures");
+  loadList("products_outros","listFuncionais","produtos-funcionais");
+  loadCarouselList();
+}
+
+function loadList(key, cId, filter) {
+  var container=document.getElementById(cId);
+  var list=getData(key);
+  if (filter!=="diorama") list=list.filter(function(p){ return p.category===filter; });
+
+  /* Atualiza contador no header do accordion */
+  var countMap={ "diorama":"count-diorama", "action-figures":"count-action", "produtos-funcionais":"count-funcionais" };
+  var countEl=document.getElementById(countMap[filter]);
+  if (countEl) countEl.textContent=list.length+" produto"+(list.length===1?"":"s");
+
+  if (!list.length) {
+    container.innerHTML='<p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhum produto. Sincronize para carregar.</p>';
+    return;
+  }
+  container.innerHTML="";
+  list.forEach(function(p){
+    var badge=p.category==="action-figures"
+      ?'<span class="cat-badge cat-action">Action</span>'
+      :p.category==="produtos-funcionais"
+        ?'<span class="cat-badge cat-funcional">Funcional</span>'
+        :'<span class="cat-badge cat-diorama">Diorama</span>';
+    var imgSrc=p.mainImage
+      ?"https://raw.githubusercontent.com/"+GITHUB_OWNER+"/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/"+p.mainImage
+      :"";
+    var d=document.createElement("div"); d.className="product-list-item";
+    d.innerHTML=
+      '<img src="'+imgSrc+'" onerror="this.style.background=\'#333\'">'+
+      '<div class="product-list-info"><strong>'+p.name+' '+badge+'</strong>'+
+      '<span>ID: '+p.id+' — '+(p.price||"Sob consulta")+'</span></div>'+
+      '<div class="product-list-actions">' +
+      '<button class="btn-icon btn-icon-edit" onclick="openEditModal(\''+key+'\',\''+p.id+'\')" title="Editar"><i class="fas fa-pen"></i></button>' +
+      '<button class="btn-icon btn-icon-delete" onclick="removeProduct(\''+key+'\',\''+p.id+'\')" title="Remover"><i class="fas fa-trash"></i></button></div>';
+    container.appendChild(d);
+  });
+}
+
+function loadCarouselList() {
+  var container=document.getElementById("carouselList");
+  var list=getData("carousel");
+  if (!list.length) {
+    container.innerHTML='<p style="color:rgba(255,255,255,0.4);font-size:13px">Nenhuma imagem.</p>';
+    return;
+  }
+  container.innerHTML="";
+  list.forEach(function(item,idx){
+    var imgSrc=item.src
+      ?"https://raw.githubusercontent.com/"+GITHUB_OWNER+"/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/"+item.src
+      :"";
+    var d=document.createElement("div"); d.className="product-list-item";
+    d.innerHTML=
+      '<img src="'+imgSrc+'" onerror="this.style.background=\'#333\'">'+
+      '<div class="product-list-info"><strong>'+item.alt+'</strong><span>'+item.src+'</span></div>'+
+      '<div class="product-list-actions"><button class="btn-icon btn-icon-delete" onclick="removeCarouselItem('+idx+')"><i class="fas fa-trash"></i></button></div>';
+    container.appendChild(d);
+  });
+}
+
+/* ============================================================
+   REMOVER — SALVA AUTOMATICAMENTE NO GITHUB
+   ============================================================ */
+function removeProduct(key, id) {
+  if (!confirm("Remover este produto?")) return;
+  var list=getData(key).filter(function(p){ return p.id!==id; });
+  setData(key,list);
+  loadAllLists(); updateAllJSON();
+  showToast("Removendo do GitHub...","info");
+  saveJsonToGitHub(key,"Remove produto via admin")
+    .then(function(){ showToast("Produto removido e salvo no GitHub!","info"); })
+    .catch(function(err){ console.error(err); showToast("Removido local, mas erro ao salvar: "+err.message,"error"); });
+}
+
+function removeCarouselItem(idx) {
+  if (!confirm("Remover esta imagem?")) return;
+  var list=getData("carousel");
+  list.splice(idx,1);
+  setData("carousel",list);
+  loadCarouselList(); updateAllJSON();
+  showToast("Removendo do GitHub...","info");
+  saveJsonToGitHub("carousel","Remove item carrossel via admin")
+    .then(function(){ showToast("Carrossel atualizado no GitHub!","info"); })
+    .catch(function(err){ showToast("Erro ao salvar carrossel: "+err.message,"error"); });
+}
+
+function cleanForExport(arr) {
+  return arr.map(function(p){
+    var c={}, keys=Object.keys(p);
+    for (var i=0;i<keys.length;i++) { if (keys[i].charAt(0)!=="_") c[keys[i]]=p[keys[i]]; }
+    return c;
+  });
+}
+
+function updateAllJSON() {
+  document.getElementById("jsonDiorama").textContent =JSON.stringify(cleanForExport(getData("products_diorama")),null,2);
+  document.getElementById("jsonOutros").textContent  =JSON.stringify(cleanForExport(getData("products_outros")), null,2);
+  document.getElementById("jsonCarousel").textContent=JSON.stringify(cleanForExport(getData("carousel")),        null,2);
+}
+
+function copyJSON(type) {
+  var map={ diorama:"jsonDiorama", outros:"jsonOutros", carousel:"jsonCarousel" };
+  navigator.clipboard.writeText(document.getElementById(map[type]).textContent)
+    .then(function(){ showToast("JSON copiado!","info"); })
+    .catch(function(){ showToast("Erro ao copiar.","error"); });
+}
+
+/* ============================================================
+   EDITAR PRODUTO
+   ============================================================ */
+function openEditModal(key, id) {
+  var list = getData(key);
+  var product = null;
+  for (var i=0; i<list.length; i++) { if (list[i].id===id) { product=list[i]; break; } }
+  if (!product) { showToast("Produto nao encontrado.","error"); return; }
+
+  document.getElementById("editProductId").value   = id;
+  document.getElementById("editProductKey").value  = key;
+  document.getElementById("editName").value        = product.name;
+  document.getElementById("editDescription").value = product.description;
+  document.getElementById("editPrice").value       = product.price;
+
+  /* Preenche imagens atuais */
+  var currentImgsContainer = document.getElementById("editCurrentImgs");
+  currentImgsContainer.innerHTML = "";
+  var baseImgUrl = "https://raw.githubusercontent.com/"+GITHUB_OWNER+"/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/";
+  if (product.mainImage) {
+    var mainImgWrap = document.createElement("div");
+    mainImgWrap.className = "edit-img-wrap";
+    mainImgWrap.innerHTML = '<img src="'+baseImgUrl+product.mainImage+'" alt="Principal"><span>Principal</span>';
+    currentImgsContainer.appendChild(mainImgWrap);
+  }
+  if (product.thumbnails && product.thumbnails.length > 0) {
+    product.thumbnails.forEach(function(thumb, idx) {
+      var thumbImgWrap = document.createElement("div");
+      thumbImgWrap.className = "edit-img-wrap";
+      thumbImgWrap.innerHTML = '<img src="'+baseImgUrl+thumb+'" alt="Miniatura '+ (idx+1) +'"><span>Miniatura '+(idx+1)+'</span>';
+      currentImgsContainer.appendChild(thumbImgWrap);
+    });
+  }
+
+  /* Limpa previews de novas imagens */
+  document.getElementById("editMainPreview").innerHTML = "";
+  document.getElementById("editThumbsPreview").innerHTML = "";
+  document.getElementById("editMainStatus").textContent = "";
+  document.getElementById("editThumbsStatus").textContent = "";
+  editNewMainImg = null;
+  editNewThumbs  = [];
+
+  document.getElementById("editModal").classList.add("open");
+
+  /* Upload imagem principal */
+  var mainInput = document.getElementById("editMainInput");
+  mainInput.value = "";
+  mainInput.onchange = function() {
+    if (!mainInput.files.length) return;
+    var q = parseInt(document.getElementById("webpQuality").value)/100;
+    document.getElementById("editMainStatus").textContent = "Convertendo...";
+    convertToWebP(mainInput.files[0], q).then(function(url) {
+      editNewMainImg = { file: mainInput.files[0], dataUrl: url };
+      renderPreviews("editMainPreview", [editNewMainImg], false);
+      document.getElementById("editMainStatus").textContent = "Pronta para upload.";
+    }).catch(function(err){
+      document.getElementById("editMainStatus").textContent = "Erro: "+err.message;
+    });
+  };
+
+  /* Upload miniaturas */
+  var thumbInput = document.getElementById("editThumbsInput");
+  thumbInput.value = "";
+  thumbInput.onchange = function() {
+    var files = Array.from(thumbInput.files).filter(function(f){ return f.type.indexOf("image/")===0; });
+    if (!files.length) return;
+    var q = parseInt(document.getElementById("webpQuality").value)/100;
+    document.getElementById("editThumbsStatus").textContent = "Convertendo...";
+    var converted = [], n = 0;
+    function step() {
+      if (n >= files.length) {
+        editNewThumbs = editNewThumbs.concat(converted);
+        renderPreviews("editThumbsPreview", editNewThumbs, false);
+        document.getElementById("editThumbsStatus").textContent = converted.length+" miniatura(s) prontas.";
+        return;
+      }
+      convertToWebP(files[n], q).then(function(url) {
+        converted.push({ file: files[n], dataUrl: url }); n++; step();
+      }).catch(function(){ n++; step(); });
+    }
+    step();
+  };
+}
+
+function closeEditModal() {
+  document.getElementById("editModal").classList.remove("open");
+  editNewMainImg = null;
+  editNewThumbs  = [];
+}
+
+function saveEdit() {
+  var id  = document.getElementById("editProductId").value;
+  var key = document.getElementById("editProductKey").value;
+  var name  = document.getElementById("editName").value.trim();
+  var desc  = document.getElementById("editDescription").value.trim();
+  var price = document.getElementById("editPrice").value.trim();
+  if (!name) { showToast("Preencha o nome.","error"); return; }
+  if (!desc)  { showToast("Preencha a descricao.","error"); return; }
+
+  var btn = document.getElementById("editSaveBtn");
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Salvando...';
+
+  var list    = getData(key);
+  var product = null;
+  for (var i=0; i<list.length; i++) { if (list[i].id===id) { product=list[i]; break; } }
+  if (!product) { showToast("Produto nao encontrado.","error"); btn.disabled=false; btn.innerHTML='<i class="fas fa-save"></i> Salvar Alteracoes'; return; }
+
+  /* Atualiza campos de texto imediatamente */
+  product.name        = name;
+  product.description = desc;
+  product.price       = price;
+
+  var safe   = safeName(name);
+  var folder = (key==="products_diorama") ? "assets/img/dioramas/" : "assets/img/outros/";
+
+  /* Faz uploads das novas imagens se houver */
+  var uploadMainP = editNewMainImg
+    ? uploadImg(editNewMainImg.file, folder+safe+".webp").then(function(){ product.mainImage = folder+safe+".webp"; })
+    : Promise.resolve();
+
+  uploadMainP.then(function() {
+    if (!editNewThumbs.length) return Promise.resolve();
+    var currentCount = product.thumbnails ? product.thumbnails.length : 0;
+    var ti = 0;
+    function nextThumb() {
+      if (ti >= editNewThumbs.length) return Promise.resolve();
+      var tp = folder+safe+"_"+(currentCount+ti+1)+".webp";
+      return uploadImg(editNewThumbs[ti].file, tp).then(function() {
+        if (!product.thumbnails) product.thumbnails = [];
+        product.thumbnails.push(tp);
+        ti++; return nextThumb();
+      });
+    }
+    return nextThumb();
+  }).then(function() {
+    setData(key, list);
+    return saveJsonToGitHub(key, "Edita produto via admin");
+  }).then(function() {
+    showToast('"'+name+'" atualizado!','info');
+    loadAllLists(); updateAllJSON();
+    closeEditModal();
+  }).catch(function(err) {
+    console.error(err);
+    showToast(err.message||"Erro ao salvar.","error");
+  }).then(function() {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-save"></i> Salvar Alteracoes';
+  });
+}
+
+/* ============================================================
+   CALCULADORA 3D
+   ============================================================ */
+function calcFmt(v){ return "R$ "+v.toFixed(2).replace(".",","); }
+
+function calcRun(){
+  var h =parseFloat(document.getElementById("calc_hours").value)         ||0;
+  var m =parseFloat(document.getElementById("calc_minutes").value)       ||0;
+  var w =parseFloat(document.getElementById("calc_weight").value)        ||0;
+  var fp=parseFloat(document.getElementById("calc_filamentPrice").value) ||0;
+  var pw=parseFloat(document.getElementById("calc_power").value)         ||0;
+  var er=parseFloat(document.getElementById("calc_energyRate").value)    ||0;
+  var mc=parseFloat(document.getElementById("calc_maintenance").value)   ||0;
+  var lc=parseFloat(document.getElementById("calc_labor").value)         ||0;
+  var totalH=h+(m/60);
+  var cFil=(w/1000)*fp;
+  var cEng=totalH*(pw/1000)*er;
+  var cMnt=totalH*mc;
+  var cLab=totalH*lc;
+  var cTot=cFil+cEng+cMnt+cLab;
+  document.getElementById("calc_r_filament").textContent   =calcFmt(cFil);
+  document.getElementById("calc_r_energy").textContent     =calcFmt(cEng);
+  document.getElementById("calc_r_maintenance").textContent=calcFmt(cMnt);
+  document.getElementById("calc_r_labor").textContent      =calcFmt(cLab);
+  document.getElementById("calc_r_total").textContent      =calcFmt(cTot);
+  document.getElementById("calc_r_30").textContent         =calcFmt(cTot*1.30);
+  document.getElementById("calc_r_50").textContent         =calcFmt(cTot*1.50);
+  document.getElementById("calc_r_100").textContent        =calcFmt(cTot*2.00);
+  document.getElementById("calc_r_150").textContent        =calcFmt(cTot*2.50);
+  document.getElementById("calc_r_200").textContent        =calcFmt(cTot*3.00);
+  return { cFil:cFil, cEng:cEng, cMnt:cMnt, cLab:cLab, cTot:cTot };
+}
+
+function calcReset(){
+  document.getElementById("calc_projectName").value="";
+  document.getElementById("calc_clientName").value="";
+  document.getElementById("calc_hours").value="1";
+  document.getElementById("calc_minutes").value="0";
+  document.getElementById("calc_weight").value="0";
+  document.getElementById("calc_filamentPrice").value="85";
+  document.getElementById("calc_power").value="90";
+  document.getElementById("calc_energyRate").value="0.73";
+  document.getElementById("calc_maintenance").value="0.80";
+  document.getElementById("calc_labor").value="5";
+  calcRun();
+  document.getElementById("calc_notification").style.display="none";
+}
+
+function calcSaveEmailConfig(){
+  var s=document.getElementById("calc_ejsService").value.trim();
+  var t=document.getElementById("calc_ejsTemplate").value.trim();
+  var p=document.getElementById("calc_ejsPublicKey").value.trim();
+  if (!s||!t||!p){ calcNotify("Preencha todas as credenciais.","error"); return; }
+  localStorage.setItem("shakawEmailJSConfig",JSON.stringify({serviceId:s,templateId:t,publicKey:p}));
+  if (typeof emailjs!=="undefined") emailjs.init(p);
+  document.getElementById("calc_sendBtn").disabled=false;
+  document.getElementById("calc_emailSetup").style.display="none";
+  calcNotify("Configuracao salva!","success");
+}
+
+function calcLoadEmailConfig(){
+  var saved=localStorage.getItem("shakawEmailJSConfig");
+  var cfg=saved?JSON.parse(saved):{serviceId:EJS_SERVICE,templateId:EJS_TEMPLATE,publicKey:EJS_KEY};
+  document.getElementById("calc_ejsService").value  =cfg.serviceId;
+  document.getElementById("calc_ejsTemplate").value =cfg.templateId;
+  document.getElementById("calc_ejsPublicKey").value=cfg.publicKey;
+  if (typeof emailjs!=="undefined") emailjs.init(cfg.publicKey);
+  if (cfg.serviceId&&cfg.serviceId!=="SEU_SERVICE_ID"){
+    document.getElementById("calc_sendBtn").disabled=false;
+    document.getElementById("calc_emailSetup").style.display="none";
+  }
+}
+
+function calcSendEmail(){
+  var name =document.getElementById("calc_senderName").value.trim();
+  var email=document.getElementById("calc_senderEmail").value.trim();
+  if (!name||!email){ calcNotify("Preencha nome e e-mail.","error"); return; }
+  var saved=localStorage.getItem("shakawEmailJSConfig");
+  var cfg=saved?JSON.parse(saved):{serviceId:EJS_SERVICE,templateId:EJS_TEMPLATE,publicKey:EJS_KEY};
+  if (!cfg.serviceId||cfg.serviceId==="SEU_SERVICE_ID"){
+    calcNotify("Configure o EmailJS primeiro.","error");
+    document.getElementById("calc_emailSetup").style.display="block";
+    return;
+  }
+  var c=calcRun();
+  var params={
+    from_name:name, to_email:email,
+    client_name:document.getElementById("calc_clientName").value||"Nao informado",
+    project_name:document.getElementById("calc_projectName").value||"Impressao 3D",
+    custom_message:document.getElementById("calc_emailMsg").value||"",
+    filament_cost:calcFmt(c.cFil), energy_cost:calcFmt(c.cEng),
+    maintenance_cost:calcFmt(c.cMnt), labor_cost:calcFmt(c.cLab),
+    total_cost:calcFmt(c.cTot),
+    profit_30:calcFmt(c.cTot*1.30), profit_50:calcFmt(c.cTot*1.50),
+    profit_100:calcFmt(c.cTot*2.00), profit_150:calcFmt(c.cTot*2.50),
+    profit_200:calcFmt(c.cTot*3.00),
+    print_time:document.getElementById("calc_hours").value+"h "+document.getElementById("calc_minutes").value+"min",
+    filament_weight:document.getElementById("calc_weight").value+"g",
+    date:new Date().toLocaleDateString("pt-BR")
+  };
+  var btn=document.getElementById("calc_sendBtn");
+  btn.disabled=true;
+  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Enviando...';
+  emailjs.send(cfg.serviceId,cfg.templateId,params)
+    .then(function(){
+      calcNotify("Orcamento enviado para "+email+"!","success");
+      btn.innerHTML='<i class="fas fa-paper-plane"></i> Registrar Orcamento por E-mail';
+      btn.disabled=false;
+    },function(err){
+      calcNotify("Erro: "+JSON.stringify(err),"error");
+      btn.innerHTML='<i class="fas fa-paper-plane"></i> Registrar Orcamento por E-mail';
+      btn.disabled=false;
+    });
+}
+
+function calcNotify(msg,type){
+  var el=document.getElementById("calc_notification");
+  el.textContent=msg; el.style.display="block";
+  el.style.background=type==="success"?"rgba(46,204,113,0.15)":type==="error"?"rgba(220,53,69,0.15)":"rgba(79,195,247,0.15)";
+  el.style.border="1px solid "+(type==="success"?"#2ecc71":type==="error"?"#dc3545":"#4fc3f7");
+  el.style.color=type==="success"?"#2ecc71":type==="error"?"#ff6b6b":"#4fc3f7";
+  el.style.borderRadius="8px"; el.style.padding="12px 16px";
+  el.style.fontWeight="bold"; el.style.textAlign="center";
+  if (type!=="error") setTimeout(function(){ el.style.display="none"; },5000);
+}
+
+/* ============================================================
+   INICIALIZACAO DOM
+   ============================================================ */
+document.addEventListener("DOMContentLoaded",function(){
+  document.getElementById("loginScreen").style.display ="block";
+  document.getElementById("adminContent").style.display="none";
+
+  document.getElementById("adminPassword").addEventListener("keydown",function(e){
+    if (e.key==="Enter") checkPassword();
+  });
+
+  document.querySelectorAll(".tab-btn").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      document.querySelectorAll(".tab-btn").forEach(function(b){ b.classList.remove("active"); });
+      document.querySelectorAll(".tab-content").forEach(function(c){ c.classList.remove("active"); });
+      btn.classList.add("active");
+      document.getElementById(btn.dataset.tab).classList.add("active");
+      if (btn.dataset.tab==="tab-json") updateAllJSON();
+      if (btn.dataset.tab==="tab-calc") calcRun();
+    });
+  });
+
+  setupUpload("mainImgInput","mainImgArea",function(r){
+    if (!r.length) return; mainImgData=r[0];
+    renderPreviews("mainImgPreview",[mainImgData],true);
+  },"mainProgressBar","mainStatus");
+
+  setupUpload("thumbsInput","thumbsArea",function(r){
+    thumbsData=thumbsData.concat(r);
+    renderPreviews("thumbsPreview",thumbsData,true);
+  },"thumbsProgressBar","thumbsStatus");
+
+  setupUpload("carouselImgInput","carouselArea",function(r){
+    if (!r.length) return; carouselData=r[0];
+    renderPreviews("carouselImgPreview",[carouselData],false);
+  },"carouselProgressBar","carouselStatus");
+
+  calcLoadEmailConfig();
+  calcRun();
+});
+</script>
 
 </body>
 </html>
+
