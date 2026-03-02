@@ -12,52 +12,6 @@
     "category": "produtos-funcionais"
   },
   {
-    "id": "af-01",
-    "name": "Funko Pop Taylor Swift",
-    "description": "Produto artesanal produzido em resina e pintado a mão. Altura aproximada de 14cm",
-    "price": "100,00",
-    "mainImage": "assets/img/outros/funko_pop_taylor_swift.webp",
-    "thumbnails": [
-      "assets/img/outros/funko_pop_taylor_swift_1.webp",
-      "assets/img/outros/funko_pop_taylor_swift_2.webp"
-    ],
-    "category": "action-figures"
-  },
-  {
-    "id": "af-01",
-    "name": "Legolas - Senhor dos Anéis",
-    "description": "Produto artesanal produzido em resina e pintado a mão. Altura aproximada de 15cm",
-    "price": "150,00",
-    "mainImage": "assets/img/outros/legolas_senhor_dos_aneis.webp",
-    "thumbnails": [
-      "assets/img/outros/legolas_senhor_dos_aneis_1.webp",
-      "assets/img/outros/legolas_senhor_dos_aneis_2.webp",
-      "assets/img/outros/legolas_senhor_dos_aneis_3.webp",
-      "assets/img/outros/legolas_senhor_dos_aneis_4.webp",
-      "assets/img/outros/legolas_senhor_dos_aneis_5.webp",
-      "assets/img/outros/legolas_senhor_dos_aneis_6.webp"
-    ],
-    "category": "action-figures"
-  },
-  {
-    "id": "af-01",
-    "name": "Dragão Branco de Olhos Azuis do mundo de Toon - Yugi-Oh",
-    "description": "Produto artesanal produzido em resina e pintado a mão. Altura aproximada de 24cm",
-    "price": "250,00",
-    "mainImage": "assets/img/outros/dragao_branco_de_olhos_azuis_do_mundo_de_toon_yugi_oh.webp",
-    "thumbnails": [
-      "assets/img/outros/dragao_branco_de_olhos_azuis_do_mundo_de_toon_yugi_oh_1.webp",
-      "assets/img/outros/dragao_branco_de_olhos_azuis_do_mundo_de_toon_yugi_oh_2.webp",
-      "assets/img/outros/dragao_branco_de_olhos_azuis_do_mundo_de_toon_yugi_oh_3.webp",
-      "assets/img/outros/dragao_branco_de_olhos_azuis_do_mundo_de_toon_yugi_oh_4.webp",
-      "assets/img/outros/dragao_branco_de_olhos_azuis_do_mundo_de_toon_yugi_oh_5.webp",
-      "assets/img/outros/dragao_branco_de_olhos_azuis_do_mundo_de_toon_yugi_oh_6.webp",
-      "assets/img/outros/dragao_branco_de_olhos_azuis_do_mundo_de_toon_yugi_oh_7.webp",
-      "assets/img/outros/dragao_branco_de_olhos_azuis_do_mundo_de_toon_yugi_oh_8.webp"
-    ],
-    "category": "action-figures"
-  },
-  {
     "id": "pf-02",
     "name": "Porta lápis dragão",
     "description": "Produto artesanal produzido em filamento PLA",
@@ -170,74 +124,6 @@
     "price": "130,00",
     "mainImage": "assets/img/outros/mecha_gengar_pokemon.webp",
     "thumbnails": [],
-    "category": "action-figures"
-  },
-  {
-    "id": "af-01",
-    "name": "Klee - Genshin Impact",
-    "description": "Produto artesanal produzido em resina e pintado a mão. Altura aproximada de 13cm",
-    "price": "120,00",
-    "mainImage": "assets/img/outros/klee_genshin_impact.webp",
-    "thumbnails": [
-      "assets/img/outros/klee_genshin_impact_1.webp",
-      "assets/img/outros/klee_genshin_impact_2.webp",
-      "assets/img/outros/klee_genshin_impact_3.webp",
-      "assets/img/outros/klee_genshin_impact_4.webp",
-      "assets/img/outros/klee_genshin_impact_5.webp",
-      "assets/img/outros/klee_genshin_impact_6.webp",
-      "assets/img/outros/klee_genshin_impact_7.webp"
-    ],
-    "category": "action-figures"
-  },
-  {
-    "id": "af-01",
-    "name": "Gengar Torre Fantasma - Pokémon",
-    "description": "Produto artesanal produzido em resina e pintado a mão. Altura aproximada de 15cm",
-    "price": "170,00",
-    "mainImage": "assets/img/outros/gengar_torre_fantasma_pokemon.webp",
-    "thumbnails": [
-      "assets/img/outros/gengar_torre_fantasma_pokemon_1.webp",
-      "assets/img/outros/gengar_torre_fantasma_pokemon_2.webp",
-      "assets/img/outros/gengar_torre_fantasma_pokemon_3.webp",
-      "assets/img/outros/gengar_torre_fantasma_pokemon_4.webp",
-      "assets/img/outros/gengar_torre_fantasma_pokemon_5.webp",
-      "assets/img/outros/gengar_torre_fantasma_pokemon_6.webp",
-      "assets/img/outros/gengar_torre_fantasma_pokemon_7.webp"
-    ],
-    "category": "action-figures"
-  },
-  {
-    "id": "af-01",
-    "name": "Gengar Torre Fantasma - Pokémon",
-    "description": "Produto artesanal produzido em resina e pintado a mão. Altura aproximada de 15cm",
-    "price": "200",
-    "mainImage": "assets/img/outros/gengar_torre_fantasma_pokemon.webp",
-    "thumbnails": [
-      "assets/img/outros/gengar_torre_fantasma_pokemon_1.webp",
-      "assets/img/outros/gengar_torre_fantasma_pokemon_2.webp",
-      "assets/img/outros/gengar_torre_fantasma_pokemon_3.webp",
-      "assets/img/outros/gengar_torre_fantasma_pokemon_4.webp",
-      "assets/img/outros/gengar_torre_fantasma_pokemon_5.webp",
-      "assets/img/outros/gengar_torre_fantasma_pokemon_6.webp",
-      "assets/img/outros/gengar_torre_fantasma_pokemon_7.webp"
-    ],
-    "category": "action-figures"
-  },
-  {
-    "id": "af-01",
-    "name": "Jigglypuff - Pokémon",
-    "description": "Produto artesanal produzido em resina e pintado a mão. Altura aproximada de 16cm",
-    "price": "150,00",
-    "mainImage": "assets/img/outros/jigglypuff_pokemon.webp",
-    "thumbnails": [
-      "assets/img/outros/jigglypuff_pokemon_1.webp",
-      "assets/img/outros/jigglypuff_pokemon_2.webp",
-      "assets/img/outros/jigglypuff_pokemon_3.webp",
-      "assets/img/outros/jigglypuff_pokemon_4.webp",
-      "assets/img/outros/jigglypuff_pokemon_5.webp",
-      "assets/img/outros/jigglypuff_pokemon_6.webp",
-      "assets/img/outros/jigglypuff_pokemon_7.webp"
-    ],
     "category": "action-figures"
   }
 ]
