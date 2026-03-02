@@ -205,5 +205,22 @@
       "assets/img/outros/gengar_torre_fantasma_pokemon_7.webp"
     ],
     "category": "action-figures"
+  },
+  {
+    "id": "af-01",
+    "name": "Gengar Torre Fantasma - Pokémon",
+    "description": "Produto artesanal produzido em resina e pintado a mão. Altura aproximada de 15cm",
+    "price": "200",
+    "mainImage": "assets/img/outros/gengar_torre_fantasma_pokemon.webp",
+    "thumbnails": [
+      "assets/img/outros/gengar_torre_fantasma_pokemon_1.webp",
+      "assets/img/outros/gengar_torre_fantasma_pokemon_2.webp",
+      "assets/img/outros/gengar_torre_fantasma_pokemon_3.webp",
+      "assets/img/outros/gengar_torre_fantasma_pokemon_4.webp",
+      "assets/img/outros/gengar_torre_fantasma_pokemon_5.webp",
+      "assets/img/outros/gengar_torre_fantasma_pokemon_6.webp",
+      "assets/img/outros/gengar_torre_fantasma_pokemon_7.webp"
+    ],
+    "category": "action-figures"
   }
 ]
