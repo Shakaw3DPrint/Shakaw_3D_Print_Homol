@@ -21,7 +21,6 @@
     <div class="header-links">
       <a href="home.html"><i class="fas fa-home"></i> Início</a>
       <a href="catalogo.html"><i class="fas fa-box-open"></i> Catálogo</a>
-      <a href="contatos.html"><i class="fas fa-box-open"></i> Contatos</a>
       <a href="https://www.instagram.com/shakaw3dprint" target="_blank">
         <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
              alt="Instagram"
@@ -61,9 +60,9 @@
 
         <div class="home-buttons">
           <a href="catalogo.html" class="home-btn-primary">
-  <i class="fas fa-warehouse"></i>
-  Ver catálogo completo
-</a>
+            <i class="fas fa-warehouse"></i>
+            Ver catálogo completo
+          </a>
         </div>
       </div>
 
@@ -86,11 +85,10 @@
       </aside>
     </section>
 
-    <!-- CARROSSEL DE ÚLTIMAS POSTAGENS DO INSTAGRAM -->
+    <!-- CARROSSEL DE ÚLTIMAS POSTAGENS DO INSTAGRAM (simulado com imagens do carousel.json) -->
     <section class="instagram-carousel-section">
       <h2>Últimas do Instagram</h2>
       <div class="instagram-carousel-container" id="instagramCarousel">
-        <!-- Placeholders – depois o JS troca por imagens -->
         <div class="instagram-carousel-item">Carregando posts...</div>
         <div class="instagram-carousel-item">Carregando posts...</div>
         <div class="instagram-carousel-item">Carregando posts...</div>
@@ -127,27 +125,25 @@
       </article>
     </section>
 
-    <!-- LINKS RÁPIDOS PARA CATÁLOGOS -->
+    <!-- LINKS RÁPIDOS PARA CATÁLOGO -->
     <section class="catalog-links">
       <div class="catalog-card">
-        <div class="catalog-card-title">Catálogo de Dioramas</div>
+        <div class="catalog-card-title">Catálogo Completo</div>
         <p class="catalog-card-text">
-          Modelos pensados para cenários de oficina e garagem, em escalas para
-          miniaturas automotivas.
+          Dioramas, miniaturas, action figures, peças funcionais e outros projetos em impressão 3D.
         </p>
         <a href="catalogo.html">
-  Abrir catálogo <i class="fas fa-arrow-right"></i>
-</a>
+          Abrir catálogo <i class="fas fa-arrow-right"></i>
+        </a>
       </div>
 
       <div class="catalog-card">
-        <div class="catalog-card-title">Outros Projetos</div>
+        <div class="catalog-card-title">Falar sobre um projeto</div>
         <p class="catalog-card-text">
-          Action figures, suportes, organizadores e outras ideias criadas a partir de
-          impressões 3D.
+          Tem uma ideia específica? Veja o catálogo e depois use a lista de interesse para falar com a gente.
         </p>
-        <a href="outros_projetos.html">
-          Ver projetos <i class="fas fa-arrow-right"></i>
+        <a href="catalogo.html">
+          Ir para o catálogo <i class="fas fa-arrow-right"></i>
         </a>
       </div>
     </section>
@@ -169,9 +165,7 @@
   <div id="interestPanel" class="interest-panel">
     <button class="close-interest-panel-btn" id="closeInterestPanelBtn">&times;</button>
     <h3>Sua Lista de Interesses</h3>
-    <ul id="interestList">
-      <!-- Itens serão carregados aqui via JS -->
-    </ul>
+    <ul id="interestList"></ul>
     <div id="interestTotal"></div>
     <button id="openContactModalBtn">Finalizar Registro de Interesse</button>
   </div>
@@ -212,9 +206,7 @@
 
         <div class="form-section">
           <h3>Itens de Interesse</h3>
-          <div id="selectedItemsSummary" class="items-summary">
-            <!-- Resumo dos itens será carregado aqui via JS -->
-          </div>
+          <div id="selectedItemsSummary" class="items-summary"></div>
           <input type="hidden" name="_subject" value="Novo Interesse no Site Shakaw 3D Print">
           <input type="hidden" name="_template" value="box">
           <input type="hidden" name="Itens de Interesse" id="itemsData">
@@ -229,7 +221,6 @@
   <!-- Botão Voltar ao Topo -->
   <button id="backToTopBtn" title="Voltar ao Topo"><i class="fas fa-arrow-up"></i></button>
 
-  <!-- Link para o script JavaScript unificado -->
   <script src="js/script.js"></script>
 </body>
 </html>
