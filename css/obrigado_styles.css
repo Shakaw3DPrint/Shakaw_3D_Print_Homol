@@ -2,13 +2,13 @@
 :root {
     --primary-color: #ff6b6b; /* Vermelho */
     --secondary-color: #4ecdc4; /* Azul-esverdeado */
-    --text-color: #333;
+    --text-color: #f4f4f4; /* Texto claro para fundo escuro */
     --light-text-color: #f4f4f4;
-    --bg-color: #f9f9f9;
-    --dark-bg-color: #2c3e50; /* Azul escuro */
-    --card-bg-color: #fff;
-    --border-color: #ddd;
-    --shadow-color: rgba(0, 0, 0, 0.1);
+    --bg-color: #00303f; /* Fundo principal escuro */
+    --dark-bg-color: #00202a; /* Tom mais escuro para cabeçalho/rodapé */
+    --card-bg-color: #004050; /* Fundo dos cards (um pouco mais claro que o bg-color) */
+    --border-color: rgba(255, 255, 255, 0.1); /* Borda clara para fundo escuro */
+    --shadow-color: rgba(0, 0, 0, 0.4); /* Sombra mais escura */
     --header-height: 80px;
     --footer-height: 60px;
 }
@@ -23,8 +23,8 @@
 body {
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--bg-color);
+    color: var(--text-color); /* Usa a nova cor de texto padrão */
+    background-color: var(--bg-color); /* Usa a nova cor de fundo padrão */
     scroll-behavior: smooth;
     display: flex;
     flex-direction: column;
@@ -49,7 +49,7 @@ a:hover {
 
 /* Cabeçalho (igual ao index_styles.css) */
 header {
-    background-color: var(--dark-bg-color);
+    background-color: var(--dark-bg-color); /* Tom mais escuro */
     color: var(--light-text-color);
     padding: 15px 0;
     position: sticky;
@@ -144,7 +144,7 @@ main {
 
 /* Seção de Obrigado */
 .thank-you-section {
-    background-color: var(--card-bg-color);
+    background-color: var(--card-bg-color); /* Usa a nova cor de fundo para cards */
     padding: 50px;
     border-radius: 8px;
     box-shadow: 0 4px 15px var(--shadow-color);
@@ -161,7 +161,7 @@ main {
 
 .thank-you-section p {
     font-size: 1.2em;
-    color: var(--text-color);
+    color: var(--text-color); /* Ajustado para texto claro */
     margin-bottom: 30px;
 }
 
@@ -183,7 +183,7 @@ main {
 
 /* Rodapé (igual ao index_styles.css) */
 footer {
-    background-color: var(--dark-bg-color);
+    background-color: var(--dark-bg-color); /* Tom mais escuro */
     color: var(--light-text-color);
     text-align: center;
     padding: 20px 0;

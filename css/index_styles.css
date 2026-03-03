@@ -2,13 +2,13 @@
 :root {
     --primary-color: #ff6b6b; /* Vermelho */
     --secondary-color: #4ecdc4; /* Azul-esverdeado */
-    --text-color: #333;
+    --text-color: #f4f4f4; /* Texto claro para fundo escuro */
     --light-text-color: #f4f4f4;
-    --bg-color: #f9f9f9;
-    --dark-bg-color: #2c3e50; /* Azul escuro */
-    --card-bg-color: #fff;
-    --border-color: #ddd;
-    --shadow-color: rgba(0, 0, 0, 0.1);
+    --bg-color: #00303f; /* Fundo principal escuro */
+    --dark-bg-color: #00202a; /* Tom mais escuro para cabeçalho/rodapé */
+    --card-bg-color: #004050; /* Fundo dos cards (um pouco mais claro que o bg-color) */
+    --border-color: rgba(255, 255, 255, 0.1); /* Borda clara para fundo escuro */
+    --shadow-color: rgba(0, 0, 0, 0.4); /* Sombra mais escura */
     --header-height: 80px;
     --footer-height: 60px;
 }
@@ -23,8 +23,8 @@
 body {
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--bg-color);
+    color: var(--text-color); /* Usa a nova cor de texto padrão */
+    background-color: var(--bg-color); /* Usa a nova cor de fundo padrão */
     scroll-behavior: smooth;
     display: flex;
     flex-direction: column;
@@ -40,16 +40,6 @@ a:hover {
     text-decoration: underline;
 }
 
-ul {
-    list-style: none;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
 /* Layout Geral */
 .container {
     max-width: 1200px;
@@ -59,7 +49,7 @@ img {
 
 /* Cabeçalho */
 header {
-    background-color: var(--dark-bg-color);
+    background-color: var(--dark-bg-color); /* Tom mais escuro */
     color: var(--light-text-color);
     padding: 15px 0;
     position: sticky;
@@ -87,7 +77,7 @@ header .container {
 }
 
 .logo img {
-    height: 50px; /* Ajuste o tamanho do logo conforme necessário */
+    height: 50px;
     width: auto;
     display: inline-block;
     vertical-align: middle;
@@ -196,7 +186,7 @@ main {
 
 .about-section h2, .features-section h2, .catalog-header h2 {
     font-size: 2.5em;
-    color: var(--dark-bg-color);
+    color: var(--light-text-color); /* Ajustado para texto claro */
     margin-bottom: 20px;
     position: relative;
     display: inline-block;
@@ -218,6 +208,7 @@ main {
     max-width: 800px;
     margin: 20px auto 30px auto;
     font-size: 1.1em;
+    color: var(--text-color); /* Ajustado para texto claro */
 }
 
 .features-grid {
@@ -228,7 +219,7 @@ main {
 }
 
 .feature-item {
-    background-color: var(--card-bg-color);
+    background-color: var(--card-bg-color); /* Usa a nova cor de fundo para cards */
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 10px var(--shadow-color);
@@ -247,20 +238,20 @@ main {
 
 .feature-item h3 {
     font-size: 1.5em;
-    color: var(--dark-bg-color);
+    color: var(--light-text-color); /* Ajustado para texto claro */
     margin-bottom: 10px;
 }
 
 .feature-item p {
     font-size: 1em;
-    color: #666;
+    color: var(--text-color); /* Ajustado para texto claro */
 }
 
 /* Carrossel Instagram (Home) */
 .instagram-carousel-section {
     padding: 40px 0;
     text-align: center;
-    background-color: var(--dark-bg-color);
+    background-color: var(--bg-color); /* Mantém o fundo principal */
     color: var(--light-text-color);
     margin-top: 30px;
 }
@@ -281,10 +272,10 @@ main {
 }
 
 .instagram-carousel-item {
-    background-color: var(--card-bg-color);
+    background-color: var(--card-bg-color); /* Usa a nova cor de fundo para cards */
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px var(--shadow-color);
     transition: transform 0.3s ease;
 }
 
@@ -301,7 +292,7 @@ main {
 
 .instagram-caption {
     padding: 15px;
-    color: var(--text-color);
+    color: var(--text-color); /* Ajustado para texto claro */
     font-size: 0.9em;
     text-align: left;
 }
@@ -318,8 +309,8 @@ main {
 }
 
 .filter-btn {
-    background-color: #e0e0e0;
-    color: var(--text-color);
+    background-color: var(--dark-bg-color); /* Fundo mais escuro para botões */
+    color: var(--light-text-color); /* Texto claro */
     border: none;
     padding: 10px 20px;
     margin: 5px;
@@ -330,7 +321,7 @@ main {
 }
 
 .filter-btn:hover {
-    background-color: #d0d0d0;
+    background-color: #005060; /* Um tom um pouco mais claro no hover */
 }
 
 .filter-btn.active {
@@ -342,7 +333,7 @@ main {
     text-align: center;
     margin-bottom: 20px;
     font-size: 1.1em;
-    color: #555;
+    color: var(--text-color); /* Ajustado para texto claro */
 }
 
 #catalog {
@@ -352,7 +343,7 @@ main {
 }
 
 .product-card {
-    background-color: var(--card-bg-color);
+    background-color: var(--card-bg-color); /* Usa a nova cor de fundo para cards */
     border-radius: 8px;
     box-shadow: 0 4px 10px var(--shadow-color);
     overflow: hidden;
@@ -382,7 +373,7 @@ main {
 
 .product-card-content h3 {
     font-size: 1.4em;
-    color: var(--dark-bg-color);
+    color: var(--light-text-color); /* Ajustado para texto claro */
     margin-bottom: 10px;
     display: flex;
     align-items: center;
@@ -391,7 +382,7 @@ main {
 
 .product-card-content p {
     font-size: 0.95em;
-    color: #666;
+    color: var(--text-color); /* Ajustado para texto claro */
     margin-bottom: 15px;
     flex-grow: 1;
 }
@@ -405,7 +396,7 @@ main {
 }
 
 .product-card .price.consult {
-    color: #888;
+    color: #aaa; /* Ajustado para fundo escuro */
     font-size: 1.1em;
 }
 
@@ -429,10 +420,6 @@ main {
 .add-to-interest-btn:hover {
     background-color: #3cb0a8;
     transform: translateY(-2px);
-}
-
-.add-to-interest-btn i {
-    font-size: 1em;
 }
 
 /* Badges de Categoria */
@@ -490,7 +477,7 @@ main {
 .loading-message {
     text-align: center;
     font-size: 1.2em;
-    color: #888;
+    color: var(--text-color); /* Ajustado para texto claro */
     margin-top: 50px;
 }
 
@@ -501,7 +488,7 @@ main {
     right: -350px; /* Escondido por padrão */
     width: 330px;
     height: calc(100% - var(--header-height));
-    background-color: var(--card-bg-color);
+    background-color: var(--card-bg-color); /* Usa a nova cor de fundo para cards */
     box-shadow: -4px 0 10px var(--shadow-color);
     z-index: 999;
     transition: right 0.3s ease-in-out;
@@ -525,14 +512,14 @@ main {
 
 .interest-panel-header h3 {
     font-size: 1.5em;
-    color: var(--dark-bg-color);
+    color: var(--light-text-color); /* Ajustado para texto claro */
 }
 
 .interest-panel-header .close-btn {
     background: none;
     border: none;
     font-size: 1.8em;
-    color: #888;
+    color: #aaa; /* Ajustado para fundo escuro */
     cursor: pointer;
     transition: color 0.3s ease;
 }
@@ -552,7 +539,7 @@ main {
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
-    border-bottom: 1px dashed #eee;
+    border-bottom: 1px dashed var(--border-color); /* Borda clara */
 }
 
 .interest-list li:last-child {
@@ -565,13 +552,13 @@ main {
 
 .interest-list .item-name {
     font-weight: 500;
-    color: var(--text-color);
+    color: var(--light-text-color); /* Ajustado para texto claro */
     display: block;
 }
 
 .interest-list .item-price {
     font-size: 0.9em;
-    color: #777;
+    color: #aaa; /* Ajustado para fundo escuro */
 }
 
 .interest-list .remove-item-btn {
@@ -597,7 +584,7 @@ main {
 .interest-summary #interestTotal {
     font-size: 1.3em;
     font-weight: bold;
-    color: var(--dark-bg-color);
+    color: var(--light-text-color); /* Ajustado para texto claro */
     margin-bottom: 15px;
     display: block;
 }
@@ -744,13 +731,13 @@ main {
 }
 
 .contact-modal-content {
-    background-color: var(--card-bg-color);
+    background-color: var(--card-bg-color); /* Usa a nova cor de fundo para cards */
     margin: auto;
     padding: 30px;
     border-radius: 8px;
     width: 90%;
     max-width: 600px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 15px var(--shadow-color);
     position: relative;
 }
 
@@ -758,7 +745,7 @@ main {
     position: absolute;
     top: 15px;
     right: 25px;
-    color: #aaa;
+    color: #aaa; /* Ajustado para fundo escuro */
     font-size: 30px;
     font-weight: bold;
     cursor: pointer;
@@ -771,7 +758,7 @@ main {
 }
 
 .contact-modal-content h2 {
-    color: var(--dark-bg-color);
+    color: var(--light-text-color); /* Ajustado para texto claro */
     margin-bottom: 20px;
     text-align: center;
 }
@@ -780,7 +767,7 @@ main {
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
-    color: var(--text-color);
+    color: var(--text-color); /* Ajustado para texto claro */
 }
 
 .contact-modal-content form input[type="text"],
@@ -794,21 +781,19 @@ main {
     border-radius: 5px;
     font-family: 'Roboto', sans-serif;
     font-size: 1em;
-}
-
-.contact-modal-content form textarea {
-    resize: vertical;
-    min-height: 80px;
+    background-color: var(--dark-bg-color); /* Fundo escuro para inputs */
+    color: var(--light-text-color); /* Texto claro para inputs */
 }
 
 #selectedItemsSummary {
-    background-color: #f0f0f0;
-    border: 1px dashed #ccc;
+    background-color: var(--dark-bg-color); /* Fundo escuro para o resumo */
+    border: 1px dashed var(--border-color);
     padding: 15px;
     margin-bottom: 20px;
     border-radius: 5px;
     max-height: 150px;
     overflow-y: auto;
+    color: var(--text-color); /* Ajustado para texto claro */
 }
 
 #selectedItemsSummary strong {
@@ -859,7 +844,7 @@ main {
 
 /* Rodapé */
 footer {
-    background-color: var(--dark-bg-color);
+    background-color: var(--dark-bg-color); /* Tom mais escuro */
     color: var(--light-text-color);
     text-align: center;
     padding: 20px 0;
