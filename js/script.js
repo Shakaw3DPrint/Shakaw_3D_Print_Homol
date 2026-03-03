@@ -1,12 +1,19 @@
-// =============================================
-// CONFIGURAÇÕES GLOBAIS
-// =============================================
-const GITHUB_OWNER  = "Shakaw3DPrint";
-const GITHUB_REPO   = "Shakaw_3D_Print";
+const GITHUB_OWNER = "Shakaw3DPrint";
+const GITHUB_REPO = "Shakaw_3D_Print";
 const GITHUB_BRANCH = "main";
-const BASE_URL      = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/`;
+const BASE_URL = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/`;
 
-// Elementos DOM (serão inicializados em DOMContentLoaded)
+let allProducts = [];
+let carouselItems = [];
+let currentSlide = 0;
+let slideInterval;
+let currentZoom = 1;
+let currentImageIndex = 0;
+let filteredImages = []; // Para o modal de imagem
+let modalImages = []; // Armazena todas as imagens do produto para o modal
+let currentModalImageIndex = 0; // Índice da imagem atual no modal
+
+// Variáveis DOM (inicializadas em DOMContentLoaded)
 let catalogGrid;
 let loader;
 let resultsCount;
@@ -19,61 +26,57 @@ let modalImg;
 let contactModal;
 let selectedSummary;
 let itemsDataInput;
-let openInterestPanelFromHeaderBtn; // Novo botão no cabeçalho
+let openInterestPanelFromHeaderBtn;
 
-// Dados
-let allProducts = [];
-let carouselItems = [];
-let interestItems = JSON.parse(localStorage.getItem('interestItems')) || []; // Carrega do localStorage
-let interestPanelTimeoutId = null;
+// Constantes para zoom
+const ZOOM_INCREMENT = 0.1; // Incremento/decremento do zoom
+const MAX_ZOOM = 5;         // Zoom máximo
+const MIN_ZOOM = 0.5;       // Zoom mínimo
 
-// Carrossel da Home
-let currentSlide = 0; // Mantido para o carrossel da home
+// Variáveis para pan (movimento da imagem)
+let isPanning = false;
+let panStartX, panStartY;
+let panStartImgX, panStartImgY;
+let currentImgTranslateX = 0;
+let currentImgTranslateY = 0;
 
-// Modal de Imagem (Zoom e Pan)
-let currentProductImages = [];
-let currentImageIndex    = 0;
-let currentZoomLevel     = 1;
-let isPanning            = false;
-let panStartX = 0, panStartY = 0;
-let panStartImgX = 0, panStartImgY = 0;
-let currentImgTranslateX = 0, currentImgTranslateY = 0;
+// Variáveis para o painel de interesses
+let interestItems = JSON.parse(localStorage.getItem('interestItems')) || [];
+let interestPanelTimeoutId;
 
-const ZOOM_INCREMENT = 0.15;
-const MAX_ZOOM       = 5;
-const MIN_ZOOM       = 1;
-
-// Mapeamento de categorias para badges (usado na renderização)
 const categoryBadgeMap = {
-    "diorama-garagem":     '<span class="cat-badge cat-diorama-garagem">Diorama Garagem</span>',
-    "miniaturas-3d":       '<span class="cat-badge cat-miniaturas-3d">Miniaturas 3D</span>',
-    "miniaturas-rpg":      '<span class="cat-badge cat-miniaturas-rpg">Miniaturas RPG</span>',
+    "diorama-garagem": '<span class="cat-badge cat-diorama-garagem">Diorama Garagem</span>',
+    "miniaturas-3d": '<span class="cat-badge cat-miniaturas-3d">Miniaturas 3D</span>',
+    "miniaturas-rpg": '<span class="cat-badge cat-miniaturas-rpg">Miniaturas RPG</span>',
     "produtos-funcionais": '<span class="cat-badge cat-produtos-funcionais">Funcional</span>',
-    // "action-figures" não precisa de um badge próprio, será mapeado para "miniaturas-3d"
+    "action-figures": '<span class="cat-badge cat-miniaturas-3d">Miniaturas 3D</span>' // Mapeia Action Figures para Miniaturas 3D
 };
 
-// =============================================
+// ============================================================
 // FUNÇÕES AUXILIARES
-// =============================================
-
-function parsePrice(str) {
-    if (!str || typeof str !== "string") return 0;
-    return parseFloat(str.replace("R$", "").replace(".", "").replace(",", ".").trim()) || 0;
-}
+// ============================================================
 
 function showLoader() {
-    if (loader) loader.style.display = 'block';
-    if (catalogGrid) catalogGrid.style.display = 'none';
+    if (loader) loader.style.display = "block";
 }
 
 function hideLoader() {
-    if (loader) loader.style.display = 'none';
-    if (catalogGrid) catalogGrid.style.display = 'grid'; // Ou 'block' dependendo do layout
+    if (loader) loader.style.display = "none";
 }
 
-// =============================================
+function parsePrice(priceStr) {
+    if (typeof priceStr === 'number') return priceStr;
+    if (typeof priceStr === 'string') {
+        const cleaned = priceStr.replace('R$', '').replace('.', '').replace(',', '.').trim();
+        const parsed = parseFloat(cleaned);
+        return isNaN(parsed) ? 0 : parsed;
+    }
+    return 0;
+}
+
+// ============================================================
 // CARREGAMENTO DE DADOS (PRODUTOS E CARROSSEL)
-// =============================================
+// ============================================================
 
 async function loadAllData() {
     showLoader();
@@ -85,43 +88,25 @@ async function loadAllData() {
         ]);
 
         const productsDiorama = productsDioramaRes.ok ? await productsDioramaRes.json() : [];
-        const productsOutros  = productsOutrosRes.ok ? await productsOutrosRes.json() : [];
-        carouselItems         = carouselRes.ok ? await carouselRes.json() : [];
+        const productsOutros = productsOutrosRes.ok ? await productsOutrosRes.json() : [];
+        carouselItems = carouselRes.ok ? await carouselRes.json() : [];
 
-        // Garante que todos os produtos tenham uma categoria e ajusta "action-figures"
+        // Garante que todos os produtos tenham uma categoria
         productsDiorama.forEach(p => { if (!p.category) p.category = "diorama-garagem"; });
         productsOutros.forEach(p => {
             if (!p.category) p.category = "produtos-funcionais";
-            // Se a categoria for "action-figures", muda para "miniaturas-3d" para o filtro
+            // Mapeia "action-figures" para "miniaturas-3d"
             if (p.category === "action-figures") p.category = "miniaturas-3d";
-
-            // Ajusta o caminho das imagens para os produtos "outros" se necessário
-            // Verifica se a imagem já tem o BASE_URL, se não, adiciona o caminho relativo
-            if (p.mainImage && !p.mainImage.startsWith('http') && !p.mainImage.startsWith('assets/')) {
-                p.mainImage = `assets/img/produtos/${p.mainImage.split('/').pop()}`; // Assumindo que "outros" estão em assets/img/produtos
-            } else if (p.mainImage && p.mainImage.startsWith('assets/')) {
-                // Já está no formato assets/, apenas garante que não tem BASE_URL duplicado
-                p.mainImage = p.mainImage;
-            }
-
-            if (p.thumbnails && Array.isArray(p.thumbnails)) {
-                p.thumbnails = p.thumbnails.map(thumb => {
-                    if (!thumb.startsWith('http') && !thumb.startsWith('assets/')) {
-                        return `assets/img/produtos/${thumb.split('/').pop()}`; // Assumindo que "outros" estão em assets/img/produtos
-                    }
-                    return thumb;
-                });
-            }
         });
 
         allProducts = productsDiorama.concat(productsOutros);
 
-        // Se estiver na página inicial, renderiza o carrossel do Instagram
-        if (document.getElementById('instagramCarousel')) {
+        // Renderiza o carrossel do Instagram na home
+        if (document.getElementById("instagramCarousel")) {
             renderInstagramCarousel();
         }
 
-        // Se estiver em uma página de catálogo, renderiza os produtos
+        // Renderiza produtos se estiver em uma página de catálogo
         if (catalogGrid) {
             renderProducts(allProducts);
         }
@@ -131,265 +116,226 @@ async function loadAllData() {
         if (catalogGrid) {
             catalogGrid.innerHTML = '<p class="loading-message" style="color:#ff6b6b;">Erro ao carregar produtos. Tente novamente mais tarde.</p>';
         }
-        // Se for a home e o carrossel falhar, mostra mensagem
-        if (document.getElementById('instagramCarousel')) {
-            document.getElementById('instagramCarousel').innerHTML = '<p style="text-align:center; width:100%; color:#ff6b6b;">Erro ao carregar posts do Instagram.</p>';
+        if (document.getElementById("instagramCarousel")) {
+            document.getElementById("instagramCarousel").innerHTML = '<p class="loading-message" style="color:#ff6b6b;">Erro ao carregar posts do Instagram.</p>';
         }
     } finally {
         hideLoader();
     }
 }
 
-// =============================================
-// RENDERIZAÇÃO DE PRODUTOS (PARA CATÁLOGO)
-// =============================================
+// ============================================================
+// CARROSSEL (HOME - ÚLTIMAS DO INSTAGRAM)
+// ============================================================
+
+function renderInstagramCarousel() {
+    const instagramCarouselContainer = document.getElementById("instagramCarousel");
+    if (!instagramCarouselContainer) return;
+
+    instagramCarouselContainer.innerHTML = ""; // Limpa o conteúdo existente
+
+    if (carouselItems.length === 0) {
+        instagramCarouselContainer.innerHTML = '<p class="loading-message">Nenhum post do Instagram encontrado.</p>';
+        return;
+    }
+
+    carouselItems.forEach(item => {
+        const carouselItemDiv = document.createElement("div");
+        carouselItemDiv.className = "instagram-carousel-item";
+        carouselItemDiv.innerHTML = `
+            <img src="${BASE_URL + item.image}" alt="${item.alt}">
+            <div class="instagram-caption">${item.caption}</div>
+        `;
+        instagramCarouselContainer.appendChild(carouselItemDiv);
+    });
+}
+
+
+// ============================================================
+// RENDERIZAÇÃO E FILTRO DE PRODUTOS (CATÁLOGO)
+// ============================================================
 
 function renderProducts(productsToRender) {
-    if (!catalogGrid) return;
+    if (!catalogGrid) return; // Garante que só renderiza se estiver na página de catálogo
     catalogGrid.innerHTML = ""; // Limpa o conteúdo existente
 
     if (productsToRender.length === 0) {
         catalogGrid.innerHTML = '<p class="loading-message">Nenhum produto encontrado nesta categoria.</p>';
-        if (resultsCount) resultsCount.textContent = "";
+        if (resultsCount) resultsCount.textContent = "0 produtos encontrados.";
         return;
-    }
-
-    if (resultsCount) {
-        resultsCount.textContent = `${productsToRender.length} produto${productsToRender.length > 1 ? "s" : ""} encontrado${productsToRender.length > 1 ? "s" : ""}`;
     }
 
     productsToRender.forEach(product => {
         const card = document.createElement("div");
         card.className = "product-card";
-        card.dataset.productId = product.id;
+        card.dataset.productId = product.id; // Adiciona ID para identificar o produto no modal
 
-        // Usa a categoria já ajustada no loadAllData
         const badge = categoryBadgeMap[product.category] || '';
         const imgSrc = product.mainImage ? BASE_URL + product.mainImage : 'https://via.placeholder.com/200x200?text=Sem+Imagem';
-        const priceHTML = product.price ? `<div class="price">${product.price}</div>` : `<div class="price consult">Sob consulta</div>`;
 
         card.innerHTML = `
             <img src="${imgSrc}" alt="${product.name}">
             <div class="product-card-content">
                 <h3>${product.name} ${badge}</h3>
-                <p>${product.description}</p> <!-- Removida a classe product-description-full aqui -->
-                ${priceHTML}
-                <button class="add-interest-btn" data-product-id="${product.id}">Tenho Interesse</button>
+                <p>${product.description}</p>
+                <div class="price ${product.price ? '' : 'consult'}">
+                    ${product.price ? `R$ ${product.price.toFixed(2).replace('.', ',')}` : 'Sob consulta'}
+                </div>
+                <button class="add-to-interest-btn" data-product-id="${product.id}">
+                    <i class="fas fa-heart"></i> Adicionar à lista
+                </button>
             </div>
         `;
         catalogGrid.appendChild(card);
+    });
 
-        // Adiciona evento de clique para abrir o modal de imagem
-        card.querySelector('img').addEventListener('click', () => openImageModal(product));
-        // Adiciona evento de clique para adicionar ao interesse
-        card.querySelector('.add-interest-btn').addEventListener('click', (e) => {
-            e.stopPropagation(); // Evita que o clique no botão abra o modal de imagem
-            addToInterests(product);
+    if (resultsCount) resultsCount.textContent = `${productsToRender.length} produtos encontrados.`;
+
+    // Adiciona event listeners para abrir o modal de imagem
+    document.querySelectorAll('.product-card img').forEach(img => {
+        img.addEventListener('click', (e) => {
+            const productId = e.target.closest('.product-card').dataset.productId;
+            const product = allProducts.find(p => p.id === productId);
+            if (product) openImageModal(product);
+        });
+    });
+
+    // Adiciona event listeners para o botão "Adicionar à lista"
+    document.querySelectorAll('.add-to-interest-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const productId = e.target.dataset.productId;
+            const product = allProducts.find(p => p.id === productId);
+            if (product) addToInterests(product);
         });
     });
 }
 
-// =============================================
-// FILTROS DE PRODUTOS (PARA CATÁLOGO)
-// =============================================
+function filterProducts(category) {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`.filter-btn[data-filter="${category}"]`).classList.add('active');
+
+    let productsToRender = [];
+    if (category === "all") {
+        productsToRender = allProducts;
+    } else {
+        productsToRender = allProducts.filter(product => product.category === category);
+    }
+    renderProducts(productsToRender);
+}
 
 function initFilters() {
-    document.querySelectorAll(".filter-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-            document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
-
-            const cat = btn.dataset.filter;
-            const filtered = cat === "all"
-                ? allProducts
-                : allProducts.filter(p => p.category === cat);
-
-            renderProducts(filtered);
+    const filterButtonsContainer = document.getElementById("filterButtons");
+    if (filterButtonsContainer) {
+        filterButtonsContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('filter-btn')) {
+                filterProducts(e.target.dataset.filter);
+            }
         });
-    });
-}
-
-// =============================================
-// CARROSSEL DO INSTAGRAM (HOME)
-// =============================================
-
-function renderInstagramCarousel() {
-    const instagramCarouselContainer = document.getElementById('instagramCarousel');
-    if (!instagramCarouselContainer) return;
-
-    instagramCarouselContainer.innerHTML = ''; // Limpa placeholders
-
-    if (carouselItems.length === 0) {
-        instagramCarouselContainer.innerHTML = '<p style="text-align:center; width:100%; color:rgba(255,255,255,0.6);">Nenhuma postagem do Instagram para exibir.</p>';
-        return;
     }
-
-    carouselItems.forEach(item => {
-        const carouselItem = document.createElement('div');
-        carouselItem.className = 'instagram-carousel-item';
-        carouselItem.innerHTML = `<img src="${BASE_URL + item.src}" alt="${item.alt}">`;
-        instagramCarouselContainer.appendChild(carouselItem);
-    });
 }
 
 // =============================================
-// MODAL DE IMAGEM (ZOOM E NAVEGAÇÃO)
+// MODAL DE IMAGEM (ZOOM E PAN)
 // =============================================
 
-function checkImage(url) {
-    return new Promise(resolve => {
-        if (!url) { resolve({ url, status: "invalid" }); return; }
-        const img = new Image();
-        img.onload  = () => resolve({ url, status: "loaded" });
-        img.onerror = () => resolve({ url, status: "error" });
-        img.src = url;
-    });
-}
-
-async function openImageModal(product) {
+function openImageModal(product) {
     if (!imgModal || !modalImg) return;
 
-    // Coleta todas as imagens do produto (principal + miniaturas)
-    let productImages = [];
+    modalImages = [];
     if (product.mainImage) {
-        productImages.push(BASE_URL + product.mainImage);
+        modalImages.push(BASE_URL + product.mainImage);
     }
     if (product.thumbnails && product.thumbnails.length > 0) {
-        product.thumbnails.forEach(thumb => productImages.push(BASE_URL + thumb));
+        product.thumbnails.forEach(thumb => {
+            modalImages.push(BASE_URL + thumb);
+        });
     }
 
-    // Filtra imagens válidas
-    const results = await Promise.all(productImages.map(checkImage));
-    currentProductImages = results.filter(r => r.status === "loaded").map(r => r.url);
-
-    if (currentProductImages.length === 0) {
-        console.warn("Nenhuma imagem para exibir no modal.");
-        return;
+    if (modalImages.length === 0) {
+        modalImages.push('https://via.placeholder.com/800x600?text=Sem+Imagem');
     }
 
-    currentImageIndex = 0; // Sempre começa com a primeira imagem
-    loadModalImage(currentProductImages[currentImageIndex]);
-
-    imgModal.classList.add('open'); // Usa a classe 'open' para controlar display
-    document.body.style.overflow = "hidden"; // Impede rolagem do body
-
-    document.removeEventListener("keydown", handleModalKeydown);
-    document.addEventListener("keydown", handleModalKeydown);
-}
-
-function loadModalImage(src) {
-    if (!modalImg) return;
-    modalImg.style.opacity = "0";
-    modalImg.style.transition = "none"; // Desativa transição para troca rápida de imagem
-
-    const onLoad = () => {
-        resetZoomAndPan();
-        modalImg.style.transition = "opacity 0.25s ease";
-        modalImg.style.opacity    = "1";
-        modalImg.removeEventListener("load",  onLoad);
-        modalImg.removeEventListener("error", onErr);
-    };
-    const onErr = () => {
-        modalImg.style.opacity = "1"; // Mostra mesmo com erro, se for o caso
-        modalImg.removeEventListener("load",  onLoad);
-        modalImg.removeEventListener("error", onErr);
-    };
-
-    modalImg.addEventListener("load",  onLoad);
-    modalImg.addEventListener("error", onErr);
-    modalImg.src = src;
+    currentModalImageIndex = 0;
+    renderModalImage();
+    imgModal.classList.add('open');
+    document.addEventListener('keydown', handleModalKeydown);
 }
 
 function closeImageModal() {
     if (!imgModal) return;
     imgModal.classList.remove('open');
-    document.body.style.overflow = "auto";
-    document.removeEventListener("keydown", handleModalKeydown);
     resetZoomAndPan();
+    document.removeEventListener('keydown', handleModalKeydown);
+}
+
+function renderModalImage() {
+    if (!modalImg || modalImages.length === 0) return;
+    modalImg.src = modalImages[currentModalImageIndex];
+    resetZoomAndPan(); // Reseta zoom e pan ao carregar nova imagem
 }
 
 function navigateModalImages(direction) {
-    if (!modalImg || currentProductImages.length <= 1) return;
-    currentImageIndex = (currentImageIndex + direction + currentProductImages.length) % currentProductImages.length;
-    loadModalImage(currentProductImages[currentImageIndex]);
+    if (modalImages.length <= 1) return;
+    currentModalImageIndex = (currentModalImageIndex + direction + modalImages.length) % modalImages.length;
+    renderModalImage();
 }
 
 function applyTransform() {
     if (!modalImg) return;
-    modalImg.style.transform = `translate(${currentImgTranslateX}px, ${currentImgTranslateY}px) scale(${currentZoomLevel})`;
-    modalImg.style.cursor = currentZoomLevel > MIN_ZOOM
-        ? (isPanning ? "grabbing" : "grab")
-        : "zoom-in";
+    modalImg.style.transform = `scale(${currentZoom}) translate(${currentImgTranslateX}px, ${currentImgTranslateY}px)`;
 }
 
 function constrainPan() {
-    if (!modalImg || !imgModal) return;
-    const nW = modalImg.naturalWidth  || modalImg.offsetWidth;
-    const nH = modalImg.naturalHeight || modalImg.offsetHeight;
-    const mW = imgModal.clientWidth;
-    const mH = imgModal.clientHeight;
-    const ratio = nW / nH;
-    const mRatio = mW / mH;
+    if (!modalImg) return;
+    const imgRect = modalImg.getBoundingClientRect();
+    const modalRect = imgModal.getBoundingClientRect();
 
-    let dW, dH;
-    if (ratio > mRatio) { dW = mW; dH = mW / ratio; }
-    else                { dH = mH; dW = mH * ratio; }
+    const effectiveWidth = imgRect.width * currentZoom;
+    const effectiveHeight = imgRect.height * currentZoom;
 
-    const sW = dW * currentZoomLevel;
-    const sH = dH * currentZoomLevel;
-    const maxX = Math.max(0, (sW - mW) / 2);
-    const maxY = Math.max(0, (sH - mH) / 2);
+    const maxPanX = Math.max(0, (effectiveWidth - modalRect.width) / 2 / currentZoom);
+    const maxPanY = Math.max(0, (effectiveHeight - modalRect.height) / 2 / currentZoom);
 
-    currentImgTranslateX = Math.min(maxX, Math.max(-maxX, currentImgTranslateX));
-    currentImgTranslateY = Math.min(maxY, Math.max(-maxY, currentImgTranslateY));
+    currentImgTranslateX = Math.max(-maxPanX, Math.min(maxPanX, currentImgTranslateX));
+    currentImgTranslateY = Math.max(-maxPanY, Math.min(maxPanY, currentImgTranslateY));
 }
 
-function zoomImage(amount, focal = null) {
-    if (!modalImg || !imgModal) return;
-    const oldZoom = currentZoomLevel;
-    currentZoomLevel = Math.min(Math.max(currentZoomLevel + amount, MIN_ZOOM), MAX_ZOOM);
+function zoomImage(delta, focalPoint = null) {
+    const oldZoom = currentZoom;
+    currentZoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, currentZoom + delta));
 
-    if (currentZoomLevel === MIN_ZOOM && amount < 0) { resetZoomAndPan(); return; }
-
-    const mW = imgModal.clientWidth;
-    const mH = imgModal.clientHeight;
-    const fX = focal ? focal.x - mW / 2 : 0;
-    const fY = focal ? focal.y - mH / 2 : 0;
-    const ratio = currentZoomLevel / oldZoom;
-
-    currentImgTranslateX = fX + (currentImgTranslateX - fX) * ratio;
-    currentImgTranslateY = fY + (currentImgTranslateY - fY) * ratio;
+    if (focalPoint && modalImg) {
+        // Ajusta o pan para manter o foco no ponto do mouse
+        const zoomRatio = currentZoom / oldZoom;
+        currentImgTranslateX = focalPoint.x - (focalPoint.x - currentImgTranslateX) * zoomRatio;
+        currentImgTranslateY = focalPoint.y - (focalPoint.y - currentImgTranslateY) * zoomRatio;
+    }
 
     constrainPan();
     applyTransform();
 }
 
 function resetZoomAndPan() {
-    currentZoomLevel     = MIN_ZOOM;
+    currentZoom = 1;
     currentImgTranslateX = 0;
     currentImgTranslateY = 0;
-    isPanning            = false;
-    if (modalImg) {
-        modalImg.style.transition = "transform 0.3s ease";
-        applyTransform();
-        setTimeout(() => { if (modalImg) modalImg.style.transition = "opacity 0.25s ease"; }, 320);
-    }
+    applyTransform();
 }
 
 function handlePanStart(e) {
-    if (!modalImg || currentZoomLevel <= MIN_ZOOM) return;
-    if (e.type === "mousedown" && e.button !== 0) return;
+    if (!modalImg || currentZoom === 1) return; // Só permite pan se houver zoom
     e.preventDefault();
     isPanning = true;
     const p = e.type === "touchstart" ? e.touches[0] : e;
-    panStartX = p.clientX; panStartY = p.clientY;
-    panStartImgX = currentImgTranslateX; panStartImgY = currentImgTranslateY;
-    modalImg.style.transition = "none";
-    applyTransform();
+    panStartX = p.clientX;
+    panStartY = p.clientY;
+    panStartImgX = currentImgTranslateX;
+    panStartImgY = currentImgTranslateY;
     document.addEventListener("mousemove", handlePanMove);
     document.addEventListener("touchmove", handlePanMove, { passive: false });
-    document.addEventListener("mouseup",   handlePanEnd);
-    document.addEventListener("touchend",  handlePanEnd);
+    document.addEventListener("mouseup", handlePanEnd);
+    document.addEventListener("touchend", handlePanEnd);
 }
 
 function handlePanMove(e) {
@@ -409,30 +355,34 @@ function handlePanEnd() {
     applyTransform();
     document.removeEventListener("mousemove", handlePanMove);
     document.removeEventListener("touchmove", handlePanMove);
-    document.removeEventListener("mouseup",   handlePanEnd);
-    document.removeEventListener("touchend",  handlePanEnd);
+    document.removeEventListener("mouseup", handlePanEnd);
+    document.removeEventListener("touchend", handlePanEnd);
 }
 
 function handleWheelZoom(e) {
     if (!imgModal || !imgModal.classList.contains('open')) return;
     e.preventDefault();
-    const rect = imgModal.getBoundingClientRect();
+    const rect = modalImg.getBoundingClientRect(); // Usar modalImg para o foco
+    const modalRect = imgModal.getBoundingClientRect();
+
+    // Calcula o ponto focal relativo à imagem (não ao modal)
     const focal = {
-        x: e.clientX - rect.left - rect.width  / 2,
-        y: e.clientY - rect.top  - rect.height / 2
+        x: (e.clientX - rect.left) - (rect.width / 2),
+        y: (e.clientY - rect.top) - (rect.height / 2)
     };
+
     zoomImage(e.deltaY < 0 ? ZOOM_INCREMENT : -ZOOM_INCREMENT, focal);
 }
 
 function handleModalKeydown(e) {
     if (!imgModal || !imgModal.classList.contains('open')) return;
     switch (e.key) {
-        case "ArrowRight": navigateModalImages(1);            break;
-        case "ArrowLeft":  navigateModalImages(-1);           break;
-        case "+": case "=": zoomImage(ZOOM_INCREMENT);  break;
-        case "-":           zoomImage(-ZOOM_INCREMENT); break;
-        case "0":           resetZoomAndPan();          break;
-        case "Escape":      closeImageModal();               break;
+        case "ArrowRight": navigateModalImages(1); break;
+        case "ArrowLeft": navigateModalImages(-1); break;
+        case "+": case "=": zoomImage(ZOOM_INCREMENT); break;
+        case "-": zoomImage(-ZOOM_INCREMENT); break;
+        case "0": resetZoomAndPan(); break;
+        case "Escape": closeImageModal(); break;
     }
 }
 
@@ -496,7 +446,7 @@ function updateInterestPanel() {
         li.innerHTML = `
             <div class="item-info">
                 <span class="item-name">${item.name} (Qtd: ${item.quantity || 1})</span>
-                <span class="item-price">${item.price || 'Sob consulta'}</span>
+                <span class="item-price">${typeof item.price === 'number' ? `R$ ${item.price.toFixed(2).replace('.', ',')}` : item.price}</span>
             </div>
             <button class="remove-item-btn" data-index="${index}">&times;</button>
         `;
@@ -533,10 +483,10 @@ function showContactModal() {
 
     interestItems.forEach(item => {
         const div = document.createElement("div");
-        const label = item.price || "Sob consulta";
+        const label = typeof item.price === 'number' ? `R$ ${item.price.toFixed(2).replace('.', ',')}` : item.price;
         div.innerHTML = `<strong>${item.quantity}x</strong> ${item.name} (${label})`;
         if (selectedSummary) selectedSummary.appendChild(div);
-        text  += `${item.quantity}x ${item.name} (${label})\n`;
+        text += `${item.quantity}x ${item.name} (${label})\n`;
         total += parsePrice(item.price) * (item.quantity || 1);
     });
 
@@ -567,18 +517,19 @@ function initContactForm() {
         fetch(form.action, { method: "POST", body: new FormData(form) })
             .then(response => {
                 if (response.ok) {
-                    alert("Sua lista de interesses foi enviada com sucesso! Em breve entraremos em contato.");
+                    alert("Sua lista de interesses foi enviada com sucesso!");
                     closeContactModal();
                     interestItems = []; // Limpa a lista após o envio
                     updateInterestPanel();
-                    // O FormSubmit.co redireciona automaticamente para a página de "obrigado" se configurado no hidden input _next
+                    // Redireciona para a página de obrigado se o FormSubmit estiver configurado para isso
+                    // window.location.href = "obrigado.html";
                 } else {
-                    alert("Erro ao enviar. Por favor, tente novamente ou entre em contato direto.");
+                    alert("Erro ao enviar. Tente novamente.");
                 }
             })
             .catch(err => {
-                console.error("Erro de rede ou FormSubmit:", err);
-                alert("Erro ao enviar. Por favor, tente novamente ou entre em contato direto.");
+                console.error(err);
+                alert("Erro ao enviar. Tente novamente.");
             })
             .finally(() => {
                 if (btn) { btn.innerHTML = orig; btn.disabled = false; }
