@@ -169,8 +169,71 @@
 
   </main>
 
-  <!-- Aqui no futuro vamos garantir que o painel de interesses exista em todas as páginas -->
+  <!-- Painel de interesses (lateral) -->
+  <div id="interestPanel" class="interest-panel">
+    <button class="close-interest-panel-btn" id="closeInterestPanelBtn">&times;</button>
+    <h3>Sua Lista de Interesses</h3>
+    <ul id="interestList">
+      <!-- Itens serão carregados aqui via JS -->
+    </ul>
+    <div id="interestTotal"></div>
+    <button id="openContactModalBtn">Finalizar Registro de Interesse</button>
+  </div>
 
-  <script src="js/index_script.js"></script>
+  <!-- Modal de Imagem (Zoom e Pan) -->
+  <div id="imgModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImg">
+    <button class="modal-nav modal-prev"><i class="fas fa-chevron-left"></i></button>
+    <button class="modal-nav modal-next"><i class="fas fa-chevron-right"></i></button>
+    <div class="zoom-controls">
+      <button id="zoomInBtn"><i class="fas fa-plus"></i></button>
+      <button id="zoomOutBtn"><i class="fas fa-minus"></i></button>
+      <button id="zoomResetBtn"><i class="fas fa-sync-alt"></i></button>
+    </div>
+  </div>
+
+  <!-- Modal de Contato -->
+  <div id="contactModal" class="contact-modal">
+    <div class="contact-modal-content">
+      <span class="close-contact">&times;</span>
+      <h2>Registrar Interesse</h2>
+      <form id="contactForm" action="https://formsubmit.co/shakaw3dprint@hotmail.com" method="POST">
+        <div class="form-section">
+          <h3>Seus Dados</h3>
+          <label for="name">Nome:</label>
+          <input type="text" id="name" name="Nome" required>
+
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" name="Email" required>
+
+          <label for="phone">Telefone (WhatsApp):</label>
+          <input type="tel" id="phone" name="Telefone" placeholder="(XX) XXXXX-XXXX" required>
+
+          <label for="message">Mensagem (opcional):</label>
+          <textarea id="message" name="Mensagem" rows="4" placeholder="Alguma observação ou dúvida?"></textarea>
+        </div>
+
+        <div class="form-section">
+          <h3>Itens de Interesse</h3>
+          <div id="selectedItemsSummary" class="items-summary">
+            <!-- Resumo dos itens será carregado aqui via JS -->
+          </div>
+          <input type="hidden" name="_subject" value="Novo Interesse no Site Shakaw 3D Print">
+          <input type="hidden" name="_template" value="box">
+          <input type="hidden" name="Itens de Interesse" id="itemsData">
+          <input type="hidden" name="_captcha" value="false">
+        </div>
+
+        <button type="submit">Enviar Interesse</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Botão Voltar ao Topo -->
+  <button id="backToTopBtn" title="Voltar ao Topo"><i class="fas fa-arrow-up"></i></button>
+
+  <!-- Link para o script JavaScript unificado -->
+  <script src="js/script.js"></script>
 </body>
 </html>
