@@ -49,7 +49,7 @@ const categoryBadgeMap = {
     "miniaturas-3d":       '<span class="cat-badge cat-miniaturas-3d">Miniaturas 3D</span>',
     "miniaturas-rpg":      '<span class="cat-badge cat-miniaturas-rpg">Miniaturas RPG</span>',
     "produtos-funcionais": '<span class="cat-badge cat-produtos-funcionais">Funcional</span>',
-    "action-figures":      '<span class="cat-badge cat-miniaturas-3d">Miniaturas 3D</span>' // Mapeia Action Figures para Miniaturas 3D
+    // "action-figures" não precisa de um badge próprio, será mapeado para "miniaturas-3d"
 };
 
 // =============================================
@@ -88,17 +88,17 @@ async function loadAllData() {
         const productsOutros  = productsOutrosRes.ok ? await productsOutrosRes.json() : [];
         carouselItems         = carouselRes.ok ? await carouselRes.json() : [];
 
-        // Garante que todos os produtos tenham uma categoria
+        // Garante que todos os produtos tenham uma categoria e ajusta "action-figures"
         productsDiorama.forEach(p => { if (!p.category) p.category = "diorama-garagem"; });
         productsOutros.forEach(p => {
-            if (!p.category) p.category = "produtos-funcionais"; // Assumindo "outros" são funcionais por padrão
-            // Se a categoria for "action-figures", muda para "miniaturas-3d"
+            if (!p.category) p.category = "produtos-funcionais";
+            // Se a categoria for "action-figures", muda para "miniaturas-3d" para o filtro
             if (p.category === "action-figures") p.category = "miniaturas-3d";
 
             // Ajusta o caminho das imagens para os produtos "outros" se necessário
             // Verifica se a imagem já tem o BASE_URL, se não, adiciona o caminho relativo
             if (p.mainImage && !p.mainImage.startsWith('http') && !p.mainImage.startsWith('assets/')) {
-                p.mainImage = `assets/img/projects/${p.mainImage.split('/').pop()}`;
+                p.mainImage = `assets/img/produtos/${p.mainImage.split('/').pop()}`; // Assumindo que "outros" estão em assets/img/produtos
             } else if (p.mainImage && p.mainImage.startsWith('assets/')) {
                 // Já está no formato assets/, apenas garante que não tem BASE_URL duplicado
                 p.mainImage = p.mainImage;
@@ -107,7 +107,7 @@ async function loadAllData() {
             if (p.thumbnails && Array.isArray(p.thumbnails)) {
                 p.thumbnails = p.thumbnails.map(thumb => {
                     if (!thumb.startsWith('http') && !thumb.startsWith('assets/')) {
-                        return `assets/img/projects/${thumb.split('/').pop()}`;
+                        return `assets/img/produtos/${thumb.split('/').pop()}`; // Assumindo que "outros" estão em assets/img/produtos
                     }
                     return thumb;
                 });
@@ -130,6 +130,10 @@ async function loadAllData() {
         console.error("Erro ao carregar dados:", error);
         if (catalogGrid) {
             catalogGrid.innerHTML = '<p class="loading-message" style="color:#ff6b6b;">Erro ao carregar produtos. Tente novamente mais tarde.</p>';
+        }
+        // Se for a home e o carrossel falhar, mostra mensagem
+        if (document.getElementById('instagramCarousel')) {
+            document.getElementById('instagramCarousel').innerHTML = '<p style="text-align:center; width:100%; color:#ff6b6b;">Erro ao carregar posts do Instagram.</p>';
         }
     } finally {
         hideLoader();
@@ -168,7 +172,7 @@ function renderProducts(productsToRender) {
             <img src="${imgSrc}" alt="${product.name}">
             <div class="product-card-content">
                 <h3>${product.name} ${badge}</h3>
-                <p class="product-description-full">${product.description}</p>
+                <p>${product.description}</p> <!-- Removida a classe product-description-full aqui -->
                 ${priceHTML}
                 <button class="add-interest-btn" data-product-id="${product.id}">Tenho Interesse</button>
             </div>
@@ -559,36 +563,26 @@ function initContactForm() {
         const orig = btn ? btn.innerHTML : "";
         if (btn) { btn.innerHTML = "Enviando..."; btn.disabled = true; }
 
-        // Simula o envio de e-mail (você precisará de um serviço de backend real)
-        // Por exemplo, FormSubmit.co, EmailJS, Netlify Forms, etc.
-        // Para demonstração, apenas simula sucesso e redireciona.
-        setTimeout(() => {
-            alert("Sua lista de interesses foi enviada com sucesso!");
-            closeContactModal();
-            interestItems = []; // Limpa a lista após o envio
-            updateInterestPanel();
-            // window.location.href = "obrigado.html"; // Redireciona para uma página de obrigado
-            if (btn) { btn.innerHTML = orig; btn.disabled = false; }
-        }, 1500);
-
-        // Exemplo de como você faria com um serviço como FormSubmit:
-        /*
+        // Usando FormSubmit.co
         fetch(form.action, { method: "POST", body: new FormData(form) })
-            .then(() => {
-                alert("Sua lista de interesses foi enviada com sucesso!");
-                closeContactModal();
-                interestItems = [];
-                updateInterestPanel();
-                // window.location.href = "obrigado.html";
+            .then(response => {
+                if (response.ok) {
+                    alert("Sua lista de interesses foi enviada com sucesso! Em breve entraremos em contato.");
+                    closeContactModal();
+                    interestItems = []; // Limpa a lista após o envio
+                    updateInterestPanel();
+                    // O FormSubmit.co redireciona automaticamente para a página de "obrigado" se configurado no hidden input _next
+                } else {
+                    alert("Erro ao enviar. Por favor, tente novamente ou entre em contato direto.");
+                }
             })
             .catch(err => {
-                console.error(err);
-                alert("Erro ao enviar. Tente novamente.");
+                console.error("Erro de rede ou FormSubmit:", err);
+                alert("Erro ao enviar. Por favor, tente novamente ou entre em contato direto.");
             })
             .finally(() => {
                 if (btn) { btn.innerHTML = orig; btn.disabled = false; }
             });
-        */
     });
 }
 
