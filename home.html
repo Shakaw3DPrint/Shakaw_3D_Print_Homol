@@ -6,484 +6,33 @@
   <title>Shakaw 3D Print</title>
   <link rel="stylesheet" href="css/index_styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <style>
-    /* --- LAYOUT GERAL DA HOME --- */
-
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Exemplo de fonte, ajuste se necessário */
-      background-color: #1a1a1a; /* Cor de fundo geral */
-      color: white;
-    }
-
-    .home-wrapper {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0 20px 40px;
-      color: white;
-    }
-
-    /* CABEÇALHO PADRÃO */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 20px;
-      background-color: rgba(0, 0, 0, 0.6); /* Fundo semi-transparente para o cabeçalho */
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      position: sticky; /* Fixa o cabeçalho no topo */
-      top: 0;
-      z-index: 1000; /* Garante que o cabeçalho fique acima de outros elementos */
-    }
-
-    .header .logo {
-      height: 40px; /* Ajuste o tamanho do logo conforme necessário */
-      margin-right: 10px;
-    }
-
-    .header h1 {
-      font-size: 1.5rem;
-      margin: 0;
-      flex-grow: 1; /* Permite que o título ocupe espaço */
-    }
-
-    .header-links {
-      display: flex;
-      align-items: center;
-      gap: 20px; /* Espaçamento entre os links */
-    }
-
-    .header-links a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      transition: color 0.2s ease;
-    }
-
-    .header-links a:hover {
-      color: #4fc3f7;
-    }
-
-    .header-links .instagram-icon {
-      height: 20px; /* Tamanho do ícone do Instagram */
-      width: 20px;
-    }
-
-    /* Ícone do carrinho de interesses */
-    .interest-cart-icon {
-      position: relative;
-      margin-left: 20px; /* Espaçamento do último item do menu */
-      cursor: pointer;
-      color: white;
-      font-size: 1.2rem;
-      transition: color 0.2s ease;
-    }
-
-    .interest-cart-icon:hover {
-      color: #4fc3f7;
-    }
-
-    .interest-cart-count {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background-color: #e53935; /* Cor de destaque para o contador */
-      color: white;
-      border-radius: 50%;
-      padding: 2px 6px;
-      font-size: 0.7rem;
-      font-weight: bold;
-      line-height: 1;
-      min-width: 18px;
-      text-align: center;
-      display: none; /* Escondido por padrão, será mostrado via JS */
-    }
-
-
-    /* HERO PRINCIPAL */
-
-    .home-hero {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
-      gap: 30px;
-      align-items: center;
-      padding-top: 10px;
-      padding-bottom: 30px;
-    }
-
-    .hero-text {
-      text-align: left;
-    }
-
-    .hero-title {
-      font-size: clamp(1.9rem, 3vw, 2.3rem);
-      margin: 0 0 12px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-
-    .hero-subtitle {
-      font-size: 0.98rem;
-      color: rgba(255,255,255,0.78);
-      line-height: 1.7;
-      margin-bottom: 22px;
-    }
-
-    .hero-subtitle strong {
-      color: #ffffff;
-      font-weight: 600;
-    }
-
-    .hero-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.8rem;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.18);
-      margin-bottom: 12px;
-      color: rgba(255,255,255,0.8);
-    }
-
-    .hero-pill i {
-      color: #4fc3f7;
-    }
-
-    .home-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .home-btn-primary,
-    .home-btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border-radius: 999px;
-      padding: 10px 20px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.2s ease;
-      white-space: nowrap;
-    }
-
-    .home-btn-primary {
-      background: #4fc3f7;
-      color: #00303f;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
-    }
-
-    .home-btn-primary:hover {
-      background: #33b5e5;
-      transform: translateY(-1px);
-      box-shadow: 0 10px 24px rgba(0,0,0,0.5);
-    }
-
-    .home-btn-secondary {
-      background: rgba(255,255,255,0.04);
-      color: white;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-
-    .home-btn-secondary:hover {
-      background: rgba(255,255,255,0.12);
-      transform: translateY(-1px);
-    }
-
-    /* BLOCO DESTAQUE (CARD À DIREITA) */
-
-    .hero-card {
-      background: radial-gradient(circle at top left, rgba(79,195,247,0.25), transparent 55%),
-                  rgba(0,0,0,0.35);
-      border-radius: 18px;
-      padding: 20px 18px;
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      backdrop-filter: blur(10px);
-    }
-
-    .hero-card-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .hero-card-sub {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.75);
-      margin-bottom: 14px;
-    }
-
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 10px;
-      font-size: 0.75rem;
-    }
-
-    .hero-tag {
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(0,0,0,0.45);
-      color: rgba(255,255,255,0.82);
-    }
-
-    .hero-card-note {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.65);
-      margin-top: 6px;
-    }
-
-    /* SEÇÃO DESTAQUES MÍNIMA */
-
-    .highlights {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 18px;
-      margin-top: 10px;
-    }
-
-    .highlight-card {
-      background: rgba(0,0,0,0.35);
-      border-radius: 14px;
-      padding: 16px 14px;
-      border: 1px solid rgba(255,255,255,0.12);
-      text-align: left;
-      transition: background 0.2s ease, transform 0.15s ease;
-    }
-
-    .highlight-card:hover {
-      background: rgba(0,0,0,0.55);
-      transform: translateY(-2px);
-    }
-
-    .highlight-icon {
-      width: 28px;
-      height: 28px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 999px;
-      background: rgba(79,195,247,0.16);
-      color: #4fc3f7;
-      margin-bottom: 8px;
-      font-size: 0.9rem;
-    }
-
-    .highlight-card h3 {
-      font-size: 0.9rem;
-      margin: 0 0 6px;
-    }
-
-    .highlight-card p {
-      font-size: 0.8rem;
-      margin: 0;
-      color: rgba(255,255,255,0.72);
-      line-height: 1.5;
-    }
-
-    /* SEÇÃO "VER MAIS" (CATÁLOGOS) */
-
-    .catalog-links {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 14px;
-      margin-top: 28px;
-    }
-
-    .catalog-card {
-      background: rgba(0,0,0,0.35);
-      border-radius: 14px;
-      padding: 14px 14px 16px;
-      border: 1px solid rgba(255,255,255,0.12);
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .catalog-card-title {
-      font-size: 0.98rem;
-      font-weight: 600;
-    }
-
-    .catalog-card-text {
-      font-size: 0.83rem;
-      color: rgba(255,255,255,0.72);
-      flex: 1;
-    }
-
-    .catalog-card a {
-      align-self: flex-start;
-      margin-top: 6px;
-      font-size: 0.82rem;
-      color: #4fc3f7;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .catalog-card a:hover {
-      text-decoration: underline;
-    }
-
-    /* SEÇÃO CARROSSEL INSTAGRAM */
-    .instagram-carousel-section {
-      margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      text-align: center;
-    }
-
-    .instagram-carousel-section h2 {
-      font-size: 1.8rem;
-      margin-bottom: 25px;
-      color: #4fc3f7;
-    }
-
-    .instagram-carousel-container {
-      display: flex;
-      overflow-x: auto; /* Permite rolagem horizontal */
-      scroll-snap-type: x mandatory; /* Ajuda a "grudar" nas imagens */
-      -webkit-overflow-scrolling: touch; /* Melhor rolagem em iOS */
-      gap: 15px;
-      padding-bottom: 15px; /* Espaço para a barra de rolagem */
-    }
-
-    .instagram-carousel-item {
-      flex: 0 0 auto; /* Impede que os itens encolham */
-      width: 280px; /* Largura fixa para cada item do carrossel */
-      height: 280px; /* Altura fixa para cada item do carrossel */
-      background-color: rgba(0,0,0,0.4);
-      border-radius: 12px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255,255,255,0.6);
-      font-size: 0.9rem;
-      border: 1px solid rgba(255,255,255,0.1);
-      scroll-snap-align: start; /* Alinha o item ao início da rolagem */
-    }
-
-    .instagram-carousel-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
-      display: block;
-    }
-
-    /* RODAPÉ SIMPLES */
-
-    .home-footer {
-      margin-top: 34px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(255,255,255,0.12);
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.6);
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .home-footer a {
-      color: rgba(255,255,255,0.75);
-      text-decoration: none;
-    }
-
-    .home-footer a:hover {
-      text-decoration: underline;
-    }
-
-    /* RESPONSIVO */
-
-    @media (max-width: 860px) {
-      .home-hero {
-        grid-template-columns: minmax(0,1fr);
-      }
-      .hero-text {
-        text-align: left;
-      }
-      .header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-      }
-      .header h1 {
-        font-size: 1.3rem;
-      }
-      .header-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        width: 100%;
-        gap: 10px;
-      }
-      .interest-cart-icon {
-        margin-left: 0;
-        margin-top: 10px; /* Ajuste para mobile */
-        align-self: center;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .highlights {
-        grid-template-columns: minmax(0,1fr);
-      }
-
-      .catalog-links {
-        grid-template-columns: minmax(0,1fr);
-      }
-
-      .home-buttons {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .home-btn-primary,
-      .home-btn-secondary {
-        justify-content: center;
-        width: 100%;
-      }
-      .instagram-carousel-container {
-        justify-content: center; /* Centraliza os itens em telas menores */
-      }
-    }
-  </style>
 </head>
 <body>
 
-  <!-- CABEÇALHO PADRÃO -->
+  <!-- CABEÇALHO PADRÃO (usa .header do CSS global) -->
   <div class="header">
-    <img src="https://shakaw3dprint.github.io/Shakaw_3D_Print/assets/img/logo.webp" alt="Logo Shakaw 3D Print" class="logo">
-    <h1>Shakaw 3D Print</h1>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <img src="https://shakaw3dprint.github.io/Shakaw_3D_Print/assets/img/logo.webp" alt="Logo Shakaw 3D Print" class="logo">
+      <h1>Shakaw 3D Print</h1>
+    </div>
+
     <div class="header-links">
       <a href="home.html"><i class="fas fa-home"></i> Início</a>
       <a href="catalogo_diorama.html"><i class="fas fa-box-open"></i> Catálogo</a>
       <a href="outros_projetos.html"><i class="fas fa-images"></i> Outros Projetos</a>
-      <a href="contato.html"><i class="fas fa-envelope"></i> Contato</a> <!-- Adicionado link de Contato -->
+      <!-- Se quiser ter uma página de contato separada depois -->
+      <!-- <a href="contato.html"><i class="fas fa-envelope"></i> Contato</a> -->
       <a href="https://www.instagram.com/shakaw3dprint" target="_blank">
         <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="instagram-icon">
         @shakaw3dprint
       </a>
-      <!-- Ícone do carrinho de interesses -->
-      <div class="interest-cart-icon" id="interestCartIcon">
+
+      <!-- Ícone do “carrinho de interesses” (conectado ao painel) -->
+      <button id="openInterestPanelFromHeader"
+              style="background:none;border:none;color:#fff;cursor:pointer;display:flex;align-items:center;gap:6px;">
         <i class="fas fa-shopping-cart"></i>
-        <span class="interest-cart-count" id="interestCartCount">0</span>
-      </div>
+        <span>Lista de interesse</span>
+      </button>
     </div>
   </div>
 
@@ -543,9 +92,7 @@
     <section class="instagram-carousel-section">
       <h2>Últimas do Instagram</h2>
       <div class="instagram-carousel-container" id="instagramCarousel">
-        <!-- Itens do carrossel serão carregados aqui via JavaScript -->
-        <div class="instagram-carousel-item">Carregando posts...</div>
-        <div class="instagram-carousel-item">Carregando posts...</div>
+        <!-- Estes são placeholders, depois o JS substitui por imagens reais -->
         <div class="instagram-carousel-item">Carregando posts...</div>
         <div class="instagram-carousel-item">Carregando posts...</div>
         <div class="instagram-carousel-item">Carregando posts...</div>
@@ -620,6 +167,10 @@
 
   </main>
 
-  <script src="js/index_script.js"></script> <!-- Link para o arquivo JS -->
+  <!-- Painel de interesses e modais já são estilizados pelo index_styles.css.
+       A estrutura HTML deles provavelmente está em outras páginas.
+       Depois garantimos que a home também tenha esses elementos se precisar. -->
+
+  <script src="js/index_script.js"></script>
 </body>
 </html>
