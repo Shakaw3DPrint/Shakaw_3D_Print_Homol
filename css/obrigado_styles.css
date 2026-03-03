@@ -1,79 +1,245 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(to bottom, #0057b7, #06abff);
-  color: white;
-  text-align: center;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.container {
-  max-width: 600px;
-  padding: 40px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-}
-p {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  margin-bottom: 30px;
-}
-.logo {
-  width: 150px;
-  border-radius: 50%;
-  border: 4px solid white;
-  margin-bottom: 20px;
-}
-.whatsapp-btn {
-  display: inline-block;
-  background-color: #25D366;
-  color: white;
-  text-decoration: none;
-  padding: 12px 24px;
-  border-radius: 50px;
-  font-weight: bold;
-  margin: 10px;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.whatsapp-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-.instagram-btn {
-  display: inline-block;
-  background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
-  color: white;
-  text-decoration: none;
-  padding: 12px 24px;
-  border-radius: 50px;
-  font-weight: bold;
-  margin: 10px;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.instagram-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-.back-btn {
-  display: inline-block;
-  background-color: #0077cc;
-  color: white;
-  text-decoration: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  margin-top: 30px;
-  transition: background-color 0.3s;
-}
-.back-btn:hover {
-  background-color: #005fa3;
+/* Variáveis CSS */
+:root {
+    --primary-color: #ff6b6b; /* Vermelho */
+    --secondary-color: #4ecdc4; /* Azul-esverdeado */
+    --text-color: #333;
+    --light-text-color: #f4f4f4;
+    --bg-color: #f9f9f9;
+    --dark-bg-color: #2c3e50; /* Azul escuro */
+    --card-bg-color: #fff;
+    --border-color: #ddd;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --header-height: 80px;
+    --footer-height: 60px;
 }
 
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Layout Geral */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Cabeçalho (igual ao index_styles.css) */
+header {
+    background-color: var(--dark-bg-color);
+    color: var(--light-text-color);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--light-text-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.logo img {
+    height: 50px;
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+nav ul {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+nav ul li a {
+    color: var(--light-text-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding: 5px 0;
+    position: relative;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-actions button {
+    background: none;
+    border: none;
+    color: var(--light-text-color);
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.header-actions button:hover {
+    color: var(--primary-color);
+}
+
+/* Main Content */
+main {
+    flex-grow: 1;
+    padding: 30px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Seção de Obrigado */
+.thank-you-section {
+    background-color: var(--card-bg-color);
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    max-width: 700px;
+    width: 100%;
+    margin: 30px auto;
+}
+
+.thank-you-section h1 {
+    font-size: 3em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.thank-you-section p {
+    font-size: 1.2em;
+    color: var(--text-color);
+    margin-bottom: 30px;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background-color: #e65a5a;
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+/* Rodapé (igual ao index_styles.css) */
+footer {
+    background-color: var(--dark-bg-color);
+    color: var(--light-text-color);
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 50px;
+    height: var(--footer-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer p {
+    font-size: 0.9em;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .header-actions {
+        margin-top: 10px;
+    }
+
+    .thank-you-section {
+        padding: 30px;
+        margin: 20px;
+    }
+
+    .thank-you-section h1 {
+        font-size: 2.5em;
+    }
+
+    .thank-you-section p {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .thank-you-section {
+        padding: 20px;
+        margin: 15px;
+    }
+
+    .thank-you-section h1 {
+        font-size: 2em;
+    }
+
+    .thank-you-section p {
+        font-size: 0.9em;
+    }
+}

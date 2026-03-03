@@ -1,36 +1,116 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Obrigado pelo seu interesse | Shakaw 3D Print</title>
-  <link rel="stylesheet" href="css/obrigado_styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obrigado! - Shakaw 3D Print</title>
+    <link rel="stylesheet" href="assets/css/obrigado_styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <img src="https://shakaw3dprint.github.io/Shakaw_3D_Print/assets/img/logo.webp"
-         alt="Logo Shakaw 3D Print" class="logo">
-    <h1>Obrigado pelo seu interesse!</h1>
-    <p>Recebemos sua mensagem e entraremos em contato em breve com os detalhes sobre os produtos selecionados.</p>
-    <p>Enquanto isso, você pode nos contatar diretamente:</p>
+    <header>
+        <div class="container">
+            <a href="home.html" class="logo">
+                <img src="assets/img/logo.webp" alt="Shakaw 3D Print Logo">
+                Shakaw 3D Print
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="catalogo.html">Catálogo</a></li>
+                    <li><a href="home.html#about">Sobre</a></li>
+                    <li><a href="home.html#contact">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <!-- O botão de interesses não é essencial na página de obrigado, mas pode ser mantido se desejar -->
+                <button id="openInterestPanelFromHeader" aria-label="Abrir lista de interesses">
+                    <i class="fas fa-heart"></i>
+                </button>
+            </div>
+        </div>
+    </header>
 
-    <div>
-      <a href="https://wa.me/5511954846647" class="whatsapp-btn" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png"
-             alt="WhatsApp"
-             style="width: 20px; vertical-align: middle; margin-right: 8px;">
-        Falar no WhatsApp
-      </a>
+    <main>
+        <section class="thank-you-section">
+            <div class="container">
+                <h1>Obrigado!</h1>
+                <p>Sua solicitação de orçamento foi enviada com sucesso. Entraremos em contato em breve!</p>
+                <a href="catalogo.html" class="btn-primary">Voltar ao Catálogo</a>
+            </div>
+        </section>
+    </main>
 
-      <a href="https://www.instagram.com/shakaw3dprint" class="instagram-btn" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
-             alt="Instagram"
-             style="width: 20px; vertical-align: middle; margin-right: 8px;">
-        Ver no Instagram
-      </a>
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Shakaw 3D Print. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Painel de Interesses (mantido para consistência, mas pode ser removido se não for necessário) -->
+    <div id="interestPanel" class="interest-panel">
+        <div class="interest-panel-header">
+            <h3>Sua Lista de Interesses</h3>
+            <button id="closeInterestPanelBtn" class="close-btn">&times;</button>
+        </div>
+        <ul id="interestList" class="interest-list">
+            <!-- Itens serão adicionados aqui pelo JavaScript -->
+        </ul>
+        <div class="interest-summary">
+            <span id="interestTotal">Total: R$ 0,00</span>
+            <button id="openContactModalBtn" class="btn-primary">Solicitar Orçamento</button>
+        </div>
     </div>
 
-    <a href="home.html" class="back-btn">Voltar para o Início</a>
-  </div>
+    <!-- Modal de Imagem (Zoom) - Não essencial na página de obrigado, mas mantido para evitar erros de JS -->
+    <div id="imgModal" class="img-modal">
+        <span class="close">&times;</span>
+        <div class="img-modal-content">
+            <img id="modalImg" src="" alt="Imagem do Produto">
+            <div class="modal-nav modal-prev"><i class="fas fa-chevron-left"></i></div>
+            <div class="modal-nav modal-next"><i class="fas fa-chevron-right"></i></div>
+            <div class="zoom-controls">
+                <button id="zoomOutBtn"><i class="fas fa-minus"></i></button>
+                <button id="zoomResetBtn"><i class="fas fa-redo"></i></button>
+                <button id="zoomInBtn"><i class="fas fa-plus"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Contato - Não essencial na página de obrigado, mas mantido para evitar erros de JS -->
+    <div id="contactModal" class="contact-modal">
+        <div class="contact-modal-content">
+            <span class="close-contact">&times;</span>
+            <h2>Solicitar Orçamento</h2>
+            <p>Preencha o formulário abaixo com seus dados e enviaremos um orçamento detalhado para os itens selecionados.</p>
+            <div id="selectedItemsSummary">
+                <!-- Resumo dos itens selecionados será preenchido aqui -->
+            </div>
+            <form id="contactForm" action="https://formsubmit.co/seu-email@exemplo.com" method="POST">
+                <input type="hidden" name="_next" value="https://seusite.com/obrigado.html">
+                <input type="hidden" name="_subject" value="Novo Orçamento Shakaw 3D Print">
+                <input type="hidden" name="Itens Selecionados" id="itemsData">
+
+                <label for="name">Nome Completo:</label>
+                <input type="text" id="name" name="Nome" required>
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="Email" required>
+
+                <label for="phone">Telefone (WhatsApp):</label>
+                <input type="tel" id="phone" name="Telefone" placeholder="(DD) 9XXXX-XXXX" required>
+
+                <label for="message">Mensagem (opcional):</label>
+                <textarea id="message" name="Mensagem"></textarea>
+
+                <button type="submit">Enviar Solicitação</button>
+            </form>
+        </div>
+    </div>
+
+    <button id="backToTopBtn" title="Voltar ao Topo"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="assets/js/script.js"></script>
 </body>
 </html>

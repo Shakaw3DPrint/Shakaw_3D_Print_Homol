@@ -48,8 +48,7 @@ const categoryBadgeMap = {
     "diorama-garagem": '<span class="cat-badge cat-diorama-garagem">Diorama Garagem</span>',
     "miniaturas-3d": '<span class="cat-badge cat-miniaturas-3d">Miniaturas 3D</span>',
     "miniaturas-rpg": '<span class="cat-badge cat-miniaturas-rpg">Miniaturas RPG</span>',
-    "produtos-funcionais": '<span class="cat-badge cat-produtos-funcionais">Funcional</span>',
-    "action-figures": '<span class="cat-badge cat-miniaturas-3d">Miniaturas 3D</span>' // Mapeia Action Figures para Miniaturas 3D
+    "produtos-funcionais": '<span class="cat-badge cat-produtos-funcionais">Funcional</span>'
 };
 
 // ============================================================
@@ -95,7 +94,7 @@ async function loadAllData() {
         productsDiorama.forEach(p => { if (!p.category) p.category = "diorama-garagem"; });
         productsOutros.forEach(p => {
             if (!p.category) p.category = "produtos-funcionais";
-            // Mapeia "action-figures" para "miniaturas-3d"
+            // Mapeia "action-figures" para "miniaturas-3d" se a categoria original fosse essa
             if (p.category === "action-figures") p.category = "miniaturas-3d";
         });
 
@@ -142,9 +141,10 @@ function renderInstagramCarousel() {
     carouselItems.forEach(item => {
         const carouselItemDiv = document.createElement("div");
         carouselItemDiv.className = "instagram-carousel-item";
+        // CORREÇÃO AQUI: item.image para item.src
         carouselItemDiv.innerHTML = `
-            <img src="${BASE_URL + item.image}" alt="${item.alt}">
-            <div class="instagram-caption">${item.caption}</div>
+            <img src="${BASE_URL + item.src}" alt="${item.alt}">
+            <div class="instagram-caption">${item.caption || ''}</div>
         `;
         instagramCarouselContainer.appendChild(carouselItemDiv);
     });
@@ -179,7 +179,7 @@ function renderProducts(productsToRender) {
                 <h3>${product.name} ${badge}</h3>
                 <p>${product.description}</p>
                 <div class="price ${product.price ? '' : 'consult'}">
-                    ${product.price ? `R$ ${product.price.toFixed(2).replace('.', ',')}` : 'Sob consulta'}
+                    ${product.price ? `R$ ${parsePrice(product.price).toFixed(2).replace('.', ',')}` : 'Sob consulta'}
                 </div>
                 <button class="add-to-interest-btn" data-product-id="${product.id}">
                     <i class="fas fa-heart"></i> Adicionar à lista
@@ -213,7 +213,8 @@ function renderProducts(productsToRender) {
 function filterProducts(category) {
     const filterButtons = document.querySelectorAll('.filter-btn');
     filterButtons.forEach(btn => btn.classList.remove('active'));
-    document.querySelector(`.filter-btn[data-filter="${category}"]`).classList.add('active');
+    const activeBtn = document.querySelector(`.filter-btn[data-filter="${category}"]`);
+    if (activeBtn) activeBtn.classList.add('active');
 
     let productsToRender = [];
     if (category === "all") {
@@ -291,9 +292,11 @@ function constrainPan() {
     const imgRect = modalImg.getBoundingClientRect();
     const modalRect = imgModal.getBoundingClientRect();
 
+    // Calcula as dimensões efetivas da imagem com zoom
     const effectiveWidth = imgRect.width * currentZoom;
     const effectiveHeight = imgRect.height * currentZoom;
 
+    // Calcula os limites de pan baseados na diferença entre o tamanho da imagem (com zoom) e o modal
     const maxPanX = Math.max(0, (effectiveWidth - modalRect.width) / 2 / currentZoom);
     const maxPanY = Math.max(0, (effectiveHeight - modalRect.height) / 2 / currentZoom);
 
@@ -521,8 +524,7 @@ function initContactForm() {
                     closeContactModal();
                     interestItems = []; // Limpa a lista após o envio
                     updateInterestPanel();
-                    // Redireciona para a página de obrigado se o FormSubmit estiver configurado para isso
-                    // window.location.href = "obrigado.html";
+                    window.location.href = "obrigado.html"; // Redireciona para a página de obrigado
                 } else {
                     alert("Erro ao enviar. Tente novamente.");
                 }
@@ -573,7 +575,7 @@ document.addEventListener("DOMContentLoaded", () => {
     contactModal = document.getElementById("contactModal");
     selectedSummary = document.getElementById("selectedItemsSummary");
     itemsDataInput = document.getElementById("itemsData");
-    openInterestPanelFromHeaderBtn = document.getElementById("openInterestPanelFromHeader");
+    openInterestPanelFromHeaderBtn = document.getElementById("openInterestPanelFromHeader"); // Inicializa aqui
 
     // Carrega todos os dados (produtos e carrossel)
     loadAllData();
@@ -606,6 +608,7 @@ document.addEventListener("DOMContentLoaded", () => {
         modalImg.addEventListener("mousedown", handlePanStart);
         modalImg.addEventListener("touchstart", handlePanStart, { passive: false });
         modalImg.addEventListener("contextmenu", e => e.preventDefault()); // Impede menu de contexto no clique direito
+        modalImg.addEventListener('click', e => e.stopPropagation()); // Impede que o clique na imagem feche o modal
     }
 
     // Event Listeners para o modal de contato

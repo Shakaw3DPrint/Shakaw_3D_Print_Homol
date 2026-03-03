@@ -1,227 +1,170 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Shakaw 3D Print</title>
-  <link rel="stylesheet" href="css/index_styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shakaw 3D Print - Home</title>
+    <link rel="stylesheet" href="assets/css/index_styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-  <!-- CABEÇALHO -->
-  <div class="header">
-    <div class="header-left">
-      <img src="https://shakaw3dprint.github.io/Shakaw_3D_Print/assets/img/logo.webp"
-           alt="Logo Shakaw 3D Print"
-           class="logo">
-      <h1>Shakaw 3D Print</h1>
-    </div>
-
-    <div class="header-links">
-      <a href="home.html"><i class="fas fa-home"></i> Início</a>
-      <a href="catalogo.html"><i class="fas fa-box-open"></i> Catálogo</a>
-      <a href="https://www.instagram.com/shakaw3dprint" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
-             alt="Instagram"
-             class="instagram-icon">
-        @shakaw3dprint
-      </a>
-
-      <!-- Botão que abrirá a lista de interesse (painel lateral) -->
-      <button id="openInterestPanelFromHeader"
-              class="header-interest-btn">
-        <i class="fas fa-shopping-cart"></i>
-        <span>Lista de interesse</span>
-      </button>
-    </div>
-  </div>
-
-  <main class="home-wrapper">
-
-    <!-- HERO PRINCIPAL -->
-    <section class="home-hero">
-
-      <div class="hero-text">
-        <div class="hero-pill">
-          <i class="fas fa-cube"></i>
-          Impressão 3D para colecionadores e projetos especiais
+    <header>
+        <div class="container">
+            <a href="home.html" class="logo">
+                <img src="assets/img/logo.webp" alt="Shakaw 3D Print Logo">
+                Shakaw 3D Print
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="catalogo.html">Catálogo</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button id="openInterestPanelFromHeader" aria-label="Abrir lista de interesses">
+                    <i class="fas fa-heart"></i>
+                </button>
+            </div>
         </div>
+    </header>
 
-        <h2 class="hero-title">
-          Peças em 3D para dar vida aos seus cenários e coleções
-        </h2>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Impressões 3D Personalizadas</h1>
+                <p>Transforme suas ideias em realidade com a mais alta qualidade em impressão 3D.</p>
+                <a href="catalogo.html" class="btn-primary">Ver Catálogo</a>
+            </div>
+        </section>
 
-        <p class="hero-subtitle">
-          Criação de <strong>dioramas automotivos</strong>, miniaturas e objetos
-          funcionais impressos em 3D, com acabamento manual e atenção aos detalhes.
-          Ideal para quem quer montar cenas marcantes na estante ou na bancada.
-        </p>
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2>Sobre Nós</h2>
+                <p>Na Shakaw 3D Print, somos apaixonados por criar. Utilizamos tecnologia de ponta em impressão 3D para produzir miniaturas, dioramas, peças funcionais e muito mais, com atenção meticulosa aos detalhes. Nosso compromisso é com a qualidade e a satisfação do cliente, transformando conceitos em objetos tangíveis e únicos.</p>
+            </div>
+        </section>
 
-        <div class="home-buttons">
-          <a href="catalogo.html" class="home-btn-primary">
-            <i class="fas fa-warehouse"></i>
-            Ver catálogo completo
-          </a>
+        <section class="features-section">
+            <div class="container">
+                <h2>Nossos Diferenciais</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-gem"></i>
+                        <h3>Qualidade Premium</h3>
+                        <p>Materiais de alta durabilidade e acabamento impecável em cada peça.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-palette"></i>
+                        <h3>Design Personalizado</h3>
+                        <p>Traga sua ideia e nós a transformamos em um projeto 3D exclusivo.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-truck"></i>
+                        <h3>Entrega Rápida</h3>
+                        <p>Processo de produção eficiente para que seu pedido chegue rápido.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <h3>Suporte Dedicado</h3>
+                        <p>Atendimento personalizado para todas as suas dúvidas e necessidades.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="instagram-carousel-section">
+            <div class="container">
+                <h2>Últimas do Instagram</h2>
+                <div id="instagramCarousel">
+                    <!-- Itens do carrossel serão carregados aqui pelo JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="about-section">
+            <div class="container">
+                <h2>Entre em Contato</h2>
+                <p>Tem uma ideia ou precisa de um orçamento? Fale conosco! Estamos prontos para ajudar a dar vida aos seus projetos.</p>
+                <a href="https://wa.me/5511999999999" target="_blank" class="btn-primary">
+                    <i class="fab fa-whatsapp"></i> Fale pelo WhatsApp
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Shakaw 3D Print. Todos os direitos reservados.</p>
         </div>
-      </div>
-
-      <aside class="hero-card">
-        <p class="hero-card-title">O que você encontra por aqui</p>
-        <p class="hero-card-sub">
-          Impressão 3D pensada para colecionadores e uso no dia a dia.
-        </p>
-
-        <div class="hero-tags">
-          <span class="hero-tag">Dioramas e cenários de garagem</span>
-          <span class="hero-tag">Peças para miniaturas automotivas</span>
-          <span class="hero-tag">Action figures e personagens</span>
-          <span class="hero-tag">Suportes e organizadores</span>
-        </div>
-
-        <p class="hero-card-note">
-          Fale com a gente para adaptar tamanho, cores e detalhes para o seu projeto.
-        </p>
-      </aside>
-    </section>
-
-    <!-- CARROSSEL DE ÚLTIMAS POSTAGENS DO INSTAGRAM (simulado com imagens do carousel.json) -->
-    <section class="instagram-carousel-section">
-      <h2>Últimas do Instagram</h2>
-      <div class="instagram-carousel-container" id="instagramCarousel">
-        <!-- Itens do carrossel serão carregados aqui via JavaScript -->
-        <div class="instagram-carousel-item">Carregando posts...</div>
-        <div class="instagram-carousel-item">Carregando posts...</div>
-        <div class="instagram-carousel-item">Carregando posts...</div>
-      </div>
-    </section>
-
-    <!-- DESTAQUES (3 pontos fortes) -->
-    <section class="highlights">
-      <article class="highlight-card">
-        <div class="highlight-icon"><i class="fas fa-medal"></i></div>
-        <h3>Detalhe e acabamento</h3>
-        <p>
-          Ajuste fino de impressão e pintura manual em cada peça, para ficar bem na
-          foto e de perto.
-        </p>
-      </article>
-
-      <article class="highlight-card">
-        <div class="highlight-icon"><i class="fas fa-sliders-h"></i></div>
-        <h3>Personalização</h3>
-        <p>
-          Possibilidade de adaptar modelos, escalas e combinações de cores para combinar
-          com a sua coleção.
-        </p>
-      </article>
-
-      <article class="highlight-card">
-        <div class="highlight-icon"><i class="fas fa-comments"></i></div>
-        <h3>Contato direto</h3>
-        <p>
-          Atendimento via WhatsApp e Instagram para tirar dúvidas e alinhar expectativas
-          antes da impressão.
-        </p>
-      </article>
-    </section>
-
-    <!-- LINKS RÁPIDOS PARA CATÁLOGO -->
-    <section class="catalog-links">
-      <div class="catalog-card">
-        <div class="catalog-card-title">Catálogo Completo</div>
-        <p class="catalog-card-text">
-          Dioramas, miniaturas, action figures, peças funcionais e outros projetos em impressão 3D.
-        </p>
-        <a href="catalogo.html">
-          Abrir catálogo <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
-
-      <div class="catalog-card">
-        <div class="catalog-card-title">Falar sobre um projeto</div>
-        <p class="catalog-card-text">
-          Tem uma ideia específica? Veja o catálogo e depois use a lista de interesse para falar com a gente.
-        </p>
-        <a href="catalogo.html">
-          Ir para o catálogo <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
-    </section>
-
-    <!-- RODAPÉ SIMPLES -->
-    <footer class="home-footer">
-      <span>Shakaw 3D Print • Impressão 3D personalizada</span>
-      <span>
-        Contato:
-        <a href="mailto:shakaw3dprint@hotmail.com">shakaw3dprint@hotmail.com</a>
-        ·
-        <a href="https://wa.me/5511954846647" target="_blank">WhatsApp</a>
-      </span>
     </footer>
 
-  </main>
-
-  <!-- Painel de interesses (lateral) -->
-  <div id="interestPanel" class="interest-panel">
-    <button class="close-interest-panel-btn" id="closeInterestPanelBtn">&times;</button>
-    <h3>Sua Lista de Interesses</h3>
-    <ul id="interestList"></ul>
-    <div id="interestTotal"></div>
-    <button id="openContactModalBtn">Finalizar Registro de Interesse</button>
-  </div>
-
-  <!-- Modal de Imagem (Zoom e Pan) -->
-  <div id="imgModal" class="modal">
-    <span class="close">&times;</span>
-    <img class="modal-content" id="modalImg">
-    <button class="modal-nav modal-prev"><i class="fas fa-chevron-left"></i></button>
-    <button class="modal-nav modal-next"><i class="fas fa-chevron-right"></i></button>
-    <div class="zoom-controls">
-      <button id="zoomInBtn"><i class="fas fa-plus"></i></button>
-      <button id="zoomOutBtn"><i class="fas fa-minus"></i></button>
-      <button id="zoomResetBtn"><i class="fas fa-sync-alt"></i></button>
-    </div>
-  </div>
-
-  <!-- Modal de Contato -->
-  <div id="contactModal" class="contact-modal">
-    <div class="contact-modal-content">
-      <span class="close-contact">&times;</span>
-      <h2>Registrar Interesse</h2>
-      <form id="contactForm" action="https://formsubmit.co/shakaw3dprint@hotmail.com" method="POST">
-        <div class="form-section">
-          <h3>Seus Dados</h3>
-          <label for="name">Nome:</label>
-          <input type="text" id="name" name="Nome" required>
-
-          <label for="email">E-mail:</label>
-          <input type="email" id="email" name="Email" required>
-
-          <label for="phone">Telefone (WhatsApp):</label>
-          <input type="tel" id="phone" name="Telefone" placeholder="(XX) XXXXX-XXXX" required>
-
-          <label for="message">Mensagem (opcional):</label>
-          <textarea id="message" name="Mensagem" rows="4" placeholder="Alguma observação ou dúvida?"></textarea>
+    <!-- Painel de Interesses -->
+    <div id="interestPanel" class="interest-panel">
+        <div class="interest-panel-header">
+            <h3>Sua Lista de Interesses</h3>
+            <button id="closeInterestPanelBtn" class="close-btn">&times;</button>
         </div>
-
-        <div class="form-section">
-          <h3>Itens de Interesse</h3>
-          <div id="selectedItemsSummary" class="items-summary"></div>
-          <input type="hidden" name="_subject" value="Novo Interesse no Site Shakaw 3D Print">
-          <input type="hidden" name="_template" value="box">
-          <input type="hidden" name="Itens de Interesse" id="itemsData">
-          <input type="hidden" name="_captcha" value="false">
+        <ul id="interestList" class="interest-list">
+            <!-- Itens serão adicionados aqui pelo JavaScript -->
+        </ul>
+        <div class="interest-summary">
+            <span id="interestTotal">Total: R$ 0,00</span>
+            <button id="openContactModalBtn" class="btn-primary">Solicitar Orçamento</button>
         </div>
-
-        <button type="submit">Enviar Interesse</button>
-      </form>
     </div>
-  </div>
 
-  <!-- Botão Voltar ao Topo -->
-  <button id="backToTopBtn" title="Voltar ao Topo"><i class="fas fa-arrow-up"></i></button>
+    <!-- Modal de Imagem (Zoom) -->
+    <div id="imgModal" class="img-modal">
+        <span class="close">&times;</span>
+        <div class="img-modal-content">
+            <img id="modalImg" src="" alt="Imagem do Produto">
+            <div class="modal-nav modal-prev"><i class="fas fa-chevron-left"></i></div>
+            <div class="modal-nav modal-next"><i class="fas fa-chevron-right"></i></div>
+            <div class="zoom-controls">
+                <button id="zoomOutBtn"><i class="fas fa-minus"></i></button>
+                <button id="zoomResetBtn"><i class="fas fa-redo"></i></button>
+                <button id="zoomInBtn"><i class="fas fa-plus"></i></button>
+            </div>
+        </div>
+    </div>
 
-  <script src="js/script.js"></script>
+    <!-- Modal de Contato -->
+    <div id="contactModal" class="contact-modal">
+        <div class="contact-modal-content">
+            <span class="close-contact">&times;</span>
+            <h2>Solicitar Orçamento</h2>
+            <p>Preencha o formulário abaixo com seus dados e enviaremos um orçamento detalhado para os itens selecionados.</p>
+            <div id="selectedItemsSummary">
+                <!-- Resumo dos itens selecionados será preenchido aqui -->
+            </div>
+            <form id="contactForm" action="https://formsubmit.co/seu-email@exemplo.com" method="POST">
+                <input type="hidden" name="_next" value="https://seusite.com/obrigado.html">
+                <input type="hidden" name="_subject" value="Novo Orçamento Shakaw 3D Print">
+                <input type="hidden" name="_template" value="box">
+                <input type="hidden" name="Itens Selecionados" id="itemsData">
+
+                <label for="name">Nome Completo:</label>
+                <input type="text" id="name" name="Nome" required>
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="Email" required>
+
+                <label for="phone">Telefone (WhatsApp):</label>
+                <input type="tel" id="phone" name="Telefone" placeholder="(DD) 9XXXX-XXXX" required>
+
+                <label for="message">Mensagem (opcional):</label>
+                <textarea id="message" name="Mensagem"></textarea>
+
+                <button type="submit">Enviar Solicitação</button>
+            </form>
+        </div>
+    </div>
+
+    <button id="backToTopBtn" title="Voltar ao Topo"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
