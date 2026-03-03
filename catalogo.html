@@ -33,12 +33,8 @@
   </div>
 
   <!-- CARROSSEL (usa carousel.json) -->
-  <div class="carousel-container">
-    <div class="carousel" id="carousel"></div>
-    <button class="carousel-btn prev">❮</button>
-    <button class="carousel-btn next">❯</button>
-    <div class="carousel-indicators" id="carouselIndicators"></div>
-  </div>
+  <!-- Removido o carrossel aqui, pois geralmente catálogos não têm carrossel principal.
+       Se quiser um carrossel de produtos em destaque, podemos adicionar depois. -->
 
   <!-- LOADER -->
   <div class="loader" id="loader"></div>
@@ -52,11 +48,11 @@
       <button class="filter-btn" data-filter="miniaturas-3d">Miniaturas 3D</button>
       <button class="filter-btn" data-filter="miniaturas-rpg">Miniaturas RPG</button>
       <button class="filter-btn" data-filter="produtos-funcionais">Produtos Funcionais</button>
-      <button class="filter-btn" data-filter="action-figures">Action Figures / Outros</button>
+      <!-- A categoria "action-figures" será mapeada para "miniaturas-3d" no JS -->
     </div>
   </div>
 
-  <!-- CONTADOR DE RESULTADOS (opcional) -->
+  <!-- CONTADOR DE RESULTADOS -->
   <p class="results-count" id="resultsCount"></p>
 
   <!-- CATÁLOGO DE PRODUTOS -->
@@ -122,7 +118,7 @@
   </div>
 
   <!-- BOTÃO TOPO -->
-  <button id="backToTopBtn" title="Voltar ao topo"><i class="fas fa-arrow-up"></i></button>
+  <button id="backToTopBtn" title="Voltar ao Topo"><i class="fas fa-arrow-up"></i></button>
 
   <script src="js/script.js"></script>
 </body>
