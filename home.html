@@ -9,6 +9,181 @@
 </head>
 <body>
 
+  <!-- CABEÇALHO -->
+  <div class="header">
+    <div class="header-left">
+      <img src="https://shakaw3dprint.github.io/Shakaw_3D_Print/assets/img/logo.webp"
+           alt="Logo Shakaw 3D Print"
+           class="logo">
+      <h1>Shakaw 3D Print</h1>
+    </div>
+
+    <div class="header-links">
+      <a href="home.html"><i class="fas fa-home"></i> Início</a>
+      <a href="catalogo_diorama.html"><i class="fas fa-box-open"></i> Catálogo</a>
+      <a href="outros_projetos.html"><i class="fas fa-images"></i> Outros Projetos</a>
+      <a href="https://www.instagram.com/shakaw3dprint" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
+             alt="Instagram"
+             class="instagram-icon">
+        @shakaw3dprint
+      </a>
+
+      <!-- Botão que abrirá a lista de interesse (painel lateral) -->
+      <button id="openInterestPanelFromHeader"
+              class="header-interest-btn">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Lista de interesse</span>
+      </button>
+    </div>
+  </div>
+
+  <main class="home-wrapper">
+
+    <!-- HERO PRINCIPAL -->
+    <section class="home-hero">
+
+      <div class="hero-text">
+        <div class="hero-pill">
+          <i class="fas fa-cube"></i>
+          Impressão 3D para colecionadores e projetos especiais
+        </div>
+
+        <h2 class="hero-title">
+          Peças em 3D para dar vida aos seus cenários e coleções
+        </h2>
+
+        <p class="hero-subtitle">
+          Criação de <strong>dioramas automotivos</strong>, miniaturas e objetos
+          funcionais impressos em 3D, com acabamento manual e atenção aos detalhes.
+          Ideal para quem quer montar cenas marcantes na estante ou na bancada.
+        </p>
+
+        <div class="home-buttons">
+          <a href="catalogo_diorama.html" class="home-btn-primary">
+            <i class="fas fa-warehouse"></i>
+            Ver catálogo de dioramas
+          </a>
+          <a href="outros_projetos.html" class="home-btn-secondary">
+            <i class="fas fa-shapes"></i>
+            Ver outros projetos
+          </a>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <p class="hero-card-title">O que você encontra por aqui</p>
+        <p class="hero-card-sub">
+          Impressão 3D pensada para colecionadores e uso no dia a dia.
+        </p>
+
+        <div class="hero-tags">
+          <span class="hero-tag">Dioramas e cenários de garagem</span>
+          <span class="hero-tag">Peças para miniaturas automotivas</span>
+          <span class="hero-tag">Action figures e personagens</span>
+          <span class="hero-tag">Suportes e organizadores</span>
+        </div>
+
+        <p class="hero-card-note">
+          Fale com a gente para adaptar tamanho, cores e detalhes para o seu projeto.
+        </p>
+      </aside>
+    </section>
+
+    <!-- CARROSSEL DE ÚLTIMAS POSTAGENS DO INSTAGRAM -->
+    <section class="instagram-carousel-section">
+      <h2>Últimas do Instagram</h2>
+      <div class="instagram-carousel-container" id="instagramCarousel">
+        <!-- Placeholders – depois o JS troca por imagens -->
+        <div class="instagram-carousel-item">Carregando posts...</div>
+        <div class="instagram-carousel-item">Carregando posts...</div>
+        <div class="instagram-carousel-item">Carregando posts...</div>
+      </div>
+    </section>
+
+    <!-- DESTAQUES (3 pontos fortes) -->
+    <section class="highlights">
+      <article class="highlight-card">
+        <div class="highlight-icon"><i class="fas fa-medal"></i></div>
+        <h3>Detalhe e acabamento</h3>
+        <p>
+          Ajuste fino de impressão e pintura manual em cada peça, para ficar bem na
+          foto e de perto.
+        </p>
+      </article>
+
+      <article class="highlight-card">
+        <div class="highlight-icon"><i class="fas fa-sliders-h"></i></div>
+        <h3>Personalização</h3>
+        <p>
+          Possibilidade de adaptar modelos, escalas e combinações de cores para combinar
+          com a sua coleção.
+        </p>
+      </article>
+
+      <article class="highlight-card">
+        <div class="highlight-icon"><i class="fas fa-comments"></i></div>
+        <h3>Contato direto</h3>
+        <p>
+          Atendimento via WhatsApp e Instagram para tirar dúvidas e alinhar expectativas
+          antes da impressão.
+        </p>
+      </article>
+    </section>
+
+    <!-- LINKS RÁPIDOS PARA CATÁLOGOS -->
+    <section class="catalog-links">
+      <div class="catalog-card">
+        <div class="catalog-card-title">Catálogo de Dioramas</div>
+        <p class="catalog-card-text">
+          Modelos pensados para cenários de oficina e garagem, em escalas para
+          miniaturas automotivas.
+        </p>
+        <a href="catalogo_diorama.html">
+          Abrir catálogo <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="catalog-card">
+        <div class="catalog-card-title">Outros Projetos</div>
+        <p class="catalog-card-text">
+          Action figures, suportes, organizadores e outras ideias criadas a partir de
+          impressões 3D.
+        </p>
+        <a href="outros_projetos.html">
+          Ver projetos <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- RODAPÉ SIMPLES -->
+    <footer class="home-footer">
+      <span>Shakaw 3D Print • Impressão 3D personalizada</span>
+      <span>
+        Contato:
+        <a href="mailto:shakaw3dprint@hotmail.com">shakaw3dprint@hotmail.com</a>
+        ·
+        <a href="https://wa.me/5511954846647" target="_blank">WhatsApp</a>
+      </span>
+    </footer>
+
+  </main>
+
+  <!-- Aqui no futuro vamos garantir que o painel de interesses exista em todas as páginas -->
+
+  <script src="js/index_script.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Shakaw 3D Print</title>
+  <link rel="stylesheet" href="css/index_styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
   <!-- CABEÇALHO PADRÃO (usa .header do CSS global) -->
   <div class="header">
     <div style="display:flex; align-items:center; gap:10px;">
