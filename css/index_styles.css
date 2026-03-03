@@ -16,10 +16,13 @@ body {
     padding: 20px;
 }
 
-/* Cabeçalho */
+/* ================= */
+/* Cabeçalho global  */
+/* ================= */
+
 .header {
-    background-color: rgba(0, 0, 0, 0.3);
-    padding: 15px 20px;
+    background-color: rgba(0, 0, 0, 0.35);
+    padding: 12px 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -27,13 +30,20 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .header .logo {
-    height: 40px;
-    margin-right: 15px;
+    height: 56px;           /* logo maior */
+    width: auto;
+    border-radius: 4px;
 }
 
 .header h1 {
-    font-size: 1.5em;
+    font-size: 1.6em;
     margin: 0;
     color: #4fc3f7; /* Cor de destaque */
     display: flex;
@@ -43,19 +53,21 @@ body {
 
 .header-links {
     display: flex;
-    gap: 20px;
+    gap: 18px;
     flex-wrap: wrap;
     margin-left: auto; /* Empurra os links para a direita */
+    align-items: center;
 }
 
 .header-links a {
     color: #ffffff;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
     display: flex;
     align-items: center;
     gap: 5px;
     transition: color 0.3s ease;
+    font-size: 0.95rem;
 }
 
 .header-links a:hover {
@@ -69,7 +81,32 @@ body {
     margin-right: 5px;
 }
 
-/* Carrossel */
+/* Botão da lista de interesse no cabeçalho */
+.header-interest-btn {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 999px;
+    padding: 6px 12px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.header-interest-btn:hover {
+    background: rgba(79,195,247,0.15);
+    border-color: #4fc3f7;
+    color: #4fc3f7;
+}
+
+/* ================= */
+/* Carrossel genérico (usado em outras páginas, se houver) */
+/* ================= */
+
 .carousel-container {
     position: relative;
     width: 100%;
@@ -165,7 +202,10 @@ body {
     100% { transform: rotate(360deg); }
 }
 
-/* Seção de Filtros */
+/* ================= */
+/* Seção de Filtros  */
+/* ================= */
+
 .filter-section {
     text-align: center;
     margin-bottom: 40px;
@@ -215,7 +255,10 @@ body {
     color: white;
 }
 
+/* ================= */
 /* Catálogo de Produtos */
+/* ================= */
+
 .catalog-page {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -308,8 +351,10 @@ body {
 .cat-miniaturas-rpg   { background: #ffe0e0; color: #800000; }
 .cat-produtos-funcionais { background: #fff3e8; color: #b74f00; }
 
+/* ================= */
+/* Modal de Imagem   */
+/* ================= */
 
-/* Modal de Imagem */
 .modal {
     display: none;
     position: fixed;
@@ -358,7 +403,7 @@ body {
 
 .close:hover,
 .close:focus {
-    color: #bbb;
+    color:bbb;
     text-decoration: none;
     cursor: pointer;
 }
@@ -414,7 +459,10 @@ body {
     background-color: #0077cc;
 }
 
-/* Modal de Contato */
+/* ================= */
+/* Modal de Contato  */
+/* ================= */
+
 .contact-modal {
     display: none;
     position: fixed;
@@ -542,7 +590,10 @@ body {
     background-color: #27ae60;
 }
 
+/* ================= */
 /* Botão Voltar ao Topo */
+/* ================= */
+
 #backToTopBtn {
     display: none;
     position: fixed;
@@ -566,7 +617,10 @@ body {
     opacity: 1;
 }
 
+/* ================= */
 /* Painel de Interesses */
+/* ================= */
+
 .interest-btn {
     position: fixed;
     bottom: 20px;
@@ -698,17 +752,32 @@ body {
     color: #bbb;
 }
 
-/* Responsividade */
+/* ================= */
+/* RESPONSIVIDADE GLOBAL */
+/* ================= */
+
+@media (max-width: 900px) {
+    .header {
+        padding: 12px 16px;
+    }
+
+    .header-links {
+        margin-top: 8px;
+        justify-content: flex-start;
+    }
+}
+
 @media (max-width: 768px) {
     .header {
         flex-direction: column;
         align-items: flex-start;
     }
     .header-links {
-        margin-top: 15px;
+        margin-top: 10px;
         margin-left: 0;
         width: 100%;
-        justify-content: center;
+        justify-content: flex-start;
+        gap: 12px;
     }
     .carousel-item {
         height: 300px;
@@ -745,7 +814,7 @@ body {
         font-size: 1.2em;
     }
     .header .logo {
-        height: 30px;
+        height: 40px;
     }
     .header-links a {
         font-size: 0.9em;
@@ -782,6 +851,7 @@ body {
         font-size: 0.9em;
     }
 }
+
 /* ======================= */
 /* HOME (página inicial)   */
 /* ======================= */
@@ -789,7 +859,15 @@ body {
 .home-wrapper {
     max-width: 1080px;
     margin: 0 auto;
-    padding: 20px 20px 40px;
+    padding: 24px 24px 40px;
+}
+
+/* limita largura de texto para não ficar de fora a fora */
+.home-wrapper .hero-text,
+.home-wrapper .instagram-carousel-section,
+.home-wrapper .highlights,
+.home-wrapper .catalog-links {
+    max-width: 950px;
 }
 
 /* HERO PRINCIPAL */
