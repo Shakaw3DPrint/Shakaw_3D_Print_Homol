@@ -1206,3 +1206,12 @@ body {
         justify-content: center;
     }
 }
+/* Ajuste para descrição completa do produto */
+.product-card-content .product-description-full {
+    min-height: auto; /* Remove altura mínima */
+    overflow: visible; /* Permite que o texto transborde */
+    text-overflow: initial; /* Remove ellipsis */
+    display: block; /* Garante que o display seja block */
+    -webkit-line-clamp: unset; /* Remove limite de linhas para webkit */
+    -webkit-box-orient: unset; /* Remove orientação da caixa para webkit */
+}
