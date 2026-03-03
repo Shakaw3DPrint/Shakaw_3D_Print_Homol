@@ -28,8 +28,7 @@ let interestItems = JSON.parse(localStorage.getItem('interestItems')) || []; // 
 let interestPanelTimeoutId = null;
 
 // Carrossel da Home
-let currentSlide = 0;
-let slideInterval;
+let currentSlide = 0; // Mantido para o carrossel da home
 
 // Modal de Imagem (Zoom e Pan)
 let currentProductImages = [];
@@ -50,7 +49,7 @@ const categoryBadgeMap = {
     "miniaturas-3d":       '<span class="cat-badge cat-miniaturas-3d">Miniaturas 3D</span>',
     "miniaturas-rpg":      '<span class="cat-badge cat-miniaturas-rpg">Miniaturas RPG</span>',
     "produtos-funcionais": '<span class="cat-badge cat-produtos-funcionais">Funcional</span>',
-    "action-figures":      '<span class="cat-badge cat-action-figures">Action Figure</span>' // Adicionado para outros projetos
+    "action-figures":      '<span class="cat-badge cat-miniaturas-3d">Miniaturas 3D</span>' // Mapeia Action Figures para Miniaturas 3D
 };
 
 // =============================================
@@ -93,10 +92,25 @@ async function loadAllData() {
         productsDiorama.forEach(p => { if (!p.category) p.category = "diorama-garagem"; });
         productsOutros.forEach(p => {
             if (!p.category) p.category = "produtos-funcionais"; // Assumindo "outros" são funcionais por padrão
+            // Se a categoria for "action-figures", muda para "miniaturas-3d"
+            if (p.category === "action-figures") p.category = "miniaturas-3d";
+
             // Ajusta o caminho das imagens para os produtos "outros" se necessário
-            if (p.mainImage && !p.mainImage.startsWith(BASE_URL)) p.mainImage = `assets/img/projects/${p.mainImage.split('/').pop()}`;
+            // Verifica se a imagem já tem o BASE_URL, se não, adiciona o caminho relativo
+            if (p.mainImage && !p.mainImage.startsWith('http') && !p.mainImage.startsWith('assets/')) {
+                p.mainImage = `assets/img/projects/${p.mainImage.split('/').pop()}`;
+            } else if (p.mainImage && p.mainImage.startsWith('assets/')) {
+                // Já está no formato assets/, apenas garante que não tem BASE_URL duplicado
+                p.mainImage = p.mainImage;
+            }
+
             if (p.thumbnails && Array.isArray(p.thumbnails)) {
-                p.thumbnails = p.thumbnails.map(thumb => !thumb.startsWith(BASE_URL) ? `assets/img/projects/${thumb.split('/').pop()}` : thumb);
+                p.thumbnails = p.thumbnails.map(thumb => {
+                    if (!thumb.startsWith('http') && !thumb.startsWith('assets/')) {
+                        return `assets/img/projects/${thumb.split('/').pop()}`;
+                    }
+                    return thumb;
+                });
             }
         });
 
@@ -145,6 +159,7 @@ function renderProducts(productsToRender) {
         card.className = "product-card";
         card.dataset.productId = product.id;
 
+        // Usa a categoria já ajustada no loadAllData
         const badge = categoryBadgeMap[product.category] || '';
         const imgSrc = product.mainImage ? BASE_URL + product.mainImage : 'https://via.placeholder.com/200x200?text=Sem+Imagem';
         const priceHTML = product.price ? `<div class="price">${product.price}</div>` : `<div class="price consult">Sob consulta</div>`;
@@ -153,7 +168,7 @@ function renderProducts(productsToRender) {
             <img src="${imgSrc}" alt="${product.name}">
             <div class="product-card-content">
                 <h3>${product.name} ${badge}</h3>
-                <p>${product.description}</p>
+                <p class="product-description-full">${product.description}</p>
                 ${priceHTML}
                 <button class="add-interest-btn" data-product-id="${product.id}">Tenho Interesse</button>
             </div>
@@ -180,7 +195,7 @@ function initFilters() {
             document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
 
-            const cat = btn.dataset.filter; // Mudado de 'category' para 'filter' para consistência
+            const cat = btn.dataset.filter;
             const filtered = cat === "all"
                 ? allProducts
                 : allProducts.filter(p => p.category === cat);
@@ -200,8 +215,6 @@ function renderInstagramCarousel() {
 
     instagramCarouselContainer.innerHTML = ''; // Limpa placeholders
 
-    // Usando os itens do carousel.json para simular posts do Instagram
-    // No futuro, aqui seria a integração real com a API do Instagram
     if (carouselItems.length === 0) {
         instagramCarouselContainer.innerHTML = '<p style="text-align:center; width:100%; color:rgba(255,255,255,0.6);">Nenhuma postagem do Instagram para exibir.</p>';
         return;
