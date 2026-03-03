@@ -1,12 +1,12 @@
 [
-  {"src": "assets/img/carrossel/c_1.webp", "alt": "Imagem Carrossel 1"},
-  {"src": "assets/img/carrossel/c_2.webp", "alt": "Imagem Carrossel 2"},
-  {"src": "assets/img/carrossel/c_3.webp", "alt": "Imagem Carrossel 3"},
-  {"src": "assets/img/carrossel/c_4.webp", "alt": "Imagem Carrossel 4"},
-  {"src": "assets/img/carrossel/c_5.webp", "alt": "Imagem Carrossel 5"},
-  {"src": "assets/img/carrossel/c_6.webp", "alt": "Imagem Carrossel 6"},
-  {"src": "assets/img/carrossel/c_7.webp", "alt": "Imagem Carrossel 7"},
-  {"src": "assets/img/carrossel/c_8.webp", "alt": "Imagem Carrossel 8"},
-  {"src": "assets/img/carrossel/c_9.webp", "alt": "Imagem Carrossel 9"},
-  {"src": "assets/img/carrossel/c_13.jpg", "alt": "Imagem Carrossel 10"}
+  {"src": "assets/img/carrossel/c_1.webp", "alt": "Imagem Carrossel 1", "caption": ""},
+  {"src": "assets/img/carrossel/c_2.webp", "alt": "Imagem Carrossel 2", "caption": ""},
+  {"src": "assets/img/carrossel/c_3.webp", "alt": "Imagem Carrossel 3", "caption": ""},
+  {"src": "assets/img/carrossel/c_4.webp", "alt": "Imagem Carrossel 4", "caption": ""},
+  {"src": "assets/img/carrossel/c_5.webp", "alt": "Imagem Carrossel 5", "caption": ""},
+  {"src": "assets/img/carrossel/c_6.webp", "alt": "Imagem Carrossel 6", "caption": ""},
+  {"src": "assets/img/carrossel/c_7.webp", "alt": "Imagem Carrossel 7", "caption": ""},
+  {"src": "assets/img/carrossel/c_8.webp", "alt": "Imagem Carrossel 8", "caption": ""},
+  {"src": "assets/img/carrossel/c_9.webp", "alt": "Imagem Carrossel 9", "caption": ""},
+  {"src": "assets/img/carrossel/c_13.jpg", "alt": "Imagem Carrossel 10", "caption": ""}
 ]
