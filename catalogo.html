@@ -11,22 +11,28 @@
 
   <!-- CABEÇALHO -->
   <div class="header">
-    <img src="https://shakaw3dprint.github.io/Shakaw_3D_Print/assets/img/logo.webp"
-         alt="Logo Shakaw 3D Print" class="logo">
-    <h1>Shakaw 3D Print</h1>
+    <div class="header-left">
+      <img src="https://shakaw3dprint.github.io/Shakaw_3D_Print/assets/img/logo.webp"
+           alt="Logo Shakaw 3D Print" class="logo">
+      <h1>Shakaw 3D Print</h1>
+    </div>
     <div class="header-links">
       <a href="home.html"><i class="fas fa-home"></i> Início</a>
       <a href="catalogo.html"><i class="fas fa-box-open"></i> Catálogo</a>
-      <!-- O link "Outros Projetos" foi removido pois o catálogo agora é unificado -->
       <a href="https://www.instagram.com/shakaw3dprint" target="_blank">
         <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
              alt="Instagram" class="instagram-icon">
         @shakaw3dprint
       </a>
+      <button id="openInterestPanelFromHeader"
+              class="header-interest-btn">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Lista de interesse</span>
+      </button>
     </div>
   </div>
 
-  <!-- CARROSSEL -->
+  <!-- CARROSSEL (usa carousel.json) -->
   <div class="carousel-container">
     <div class="carousel" id="carousel"></div>
     <button class="carousel-btn prev">❮</button>
@@ -41,87 +47,83 @@
   <div class="filter-section">
     <h2><i class="fas fa-filter"></i> Filtrar por Categoria</h2>
     <div class="filter-buttons" id="filterButtons">
-      <button class="filter-btn active" data-filter="all" onclick="filterProducts('all')">Todos</button>
-      <button class="filter-btn" data-filter="diorama-garagem" onclick="filterProducts('diorama-garagem')">Diorama Garagem</button>
-      <button class="filter-btn" data-filter="miniaturas-3d" onclick="filterProducts('miniaturas-3d')">Miniaturas 3D</button>
-      <button class="filter-btn" data-filter="miniaturas-rpg" onclick="filterProducts('miniaturas-rpg')">Miniaturas RPG</button>
-      <button class="filter-btn" data-filter="produtos-funcionais" onclick="filterProducts('produtos-funcionais')">Produtos Funcionais</button>
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="diorama-garagem">Diorama Garagem</button>
+      <button class="filter-btn" data-filter="miniaturas-3d">Miniaturas 3D</button>
+      <button class="filter-btn" data-filter="miniaturas-rpg">Miniaturas RPG</button>
+      <button class="filter-btn" data-filter="produtos-funcionais">Produtos Funcionais</button>
+      <button class="filter-btn" data-filter="action-figures">Action Figures / Outros</button>
     </div>
   </div>
+
+  <!-- CONTADOR DE RESULTADOS (opcional) -->
+  <p class="results-count" id="resultsCount"></p>
 
   <!-- CATÁLOGO DE PRODUTOS -->
   <div class="catalog-page" id="catalog">
     <p class="loading-message">Carregando produtos...</p>
   </div>
 
-  <!-- MODAL IMAGEM -->
+  <!-- Painel de interesses (lateral) -->
+  <div id="interestPanel" class="interest-panel">
+    <button class="close-interest-panel-btn" id="closeInterestPanelBtn">&times;</button>
+    <h3>Sua Lista de Interesses</h3>
+    <ul id="interestList"></ul>
+    <div id="interestTotal"></div>
+    <button id="openContactModalBtn">Finalizar Registro de Interesse</button>
+  </div>
+
+  <!-- Modal de Imagem (Zoom e Pan) -->
   <div id="imgModal" class="modal">
     <span class="close">&times;</span>
-    <button class="modal-nav modal-prev">❮</button>
-    <div class="modal-content">
-      <img id="modalImg" src="" alt="Imagem ampliada">
-    </div>
-    <button class="modal-nav modal-next">❯</button>
+    <img class="modal-content" id="modalImg">
+    <button class="modal-nav modal-prev"><i class="fas fa-chevron-left"></i></button>
+    <button class="modal-nav modal-next"><i class="fas fa-chevron-right"></i></button>
     <div class="zoom-controls">
-      <button id="zoomInBtn">+</button>
-      <button id="zoomOutBtn">-</button>
-      <button id="zoomResetBtn">Reset</button>
+      <button id="zoomInBtn"><i class="fas fa-plus"></i></button>
+      <button id="zoomOutBtn"><i class="fas fa-minus"></i></button>
+      <button id="zoomResetBtn"><i class="fas fa-sync-alt"></i></button>
     </div>
   </div>
 
-  <!-- MODAL CONTATO -->
+  <!-- Modal de Contato -->
   <div id="contactModal" class="contact-modal">
     <div class="contact-modal-content">
       <span class="close-contact">&times;</span>
-      <h2>Enviar Interesses</h2>
-      <form id="contactForm"
-            action="https://script.google.com/macros/s/AKfycbypHVPUQFxuGJNoawgsXZFZqGwFIMNcWhcJDb0Yb2uCwuRz8QjLoR29PyMmI661wwaUyg/exec"
-            method="POST">
-        <input type="hidden" name="_next"
-               value="https://shakaw3dprint.github.io/Shakaw_3D_Print/obrigado.html">
-        <input type="hidden" id="itemsData" name="items_data">
-
+      <h2>Registrar Interesse</h2>
+      <form id="contactForm" action="https://formsubmit.co/shakaw3dprint@hotmail.com" method="POST">
         <div class="form-section">
+          <h3>Seus Dados</h3>
           <label for="name">Nome:</label>
-          <input type="text" id="name" name="name" required>
+          <input type="text" id="name" name="Nome" required>
+
           <label for="email">E-mail:</label>
-          <input type="email" id="email" name="email" required>
-          <label for="whatsapp">WhatsApp:</label>
-          <input type="tel" id="whatsapp" name="whatsapp"
-                 placeholder="(00) 00000-0000" required>
+          <input type="email" id="email" name="Email" required>
+
+          <label for="phone">Telefone (WhatsApp):</label>
+          <input type="tel" id="phone" name="Telefone" placeholder="(XX) XXXXX-XXXX" required>
+
+          <label for="message">Mensagem (opcional):</label>
+          <textarea id="message" name="Mensagem" rows="4" placeholder="Alguma observação ou dúvida?"></textarea>
         </div>
 
         <div class="form-section">
-          <h3>Resumo dos Itens Selecionados</h3>
+          <h3>Itens de Interesse</h3>
           <div id="selectedItemsSummary" class="items-summary"></div>
+          <input type="hidden" name="_subject" value="Novo Interesse no Site Shakaw 3D Print">
+          <input type="hidden" name="_template" value="box">
+          <input type="hidden" name="Itens de Interesse" id="itemsData">
+          <input type="hidden" name="_captcha" value="false">
         </div>
 
-        <div class="form-section">
-          <label for="customMessage">Mensagem Adicional:</label>
-          <textarea id="customMessage" name="custom_message" rows="4"
-                    placeholder="Digite aqui qualquer informação adicional..."></textarea>
-        </div>
-
-        <button type="submit">Enviar Interesses</button>
+        <button type="submit">Enviar Interesse</button>
       </form>
     </div>
   </div>
 
   <!-- BOTÃO TOPO -->
-  <button id="backToTopBtn" title="Voltar ao topo">⬆️ Topo</button>
+  <button id="backToTopBtn" title="Voltar ao topo"><i class="fas fa-arrow-up"></i></button>
 
-  <!-- PAINEL INTERESSES -->
-  <div id="interestPanel">
-    <button id="closeInterestPanelBtn" class="close-interest-panel-btn">&times;</button>
-    <h3>Lista de interesses</h3>
-    <ul id="interestList"></ul>
-    <div id="interestTotal"></div>
-    <button onclick="showContactModal()">Enviar Interesses</button>
-  </div>
-
-  <!-- BOTÃO INTERESSES -->
-  <button class="interest-btn">💚 Ver interesses</button>
-
-  <script src="js/index_script.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>
