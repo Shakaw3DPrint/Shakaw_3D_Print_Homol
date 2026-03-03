@@ -1,249 +1,127 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo - Shakaw 3D Print</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Estilos básicos do seu site, adaptados para o catálogo */
-        body { font-family: Arial, sans-serif; background: #00303f; color: white; margin: 0; padding: 0; }
-        .header { background: rgba(0,0,0,0.3); padding: 20px 30px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .header h1 { font-size: 1.4rem; display: flex; align-items: center; gap: 10px; }
-        .header a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; }
-        .header a:hover { color: white; }
-        .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
-
-        /* Estilos dos filtros */
-        .filter-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; justify-content: center; }
-        .filter-btn { padding: 10px 22px; border-radius: 25px; border: 2px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.07); color: white; cursor: pointer; font-size: 14px; font-weight: bold; transition: all 0.2s; }
-        .filter-btn:hover { background: rgba(255,255,255,0.15); }
-        .filter-btn.active { background: #0077cc; border-color: #0077cc; }
-
-        /* Estilos do carrossel */
-        .carousel-container { position: relative; width: 100%; max-width: 1000px; margin: 0 auto 40px; overflow: hidden; border-radius: 12px; }
-        .carousel-slide { display: flex; transition: transform 0.5s ease-in-out; }
-        .carousel-item { min-width: 100%; height: 400px; background-color: #333; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .carousel-item img { width: 100%; height: 100%; object-fit: cover; }
-        .carousel-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; padding: 10px 15px; cursor: pointer; font-size: 24px; z-index: 10; border-radius: 50%; }
-        .carousel-nav-btn.prev { left: 10px; }
-        .carousel-nav-btn.next { right: 10px; }
-        .carousel-dots { display: flex; justify-content: center; margin-top: 15px; }
-        .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.3); margin: 0 5px; cursor: pointer; }
-        .dot.active { background: #0077cc; }
-
-        /* Estilos dos produtos (cards) */
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
-        .product-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; overflow: hidden; text-decoration: none; color: white; transition: transform 0.2s, box-shadow 0.2s; }
-        .product-card:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.3); }
-        .product-card img { width: 100%; height: 200px; object-fit: cover; background: #333; }
-        .product-card-content { padding: 15px; }
-        .product-card-content h3 { font-size: 1.2rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-        .product-card-content p { font-size: 0.9rem; color: rgba(255,255,255,0.7); line-height: 1.5; margin-bottom: 10px; }
-        .product-card-content .price { font-size: 1.1rem; font-weight: bold; color: #4fc3f7; }
-        .product-card-content .price.consult { color: rgba(255,255,255,0.5); font-style: italic; }
-
-        /* Badges de categoria (iguais ao admin) */
-        .cat-badge { display: inline-block; font-size: 10px; font-weight: bold; padding: 2px 8px; border-radius: 10px; margin-left: 6px; vertical-align: middle; }
-        .cat-diorama-garagem  { background: #e8f4ff; color: #0057b7; }
-        .cat-miniaturas-3d    { background: #e0ffe0; color: #008000; }
-        .cat-miniaturas-rpg   { background: #ffe0e0; color: #800000; }
-        .cat-produtos-funcionais { background: #fff3e8; color: #b74f00; }
-
-        @media (max-width: 768px) {
-            .carousel-item { height: 300px; }
-            .product-grid { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 480px) {
-            .carousel-item { height: 200px; }
-            .header { padding: 15px; }
-            .container { padding: 0 15px; }
-            .filter-buttons { justify-content: flex-start; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Catálogo - Shakaw 3D Print</title>
+  <link rel="stylesheet" href="css/index_styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <div class="header">
-        <h1><i class="fas fa-store"></i> Catálogo Shakaw 3D Print</h1>
-        <a href="admin.html"><i class="fas fa-tools"></i> Painel Admin</a>
+  <!-- CABEÇALHO -->
+  <div class="header">
+    <img src="https://shakaw3dprint.github.io/Shakaw_3D_Print/assets/img/logo.webp"
+         alt="Logo Shakaw 3D Print" class="logo">
+    <h1>Shakaw 3D Print</h1>
+    <div class="header-links">
+      <a href="home.html"><i class="fas fa-home"></i> Início</a>
+      <a href="catalogo.html"><i class="fas fa-box-open"></i> Catálogo</a>
+      <!-- O link "Outros Projetos" foi removido pois o catálogo agora é unificado -->
+      <a href="https://www.instagram.com/shakaw3dprint" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
+             alt="Instagram" class="instagram-icon">
+        @shakaw3dprint
+      </a>
     </div>
+  </div>
 
-    <div class="container">
-        <!-- Carrossel -->
-        <div class="carousel-container" id="mainCarousel">
-            <div class="carousel-slide" id="carouselSlide">
-                <!-- Itens do carrossel serão carregados aqui -->
-            </div>
-            <button class="carousel-nav-btn prev" onclick="moveSlide(-1)"><i class="fas fa-chevron-left"></i></button>
-            <button class="carousel-nav-btn next" onclick="moveSlide(1)"><i class="fas fa-chevron-right"></i></button>
-        </div>
-        <div class="carousel-dots" id="carouselDots"></div>
+  <!-- CARROSSEL -->
+  <div class="carousel-container">
+    <div class="carousel" id="carousel"></div>
+    <button class="carousel-btn prev">❮</button>
+    <button class="carousel-btn next">❯</button>
+    <div class="carousel-indicators" id="carouselIndicators"></div>
+  </div>
 
-        <h2><i class="fas fa-filter"></i> Filtrar Produtos</h2>
-        <div class="filter-buttons" id="filterButtons">
-            <button class="filter-btn active" data-filter="all" onclick="filterProducts('all')">Todos</button>
-            <button class="filter-btn" data-filter="diorama-garagem" onclick="filterProducts('diorama-garagem')">Diorama Garagem</button>
-            <button class="filter-btn" data-filter="miniaturas-3d" onclick="filterProducts('miniaturas-3d')">Miniaturas 3D</button>
-            <button class="filter-btn" data-filter="miniaturas-rpg" onclick="filterProducts('miniaturas-rpg')">Miniaturas RPG</button>
-            <button class="filter-btn" data-filter="produtos-funcionais" onclick="filterProducts('produtos-funcionais')">Produtos Funcionais</button>
-        </div>
+  <!-- LOADER -->
+  <div class="loader" id="loader"></div>
 
-        <h2><i class="fas fa-cubes"></i> Nossos Produtos</h2>
-        <div class="product-grid" id="productGrid">
-            <p style="color:rgba(255,255,255,0.4);font-size:13px;grid-column:1/-1;text-align:center;">Carregando produtos...</p>
-        </div>
+  <!-- FILTROS DE CATEGORIA -->
+  <div class="filter-section">
+    <h2><i class="fas fa-filter"></i> Filtrar por Categoria</h2>
+    <div class="filter-buttons" id="filterButtons">
+      <button class="filter-btn active" data-filter="all" onclick="filterProducts('all')">Todos</button>
+      <button class="filter-btn" data-filter="diorama-garagem" onclick="filterProducts('diorama-garagem')">Diorama Garagem</button>
+      <button class="filter-btn" data-filter="miniaturas-3d" onclick="filterProducts('miniaturas-3d')">Miniaturas 3D</button>
+      <button class="filter-btn" data-filter="miniaturas-rpg" onclick="filterProducts('miniaturas-rpg')">Miniaturas RPG</button>
+      <button class="filter-btn" data-filter="produtos-funcionais" onclick="filterProducts('produtos-funcionais')">Produtos Funcionais</button>
     </div>
+  </div>
 
-    <script>
-        const GITHUB_OWNER  = "Shakaw3DPrint";
-        const GITHUB_REPO   = "Shakaw_3D_Print";
-        const GITHUB_BRANCH = "main";
-        const BASE_URL      = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/`;
+  <!-- CATÁLOGO DE PRODUTOS -->
+  <div class="catalog-page" id="catalog">
+    <p class="loading-message">Carregando produtos...</p>
+  </div>
 
-        let allProducts = [];
-        let carouselItems = [];
-        let currentSlide = 0;
-        let slideInterval;
+  <!-- MODAL IMAGEM -->
+  <div id="imgModal" class="modal">
+    <span class="close">&times;</span>
+    <button class="modal-nav modal-prev">❮</button>
+    <div class="modal-content">
+      <img id="modalImg" src="" alt="Imagem ampliada">
+    </div>
+    <button class="modal-nav modal-next">❯</button>
+    <div class="zoom-controls">
+      <button id="zoomInBtn">+</button>
+      <button id="zoomOutBtn">-</button>
+      <button id="zoomResetBtn">Reset</button>
+    </div>
+  </div>
 
-        const categoryBadgeMap = {
-            "diorama-garagem":     '<span class="cat-badge cat-diorama-garagem">Diorama Garagem</span>',
-            "miniaturas-3d":       '<span class="cat-badge cat-miniaturas-3d">Miniaturas 3D</span>',
-            "miniaturas-rpg":      '<span class="cat-badge cat-miniaturas-rpg">Miniaturas RPG</span>',
-            "produtos-funcionais": '<span class="cat-badge cat-produtos-funcionais">Funcional</span>'
-        };
+  <!-- MODAL CONTATO -->
+  <div id="contactModal" class="contact-modal">
+    <div class="contact-modal-content">
+      <span class="close-contact">&times;</span>
+      <h2>Enviar Interesses</h2>
+      <form id="contactForm"
+            action="https://script.google.com/macros/s/AKfycbypHVPUQFxuGJNoawgsXZFZqGwFIMNcWhcJDb0Yb2uCwuRz8QjLoR29PyMmI661wwaUyg/exec"
+            method="POST">
+        <input type="hidden" name="_next"
+               value="https://shakaw3dprint.github.io/Shakaw_3D_Print/obrigado.html">
+        <input type="hidden" id="itemsData" name="items_data">
 
-        async function loadProducts() {
-            try {
-                const [productsDioramaRes, productsOutrosRes, carouselRes] = await Promise.all([
-                    fetch(BASE_URL + "assets/json/products.json?t=" + Date.now()),
-                    fetch(BASE_URL + "assets/json/outros_produtos.json?t=" + Date.now()),
-                    fetch(BASE_URL + "assets/json/carousel.json?t=" + Date.now())
-                ]);
+        <div class="form-section">
+          <label for="name">Nome:</label>
+          <input type="text" id="name" name="name" required>
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" name="email" required>
+          <label for="whatsapp">WhatsApp:</label>
+          <input type="tel" id="whatsapp" name="whatsapp"
+                 placeholder="(00) 00000-0000" required>
+        </div>
 
-                const productsDiorama = productsDioramaRes.ok ? await productsDioramaRes.json() : [];
-                const productsOutros  = productsOutrosRes.ok ? await productsOutrosRes.json() : [];
-                carouselItems         = carouselRes.ok ? await carouselRes.json() : [];
+        <div class="form-section">
+          <h3>Resumo dos Itens Selecionados</h3>
+          <div id="selectedItemsSummary" class="items-summary"></div>
+        </div>
 
-                allProducts = productsDiorama.concat(productsOutros);
-                renderProducts(allProducts);
-                renderCarousel();
-            } catch (error) {
-                console.error("Erro ao carregar dados:", error);
-                document.getElementById("productGrid").innerHTML = '<p style="color:#ff6b6b;grid-column:1/-1;text-align:center;">Erro ao carregar produtos. Tente novamente mais tarde.</p>';
-            }
-        }
+        <div class="form-section">
+          <label for="customMessage">Mensagem Adicional:</label>
+          <textarea id="customMessage" name="custom_message" rows="4"
+                    placeholder="Digite aqui qualquer informação adicional..."></textarea>
+        </div>
 
-        function renderProducts(productsToRender) {
-            const grid = document.getElementById("productGrid");
-            grid.innerHTML = "";
-            if (productsToRender.length === 0) {
-                grid.innerHTML = '<p style="color:rgba(255,255,255,0.4);grid-column:1/-1;text-align:center;">Nenhum produto encontrado nesta categoria.</p>';
-                return;
-            }
+        <button type="submit">Enviar Interesses</button>
+      </form>
+    </div>
+  </div>
 
-            productsToRender.forEach(product => {
-                const card = document.createElement("a");
-                card.href = "#"; // Pode ser um link para a página de detalhes do produto, se houver
-                card.className = "product-card";
+  <!-- BOTÃO TOPO -->
+  <button id="backToTopBtn" title="Voltar ao topo">⬆️ Topo</button>
 
-                const badge = categoryBadgeMap[product.category] || '';
-                const imgSrc = product.mainImage ? BASE_URL + product.mainImage : 'https://via.placeholder.com/200x200?text=Sem+Imagem';
+  <!-- PAINEL INTERESSES -->
+  <div id="interestPanel">
+    <button id="closeInterestPanelBtn" class="close-interest-panel-btn">&times;</button>
+    <h3>Lista de interesses</h3>
+    <ul id="interestList"></ul>
+    <div id="interestTotal"></div>
+    <button onclick="showContactModal()">Enviar Interesses</button>
+  </div>
 
-                card.innerHTML = `
-                    <img src="${imgSrc}" alt="${product.name}">
-                    <div class="product-card-content">
-                        <h3>${product.name} ${badge}</h3>
-                        <p>${product.description}</p>
-                        <div class="price ${product.price ? '' : 'consult'}">${product.price || 'Sob consulta'}</div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
+  <!-- BOTÃO INTERESSES -->
+  <button class="interest-btn">💚 Ver interesses</button>
 
-        function filterProducts(filterCategory) {
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.querySelector(`.filter-btn[data-filter="${filterCategory}"]`).classList.add('active');
-
-            if (filterCategory === 'all') {
-                renderProducts(allProducts);
-            } else {
-                const filtered = allProducts.filter(p => p.category === filterCategory);
-                renderProducts(filtered);
-            }
-        }
-
-        // Funções do Carrossel
-        function renderCarousel() {
-            const slideContainer = document.getElementById('carouselSlide');
-            const dotsContainer = document.getElementById('carouselDots');
-            slideContainer.innerHTML = '';
-            dotsContainer.innerHTML = '';
-
-            if (carouselItems.length === 0) {
-                document.getElementById('mainCarousel').style.display = 'none';
-                return;
-            } else {
-                document.getElementById('mainCarousel').style.display = 'block';
-            }
-
-            carouselItems.forEach((item, index) => {
-                const slide = document.createElement('div');
-                slide.className = 'carousel-item';
-                slide.innerHTML = `<img src="${BASE_URL + item.src}" alt="${item.alt}">`;
-                slideContainer.appendChild(slide);
-
-                const dot = document.createElement('span');
-                dot.className = 'dot';
-                dot.onclick = () => goToSlide(index);
-                dotsContainer.appendChild(dot);
-            });
-
-            goToSlide(0); // Inicia no primeiro slide
-            startSlideShow();
-        }
-
-        function goToSlide(index) {
-            const slideContainer = document.getElementById('carouselSlide');
-            const dots = document.querySelectorAll('.dot');
-
-            if (index >= carouselItems.length) {
-                currentSlide = 0;
-            } else if (index < 0) {
-                currentSlide = carouselItems.length - 1;
-            } else {
-                currentSlide = index;
-            }
-
-            slideContainer.style.transform = `translateX(${-currentSlide * 100}%)`;
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentSlide);
-            });
-        }
-
-        function moveSlide(direction) {
-            goToSlide(currentSlide + direction);
-            resetSlideShow();
-        }
-
-        function startSlideShow() {
-            clearInterval(slideInterval);
-            slideInterval = setInterval(() => {
-                moveSlide(1);
-            }, 5000); // Troca de slide a cada 5 segundos
-        }
-
-        function resetSlideShow() {
-            clearInterval(slideInterval);
-            startSlideShow();
-        }
-
-        // Inicialização
-        document.addEventListener("DOMContentLoaded", loadProducts);
-    </script>
-
+  <script src="js/index_script.js"></script>
 </body>
 </html>
