@@ -1,4 +1,6 @@
-<html lang="pt-BR"><head>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Shakaw 3D Print</title>
@@ -8,12 +10,100 @@
   <style>
     /* --- LAYOUT GERAL DA HOME --- */
 
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Exemplo de fonte, ajuste se necessário */
+      background-color: #1a1a1a; /* Cor de fundo geral */
+      color: white;
+    }
+
     .home-wrapper {
       max-width: 1080px;
       margin: 0 auto;
       padding: 0 20px 40px;
       color: white;
     }
+
+    /* CABEÇALHO PADRÃO */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: rgba(0, 0, 0, 0.6); /* Fundo semi-transparente para o cabeçalho */
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: sticky; /* Fixa o cabeçalho no topo */
+      top: 0;
+      z-index: 1000; /* Garante que o cabeçalho fique acima de outros elementos */
+    }
+
+    .header .logo {
+      height: 40px; /* Ajuste o tamanho do logo conforme necessário */
+      margin-right: 10px;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      margin: 0;
+      flex-grow: 1; /* Permite que o título ocupe espaço */
+    }
+
+    .header-links {
+      display: flex;
+      align-items: center;
+      gap: 20px; /* Espaçamento entre os links */
+    }
+
+    .header-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.2s ease;
+    }
+
+    .header-links a:hover {
+      color: #4fc3f7;
+    }
+
+    .header-links .instagram-icon {
+      height: 20px; /* Tamanho do ícone do Instagram */
+      width: 20px;
+    }
+
+    /* Ícone do carrinho de interesses */
+    .interest-cart-icon {
+      position: relative;
+      margin-left: 20px; /* Espaçamento do último item do menu */
+      cursor: pointer;
+      color: white;
+      font-size: 1.2rem;
+      transition: color 0.2s ease;
+    }
+
+    .interest-cart-icon:hover {
+      color: #4fc3f7;
+    }
+
+    .interest-cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: #e53935; /* Cor de destaque para o contador */
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      line-height: 1;
+      min-width: 18px;
+      text-align: center;
+      display: none; /* Escondido por padrão, será mostrado via JS */
+    }
+
 
     /* HERO PRINCIPAL */
 
@@ -250,6 +340,52 @@
       text-decoration: underline;
     }
 
+    /* SEÇÃO CARROSSEL INSTAGRAM */
+    .instagram-carousel-section {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+    }
+
+    .instagram-carousel-section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+      color: #4fc3f7;
+    }
+
+    .instagram-carousel-container {
+      display: flex;
+      overflow-x: auto; /* Permite rolagem horizontal */
+      scroll-snap-type: x mandatory; /* Ajuda a "grudar" nas imagens */
+      -webkit-overflow-scrolling: touch; /* Melhor rolagem em iOS */
+      gap: 15px;
+      padding-bottom: 15px; /* Espaço para a barra de rolagem */
+    }
+
+    .instagram-carousel-item {
+      flex: 0 0 auto; /* Impede que os itens encolham */
+      width: 280px; /* Largura fixa para cada item do carrossel */
+      height: 280px; /* Altura fixa para cada item do carrossel */
+      background-color: rgba(0,0,0,0.4);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      scroll-snap-align: start; /* Alinha o item ao início da rolagem */
+    }
+
+    .instagram-carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
+      display: block;
+    }
+
     /* RODAPÉ SIMPLES */
 
     .home-footer {
@@ -282,6 +418,25 @@
       .hero-text {
         text-align: left;
       }
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .header h1 {
+        font-size: 1.3rem;
+      }
+      .header-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        gap: 10px;
+      }
+      .interest-cart-icon {
+        margin-left: 0;
+        margin-top: 10px; /* Ajuste para mobile */
+        align-self: center;
+      }
     }
 
     @media (max-width: 640px) {
@@ -303,6 +458,9 @@
         justify-content: center;
         width: 100%;
       }
+      .instagram-carousel-container {
+        justify-content: center; /* Centraliza os itens em telas menores */
+      }
     }
   </style>
 </head>
@@ -316,10 +474,16 @@
       <a href="home.html"><i class="fas fa-home"></i> Início</a>
       <a href="catalogo_diorama.html"><i class="fas fa-box-open"></i> Catálogo</a>
       <a href="outros_projetos.html"><i class="fas fa-images"></i> Outros Projetos</a>
+      <a href="contato.html"><i class="fas fa-envelope"></i> Contato</a> <!-- Adicionado link de Contato -->
       <a href="https://www.instagram.com/shakaw3dprint" target="_blank">
         <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="instagram-icon">
         @shakaw3dprint
       </a>
+      <!-- Ícone do carrinho de interesses -->
+      <div class="interest-cart-icon" id="interestCartIcon">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="interest-cart-count" id="interestCartCount">0</span>
+      </div>
     </div>
   </div>
 
@@ -373,6 +537,19 @@
           Fale com a gente para adaptar tamanho, cores e detalhes para o seu projeto.
         </p>
       </aside>
+    </section>
+
+    <!-- CARROSSEL DE ÚLTIMAS POSTAGENS DO INSTAGRAM -->
+    <section class="instagram-carousel-section">
+      <h2>Últimas do Instagram</h2>
+      <div class="instagram-carousel-container" id="instagramCarousel">
+        <!-- Itens do carrossel serão carregados aqui via JavaScript -->
+        <div class="instagram-carousel-item">Carregando posts...</div>
+        <div class="instagram-carousel-item">Carregando posts...</div>
+        <div class="instagram-carousel-item">Carregando posts...</div>
+        <div class="instagram-carousel-item">Carregando posts...</div>
+        <div class="instagram-carousel-item">Carregando posts...</div>
+      </div>
     </section>
 
     <!-- DESTAQUES (3 pontos fortes) -->
@@ -443,6 +620,6 @@
 
   </main>
 
-
-
-</body></html>
+  <script src="js/index_script.js"></script> <!-- Link para o arquivo JS -->
+</body>
+</html>
