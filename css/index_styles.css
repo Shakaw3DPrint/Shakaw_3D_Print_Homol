@@ -1,92 +1,12 @@
 /* ============================================= */
-/* Reset Básico e Estilos Globais */
-/* ============================================= */
-body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #1a1a1a; /* Fundo escuro geral */
-    color: #f0f0f0; /* Cor de texto padrão */
-    line-height: 1.6;
-    min-height: 100vh; /* Garante que o body ocupe a altura total da viewport */
-    display: flex;
-    flex-direction: column; /* Para que o footer fique no final */
-}
-
-.container {
-    width: 90%; /* Largura padrão para o conteúdo */
-    max-width: 1200px; /* Limite máximo para o conteúdo */
-    margin: 0 auto; /* Centraliza o container */
-    padding: 0 15px; /* Espaçamento lateral */
-}
-
-/* ============================================= */
-/* Layout da Página de Catálogo */
-/* ============================================= */
-
-.catalog-page-content { /* Nova classe para o <main> */
-    flex-grow: 1; /* Permite que o conteúdo principal ocupe o espaço restante */
-    padding: 20px 0; /* Espaçamento superior e inferior */
-}
-
-.filter-section {
-    display: flex;
-    flex-wrap: wrap; /* Permite que os filtros quebrem a linha em telas menores */
-    gap: 15px;
-    justify-content: center; /* Centraliza os filtros */
-    align-items: center;
-    background-color: #2a2a2a;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 30px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.filter-group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.filter-section label {
-    color: #fff;
-    font-weight: 500;
-}
-
-.filter-section select,
-.filter-section input[type="text"] {
-    padding: 8px 12px;
-    border: 1px solid #444;
-    border-radius: 5px;
-    background-color: #3a3a3a;
-    color: #fff;
-    font-size: 1em;
-    outline: none;
-    transition: border-color 0.2s;
-}
-
-.filter-section select:focus,
-.filter-section input[type="text"]:focus {
-    border-color: #00bcd4;
-}
-
-.results-count {
-    color: #ccc;
-    font-size: 0.9em;
-    margin-left: 15px; /* Espaçamento à esquerda */
-}
-
-/* ============================================= */
 /* Seção de Catálogo e Cards de Produto */
 /* ============================================= */
 
 .catalog-grid {
     display: grid;
-    /* Ajuste aqui: minmax(200px, 1fr) para cards menores */
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px; /* Espaçamento entre os cards */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Reduzindo minmax para permitir mais cards ou cards menores */
+    gap: 20px;
     padding: 20px 0;
-    justify-items: center; /* Centraliza os itens na grade */
 }
 
 .product-card {
@@ -98,9 +18,9 @@ body {
     flex-direction: column;
     text-align: center;
     transition: transform 0.2s ease-in-out;
-    width: 100%; /* Ocupa 100% do espaço disponível na coluna da grid */
-    max-width: 280px; /* Limita a largura máxima do card individual */
-    /* Remova 'margin: 0 auto;' se estiver usando justify-items: center na grid */
+    max-width: 280px; /* Limita a largura máxima do card um pouco mais */
+    margin: 0 auto;
+    height: auto; /* Deixa a altura se ajustar ao conteúdo */
 }
 
 .product-card:hover {
@@ -108,9 +28,10 @@ body {
 }
 
 .product-image {
-    width: 100%; /* A imagem ocupa 100% da largura do card */
-    height: 180px; /* Altura fixa para as imagens dos cards (reduzida) */
-    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer, cortando se necessário */
+    width: 100%;
+    height: 180px; /* Altura fixa para as imagens dos cards (ligeiramente reduzida) */
+    object-fit: contain; /* ALTERADO: Garante que a imagem inteira seja visível */
+    background-color: #333; /* Adiciona um fundo escuro para o espaço vazio do 'contain' */
     border-bottom: 1px solid #3a3a3a;
 }
 
@@ -123,7 +44,7 @@ body {
 }
 
 .product-name {
-    font-size: 1.1em; /* Tamanho da fonte ligeiramente menor */
+    font-size: 1.1em; /* Ligeiramente menor para caber melhor */
     margin-bottom: 8px;
     color: #fff;
     white-space: nowrap;
@@ -132,7 +53,7 @@ body {
 }
 
 .product-price {
-    font-size: 1em; /* Tamanho da fonte ligeiramente menor */
+    font-size: 1em; /* Ligeiramente menor */
     color: #00bcd4;
     margin-bottom: 15px;
     font-weight: bold;
@@ -141,19 +62,19 @@ body {
 .product-actions {
     display: flex;
     justify-content: space-around;
-    gap: 8px; /* Espaçamento menor entre os botões */
+    gap: 8px; /* Espaçamento menor entre botões */
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 10px; /* Margem menor */
 }
 
 .product-actions button {
     background-color: #00bcd4;
     color: #fff;
     border: none;
-    padding: 7px 10px; /* Padding menor */
+    padding: 7px 10px; /* Padding ligeiramente menor */
     border-radius: 5px;
     cursor: pointer;
-    font-size: 0.85em; /* Tamanho da fonte menor */
+    font-size: 0.85em; /* Fonte menor */
     transition: background-color 0.2s ease;
     flex: 1;
 }
@@ -163,154 +84,25 @@ body {
     display: inline-block;
     padding: 4px 8px; /* Padding menor */
     border-radius: 5px;
-    font-size: 0.75em; /* Tamanho da fonte menor */
+    font-size: 0.75em; /* Fonte menor */
     font-weight: bold;
-    margin-top: 8px;
+    margin-top: 8px; /* Margem menor */
     color: #fff;
 }
 
-/* ... (Mantenha os estilos dos badges de cor) ... */
-
-/* ============================================= */
-/* Modal de Imagem (Detalhes do Produto) */
-/* ============================================= */
-
-.modal-content {
-    background-color: #2a2a2a;
-    margin: 5% auto; /* Ajusta a margem para centralizar melhor e subir um pouco */
-    padding: 25px;
-    border: 1px solid #888;
-    width: 95%; /* Largura maior para o modal */
-    max-width: 900px; /* Limite máximo */
-    border-radius: 10px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.modal-content h2 {
-    color: #fff;
-    margin-bottom: 15px;
-    font-size: 2em; /* Título um pouco maior */
-    text-align: center;
-}
-
-.modal-main-image-container {
-    position: relative;
-    width: 100%;
-    max-width: 700px; /* Limita a largura da imagem principal */
-    height: 450px; /* Altura fixa para a imagem principal */
-    overflow: hidden;
-    margin-bottom: 20px;
-    background-color: #1a1a1a;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
-}
-
-#modalImg {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transform-origin: center center;
-    transition: transform 0.1s ease-out;
-    cursor: grab;
-}
-
-/* ... (Mantenha os estilos de navegação e controles do modal) ... */
-
-.modal-product-description {
-    color: #ccc;
-    font-size: 0.95em; /* Tamanho da fonte ligeiramente menor */
-    line-height: 1.5;
-    text-align: justify;
-    margin-bottom: 20px;
-    max-height: 120px; /* Limita a altura da descrição (reduzida) */
-    overflow-y: auto;
-    padding-right: 5px;
-    width: 100%; /* Ocupa a largura total disponível */
-    max-width: 700px; /* Alinha com a imagem principal */
-}
-
-.modal-thumbnails {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px; /* Espaçamento menor entre as miniaturas */
-    margin-top: 15px;
-    max-width: 100%;
-    overflow-x: auto;
-    padding-bottom: 10px;
-}
-
-.modal-thumbnail {
-    width: 70px; /* Tamanho fixo para as miniaturas (reduzido) */
-    height: 70px;
-    object-fit: cover;
-    border: 2px solid transparent;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: border-color 0.2s ease, transform 0.2s ease;
-}
-
-/* ... (Mantenha o restante do seu CSS para o painel de interesses e outros) ... */
+/* ... (Mantenha os estilos do modal de imagem e painel de interesses como estão, eles parecem estar funcionando) ... */
 
 /* Media Queries para Responsividade */
 @media (max-width: 768px) {
-    .container {
-        width: 95%;
-    }
-
-    .filter-section {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .filter-group {
-        width: 100%;
-        justify-content: space-between;
-    }
-
     .catalog-grid {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Cards ainda menores em mobile */
-        gap: 15px;
-    }
-
-    .product-card {
-        max-width: 100%; /* Ocupa a largura total disponível */
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Cards ainda menores em mobile */
+        gap: 10px;
     }
 
     .product-image {
-        height: 150px; /* Altura da imagem do card em mobile */
+        height: 140px; /* Altura da imagem do card em mobile */
     }
 
-    .modal-content {
-        margin: 2% auto;
-        width: 98%;
-        padding: 15px;
-    }
-
-    .modal-main-image-container {
-        height: 300px; /* Altura da imagem principal do modal em mobile */
-    }
-
-    .modal-product-description {
-        max-height: 100px; /* Altura da descrição do modal em mobile */
-    }
-
-    .modal-thumbnails {
-        gap: 5px;
-    }
-
-    .modal-thumbnail {
-        width: 60px;
-        height: 60px;
-    }
-}
-
-@media (max-width: 480px) {
     .product-name {
         font-size: 1em;
     }
@@ -318,11 +110,13 @@ body {
         font-size: 0.9em;
     }
     .product-actions button {
-        font-size: 0.8em;
-        padding: 6px 8px;
+        font-size: 0.75em;
+        padding: 5px 7px;
     }
     .cat-badge {
-        font-size: 0.7em;
-        padding: 3px 6px;
+        font-size: 0.65em;
+        padding: 2px 5px;
     }
 }
+
+/* ... (Mantenha as outras media queries se tiver) ... */
