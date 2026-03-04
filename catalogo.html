@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shakaw 3D Print - Catálogo</title>
-    <link rel="stylesheet" href="css/index_styles.css"> <!-- Verifique este caminho -->
+    <link rel="stylesheet" href="css/index_styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -31,7 +31,7 @@
         </div>
     </header>
 
-    <main class="catalog-page-content"> <!-- Adicionei uma classe para o main -->
+    <main class="catalog-page-content">
         <div class="container">
             <section class="filter-section">
                 <div class="filter-group">
@@ -51,20 +51,15 @@
                 <div class="filter-group">
                     <label for="sortSelect">Ordenar por:</label>
                     <select id="sortSelect">
-                        <option value="name-asc">Nome (A-Z)</option>
-                        <option value="name-desc">Nome (Z-A)</option>
                         <option value="price-asc">Preço (Menor ao Maior)</option>
                         <option value="price-desc">Preço (Maior ao Menor)</option>
                     </select>
                 </div>
-                <p id="resultsCount" class="results-count">Carregando produtos...</p>
+                <p id="resultsCount" class="results-count">0 produtos encontrados.</p>
             </section>
 
-            <section class="catalog-section">
-                <div id="loader" class="loader"></div>
-                <div id="catalog" class="catalog-grid">
-                    <!-- Produtos serão carregados aqui pelo JavaScript -->
-                </div>
+            <section id="catalogGrid" class="catalog-grid">
+                <!-- Produtos serão carregados aqui pelo JavaScript -->
             </section>
         </div>
     </main>
@@ -73,46 +68,46 @@
         <div class="container">
             <p>&copy; 2026 Shakaw 3D Print. Todos os direitos reservados.</p>
             <div class="social-links">
-                <a href="https://www.instagram.com/shakaw3dprint/" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://wa.me/seu-numero-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/shakaw3dprint/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/5511999999999" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
     </footer>
 
-    <!-- Painel de Interesses -->
+    <!-- Modal de Imagem (Detalhes do Produto) -->
+    <div id="imgModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalProductName"></h2>
+            <div class="modal-main-image-container">
+                <img id="modalImg" src="" alt="Imagem do Produto">
+                <button class="modal-nav modal-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="modal-nav modal-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="modal-controls">
+                <button id="zoomOutBtn"><i class="fas fa-search-minus"></i></button>
+                <button id="zoomInBtn"><i class="fas fa-search-plus"></i></button>
+                <button id="zoomResetBtn"><i class="fas fa-redo"></i></button>
+            </div>
+            <p id="modalProductDescription" class="modal-product-description"></p>
+            <div id="modalThumbnails" class="modal-thumbnails">
+                <!-- Miniaturas serão carregadas aqui -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Painel de Interesses (Carrinho) -->
     <div id="interestPanel" class="interest-panel">
         <div class="interest-panel-header">
             <h3>Sua Lista de Interesses</h3>
-            <button id="closeInterestPanelBtn" class="close-panel-btn">&times;</button>
+            <button id="closeInterestPanelBtn" class="close-interest-panel-btn">&times;</button>
         </div>
         <ul id="interestList" class="interest-list">
             <!-- Itens de interesse serão carregados aqui -->
         </ul>
         <div class="interest-panel-footer">
-            <p>Total: <span id="interestTotal">R$ 0,00</span></p>
-            <button id="openContactModalBtn" class="checkout-btn">Solicitar Orçamento</button>
-        </div>
-    </div>
-
-    <!-- Modal de Imagem -->
-    <div id="imgModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Nome do Produto</h2> <!-- Título do produto -->
-            <div class="modal-main-image-container">
-                <button class="modal-nav modal-prev"><i class="fas fa-chevron-left"></i></button>
-                <img id="modalImg" src="" alt="Imagem do Produto">
-                <button class="modal-nav modal-next"><i class="fas fa-chevron-right"></i></button>
-            </div>
-            <div class="modal-controls">
-                <button id="zoomInBtn"><i class="fas fa-search-plus"></i></button>
-                <button id="zoomOutBtn"><i class="fas fa-search-minus"></i></button>
-                <button id="zoomResetBtn"><i class="fas fa-redo"></i></button>
-            </div>
-            <p id="modalProductDescription" class="modal-product-description"></p> <!-- Descrição do produto -->
-            <div id="modalThumbnails" class="modal-thumbnails">
-                <!-- Miniaturas serão carregadas aqui -->
-            </div>
+            <p class="interest-total">Total: R$ <span id="interestTotal">0,00</span></p>
+            <button id="openContactModalBtn" class="open-contact-modal-btn">Entrar em Contato</button>
         </div>
     </div>
 
@@ -120,21 +115,18 @@
     <div id="contactModal" class="contact-modal">
         <div class="contact-modal-content">
             <span class="close-contact">&times;</span>
-            <h2>Solicitar Orçamento</h2>
+            <h2>Solicitação de Orçamento</h2>
             <p>Preencha o formulário abaixo para enviar sua lista de interesses.</p>
-            <div id="selectedItemsSummary" class="selected-items-summary">
-                <!-- Resumo dos itens selecionados -->
-            </div>
-            <form id="contactForm" action="https://formsubmit.co/seu-email@exemplo.com" method="POST">
-                <input type="hidden" name="_subject" value="Novo Orçamento - Shakaw 3D Print">
+            <form action="https://formsubmit.co/seu-email@exemplo.com" method="POST"> <!-- ATUALIZE SEU EMAIL AQUI -->
+                <input type="hidden" name="_subject" value="Solicitação de Orçamento - Shakaw 3D Print">
                 <input type="hidden" name="_template" value="box">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="Itens Selecionados" id="itemsData">
+                <input type="hidden" name="_next" value="https://www.shakaw3dprint.com.br/obrigado.html"> <!-- Crie uma página de obrigado.html -->
 
-                <label for="name">Nome Completo:</label>
+                <label for="name">Nome:</label>
                 <input type="text" id="name" name="Nome" required>
 
-                <label for="email">E-mail:</label>
+                <label for="email">Email:</label>
                 <input type="email" id="email" name="Email" required>
 
                 <label for="phone">Telefone (WhatsApp):</label>
@@ -143,6 +135,9 @@
                 <label for="message">Mensagem (opcional):</label>
                 <textarea id="message" name="Mensagem"></textarea>
 
+                <input type="hidden" id="selectedItemsSummary" name="Itens_Selecionados">
+                <input type="hidden" id="itemsData" name="Dados_Itens">
+
                 <button type="submit">Enviar Solicitação</button>
             </form>
         </div>
@@ -150,6 +145,6 @@
 
     <button id="backToTopBtn" title="Voltar ao Topo"><i class="fas fa-arrow-up"></i></button>
 
-    <script src="js/script.js"></script> <!-- Verifique este caminho -->
+    <script src="js/script.js"></script>
 </body>
 </html>
