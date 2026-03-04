@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shakaw 3D Print - Catálogo</title>
-    <link rel="stylesheet" href="css/index_styles.css">
+    <link rel="stylesheet" href="css/index_styles.css"> <!-- Verifique este caminho -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <div class="container">
-            <a href="index.html" class="logo">
+            <a href="home.html" class="logo">
                 <img src="assets/img/logo.webp" alt="Shakaw 3D Print Logo">
                 Shakaw 3D Print
             </a>
             <nav>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="home.html">Home</a></li>
                     <li><a href="catalogo.html" class="active">Catálogo</a></li>
                     <li><a href="contato.html">Contato</a></li>
                 </ul>
@@ -31,38 +31,42 @@
         </div>
     </header>
 
-    <main class="container catalog-page">
-        <section class="filter-section">
-            <div class="filter-group">
-                <label for="categoryFilter">Categoria:</label>
-                <select id="categoryFilter">
-                    <option value="all">Todas</option>
-                    <option value="diorama-garagem">Diorama Garagem</option>
-                    <option value="miniaturas-3d">Miniaturas 3D</option>
-                    <option value="miniaturas-rpg">Miniaturas RPG</option>
-                    <option value="produtos-funcionais">Funcional</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label for="searchInput">Buscar:</label>
-                <input type="text" id="searchInput" placeholder="Nome ou descrição...">
-            </div>
-            <div class="filter-group">
-                <label for="sortSelect">Ordenar por:</label>
-                <select id="sortSelect">
-                    <option value="name-asc">Nome (A-Z)</option>
-                    <option value="name-desc">Nome (Z-A)</option>
-                    <option value="price-asc">Preço (Menor)</option>
-                    <option value="price-desc">Preço (Maior)</option>
-                </select>
-            </div>
-        </section>
+    <main class="catalog-page-content"> <!-- Adicionei uma classe para o main -->
+        <div class="container">
+            <section class="filter-section">
+                <div class="filter-group">
+                    <label for="categoryFilter">Categoria:</label>
+                    <select id="categoryFilter">
+                        <option value="all">Todas</option>
+                        <option value="diorama-garagem">Diorama Garagem</option>
+                        <option value="miniaturas-3d">Miniaturas 3D</option>
+                        <option value="miniaturas-rpg">Miniaturas RPG</option>
+                        <option value="produtos-funcionais">Funcional</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="searchInput">Buscar:</label>
+                    <input type="text" id="searchInput" placeholder="Nome ou descrição...">
+                </div>
+                <div class="filter-group">
+                    <label for="sortSelect">Ordenar por:</label>
+                    <select id="sortSelect">
+                        <option value="name-asc">Nome (A-Z)</option>
+                        <option value="name-desc">Nome (Z-A)</option>
+                        <option value="price-asc">Preço (Menor ao Maior)</option>
+                        <option value="price-desc">Preço (Maior ao Menor)</option>
+                    </select>
+                </div>
+                <p id="resultsCount" class="results-count">Carregando produtos...</p>
+            </section>
 
-        <p id="resultsCount" class="results-count">Carregando produtos...</p>
-
-        <section id="catalog" class="catalog-grid">
-            <!-- Produtos serão carregados aqui pelo JavaScript -->
-        </section>
+            <section class="catalog-section">
+                <div id="loader" class="loader"></div>
+                <div id="catalog" class="catalog-grid">
+                    <!-- Produtos serão carregados aqui pelo JavaScript -->
+                </div>
+            </section>
+        </div>
     </main>
 
     <footer>
@@ -70,37 +74,34 @@
             <p>&copy; 2026 Shakaw 3D Print. Todos os direitos reservados.</p>
             <div class="social-links">
                 <a href="https://www.instagram.com/shakaw3dprint/" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://wa.me/5511999999999" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://wa.me/seu-numero-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
     </footer>
 
-    <!-- Loader -->
-    <div id="loader" class="loader"></div>
-
-    <!-- Painel de Interesses (Carrinho) -->
+    <!-- Painel de Interesses -->
     <div id="interestPanel" class="interest-panel">
         <div class="interest-panel-header">
-            <h2>Sua Lista de Interesses</h2>
-            <button id="closeInterestPanelBtn" class="close-panel-btn"><i class="fas fa-times"></i></button>
+            <h3>Sua Lista de Interesses</h3>
+            <button id="closeInterestPanelBtn" class="close-panel-btn">&times;</button>
         </div>
         <ul id="interestList" class="interest-list">
             <!-- Itens de interesse serão carregados aqui -->
         </ul>
         <div class="interest-panel-footer">
-            <p id="interestTotal">Total: R$ 0,00</p>
-            <button id="openContactModalBtn" class="btn-primary">Solicitar Orçamento</button>
+            <p>Total: <span id="interestTotal">R$ 0,00</span></p>
+            <button id="openContactModalBtn" class="checkout-btn">Solicitar Orçamento</button>
         </div>
     </div>
 
-    <!-- Modal de Imagem (Detalhes do Produto) -->
+    <!-- Modal de Imagem -->
     <div id="imgModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2 class="modal-product-name"></h2> <!-- Título do produto no modal -->
+            <h2>Nome do Produto</h2> <!-- Título do produto -->
             <div class="modal-main-image-container">
-                <img id="modalImg" src="" alt="Imagem do Produto">
                 <button class="modal-nav modal-prev"><i class="fas fa-chevron-left"></i></button>
+                <img id="modalImg" src="" alt="Imagem do Produto">
                 <button class="modal-nav modal-next"><i class="fas fa-chevron-right"></i></button>
             </div>
             <div class="modal-controls">
@@ -149,6 +150,6 @@
 
     <button id="backToTopBtn" title="Voltar ao Topo"><i class="fas fa-arrow-up"></i></button>
 
-    <script src="js/script.js"></script>
+    <script src="js/script.js"></script> <!-- Verifique este caminho -->
 </body>
 </html>
