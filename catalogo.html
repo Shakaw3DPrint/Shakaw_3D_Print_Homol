@@ -11,16 +11,15 @@
 <body>
     <header>
         <div class="container">
-            <a href="home.html" class="logo">
+            <a href="index.html" class="logo">
                 <img src="assets/img/logo.webp" alt="Shakaw 3D Print Logo">
                 Shakaw 3D Print
             </a>
             <nav>
                 <ul>
-                    <li><a href="home.html">Home</a></li>
-                    <li><a href="catalogo.html">Catálogo</a></li>
-                    <li><a href="home.html#about">Sobre</a></li>
-                    <li><a href="home.html#contact">Contato</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="catalogo.html" class="active">Catálogo</a></li>
+                    <li><a href="contato.html">Contato</a></li>
                 </ul>
             </nav>
             <div class="header-actions">
@@ -32,32 +31,37 @@
         </div>
     </header>
 
-    <main>
-        <section id="catalog-section" class="catalog-page-section">
-            <div class="container">
-                <h1>Nosso Catálogo</h1>
-                <div class="filter-section">
-                    <input type="text" id="searchInput" placeholder="Buscar produtos...">
-                    <select id="categoryFilter">
-                        <option value="all">Todas as Categorias</option>
-                        <option value="diorama-garagem">Diorama Garagem</option>
-                        <option value="miniaturas-3d">Miniaturas 3D</option>
-                        <option value="miniaturas-rpg">Miniaturas RPG</option>
-                        <option value="produtos-funcionais">Funcional</option>
-                    </select>
-                    <select id="sortSelect">
-                        <option value="name-asc">Nome (A-Z)</option>
-                        <option value="name-desc">Nome (Z-A)</option>
-                        <option value="price-asc">Preço (Menor para Maior)</option>
-                        <option value="price-desc">Preço (Maior para Menor)</option>
-                    </select>
-                </div>
-                <p id="resultsCount" class="results-count">Carregando produtos...</p>
-                <div id="catalog" class="catalog-grid">
-                    <!-- Produtos serão carregados aqui pelo JavaScript -->
-                </div>
-                <div id="loader" class="loader"></div>
+    <main class="container catalog-page">
+        <section class="filter-section">
+            <div class="filter-group">
+                <label for="categoryFilter">Categoria:</label>
+                <select id="categoryFilter">
+                    <option value="all">Todas</option>
+                    <option value="diorama-garagem">Diorama Garagem</option>
+                    <option value="miniaturas-3d">Miniaturas 3D</option>
+                    <option value="miniaturas-rpg">Miniaturas RPG</option>
+                    <option value="produtos-funcionais">Funcional</option>
+                </select>
             </div>
+            <div class="filter-group">
+                <label for="searchInput">Buscar:</label>
+                <input type="text" id="searchInput" placeholder="Nome ou descrição...">
+            </div>
+            <div class="filter-group">
+                <label for="sortSelect">Ordenar por:</label>
+                <select id="sortSelect">
+                    <option value="name-asc">Nome (A-Z)</option>
+                    <option value="name-desc">Nome (Z-A)</option>
+                    <option value="price-asc">Preço (Menor)</option>
+                    <option value="price-desc">Preço (Maior)</option>
+                </select>
+            </div>
+        </section>
+
+        <p id="resultsCount" class="results-count">Carregando produtos...</p>
+
+        <section id="catalog" class="catalog-grid">
+            <!-- Produtos serão carregados aqui pelo JavaScript -->
         </section>
     </main>
 
@@ -65,38 +69,48 @@
         <div class="container">
             <p>&copy; 2026 Shakaw 3D Print. Todos os direitos reservados.</p>
             <div class="social-links">
-                <a href="https://www.instagram.com/shakaw3dprint/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://wa.me/seu-numero-whatsapp" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/shakaw3dprint/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/5511999999999" target="_blank"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
     </footer>
 
-    <!-- Painel de Interesses -->
+    <!-- Loader -->
+    <div id="loader" class="loader"></div>
+
+    <!-- Painel de Interesses (Carrinho) -->
     <div id="interestPanel" class="interest-panel">
         <div class="interest-panel-header">
-            <h3>Sua Lista de Interesses</h3>
-            <button id="closeInterestPanelBtn" class="close-panel-btn">&times;</button>
+            <h2>Sua Lista de Interesses</h2>
+            <button id="closeInterestPanelBtn" class="close-panel-btn"><i class="fas fa-times"></i></button>
         </div>
-        <ul id="interestList">
+        <ul id="interestList" class="interest-list">
             <!-- Itens de interesse serão carregados aqui -->
         </ul>
         <div class="interest-panel-footer">
-            <span id="interestTotal">Total: R$ 0,00</span>
+            <p id="interestTotal">Total: R$ 0,00</p>
             <button id="openContactModalBtn" class="btn-primary">Solicitar Orçamento</button>
         </div>
     </div>
 
-    <!-- Modal de Imagem (Zoom) -->
-    <div id="imgModal" class="img-modal">
-        <span class="close">&times;</span>
-        <div class="img-modal-content">
-            <img id="modalImg" src="" alt="Imagem do Produto">
-            <div class="modal-nav modal-prev"><i class="fas fa-chevron-left"></i></div>
-            <div class="modal-nav modal-next"><i class="fas fa-chevron-right"></i></div>
-            <div class="zoom-controls">
-                <button id="zoomOutBtn"><i class="fas fa-minus"></i></button>
+    <!-- Modal de Imagem (Detalhes do Produto) -->
+    <div id="imgModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 class="modal-product-name"></h2> <!-- Título do produto no modal -->
+            <div class="modal-main-image-container">
+                <img id="modalImg" src="" alt="Imagem do Produto">
+                <button class="modal-nav modal-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="modal-nav modal-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="modal-controls">
+                <button id="zoomInBtn"><i class="fas fa-search-plus"></i></button>
+                <button id="zoomOutBtn"><i class="fas fa-search-minus"></i></button>
                 <button id="zoomResetBtn"><i class="fas fa-redo"></i></button>
-                <button id="zoomInBtn"><i class="fas fa-plus"></i></button>
+            </div>
+            <p id="modalProductDescription" class="modal-product-description"></p> <!-- Descrição do produto -->
+            <div id="modalThumbnails" class="modal-thumbnails">
+                <!-- Miniaturas serão carregadas aqui -->
             </div>
         </div>
     </div>
@@ -106,14 +120,14 @@
         <div class="contact-modal-content">
             <span class="close-contact">&times;</span>
             <h2>Solicitar Orçamento</h2>
-            <p>Preencha o formulário abaixo com seus dados e enviaremos um orçamento detalhado para os itens selecionados.</p>
-            <div id="selectedItemsSummary">
-                <!-- Resumo dos itens selecionados será preenchido aqui -->
+            <p>Preencha o formulário abaixo para enviar sua lista de interesses.</p>
+            <div id="selectedItemsSummary" class="selected-items-summary">
+                <!-- Resumo dos itens selecionados -->
             </div>
             <form id="contactForm" action="https://formsubmit.co/seu-email@exemplo.com" method="POST">
-                <input type="hidden" name="_next" value="https://seusite.com/obrigado.html">
-                <input type="hidden" name="_subject" value="Novo Orçamento Shakaw 3D Print">
+                <input type="hidden" name="_subject" value="Novo Orçamento - Shakaw 3D Print">
                 <input type="hidden" name="_template" value="box">
+                <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="Itens Selecionados" id="itemsData">
 
                 <label for="name">Nome Completo:</label>
@@ -135,7 +149,6 @@
 
     <button id="backToTopBtn" title="Voltar ao Topo"><i class="fas fa-arrow-up"></i></button>
 
-    <!-- CORREÇÃO AQUI: Caminho do script ajustado -->
     <script src="js/script.js"></script>
 </body>
 </html>
