@@ -714,3 +714,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setupBackToTopButton();
 });
+// Garantir que o script seja executado quando o DOM estiver pronto
+document.addEventListener('DOMContentLoaded', function() {
+    const openInterestPanelFromHeaderBtn = document.getElementById("openInterestPanelFromHeader");
+    const interestPanel = document.getElementById("interestPanel");
+    const closeInterestPanelBtn = document.querySelector(".close-interest-panel-btn");
+
+    if (openInterestPanelFromHeaderBtn && interestPanel) {
+        openInterestPanelFromHeaderBtn.addEventListener("click", function() {
+            interestPanel.classList.add('open');
+        });
+    }
+
+    if (closeInterestPanelBtn && interestPanel) {
+        closeInterestPanelBtn.addEventListener("click", function() {
+            interestPanel.classList.remove('open');
+        });
+    }
+});
