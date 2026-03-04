@@ -243,3 +243,36 @@ footer p {
         font-size: 0.9em;
     }
 }
+/* ---------- AJUSTES DE CABEÇALHO ---------- */
+
+/* Logo */
+header .logo img {
+    height: 56px;               /* Altura maior para a logo */
+    width: auto;
+    margin-right: 12px;         /* Espaço entre a logo e o texto "Shakaw 3D Print" */
+}
+
+/* Menu de Navegação */
+header nav ul {
+    gap: 24px;                  /* Aumenta o espaçamento entre os links do menu */
+    align-items: center;
+}
+
+header nav ul li a {
+    font-size: 1rem;            /* Tamanho da fonte dos links do menu */
+    font-weight: 500;
+    padding: 6px 0;             /* Aumenta a área clicável dos links */
+}
+
+/* Responsividade para telas menores (ajustes no cabeçalho) */
+@media (max-width: 480px) {
+    header .logo img {
+        height: 48px;           /* Mantém a logo maior em telas pequenas */
+    }
+    header nav ul {
+        gap: 18px;              /* Ajusta o espaçamento do menu em telas pequenas */
+    }
+    header nav ul li a {
+        font-size: 0.95rem;     /* Ajusta a fonte do menu em telas pequenas */
+    }
+}
