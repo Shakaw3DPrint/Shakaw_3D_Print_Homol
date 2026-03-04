@@ -1,7 +1,7 @@
 const GITHUB_OWNER = "Shakaw3DPrint";
 const GITHUB_REPO = "Shakaw_3D_Print";
 const GITHUB_BRANCH = "main";
-const BASE_URL = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/`;
+// const BASE_URL = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/`; // Removido ou comentado
 
 let allProducts = [];
 let carouselItems = [];
@@ -80,10 +80,11 @@ function parsePrice(priceStr) {
 async function loadAllData() {
     showLoader();
     try {
+        // Os caminhos para os JSONs permanecem os mesmos, pois são relativos à raiz do site
         const [productsDioramaRes, productsOutrosRes, carouselRes] = await Promise.all([
-            fetch(BASE_URL + "assets/json/products.json?t=" + Date.now()),
-            fetch(BASE_URL + "assets/json/outros_produtos.json?t=" + Date.now()),
-            fetch(BASE_URL + "assets/json/carousel.json?t=" + Date.now())
+            fetch("assets/json/products.json?t=" + Date.now()),
+            fetch("assets/json/outros_produtos.json?t=" + Date.now()),
+            fetch("assets/json/carousel.json?t=" + Date.now())
         ]);
 
         const productsDiorama = productsDioramaRes.ok ? await productsDioramaRes.json() : [];
@@ -141,9 +142,9 @@ function renderInstagramCarousel() {
     carouselItems.forEach(item => {
         const carouselItemDiv = document.createElement("div");
         carouselItemDiv.className = "instagram-carousel-item";
-        // CORREÇÃO AQUI: item.image para item.src
+        // CORREÇÃO AQUI: item.src já deve ser o caminho completo /assets/img/...
         carouselItemDiv.innerHTML = `
-            <img src="${BASE_URL + item.src}" alt="${item.alt}">
+            <img src="${item.src}" alt="${item.alt}">
             <div class="instagram-caption">${item.caption || ''}</div>
         `;
         instagramCarouselContainer.appendChild(carouselItemDiv);
@@ -168,22 +169,22 @@ function renderProducts(productsToRender) {
     productsToRender.forEach(product => {
         const card = document.createElement("div");
         card.className = "product-card";
-        card.dataset.productId = product.id; // Adiciona ID para identificar o produto no modal
+        card.dataset.productId = product.id;
 
-        const badge = categoryBadgeMap[product.category] || '';
-        const imgSrc = product.mainImage ? BASE_URL + product.mainImage : 'https://via.placeholder.com/200x200?text=Sem+Imagem';
+        // CORREÇÃO AQUI: product.mainImage já deve ser o caminho completo /assets/img/...
+        const imgSrc = product.mainImage ? product.mainImage : 'https://via.placeholder.com/200x200?text=Sem+Imagem';
+        const categoryBadge = categoryBadgeMap[product.category] || '';
 
         card.innerHTML = `
-            <img src="${imgSrc}" alt="${product.name}">
-            <div class="product-card-content">
-                <h3>${product.name} ${badge}</h3>
-                <p>${product.description}</p>
-                <div class="price ${product.price ? '' : 'consult'}">
-                    ${product.price ? `R$ ${parsePrice(product.price).toFixed(2).replace('.', ',')}` : 'Sob consulta'}
+            <img src="${imgSrc}" alt="${product.name}" class="product-image">
+            <div class="product-info">
+                <h3 class="product-name">${product.name}</h3>
+                <p class="product-price">R$ ${parsePrice(product.price).toFixed(2).replace('.', ',')}</p>
+                <div class="product-actions">
+                    <button class="add-to-interest" data-product-id="${product.id}">Adicionar à Lista</button>
+                    <button class="view-details" data-product-id="${product.id}">Ver Detalhes</button>
                 </div>
-                <button class="add-to-interest-btn" data-product-id="${product.id}">
-                    <i class="fas fa-heart"></i> Adicionar à lista
-                </button>
+                ${categoryBadge}
             </div>
         `;
         catalogGrid.appendChild(card);
@@ -191,296 +192,313 @@ function renderProducts(productsToRender) {
 
     if (resultsCount) resultsCount.textContent = `${productsToRender.length} produtos encontrados.`;
 
-    // Adiciona event listeners para abrir o modal de imagem
-    document.querySelectorAll('.product-card img').forEach(img => {
-        img.addEventListener('click', (e) => {
-            const productId = e.target.closest('.product-card').dataset.productId;
-            const product = allProducts.find(p => p.id === productId);
-            if (product) openImageModal(product);
-        });
-    });
-
-    // Adiciona event listeners para o botão "Adicionar à lista"
-    document.querySelectorAll('.add-to-interest-btn').forEach(button => {
+    // Adiciona event listeners para os botões "Adicionar à Lista" e "Ver Detalhes"
+    catalogGrid.querySelectorAll('.add-to-interest').forEach(button => {
         button.addEventListener('click', (e) => {
             const productId = e.target.dataset.productId;
             const product = allProducts.find(p => p.id === productId);
-            if (product) addToInterests(product);
+            if (product) {
+                addToInterest(product);
+            }
+        });
+    });
+
+    catalogGrid.querySelectorAll('.view-details').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const productId = e.target.dataset.productId;
+            const product = allProducts.find(p => p.id === productId);
+            if (product) {
+                openImageModal(product);
+            }
         });
     });
 }
 
-function filterProducts(category) {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    filterButtons.forEach(btn => btn.classList.remove('active'));
-    const activeBtn = document.querySelector(`.filter-btn[data-filter="${category}"]`);
-    if (activeBtn) activeBtn.classList.add('active');
-
-    let productsToRender = [];
-    if (category === "all") {
-        productsToRender = allProducts;
-    } else {
-        productsToRender = allProducts.filter(product => product.category === category);
-    }
-    renderProducts(productsToRender);
-}
+// ============================================================
+// FILTROS (CATÁLOGO)
+// ============================================================
 
 function initFilters() {
-    const filterButtonsContainer = document.getElementById("filterButtons");
-    if (filterButtonsContainer) {
-        filterButtonsContainer.addEventListener('click', (e) => {
-            if (e.target.classList.contains('filter-btn')) {
-                filterProducts(e.target.dataset.filter);
-            }
-        });
+    const categoryFilter = document.getElementById("categoryFilter");
+    const searchInput = document.getElementById("searchInput");
+    const sortSelect = document.getElementById("sortSelect");
+
+    if (categoryFilter) {
+        categoryFilter.addEventListener("change", applyFilters);
+    }
+    if (searchInput) {
+        searchInput.addEventListener("input", applyFilters);
+    }
+    if (sortSelect) {
+        sortSelect.addEventListener("change", applyFilters);
     }
 }
 
-// =============================================
-// MODAL DE IMAGEM (ZOOM E PAN)
-// =============================================
+function applyFilters() {
+    const categoryFilter = document.getElementById("categoryFilter");
+    const searchInput = document.getElementById("searchInput");
+    const sortSelect = document.getElementById("sortSelect");
+
+    const selectedCategory = categoryFilter ? categoryFilter.value : "all";
+    const searchTerm = searchInput ? searchInput.value.toLowerCase() : "";
+    const sortBy = sortSelect ? sortSelect.value : "name-asc";
+
+    let filteredProducts = allProducts.filter(product => {
+        const matchesCategory = selectedCategory === "all" || product.category === selectedCategory;
+        const matchesSearch = product.name.toLowerCase().includes(searchTerm) ||
+                              product.description.toLowerCase().includes(searchTerm);
+        return matchesCategory && matchesSearch;
+    });
+
+    // Ordenação
+    filteredProducts.sort((a, b) => {
+        const nameA = a.name.toLowerCase();
+        const nameB = b.name.toLowerCase();
+        const priceA = parsePrice(a.price);
+        const priceB = parsePrice(b.price);
+
+        if (sortBy === "name-asc") return nameA.localeCompare(nameB);
+        if (sortBy === "name-desc") return nameB.localeCompare(nameA);
+        if (sortBy === "price-asc") return priceA - priceB;
+        if (sortBy === "price-desc") return priceB - priceA;
+        return 0;
+    });
+
+    renderProducts(filteredProducts);
+}
+
+// ============================================================
+// MODAL DE IMAGEM (DETALHES DO PRODUTO)
+// ============================================================
 
 function openImageModal(product) {
     if (!imgModal || !modalImg) return;
 
     modalImages = [];
     if (product.mainImage) {
-        modalImages.push(BASE_URL + product.mainImage);
+        modalImages.push(product.mainImage); // CORREÇÃO AQUI: Caminho já completo
     }
     if (product.thumbnails && product.thumbnails.length > 0) {
         product.thumbnails.forEach(thumb => {
-            modalImages.push(BASE_URL + thumb);
+            modalImages.push(thumb); // CORREÇÃO AQUI: Caminho já completo
         });
     }
 
     if (modalImages.length === 0) {
-        modalImages.push('https://via.placeholder.com/800x600?text=Sem+Imagem');
+        modalImages.push('https://via.placeholder.com/600x400?text=Sem+Imagem');
     }
 
     currentModalImageIndex = 0;
-    renderModalImage();
-    imgModal.classList.add('open');
-    document.addEventListener('keydown', handleModalKeydown);
+    showModalImage(currentModalImageIndex);
+    resetZoomAndPan();
+    imgModal.classList.add('open'); // Adiciona a classe 'open' para exibir o modal
 }
 
 function closeImageModal() {
-    if (!imgModal) return;
-    imgModal.classList.remove('open');
-    resetZoomAndPan();
-    document.removeEventListener('keydown', handleModalKeydown);
+    if (imgModal) {
+        imgModal.classList.remove('open'); // Remove a classe 'open' para esconder o modal
+        resetZoomAndPan();
+    }
 }
 
-function renderModalImage() {
+function showModalImage(index) {
     if (!modalImg || modalImages.length === 0) return;
+    currentModalImageIndex = (index + modalImages.length) % modalImages.length;
     modalImg.src = modalImages[currentModalImageIndex];
-    resetZoomAndPan(); // Reseta zoom e pan ao carregar nova imagem
+    resetZoomAndPan(); // Reseta zoom e pan ao trocar de imagem
 }
 
 function navigateModalImages(direction) {
-    if (modalImages.length <= 1) return;
-    currentModalImageIndex = (currentModalImageIndex + direction + modalImages.length) % modalImages.length;
-    renderModalImage();
+    showModalImage(currentModalImageIndex + direction);
 }
 
-function applyTransform() {
-    if (!modalImg) return;
-    modalImg.style.transform = `scale(${currentZoom}) translate(${currentImgTranslateX}px, ${currentImgTranslateY}px)`;
-}
-
-function constrainPan() {
-    if (!modalImg) return;
-    const imgRect = modalImg.getBoundingClientRect();
-    const modalRect = imgModal.getBoundingClientRect();
-
-    // Calcula as dimensões efetivas da imagem com zoom
-    const effectiveWidth = imgRect.width * currentZoom;
-    const effectiveHeight = imgRect.height * currentZoom;
-
-    // Calcula os limites de pan baseados na diferença entre o tamanho da imagem (com zoom) e o modal
-    const maxPanX = Math.max(0, (effectiveWidth - modalRect.width) / 2 / currentZoom);
-    const maxPanY = Math.max(0, (effectiveHeight - modalRect.height) / 2 / currentZoom);
-
-    currentImgTranslateX = Math.max(-maxPanX, Math.min(maxPanX, currentImgTranslateX));
-    currentImgTranslateY = Math.max(-maxPanY, Math.min(maxPanY, currentImgTranslateY));
-}
-
-function zoomImage(delta, focalPoint = null) {
-    const oldZoom = currentZoom;
-    currentZoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, currentZoom + delta));
-
-    if (focalPoint && modalImg) {
-        // Ajusta o pan para manter o foco no ponto do mouse
-        const zoomRatio = currentZoom / oldZoom;
-        currentImgTranslateX = focalPoint.x - (focalPoint.x - currentImgTranslateX) * zoomRatio;
-        currentImgTranslateY = focalPoint.y - (focalPoint.y - currentImgTranslateY) * zoomRatio;
-    }
-
-    constrainPan();
-    applyTransform();
+function zoomImage(amount) {
+    currentZoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, currentZoom + amount));
+    applyZoomAndPan();
 }
 
 function resetZoomAndPan() {
     currentZoom = 1;
     currentImgTranslateX = 0;
     currentImgTranslateY = 0;
-    applyTransform();
+    applyZoomAndPan();
+}
+
+function applyZoomAndPan() {
+    if (modalImg) {
+        modalImg.style.transform = `scale(${currentZoom}) translate(${currentImgTranslateX}px, ${currentImgTranslateY}px)`;
+        modalImg.style.cursor = currentZoom > 1 ? 'grab' : 'zoom-in';
+    }
+}
+
+function handleWheelZoom(e) {
+    if (!imgModal || !imgModal.classList.contains('open')) return; // Só aplica zoom se o modal estiver aberto
+    e.preventDefault(); // Impede o scroll da página
+    const zoomDirection = e.deltaY < 0 ? ZOOM_INCREMENT : -ZOOM_INCREMENT;
+    zoomImage(zoomDirection);
 }
 
 function handlePanStart(e) {
-    if (!modalImg || currentZoom === 1) return; // Só permite pan se houver zoom
-    e.preventDefault();
+    if (currentZoom <= 1) return; // Só permite pan se houver zoom
     isPanning = true;
-    const p = e.type === "touchstart" ? e.touches[0] : e;
-    panStartX = p.clientX;
-    panStartY = p.clientY;
+    modalImg.style.cursor = 'grabbing';
+    panStartX = e.clientX || e.touches[0].clientX;
+    panStartY = e.clientY || e.touches[0].clientY;
     panStartImgX = currentImgTranslateX;
     panStartImgY = currentImgTranslateY;
-    document.addEventListener("mousemove", handlePanMove);
-    document.addEventListener("touchmove", handlePanMove, { passive: false });
-    document.addEventListener("mouseup", handlePanEnd);
-    document.addEventListener("touchend", handlePanEnd);
+
+    document.addEventListener('mousemove', handlePanMove);
+    document.addEventListener('mouseup', handlePanEnd);
+    document.addEventListener('touchmove', handlePanMove, { passive: false });
+    document.addEventListener('touchend', handlePanEnd);
 }
 
 function handlePanMove(e) {
     if (!isPanning) return;
-    e.preventDefault();
-    const p = e.type === "touchmove" ? e.touches[0] : e;
-    currentImgTranslateX = panStartImgX + (p.clientX - panStartX);
-    currentImgTranslateY = panStartImgY + (p.clientY - panStartY);
-    constrainPan();
-    applyTransform();
+    e.preventDefault(); // Impede o scroll em dispositivos touch
+
+    const clientX = e.clientX || e.touches[0].clientX;
+    const clientY = e.clientY || e.touches[0].clientY;
+
+    const dx = (clientX - panStartX) / currentZoom; // Ajusta o movimento pelo zoom
+    const dy = (clientY - panStartY) / currentZoom;
+
+    currentImgTranslateX = panStartImgX + dx;
+    currentImgTranslateY = panStartImgY + dy;
+
+    applyZoomAndPan();
 }
 
 function handlePanEnd() {
-    if (!isPanning) return;
     isPanning = false;
-    constrainPan();
-    applyTransform();
-    document.removeEventListener("mousemove", handlePanMove);
-    document.removeEventListener("touchmove", handlePanMove);
-    document.removeEventListener("mouseup", handlePanEnd);
-    document.removeEventListener("touchend", handlePanEnd);
+    if (modalImg) modalImg.style.cursor = currentZoom > 1 ? 'grab' : 'zoom-in';
+    document.removeEventListener('mousemove', handlePanMove);
+    document.removeEventListener('mouseup', handlePanEnd);
+    document.removeEventListener('touchmove', handlePanMove);
+    document.removeEventListener('touchend', handlePanEnd);
 }
 
-function handleWheelZoom(e) {
-    if (!imgModal || !imgModal.classList.contains('open')) return;
-    e.preventDefault();
-    const rect = modalImg.getBoundingClientRect(); // Usar modalImg para o foco
-    const modalRect = imgModal.getBoundingClientRect();
-
-    // Calcula o ponto focal relativo à imagem (não ao modal)
-    const focal = {
-        x: (e.clientX - rect.left) - (rect.width / 2),
-        y: (e.clientY - rect.top) - (rect.height / 2)
-    };
-
-    zoomImage(e.deltaY < 0 ? ZOOM_INCREMENT : -ZOOM_INCREMENT, focal);
-}
-
-function handleModalKeydown(e) {
-    if (!imgModal || !imgModal.classList.contains('open')) return;
-    switch (e.key) {
-        case "ArrowRight": navigateModalImages(1); break;
-        case "ArrowLeft": navigateModalImages(-1); break;
-        case "+": case "=": zoomImage(ZOOM_INCREMENT); break;
-        case "-": zoomImage(-ZOOM_INCREMENT); break;
-        case "0": resetZoomAndPan(); break;
-        case "Escape": closeImageModal(); break;
-    }
-}
-
-// =============================================
+// ============================================================
 // PAINEL DE INTERESSES
-// =============================================
+// ============================================================
 
-function showInterestPanel(autoHide = false) {
-    if (!interestPanel) return;
-    interestPanel.classList.add("open"); // Usa a classe 'open'
-    clearTimeout(interestPanelTimeoutId);
-    if (autoHide && interestItems.length > 0) {
-        interestPanelTimeoutId = setTimeout(hideInterestPanel, 5000);
-    }
-}
-
-function hideInterestPanel() {
-    if (!interestPanel) return;
-    clearTimeout(interestPanelTimeoutId);
-    interestPanel.classList.remove("open");
-}
-
-function toggleInterestPanel() {
-    if (!interestPanel) return;
-    if (interestPanel.classList.contains("open")) hideInterestPanel();
-    else showInterestPanel(false);
-}
-
-function addToInterests(product) {
-    const existing = interestItems.find(item => item.id === product.id);
-    if (existing) {
-        existing.quantity = (existing.quantity || 1) + 1; // Incrementa quantidade
+function addToInterest(product) {
+    const existingItem = interestItems.find(item => item.id === product.id);
+    if (existingItem) {
+        existingItem.quantity++;
     } else {
         interestItems.push({
             id: product.id,
             name: product.name,
-            price: product.price || 'Sob consulta',
-            quantity: 1 // Adiciona quantidade inicial
+            price: parsePrice(product.price),
+            quantity: 1
         });
     }
+    saveInterestItems();
     updateInterestPanel();
-    showInterestPanel(true);
+    showInterestPanelTemporarily();
+}
+
+function removeFromInterest(productId) {
+    interestItems = interestItems.filter(item => item.id !== productId);
+    saveInterestItems();
+    updateInterestPanel();
+    showInterestPanelTemporarily();
+}
+
+function updateInterestQuantity(productId, change) {
+    const item = interestItems.find(item => item.id === productId);
+    if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+            removeFromInterest(productId);
+        } else {
+            saveInterestItems();
+            updateInterestPanel();
+            showInterestPanelTemporarily();
+        }
+    }
+}
+
+function saveInterestItems() {
+    localStorage.setItem('interestItems', JSON.stringify(interestItems));
 }
 
 function updateInterestPanel() {
-    if (!interestList) return;
+    if (!interestList || !interestTotalEl) return;
+
     interestList.innerHTML = "";
     let total = 0;
 
     if (interestItems.length === 0) {
-        interestList.innerHTML = '<li>Nenhum item adicionado.</li>';
-        if (interestTotalEl) interestTotalEl.textContent = 'Total: R$ 0,00';
-        return;
-    }
-
-    interestItems.forEach((item, index) => {
-        const li = document.createElement('li');
-        const price = parsePrice(item.price) * (item.quantity || 1);
-        total += price;
-
-        li.innerHTML = `
-            <div class="item-info">
-                <span class="item-name">${item.name} (Qtd: ${item.quantity || 1})</span>
-                <span class="item-price">${typeof item.price === 'number' ? `R$ ${item.price.toFixed(2).replace('.', ',')}` : item.price}</span>
-            </div>
-            <button class="remove-item-btn" data-index="${index}">&times;</button>
-        `;
-        interestList.appendChild(li);
-    });
-
-    if (interestTotalEl) {
-        interestTotalEl.textContent = `Total: R$ ${total.toFixed(2).replace('.', ',')}`;
-    }
-    localStorage.setItem('interestItems', JSON.stringify(interestItems));
-
-    // Adiciona event listeners para remover itens
-    document.querySelectorAll('.remove-item-btn').forEach(button => {
-        button.addEventListener('click', (e) => {
-            const indexToRemove = parseInt(e.target.dataset.index);
-            interestItems.splice(indexToRemove, 1);
-            updateInterestPanel();
+        interestList.innerHTML = '<p class="empty-message">Sua lista de interesses está vazia.</p>';
+    } else {
+        interestItems.forEach(item => {
+            const listItem = document.createElement("li");
+            listItem.className = "interest-item";
+            listItem.innerHTML = `
+                <span class="item-name">${item.name}</span>
+                <div class="item-controls">
+                    <button class="quantity-btn decrease" data-id="${item.id}">-</button>
+                    <span class="item-quantity">${item.quantity}</span>
+                    <button class="quantity-btn increase" data-id="${item.id}">+</button>
+                    <span class="item-price">R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}</span>
+                    <button class="remove-item" data-id="${item.id}">x</button>
+                </div>
+            `;
+            interestList.appendChild(listItem);
+            total += item.price * item.quantity;
         });
+    }
+
+    interestTotalEl.textContent = `Total: R$ ${total.toFixed(2).replace('.', ',')}`;
+
+    // Adiciona event listeners para os botões de controle de quantidade e remoção
+    interestList.querySelectorAll('.quantity-btn.decrease').forEach(button => {
+        button.addEventListener('click', (e) => updateInterestQuantity(e.target.dataset.id, -1));
+    });
+    interestList.querySelectorAll('.quantity-btn.increase').forEach(button => {
+        button.addEventListener('click', (e) => updateInterestQuantity(e.target.dataset.id, 1));
+    });
+    interestList.querySelectorAll('.remove-item').forEach(button => {
+        button.addEventListener('click', (e) => removeFromInterest(e.target.dataset.id));
     });
 }
 
+function toggleInterestPanel() {
+    if (interestPanel) {
+        interestPanel.classList.toggle('open');
+        if (interestPanel.classList.contains('open')) {
+            clearTimeout(interestPanelTimeoutId); // Cancela qualquer timeout existente
+        }
+    }
+}
+
+function showInterestPanelTemporarily() {
+    if (interestPanel) {
+        interestPanel.classList.add('open');
+        clearTimeout(interestPanelTimeoutId);
+        interestPanelTimeoutId = setTimeout(() => {
+            interestPanel.classList.remove('open');
+        }, 5000); // Fecha automaticamente após 5 segundos
+    }
+}
+
+function hideInterestPanel() {
+    if (interestPanel) {
+        interestPanel.classList.remove('open');
+        clearTimeout(interestPanelTimeoutId);
+    }
+}
+
 // =============================================
-// MODAL DE CONTATO
+// MODAL DE CONTATO (FINALIZAR PEDIDO)
 // =============================================
 
 function showContactModal() {
-    if (interestItems.length === 0) {
-        alert("Por favor, adicione itens à sua lista de interesses primeiro.");
-        return;
-    }
-    if (selectedSummary) selectedSummary.innerHTML = "";
+    if (!contactModal || !selectedSummary || !itemsDataInput) return;
+
+    selectedSummary.innerHTML = "";
     let text = "";
     let total = 0;
 
