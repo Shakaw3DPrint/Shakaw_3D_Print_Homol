@@ -4,15 +4,15 @@
     "name": "Produto 01",
     "description": "Modelo + Esteira em resina 3D pintados à mão. <br> Imagem Real <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/01.webp",
+    "mainImage": "/assets/img/produtos/01.webp",
     "thumbnails": [
-      "assets/img/produtos/01.webp",
-      "assets/img/produtos/01_1.webp",
-      "assets/img/produtos/01_2.webp",
-      "assets/img/produtos/01_3.webp",
-      "assets/img/produtos/01_4.webp",
-      "assets/img/produtos/01_5.webp",
-      "assets/img/produtos/01_6.webp"
+      "/assets/img/produtos/01.webp",
+      "/assets/img/produtos/01_1.webp",
+      "/assets/img/produtos/01_2.webp",
+      "/assets/img/produtos/01_3.webp",
+      "/assets/img/produtos/01_4.webp",
+      "/assets/img/produtos/01_5.webp",
+      "/assets/img/produtos/01_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -21,15 +21,15 @@
     "name": "Produto 02",
     "description": "Modelo + 01 Pneu em resina 3D pintados à mão. <br> Imagem Real <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/02.webp",
+    "mainImage": "/assets/img/produtos/02.webp",
     "thumbnails": [
-      "assets/img/produtos/02.webp",
-      "assets/img/produtos/02_1.webp",
-      "assets/img/produtos/02_2.webp",
-      "assets/img/produtos/02_3.webp",
-      "assets/img/produtos/02_4.webp",
-      "assets/img/produtos/02_5.webp",
-      "assets/img/produtos/02_6.webp"
+      "/assets/img/produtos/02.webp",
+      "/assets/img/produtos/02_1.webp",
+      "/assets/img/produtos/02_2.webp",
+      "/assets/img/produtos/02_3.webp",
+      "/assets/img/produtos/02_4.webp",
+      "/assets/img/produtos/02_5.webp",
+      "/assets/img/produtos/02_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -38,15 +38,15 @@
     "name": "Produto 03",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Real <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/03.webp",
+    "mainImage": "/assets/img/produtos/03.webp",
     "thumbnails": [
-      "assets/img/produtos/03.webp",
-      "assets/img/produtos/03_1.webp",
-      "assets/img/produtos/03_2.webp",
-      "assets/img/produtos/03_3.webp",
-      "assets/img/produtos/03_4.webp",
-      "assets/img/produtos/03_5.webp",
-      "assets/img/produtos/03_6.webp"
+      "/assets/img/produtos/03.webp",
+      "/assets/img/produtos/03_1.webp",
+      "/assets/img/produtos/03_2.webp",
+      "/assets/img/produtos/03_3.webp",
+      "/assets/img/produtos/03_4.webp",
+      "/assets/img/produtos/03_5.webp",
+      "/assets/img/produtos/03_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -55,15 +55,15 @@
     "name": "Produto 04",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Real <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/04.webp",
+    "mainImage": "/assets/img/produtos/04.webp",
     "thumbnails": [
-      "assets/img/produtos/04.webp",
-      "assets/img/produtos/04_1.webp",
-      "assets/img/produtos/04_2.webp",
-      "assets/img/produtos/04_3.webp",
-      "assets/img/produtos/04_4.webp",
-      "assets/img/produtos/04_5.webp",
-      "assets/img/produtos/04_6.webp"
+      "/assets/img/produtos/04.webp",
+      "/assets/img/produtos/04_1.webp",
+      "/assets/img/produtos/04_2.webp",
+      "/assets/img/produtos/04_3.webp",
+      "/assets/img/produtos/04_4.webp",
+      "/assets/img/produtos/04_5.webp",
+      "/assets/img/produtos/04_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -72,15 +72,15 @@
     "name": "Produto 05",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Real <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/05.webp",
+    "mainImage": "/assets/img/produtos/05.webp",
     "thumbnails": [
-      "assets/img/produtos/05.webp",
-      "assets/img/produtos/05_1.webp",
-      "assets/img/produtos/05_2.webp",
-      "assets/img/produtos/05_3.webp",
-      "assets/img/produtos/05_4.webp",
-      "assets/img/produtos/05_5.webp",
-      "assets/img/produtos/05_6.webp"
+      "/assets/img/produtos/05.webp",
+      "/assets/img/produtos/05_1.webp",
+      "/assets/img/produtos/05_2.webp",
+      "/assets/img/produtos/05_3.webp",
+      "/assets/img/produtos/05_4.webp",
+      "/assets/img/produtos/05_5.webp",
+      "/assets/img/produtos/05_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -89,15 +89,15 @@
     "name": "Produto 06",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/06.webp",
+    "mainImage": "/assets/img/produtos/06.webp",
     "thumbnails": [
-      "assets/img/produtos/06.webp",
-      "assets/img/produtos/06_1.webp",
-      "assets/img/produtos/06_2.webp",
-      "assets/img/produtos/06_3.webp",
-      "assets/img/produtos/06_4.webp",
-      "assets/img/produtos/06_5.webp",
-      "assets/img/produtos/06_6.webp"
+      "/assets/img/produtos/06.webp",
+      "/assets/img/produtos/06_1.webp",
+      "/assets/img/produtos/06_2.webp",
+      "/assets/img/produtos/06_3.webp",
+      "/assets/img/produtos/06_4.webp",
+      "/assets/img/produtos/06_5.webp",
+      "/assets/img/produtos/06_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -106,15 +106,15 @@
     "name": "Produto 07",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/07.webp",
+    "mainImage": "/assets/img/produtos/07.webp",
     "thumbnails": [
-      "assets/img/produtos/07.webp",
-      "assets/img/produtos/07_1.webp",
-      "assets/img/produtos/07_2.webp",
-      "assets/img/produtos/07_3.webp",
-      "assets/img/produtos/07_4.webp",
-      "assets/img/produtos/07_5.webp",
-      "assets/img/produtos/07_6.webp"
+      "/assets/img/produtos/07.webp",
+      "/assets/img/produtos/07_1.webp",
+      "/assets/img/produtos/07_2.webp",
+      "/assets/img/produtos/07_3.webp",
+      "/assets/img/produtos/07_4.webp",
+      "/assets/img/produtos/07_5.webp",
+      "/assets/img/produtos/07_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -123,15 +123,15 @@
     "name": "Produto 08",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/08.webp",
+    "mainImage": "/assets/img/produtos/08.webp",
     "thumbnails": [
-      "assets/img/produtos/08.webp",
-      "assets/img/produtos/08_1.webp",
-      "assets/img/produtos/08_2.webp",
-      "assets/img/produtos/08_3.webp",
-      "assets/img/produtos/08_4.webp",
-      "assets/img/produtos/08_5.webp",
-      "assets/img/produtos/08_6.webp"
+      "/assets/img/produtos/08.webp",
+      "/assets/img/produtos/08_1.webp",
+      "/assets/img/produtos/08_2.webp",
+      "/assets/img/produtos/08_3.webp",
+      "/assets/img/produtos/08_4.webp",
+      "/assets/img/produtos/08_5.webp",
+      "/assets/img/produtos/08_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -140,15 +140,15 @@
     "name": "Produto 09",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/09.webp",
+    "mainImage": "/assets/img/produtos/09.webp",
     "thumbnails": [
-      "assets/img/produtos/09.webp",
-      "assets/img/produtos/09_1.webp",
-      "assets/img/produtos/09_2.webp",
-      "assets/img/produtos/09_3.webp",
-      "assets/img/produtos/09_4.webp",
-      "assets/img/produtos/09_5.webp",
-      "assets/img/produtos/09_6.webp"
+      "/assets/img/produtos/09.webp",
+      "/assets/img/produtos/09_1.webp",
+      "/assets/img/produtos/09_2.webp",
+      "/assets/img/produtos/09_3.webp",
+      "/assets/img/produtos/09_4.webp",
+      "/assets/img/produtos/09_5.webp",
+      "/assets/img/produtos/09_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -157,15 +157,15 @@
     "name": "Produto 10",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/10.webp",
+    "mainImage": "/assets/img/produtos/10.webp",
     "thumbnails": [
-      "assets/img/produtos/10.webp",
-      "assets/img/produtos/10_1.webp",
-      "assets/img/produtos/10_2.webp",
-      "assets/img/produtos/10_3.webp",
-      "assets/img/produtos/10_4.webp",
-      "assets/img/produtos/10_5.webp",
-      "assets/img/produtos/10_6.webp"
+      "/assets/img/produtos/10.webp",
+      "/assets/img/produtos/10_1.webp",
+      "/assets/img/produtos/10_2.webp",
+      "/assets/img/produtos/10_3.webp",
+      "/assets/img/produtos/10_4.webp",
+      "/assets/img/produtos/10_5.webp",
+      "/assets/img/produtos/10_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -174,15 +174,15 @@
     "name": "Produto 11",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/11.webp",
+    "mainImage": "/assets/img/produtos/11.webp",
     "thumbnails": [
-      "assets/img/produtos/11.webp",
-      "assets/img/produtos/11_1.webp",
-      "assets/img/produtos/11_2.webp",
-      "assets/img/produtos/11_3.webp",
-      "assets/img/produtos/11_4.webp",
-      "assets/img/produtos/11_5.webp",
-      "assets/img/produtos/11_6.webp"
+      "/assets/img/produtos/11.webp",
+      "/assets/img/produtos/11_1.webp",
+      "/assets/img/produtos/11_2.webp",
+      "/assets/img/produtos/11_3.webp",
+      "/assets/img/produtos/11_4.webp",
+      "/assets/img/produtos/11_5.webp",
+      "/assets/img/produtos/11_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -191,15 +191,15 @@
     "name": "Produto 12",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/12.webp",
+    "mainImage": "/assets/img/produtos/12.webp",
     "thumbnails": [
-      "assets/img/produtos/12.webp",
-      "assets/img/produtos/12_1.webp",
-      "assets/img/produtos/12_2.webp",
-      "assets/img/produtos/12_3.webp",
-      "assets/img/produtos/12_4.webp",
-      "assets/img/produtos/12_5.webp",
-      "assets/img/produtos/12_6.webp"
+      "/assets/img/produtos/12.webp",
+      "/assets/img/produtos/12_1.webp",
+      "/assets/img/produtos/12_2.webp",
+      "/assets/img/produtos/12_3.webp",
+      "/assets/img/produtos/12_4.webp",
+      "/assets/img/produtos/12_5.webp",
+      "/assets/img/produtos/12_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -208,15 +208,15 @@
     "name": "Produto 13",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/13.webp",
+    "mainImage": "/assets/img/produtos/13.webp",
     "thumbnails": [
-      "assets/img/produtos/13.webp",
-      "assets/img/produtos/13_1.webp",
-      "assets/img/produtos/13_2.webp",
-      "assets/img/produtos/13_3.webp",
-      "assets/img/produtos/13_4.webp",
-      "assets/img/produtos/13_5.webp",
-      "assets/img/produtos/13_6.webp"
+      "/assets/img/produtos/13.webp",
+      "/assets/img/produtos/13_1.webp",
+      "/assets/img/produtos/13_2.webp",
+      "/assets/img/produtos/13_3.webp",
+      "/assets/img/produtos/13_4.webp",
+      "/assets/img/produtos/13_5.webp",
+      "/assets/img/produtos/13_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -225,15 +225,15 @@
     "name": "Produto 14",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/14.webp",
+    "mainImage": "/assets/img/produtos/14.webp",
     "thumbnails": [
-      "assets/img/produtos/14.webp",
-      "assets/img/produtos/14_1.webp",
-      "assets/img/produtos/14_2.webp",
-      "assets/img/produtos/14_3.webp",
-      "assets/img/produtos/14_4.webp",
-      "assets/img/produtos/14_5.webp",
-      "assets/img/produtos/14_6.webp"
+      "/assets/img/produtos/14.webp",
+      "/assets/img/produtos/14_1.webp",
+      "/assets/img/produtos/14_2.webp",
+      "/assets/img/produtos/14_3.webp",
+      "/assets/img/produtos/14_4.webp",
+      "/assets/img/produtos/14_5.webp",
+      "/assets/img/produtos/14_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -242,15 +242,15 @@
     "name": "Produto 15",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/15.webp",
+    "mainImage": "/assets/img/produtos/15.webp",
     "thumbnails": [
-      "assets/img/produtos/15.webp",
-      "assets/img/produtos/15_1.webp",
-      "assets/img/produtos/15_2.webp",
-      "assets/img/produtos/15_3.webp",
-      "assets/img/produtos/15_4.webp",
-      "assets/img/produtos/15_5.webp",
-      "assets/img/produtos/15_6.webp"
+      "/assets/img/produtos/15.webp",
+      "/assets/img/produtos/15_1.webp",
+      "/assets/img/produtos/15_2.webp",
+      "/assets/img/produtos/15_3.webp",
+      "/assets/img/produtos/15_4.webp",
+      "/assets/img/produtos/15_5.webp",
+      "/assets/img/produtos/15_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -259,15 +259,15 @@
     "name": "Produto 16",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/16.webp",
+    "mainImage": "/assets/img/produtos/16.webp",
     "thumbnails": [
-      "assets/img/produtos/16.webp",
-      "assets/img/produtos/16_1.webp",
-      "assets/img/produtos/16_2.webp",
-      "assets/img/produtos/16_3.webp",
-      "assets/img/produtos/16_4.webp",
-      "assets/img/produtos/16_5.webp",
-      "assets/img/produtos/16_6.webp"
+      "/assets/img/produtos/16.webp",
+      "/assets/img/produtos/16_1.webp",
+      "/assets/img/produtos/16_2.webp",
+      "/assets/img/produtos/16_3.webp",
+      "/assets/img/produtos/16_4.webp",
+      "/assets/img/produtos/16_5.webp",
+      "/assets/img/produtos/16_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -276,15 +276,15 @@
     "name": "Produto 17",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/17.webp",
+    "mainImage": "/assets/img/produtos/17.webp",
     "thumbnails": [
-      "assets/img/produtos/17.webp",
-      "assets/img/produtos/17_1.webp",
-      "assets/img/produtos/17_2.webp",
-      "assets/img/produtos/17_3.webp",
-      "assets/img/produtos/17_4.webp",
-      "assets/img/produtos/17_5.webp",
-      "assets/img/produtos/17_6.webp"
+      "/assets/img/produtos/17.webp",
+      "/assets/img/produtos/17_1.webp",
+      "/assets/img/produtos/17_2.webp",
+      "/assets/img/produtos/17_3.webp",
+      "/assets/img/produtos/17_4.webp",
+      "/assets/img/produtos/17_5.webp",
+      "/assets/img/produtos/17_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -293,15 +293,15 @@
     "name": "Produto 18",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/18.webp",
+    "mainImage": "/assets/img/produtos/18.webp",
     "thumbnails": [
-      "assets/img/produtos/18.webp",
-      "assets/img/produtos/18_1.webp",
-      "assets/img/produtos/18_2.webp",
-      "assets/img/produtos/18_3.webp",
-      "assets/img/produtos/18_4.webp",
-      "assets/img/produtos/18_5.webp",
-      "assets/img/produtos/18_6.webp"
+      "/assets/img/produtos/18.webp",
+      "/assets/img/produtos/18_1.webp",
+      "/assets/img/produtos/18_2.webp",
+      "/assets/img/produtos/18_3.webp",
+      "/assets/img/produtos/18_4.webp",
+      "/assets/img/produtos/18_5.webp",
+      "/assets/img/produtos/18_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -310,15 +310,15 @@
     "name": "Produto 19",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/19.webp",
+    "mainImage": "/assets/img/produtos/19.webp",
     "thumbnails": [
-      "assets/img/produtos/19.webp",
-      "assets/img/produtos/19_1.webp",
-      "assets/img/produtos/19_2.webp",
-      "assets/img/produtos/19_3.webp",
-      "assets/img/produtos/19_4.webp",
-      "assets/img/produtos/19_5.webp",
-      "assets/img/produtos/19_6.webp"
+      "/assets/img/produtos/19.webp",
+      "/assets/img/produtos/19_1.webp",
+      "/assets/img/produtos/19_2.webp",
+      "/assets/img/produtos/19_3.webp",
+      "/assets/img/produtos/19_4.webp",
+      "/assets/img/produtos/19_5.webp",
+      "/assets/img/produtos/19_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -327,15 +327,15 @@
     "name": "Produto 20",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/20.webp",
+    "mainImage": "/assets/img/produtos/20.webp",
     "thumbnails": [
-      "assets/img/produtos/20.webp",
-      "assets/img/produtos/20_1.webp",
-      "assets/img/produtos/20_2.webp",
-      "assets/img/produtos/20_3.webp",
-      "assets/img/produtos/20_4.webp",
-      "assets/img/produtos/20_5.webp",
-      "assets/img/produtos/20_6.webp"
+      "/assets/img/produtos/20.webp",
+      "/assets/img/produtos/20_1.webp",
+      "/assets/img/produtos/20_2.webp",
+      "/assets/img/produtos/20_3.webp",
+      "/assets/img/produtos/20_4.webp",
+      "/assets/img/produtos/20_5.webp",
+      "/assets/img/produtos/20_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -344,15 +344,15 @@
     "name": "Produto 21",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/21.webp",
+    "mainImage": "/assets/img/produtos/21.webp",
     "thumbnails": [
-      "assets/img/produtos/21.webp",
-      "assets/img/produtos/21_1.webp",
-      "assets/img/produtos/21_2.webp",
-      "assets/img/produtos/21_3.webp",
-      "assets/img/produtos/21_4.webp",
-      "assets/img/produtos/21_5.webp",
-      "assets/img/produtos/21_6.webp"
+      "/assets/img/produtos/21.webp",
+      "/assets/img/produtos/21_1.webp",
+      "/assets/img/produtos/21_2.webp",
+      "/assets/img/produtos/21_3.webp",
+      "/assets/img/produtos/21_4.webp",
+      "/assets/img/produtos/21_5.webp",
+      "/assets/img/produtos/21_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -361,15 +361,15 @@
     "name": "Produto 22",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/22.webp",
+    "mainImage": "/assets/img/produtos/22.webp",
     "thumbnails": [
-      "assets/img/produtos/22.webp",
-      "assets/img/produtos/22_1.webp",
-      "assets/img/produtos/22_2.webp",
-      "assets/img/produtos/22_3.webp",
-      "assets/img/produtos/22_4.webp",
-      "assets/img/produtos/22_5.webp",
-      "assets/img/produtos/22_6.webp"
+      "/assets/img/produtos/22.webp",
+      "/assets/img/produtos/22_1.webp",
+      "/assets/img/produtos/22_2.webp",
+      "/assets/img/produtos/22_3.webp",
+      "/assets/img/produtos/22_4.webp",
+      "/assets/img/produtos/22_5.webp",
+      "/assets/img/produtos/22_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -378,15 +378,15 @@
     "name": "Produto 23",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/23.webp",
+    "mainImage": "/assets/img/produtos/23.webp",
     "thumbnails": [
-      "assets/img/produtos/23.webp",
-      "assets/img/produtos/23_1.webp",
-      "assets/img/produtos/23_2.webp",
-      "assets/img/produtos/23_3.webp",
-      "assets/img/produtos/23_4.webp",
-      "assets/img/produtos/23_5.webp",
-      "assets/img/produtos/23_6.webp"
+      "/assets/img/produtos/23.webp",
+      "/assets/img/produtos/23_1.webp",
+      "/assets/img/produtos/23_2.webp",
+      "/assets/img/produtos/23_3.webp",
+      "/assets/img/produtos/23_4.webp",
+      "/assets/img/produtos/23_5.webp",
+      "/assets/img/produtos/23_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -395,15 +395,15 @@
     "name": "Produto 24",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/24.webp",
+    "mainImage": "/assets/img/produtos/24.webp",
     "thumbnails": [
-      "assets/img/produtos/24.webp",
-      "assets/img/produtos/24_1.webp",
-      "assets/img/produtos/24_2.webp",
-      "assets/img/produtos/24_3.webp",
-      "assets/img/produtos/24_4.webp",
-      "assets/img/produtos/24_5.webp",
-      "assets/img/produtos/24_6.webp"
+      "/assets/img/produtos/24.webp",
+      "/assets/img/produtos/24_1.webp",
+      "/assets/img/produtos/24_2.webp",
+      "/assets/img/produtos/24_3.webp",
+      "/assets/img/produtos/24_4.webp",
+      "/assets/img/produtos/24_5.webp",
+      "/assets/img/produtos/24_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -412,15 +412,15 @@
     "name": "Produto 25",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/25.webp",
+    "mainImage": "/assets/img/produtos/25.webp",
     "thumbnails": [
-      "assets/img/produtos/25.webp",
-      "assets/img/produtos/25_1.webp",
-      "assets/img/produtos/25_2.webp",
-      "assets/img/produtos/25_3.webp",
-      "assets/img/produtos/25_4.webp",
-      "assets/img/produtos/25_5.webp",
-      "assets/img/produtos/25_6.webp"
+      "/assets/img/produtos/25.webp",
+      "/assets/img/produtos/25_1.webp",
+      "/assets/img/produtos/25_2.webp",
+      "/assets/img/produtos/25_3.webp",
+      "/assets/img/produtos/25_4.webp",
+      "/assets/img/produtos/25_5.webp",
+      "/assets/img/produtos/25_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -429,15 +429,15 @@
     "name": "Produto 26",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/26.webp",
+    "mainImage": "/assets/img/produtos/26.webp",
     "thumbnails": [
-      "assets/img/produtos/26.webp",
-      "assets/img/produtos/26_1.webp",
-      "assets/img/produtos/26_2.webp",
-      "assets/img/produtos/26_3.webp",
-      "assets/img/produtos/26_4.webp",
-      "assets/img/produtos/26_5.webp",
-      "assets/img/produtos/26_6.webp"
+      "/assets/img/produtos/26.webp",
+      "/assets/img/produtos/26_1.webp",
+      "/assets/img/produtos/26_2.webp",
+      "/assets/img/produtos/26_3.webp",
+      "/assets/img/produtos/26_4.webp",
+      "/assets/img/produtos/26_5.webp",
+      "/assets/img/produtos/26_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -446,15 +446,15 @@
     "name": "Produto 27",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/27.webp",
+    "mainImage": "/assets/img/produtos/27.webp",
     "thumbnails": [
-      "assets/img/produtos/27.webp",
-      "assets/img/produtos/27_1.webp",
-      "assets/img/produtos/27_2.webp",
-      "assets/img/produtos/27_3.webp",
-      "assets/img/produtos/27_4.webp",
-      "assets/img/produtos/27_5.webp",
-      "assets/img/produtos/27_6.webp"
+      "/assets/img/produtos/27.webp",
+      "/assets/img/produtos/27_1.webp",
+      "/assets/img/produtos/27_2.webp",
+      "/assets/img/produtos/27_3.webp",
+      "/assets/img/produtos/27_4.webp",
+      "/assets/img/produtos/27_5.webp",
+      "/assets/img/produtos/27_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -463,15 +463,15 @@
     "name": "Produto 28",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/28.webp",
+    "mainImage": "/assets/img/produtos/28.webp",
     "thumbnails": [
-      "assets/img/produtos/28.webp",
-      "assets/img/produtos/28_1.webp",
-      "assets/img/produtos/28_2.webp",
-      "assets/img/produtos/28_3.webp",
-      "assets/img/produtos/28_4.webp",
-      "assets/img/produtos/28_5.webp",
-      "assets/img/produtos/28_6.webp"
+      "/assets/img/produtos/28.webp",
+      "/assets/img/produtos/28_1.webp",
+      "/assets/img/produtos/28_2.webp",
+      "/assets/img/produtos/28_3.webp",
+      "/assets/img/produtos/28_4.webp",
+      "/assets/img/produtos/28_5.webp",
+      "/assets/img/produtos/28_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -480,15 +480,15 @@
     "name": "Produto 29",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/29.webp",
+    "mainImage": "/assets/img/produtos/29.webp",
     "thumbnails": [
-      "assets/img/produtos/29.webp",
-      "assets/img/produtos/29_1.webp",
-      "assets/img/produtos/29_2.webp",
-      "assets/img/produtos/29_3.webp",
-      "assets/img/produtos/29_4.webp",
-      "assets/img/produtos/29_5.webp",
-      "assets/img/produtos/29_6.webp"
+      "/assets/img/produtos/29.webp",
+      "/assets/img/produtos/29_1.webp",
+      "/assets/img/produtos/29_2.webp",
+      "/assets/img/produtos/29_3.webp",
+      "/assets/img/produtos/29_4.webp",
+      "/assets/img/produtos/29_5.webp",
+      "/assets/img/produtos/29_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -497,15 +497,15 @@
     "name": "Produto 30",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/30.webp",
+    "mainImage": "/assets/img/produtos/30.webp",
     "thumbnails": [
-      "assets/img/produtos/30.webp",
-      "assets/img/produtos/30_1.webp",
-      "assets/img/produtos/30_2.webp",
-      "assets/img/produtos/30_3.webp",
-      "assets/img/produtos/30_4.webp",
-      "assets/img/produtos/30_5.webp",
-      "assets/img/produtos/30_6.webp"
+      "/assets/img/produtos/30.webp",
+      "/assets/img/produtos/30_1.webp",
+      "/assets/img/produtos/30_2.webp",
+      "/assets/img/produtos/30_3.webp",
+      "/assets/img/produtos/30_4.webp",
+      "/assets/img/produtos/30_5.webp",
+      "/assets/img/produtos/30_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -514,15 +514,15 @@
     "name": "Produto 31",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/31.webp",
+    "mainImage": "/assets/img/produtos/31.webp",
     "thumbnails": [
-      "assets/img/produtos/31.webp",
-      "assets/img/produtos/31_1.webp",
-      "assets/img/produtos/31_2.webp",
-      "assets/img/produtos/31_3.webp",
-      "assets/img/produtos/31_4.webp",
-      "assets/img/produtos/31_5.webp",
-      "assets/img/produtos/31_6.webp"
+      "/assets/img/produtos/31.webp",
+      "/assets/img/produtos/31_1.webp",
+      "/assets/img/produtos/31_2.webp",
+      "/assets/img/produtos/31_3.webp",
+      "/assets/img/produtos/31_4.webp",
+      "/assets/img/produtos/31_5.webp",
+      "/assets/img/produtos/31_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -531,15 +531,15 @@
     "name": "Produto 32",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/32.webp",
+    "mainImage": "/assets/img/produtos/32.webp",
     "thumbnails": [
-      "assets/img/produtos/32.webp",
-      "assets/img/produtos/32_1.webp",
-      "assets/img/produtos/32_2.webp",
-      "assets/img/produtos/32_3.webp",
-      "assets/img/produtos/32_4.webp",
-      "assets/img/produtos/32_5.webp",
-      "assets/img/produtos/32_6.webp"
+      "/assets/img/produtos/32.webp",
+      "/assets/img/produtos/32_1.webp",
+      "/assets/img/produtos/32_2.webp",
+      "/assets/img/produtos/32_3.webp",
+      "/assets/img/produtos/32_4.webp",
+      "/assets/img/produtos/32_5.webp",
+      "/assets/img/produtos/32_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -548,15 +548,15 @@
     "name": "Produto 33",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/33.webp",
+    "mainImage": "/assets/img/produtos/33.webp",
     "thumbnails": [
-      "assets/img/produtos/33.webp",
-      "assets/img/produtos/33_1.webp",
-      "assets/img/produtos/33_2.webp",
-      "assets/img/produtos/33_3.webp",
-      "assets/img/produtos/33_4.webp",
-      "assets/img/produtos/33_5.webp",
-      "assets/img/produtos/33_6.webp"
+      "/assets/img/produtos/33.webp",
+      "/assets/img/produtos/33_1.webp",
+      "/assets/img/produtos/33_2.webp",
+      "/assets/img/produtos/33_3.webp",
+      "/assets/img/produtos/33_4.webp",
+      "/assets/img/produtos/33_5.webp",
+      "/assets/img/produtos/33_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -565,15 +565,15 @@
     "name": "Produto 34",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/34.webp",
+    "mainImage": "/assets/img/produtos/34.webp",
     "thumbnails": [
-      "assets/img/produtos/34.webp",
-      "assets/img/produtos/34_1.webp",
-      "assets/img/produtos/34_2.webp",
-      "assets/img/produtos/34_3.webp",
-      "assets/img/produtos/34_4.webp",
-      "assets/img/produtos/34_5.webp",
-      "assets/img/produtos/34_6.webp"
+      "/assets/img/produtos/34.webp",
+      "/assets/img/produtos/34_1.webp",
+      "/assets/img/produtos/34_2.webp",
+      "/assets/img/produtos/34_3.webp",
+      "/assets/img/produtos/34_4.webp",
+      "/assets/img/produtos/34_5.webp",
+      "/assets/img/produtos/34_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -582,15 +582,15 @@
     "name": "Produto 35",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/35.webp",
+    "mainImage": "/assets/img/produtos/35.webp",
     "thumbnails": [
-      "assets/img/produtos/35.webp",
-      "assets/img/produtos/35_1.webp",
-      "assets/img/produtos/35_2.webp",
-      "assets/img/produtos/35_3.webp",
-      "assets/img/produtos/35_4.webp",
-      "assets/img/produtos/35_5.webp",
-      "assets/img/produtos/35_6.webp"
+      "/assets/img/produtos/35.webp",
+      "/assets/img/produtos/35_1.webp",
+      "/assets/img/produtos/35_2.webp",
+      "/assets/img/produtos/35_3.webp",
+      "/assets/img/produtos/35_4.webp",
+      "/assets/img/produtos/35_5.webp",
+      "/assets/img/produtos/35_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -599,15 +599,15 @@
     "name": "Produto 36",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/36.webp",
+    "mainImage": "/assets/img/produtos/36.webp",
     "thumbnails": [
-      "assets/img/produtos/36.webp",
-      "assets/img/produtos/36_1.webp",
-      "assets/img/produtos/36_2.webp",
-      "assets/img/produtos/36_3.webp",
-      "assets/img/produtos/36_4.webp",
-      "assets/img/produtos/36_5.webp",
-      "assets/img/produtos/36_6.webp"
+      "/assets/img/produtos/36.webp",
+      "/assets/img/produtos/36_1.webp",
+      "/assets/img/produtos/36_2.webp",
+      "/assets/img/produtos/36_3.webp",
+      "/assets/img/produtos/36_4.webp",
+      "/assets/img/produtos/36_5.webp",
+      "/assets/img/produtos/36_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -616,15 +616,15 @@
     "name": "Produto 37",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/37.webp",
+    "mainImage": "/assets/img/produtos/37.webp",
     "thumbnails": [
-      "assets/img/produtos/37.webp",
-      "assets/img/produtos/37_1.webp",
-      "assets/img/produtos/37_2.webp",
-      "assets/img/produtos/37_3.webp",
-      "assets/img/produtos/37_4.webp",
-      "assets/img/produtos/37_5.webp",
-      "assets/img/produtos/37_6.webp"
+      "/assets/img/produtos/37.webp",
+      "/assets/img/produtos/37_1.webp",
+      "/assets/img/produtos/37_2.webp",
+      "/assets/img/produtos/37_3.webp",
+      "/assets/img/produtos/37_4.webp",
+      "/assets/img/produtos/37_5.webp",
+      "/assets/img/produtos/37_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -633,15 +633,15 @@
     "name": "Produto 38",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/38.webp",
+    "mainImage": "/assets/img/produtos/38.webp",
     "thumbnails": [
-      "assets/img/produtos/38.webp",
-      "assets/img/produtos/38_1.webp",
-      "assets/img/produtos/38_2.webp",
-      "assets/img/produtos/38_3.webp",
-      "assets/img/produtos/38_4.webp",
-      "assets/img/produtos/38_5.webp",
-      "assets/img/produtos/38_6.webp"
+      "/assets/img/produtos/38.webp",
+      "/assets/img/produtos/38_1.webp",
+      "/assets/img/produtos/38_2.webp",
+      "/assets/img/produtos/38_3.webp",
+      "/assets/img/produtos/38_4.webp",
+      "/assets/img/produtos/38_5.webp",
+      "/assets/img/produtos/38_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -650,15 +650,15 @@
     "name": "Produto 39",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/39.webp",
+    "mainImage": "/assets/img/produtos/39.webp",
     "thumbnails": [
-      "assets/img/produtos/39.webp",
-      "assets/img/produtos/39_1.webp",
-      "assets/img/produtos/39_2.webp",
-      "assets/img/produtos/39_3.webp",
-      "assets/img/produtos/39_4.webp",
-      "assets/img/produtos/39_5.webp",
-      "assets/img/produtos/39_6.webp"
+      "/assets/img/produtos/39.webp",
+      "/assets/img/produtos/39_1.webp",
+      "/assets/img/produtos/39_2.webp",
+      "/assets/img/produtos/39_3.webp",
+      "/assets/img/produtos/39_4.webp",
+      "/assets/img/produtos/39_5.webp",
+      "/assets/img/produtos/39_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -667,15 +667,15 @@
     "name": "Produto 40",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/40.webp",
+    "mainImage": "/assets/img/produtos/40.webp",
     "thumbnails": [
-      "assets/img/produtos/40.webp",
-      "assets/img/produtos/40_1.webp",
-      "assets/img/produtos/40_2.webp",
-      "assets/img/produtos/40_3.webp",
-      "assets/img/produtos/40_4.webp",
-      "assets/img/produtos/40_5.webp",
-      "assets/img/produtos/40_6.webp"
+      "/assets/img/produtos/40.webp",
+      "/assets/img/produtos/40_1.webp",
+      "/assets/img/produtos/40_2.webp",
+      "/assets/img/produtos/40_3.webp",
+      "/assets/img/produtos/40_4.webp",
+      "/assets/img/produtos/40_5.webp",
+      "/assets/img/produtos/40_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -684,15 +684,15 @@
     "name": "Produto 41",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/41.webp",
+    "mainImage": "/assets/img/produtos/41.webp",
     "thumbnails": [
-      "assets/img/produtos/41.webp",
-      "assets/img/produtos/41_1.webp",
-      "assets/img/produtos/41_2.webp",
-      "assets/img/produtos/41_3.webp",
-      "assets/img/produtos/41_4.webp",
-      "assets/img/produtos/41_5.webp",
-      "assets/img/produtos/41_6.webp"
+      "/assets/img/produtos/41.webp",
+      "/assets/img/produtos/41_1.webp",
+      "/assets/img/produtos/41_2.webp",
+      "/assets/img/produtos/41_3.webp",
+      "/assets/img/produtos/41_4.webp",
+      "/assets/img/produtos/41_5.webp",
+      "/assets/img/produtos/41_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -701,15 +701,15 @@
     "name": "Produto 42",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/42.webp",
+    "mainImage": "/assets/img/produtos/42.webp",
     "thumbnails": [
-      "assets/img/produtos/42.webp",
-      "assets/img/produtos/42_1.webp",
-      "assets/img/produtos/42_2.webp",
-      "assets/img/produtos/42_3.webp",
-      "assets/img/produtos/42_4.webp",
-      "assets/img/produtos/42_5.webp",
-      "assets/img/produtos/42_6.webp"
+      "/assets/img/produtos/42.webp",
+      "/assets/img/produtos/42_1.webp",
+      "/assets/img/produtos/42_2.webp",
+      "/assets/img/produtos/42_3.webp",
+      "/assets/img/produtos/42_4.webp",
+      "/assets/img/produtos/42_5.webp",
+      "/assets/img/produtos/42_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -718,15 +718,15 @@
     "name": "Produto 43",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/43.webp",
+    "mainImage": "/assets/img/produtos/43.webp",
     "thumbnails": [
-      "assets/img/produtos/43.webp",
-      "assets/img/produtos/43_1.webp",
-      "assets/img/produtos/43_2.webp",
-      "assets/img/produtos/43_3.webp",
-      "assets/img/produtos/43_4.webp",
-      "assets/img/produtos/43_5.webp",
-      "assets/img/produtos/43_6.webp"
+      "/assets/img/produtos/43.webp",
+      "/assets/img/produtos/43_1.webp",
+      "/assets/img/produtos/43_2.webp",
+      "/assets/img/produtos/43_3.webp",
+      "/assets/img/produtos/43_4.webp",
+      "/assets/img/produtos/43_5.webp",
+      "/assets/img/produtos/43_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -735,15 +735,15 @@
     "name": "Produto 44",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/44.webp",
+    "mainImage": "/assets/img/produtos/44.webp",
     "thumbnails": [
-      "assets/img/produtos/44.webp",
-      "assets/img/produtos/44_1.webp",
-      "assets/img/produtos/44_2.webp",
-      "assets/img/produtos/44_3.webp",
-      "assets/img/produtos/44_4.webp",
-      "assets/img/produtos/44_5.webp",
-      "assets/img/produtos/44_6.webp"
+      "/assets/img/produtos/44.webp",
+      "/assets/img/produtos/44_1.webp",
+      "/assets/img/produtos/44_2.webp",
+      "/assets/img/produtos/44_3.webp",
+      "/assets/img/produtos/44_4.webp",
+      "/assets/img/produtos/44_5.webp",
+      "/assets/img/produtos/44_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -752,15 +752,15 @@
     "name": "Produto 45",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/45.webp",
+    "mainImage": "/assets/img/produtos/45.webp",
     "thumbnails": [
-      "assets/img/produtos/45.webp",
-      "assets/img/produtos/45_1.webp",
-      "assets/img/produtos/45_2.webp",
-      "assets/img/produtos/45_3.webp",
-      "assets/img/produtos/45_4.webp",
-      "assets/img/produtos/45_5.webp",
-      "assets/img/produtos/45_6.webp"
+      "/assets/img/produtos/45.webp",
+      "/assets/img/produtos/45_1.webp",
+      "/assets/img/produtos/45_2.webp",
+      "/assets/img/produtos/45_3.webp",
+      "/assets/img/produtos/45_4.webp",
+      "/assets/img/produtos/45_5.webp",
+      "/assets/img/produtos/45_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -769,15 +769,15 @@
     "name": "Produto 46",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/46.webp",
+    "mainImage": "/assets/img/produtos/46.webp",
     "thumbnails": [
-      "assets/img/produtos/46.webp",
-      "assets/img/produtos/46_1.webp",
-      "assets/img/produtos/46_2.webp",
-      "assets/img/produtos/46_3.webp",
-      "assets/img/produtos/46_4.webp",
-      "assets/img/produtos/46_5.webp",
-      "assets/img/produtos/46_6.webp"
+      "/assets/img/produtos/46.webp",
+      "/assets/img/produtos/46_1.webp",
+      "/assets/img/produtos/46_2.webp",
+      "/assets/img/produtos/46_3.webp",
+      "/assets/img/produtos/46_4.webp",
+      "/assets/img/produtos/46_5.webp",
+      "/assets/img/produtos/46_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -786,15 +786,15 @@
     "name": "Produto 47",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/47.webp",
+    "mainImage": "/assets/img/produtos/47.webp",
     "thumbnails": [
-      "assets/img/produtos/47.webp",
-      "assets/img/produtos/47_1.webp",
-      "assets/img/produtos/47_2.webp",
-      "assets/img/produtos/47_3.webp",
-      "assets/img/produtos/47_4.webp",
-      "assets/img/produtos/47_5.webp",
-      "assets/img/produtos/47_6.webp"
+      "/assets/img/produtos/47.webp",
+      "/assets/img/produtos/47_1.webp",
+      "/assets/img/produtos/47_2.webp",
+      "/assets/img/produtos/47_3.webp",
+      "/assets/img/produtos/47_4.webp",
+      "/assets/img/produtos/47_5.webp",
+      "/assets/img/produtos/47_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -803,15 +803,15 @@
     "name": "Produto 48",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/48.webp",
+    "mainImage": "/assets/img/produtos/48.webp",
     "thumbnails": [
-      "assets/img/produtos/48.webp",
-      "assets/img/produtos/48_1.webp",
-      "assets/img/produtos/48_2.webp",
-      "assets/img/produtos/48_3.webp",
-      "assets/img/produtos/48_4.webp",
-      "assets/img/produtos/48_5.webp",
-      "assets/img/produtos/48_6.webp"
+      "/assets/img/produtos/48.webp",
+      "/assets/img/produtos/48_1.webp",
+      "/assets/img/produtos/48_2.webp",
+      "/assets/img/produtos/48_3.webp",
+      "/assets/img/produtos/48_4.webp",
+      "/assets/img/produtos/48_5.webp",
+      "/assets/img/produtos/48_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -820,15 +820,15 @@
     "name": "Produto 49",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/49.webp",
+    "mainImage": "/assets/img/produtos/49.webp",
     "thumbnails": [
-      "assets/img/produtos/49.webp",
-      "assets/img/produtos/49_1.webp",
-      "assets/img/produtos/49_2.webp",
-      "assets/img/produtos/49_3.webp",
-      "assets/img/produtos/49_4.webp",
-      "assets/img/produtos/49_5.webp",
-      "assets/img/produtos/49_6.webp"
+      "/assets/img/produtos/49.webp",
+      "/assets/img/produtos/49_1.webp",
+      "/assets/img/produtos/49_2.webp",
+      "/assets/img/produtos/49_3.webp",
+      "/assets/img/produtos/49_4.webp",
+      "/assets/img/produtos/49_5.webp",
+      "/assets/img/produtos/49_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -837,15 +837,15 @@
     "name": "Produto 50",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/50.webp",
+    "mainImage": "/assets/img/produtos/50.webp",
     "thumbnails": [
-      "assets/img/produtos/50.webp",
-      "assets/img/produtos/50_1.webp",
-      "assets/img/produtos/50_2.webp",
-      "assets/img/produtos/50_3.webp",
-      "assets/img/produtos/50_4.webp",
-      "assets/img/produtos/50_5.webp",
-      "assets/img/produtos/50_6.webp"
+      "/assets/img/produtos/50.webp",
+      "/assets/img/produtos/50_1.webp",
+      "/assets/img/produtos/50_2.webp",
+      "/assets/img/produtos/50_3.webp",
+      "/assets/img/produtos/50_4.webp",
+      "/assets/img/produtos/50_5.webp",
+      "/assets/img/produtos/50_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -854,15 +854,15 @@
     "name": "Produto 51",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/51.webp",
+    "mainImage": "/assets/img/produtos/51.webp",
     "thumbnails": [
-      "assets/img/produtos/51.webp",
-      "assets/img/produtos/51_1.webp",
-      "assets/img/produtos/51_2.webp",
-      "assets/img/produtos/51_3.webp",
-      "assets/img/produtos/51_4.webp",
-      "assets/img/produtos/51_5.webp",
-      "assets/img/produtos/51_6.webp"
+      "/assets/img/produtos/51.webp",
+      "/assets/img/produtos/51_1.webp",
+      "/assets/img/produtos/51_2.webp",
+      "/assets/img/produtos/51_3.webp",
+      "/assets/img/produtos/51_4.webp",
+      "/assets/img/produtos/51_5.webp",
+      "/assets/img/produtos/51_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -871,15 +871,15 @@
     "name": "Produto 52",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/52.webp",
+    "mainImage": "/assets/img/produtos/52.webp",
     "thumbnails": [
-      "assets/img/produtos/52.webp",
-      "assets/img/produtos/52_1.webp",
-      "assets/img/produtos/52_2.webp",
-      "assets/img/produtos/52_3.webp",
-      "assets/img/produtos/52_4.webp",
-      "assets/img/produtos/52_5.webp",
-      "assets/img/produtos/52_6.webp"
+      "/assets/img/produtos/52.webp",
+      "/assets/img/produtos/52_1.webp",
+      "/assets/img/produtos/52_2.webp",
+      "/assets/img/produtos/52_3.webp",
+      "/assets/img/produtos/52_4.webp",
+      "/assets/img/produtos/52_5.webp",
+      "/assets/img/produtos/52_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -888,15 +888,15 @@
     "name": "Produto 53",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/53.webp",
+    "mainImage": "/assets/img/produtos/53.webp",
     "thumbnails": [
-      "assets/img/produtos/53.webp",
-      "assets/img/produtos/53_1.webp",
-      "assets/img/produtos/53_2.webp",
-      "assets/img/produtos/53_3.webp",
-      "assets/img/produtos/53_4.webp",
-      "assets/img/produtos/53_5.webp",
-      "assets/img/produtos/53_6.webp"
+      "/assets/img/produtos/53.webp",
+      "/assets/img/produtos/53_1.webp",
+      "/assets/img/produtos/53_2.webp",
+      "/assets/img/produtos/53_3.webp",
+      "/assets/img/produtos/53_4.webp",
+      "/assets/img/produtos/53_5.webp",
+      "/assets/img/produtos/53_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -905,15 +905,15 @@
     "name": "Produto 54",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/54.webp",
+    "mainImage": "/assets/img/produtos/54.webp",
     "thumbnails": [
-      "assets/img/produtos/54.webp",
-      "assets/img/produtos/54_1.webp",
-      "assets/img/produtos/54_2.webp",
-      "assets/img/produtos/54_3.webp",
-      "assets/img/produtos/54_4.webp",
-      "assets/img/produtos/54_5.webp",
-      "assets/img/produtos/54_6.webp"
+      "/assets/img/produtos/54.webp",
+      "/assets/img/produtos/54_1.webp",
+      "/assets/img/produtos/54_2.webp",
+      "/assets/img/produtos/54_3.webp",
+      "/assets/img/produtos/54_4.webp",
+      "/assets/img/produtos/54_5.webp",
+      "/assets/img/produtos/54_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -922,15 +922,15 @@
     "name": "Produto 55",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/55.webp",
+    "mainImage": "/assets/img/produtos/55.webp",
     "thumbnails": [
-      "assets/img/produtos/55.webp",
-      "assets/img/produtos/55_1.webp",
-      "assets/img/produtos/55_2.webp",
-      "assets/img/produtos/55_3.webp",
-      "assets/img/produtos/55_4.webp",
-      "assets/img/produtos/55_5.webp",
-      "assets/img/produtos/55_6.webp"
+      "/assets/img/produtos/55.webp",
+      "/assets/img/produtos/55_1.webp",
+      "/assets/img/produtos/55_2.webp",
+      "/assets/img/produtos/55_3.webp",
+      "/assets/img/produtos/55_4.webp",
+      "/assets/img/produtos/55_5.webp",
+      "/assets/img/produtos/55_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -939,15 +939,15 @@
     "name": "Produto 56",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/56.webp",
+    "mainImage": "/assets/img/produtos/56.webp",
     "thumbnails": [
-      "assets/img/produtos/56.webp",
-      "assets/img/produtos/56_1.webp",
-      "assets/img/produtos/56_2.webp",
-      "assets/img/produtos/56_3.webp",
-      "assets/img/produtos/56_4.webp",
-      "assets/img/produtos/56_5.webp",
-      "assets/img/produtos/56_6.webp"
+      "/assets/img/produtos/56.webp",
+      "/assets/img/produtos/56_1.webp",
+      "/assets/img/produtos/56_2.webp",
+      "/assets/img/produtos/56_3.webp",
+      "/assets/img/produtos/56_4.webp",
+      "/assets/img/produtos/56_5.webp",
+      "/assets/img/produtos/56_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -956,15 +956,15 @@
     "name": "Produto 57",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/57.webp",
+    "mainImage": "/assets/img/produtos/57.webp",
     "thumbnails": [
-      "assets/img/produtos/57.webp",
-      "assets/img/produtos/57_1.webp",
-      "assets/img/produtos/57_2.webp",
-      "assets/img/produtos/57_3.webp",
-      "assets/img/produtos/57_4.webp",
-      "assets/img/produtos/57_5.webp",
-      "assets/img/produtos/57_6.webp"
+      "/assets/img/produtos/57.webp",
+      "/assets/img/produtos/57_1.webp",
+      "/assets/img/produtos/57_2.webp",
+      "/assets/img/produtos/57_3.webp",
+      "/assets/img/produtos/57_4.webp",
+      "/assets/img/produtos/57_5.webp",
+      "/assets/img/produtos/57_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -973,15 +973,15 @@
     "name": "Produto 58",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/58.webp",
+    "mainImage": "/assets/img/produtos/58.webp",
     "thumbnails": [
-      "assets/img/produtos/58.webp",
-      "assets/img/produtos/58_1.webp",
-      "assets/img/produtos/58_2.webp",
-      "assets/img/produtos/58_3.webp",
-      "assets/img/produtos/58_4.webp",
-      "assets/img/produtos/58_5.webp",
-      "assets/img/produtos/58_6.webp"
+      "/assets/img/produtos/58.webp",
+      "/assets/img/produtos/58_1.webp",
+      "/assets/img/produtos/58_2.webp",
+      "/assets/img/produtos/58_3.webp",
+      "/assets/img/produtos/58_4.webp",
+      "/assets/img/produtos/58_5.webp",
+      "/assets/img/produtos/58_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -990,15 +990,15 @@
     "name": "Produto 59",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/59.webp",
+    "mainImage": "/assets/img/produtos/59.webp",
     "thumbnails": [
-      "assets/img/produtos/59.webp",
-      "assets/img/produtos/59_1.webp",
-      "assets/img/produtos/59_2.webp",
-      "assets/img/produtos/59_3.webp",
-      "assets/img/produtos/59_4.webp",
-      "assets/img/produtos/59_5.webp",
-      "assets/img/produtos/59_6.webp"
+      "/assets/img/produtos/59.webp",
+      "/assets/img/produtos/59_1.webp",
+      "/assets/img/produtos/59_2.webp",
+      "/assets/img/produtos/59_3.webp",
+      "/assets/img/produtos/59_4.webp",
+      "/assets/img/produtos/59_5.webp",
+      "/assets/img/produtos/59_6.webp"
     ],
     "category": "diorama-garagem"
   },
@@ -1007,15 +1007,15 @@
     "name": "Produto 60",
     "description": "Modelo em resina 3D pintado à mão. <br> Imagem Ilustrativa <br> Escala 1/18. Tamanho entre 8 cm e 11 cm de altura. <br><strong>Observação_1:</strong> Os itens do cenário não acompanham o produto.<br><strong>Observação_2:</strong> Os produtos serão enviados em cores aleatórias. Caso opte por alguma cor específica, informe no ato da solicitação.",
     "price": "60,00",
-    "mainImage": "assets/img/produtos/60.webp",
+    "mainImage": "/assets/img/produtos/60.webp",
     "thumbnails": [
-      "assets/img/produtos/60.webp",
-      "assets/img/produtos/60_1.webp",
-      "assets/img/produtos/60_2.webp",
-      "assets/img/produtos/60_3.webp",
-      "assets/img/produtos/60_4.webp",
-      "assets/img/produtos/60_5.webp",
-      "assets/img/produtos/60_6.webp"
+      "/assets/img/produtos/60.webp",
+      "/assets/img/produtos/60_1.webp",
+      "/assets/img/produtos/60_2.webp",
+      "/assets/img/produtos/60_3.webp",
+      "/assets/img/produtos/60_4.webp",
+      "/assets/img/produtos/60_5.webp",
+      "/assets/img/produtos/60_6.webp"
     ],
     "category": "diorama-garagem"
   }
