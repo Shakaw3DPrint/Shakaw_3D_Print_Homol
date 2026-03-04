@@ -1,16 +1,28 @@
-/* ============================================= */
-/* Estilos Gerais */
-/* ============================================= */
+/* CORES PRINCIPAIS DA SHAKAW (baseado na logo) */
+:root {
+    --shakaw-dark: #0a0a0a;      /* Preto profundo da logo */
+    --shakaw-gray: #1e1e1e;      /* Cinza escuro secundário */
+    --shakaw-blue: #00bcd4;      /* Azul ciano vibrante */
+    --shakaw-red: #ff6b6b;       /* Vermelho para destaques */
+    --shakaw-light: #f0f0f0;     /* Texto claro */
+}
+
+/* ALTERAR O BODY */
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #1a1a1a;
-    color: #f0f0f0;
+    background-color: var(--shakaw-dark);  /* Fundo preto profundo */
+    background-image: linear-gradient(
+        to bottom,
+        var(--shakaw-dark) 0%,
+        var(--shakaw-gray) 100%
+    );
+    color: var(--shakaw-light);
     line-height: 1.6;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Garante que o rodapé fique no final */
+    min-height: 100vh;
 }
 
 .container {
@@ -40,10 +52,11 @@ h1, h2, h3, h4, h5, h6 {
 /* Cabeçalho */
 /* ============================================= */
 header {
-    background-color: #222;
+    background-color: rgba(10, 10, 10, 0.95); /* Preto com leve transparência */
     color: #fff;
     padding: 15px 0;
-    border-bottom: 1px solid #333;
+    border-bottom: 2px solid var(--shakaw-blue); /* Borda azul */
+    backdrop-filter: blur(10px);
 }
 
 header .container {
@@ -111,31 +124,34 @@ header nav ul li a.active::after {
 }
 
 .interest-toggle-btn {
-    background-color: #00bcd4;
+    background-color: var(--shakaw-blue); /* Azul da logo */
     color: #fff;
     border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
+    padding: 10px 20px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 1.1em;
     display: flex;
     align-items: center;
     gap: 8px;
-    transition: background-color 0.2s ease;
+    transition: all 0.3s ease;
+    font-weight: 600;
 }
 
 .interest-toggle-btn:hover {
-    background-color: #0097a7;
+    background-color: #0097a7; /* Azul mais escuro */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);
 }
 
 .interest-count {
-    background-color: #ff6b6b;
+    background: var(--shakaw-red); /* Vermelho da logo */
     color: #fff;
     border-radius: 50%;
-    padding: 3px 8px;
-    font-size: 0.8em;
+    padding: 3px 10px;
+    font-size: 0.9em;
     font-weight: bold;
-    min-width: 24px; /* Garante que o círculo não encolha demais */
+    min-width: 26px;
     text-align: center;
 }
 
@@ -876,7 +892,8 @@ footer .social-links a:hover {
         height: 70px;
     }
     .interest-panel {
-        width: 100%; /* Painel de interesses ocupa toda a largura em mobile */
+    background-color: var(--shakaw-gray); /* Cinza escuro */
+    border-left: 3px solid var(--shakaw-blue); /* Borda lateral azul */
     }
 }
 
