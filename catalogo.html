@@ -24,37 +24,39 @@
                 </ul>
             </nav>
             <div class="header-actions">
-                <button id="openInterestPanelFromHeader" aria-label="Abrir lista de interesses">
-                    <i class="fas fa-heart"></i>
+                <button id="openInterestPanelFromHeader" class="interest-toggle-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="interest-count">0</span>
                 </button>
             </div>
         </div>
     </header>
 
     <main>
-        <section class="catalog-section">
+        <section id="catalog-section" class="catalog-page-section">
             <div class="container">
-                <div class="catalog-header">
-                    <h2>Nosso Catálogo</h2>
-                </div>
-
+                <h1>Nosso Catálogo</h1>
                 <div class="filter-section">
-                    <div id="filterButtons">
-                        <button class="filter-btn active" data-filter="all">Todos</button>
-                        <button class="filter-btn" data-filter="diorama-garagem">Diorama Garagem</button>
-                        <button class="filter-btn" data-filter="miniaturas-3d">Miniaturas 3D</button>
-                        <button class="filter-btn" data-filter="miniaturas-rpg">Miniaturas RPG</button>
-                        <button class="filter-btn" data-filter="produtos-funcionais">Funcionais</button>
-                    </div>
+                    <input type="text" id="searchInput" placeholder="Buscar produtos...">
+                    <select id="categoryFilter">
+                        <option value="all">Todas as Categorias</option>
+                        <option value="diorama-garagem">Diorama Garagem</option>
+                        <option value="miniaturas-3d">Miniaturas 3D</option>
+                        <option value="miniaturas-rpg">Miniaturas RPG</option>
+                        <option value="produtos-funcionais">Funcional</option>
+                    </select>
+                    <select id="sortSelect">
+                        <option value="name-asc">Nome (A-Z)</option>
+                        <option value="name-desc">Nome (Z-A)</option>
+                        <option value="price-asc">Preço (Menor para Maior)</option>
+                        <option value="price-desc">Preço (Maior para Menor)</option>
+                    </select>
                 </div>
-
-                <div class="results-info">
-                    <span id="resultsCount">Carregando produtos...</span>
-                </div>
-
-                <div id="catalog">
+                <p id="resultsCount" class="results-count">Carregando produtos...</p>
+                <div id="catalog" class="catalog-grid">
                     <!-- Produtos serão carregados aqui pelo JavaScript -->
                 </div>
+                <div id="loader" class="loader"></div>
             </div>
         </section>
     </main>
@@ -62,6 +64,10 @@
     <footer>
         <div class="container">
             <p>&copy; 2026 Shakaw 3D Print. Todos os direitos reservados.</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/shakaw3dprint/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/seu-numero-whatsapp" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
         </div>
     </footer>
 
@@ -69,12 +75,12 @@
     <div id="interestPanel" class="interest-panel">
         <div class="interest-panel-header">
             <h3>Sua Lista de Interesses</h3>
-            <button id="closeInterestPanelBtn" class="close-btn">&times;</button>
+            <button id="closeInterestPanelBtn" class="close-panel-btn">&times;</button>
         </div>
-        <ul id="interestList" class="interest-list">
-            <!-- Itens serão adicionados aqui pelo JavaScript -->
+        <ul id="interestList">
+            <!-- Itens de interesse serão carregados aqui -->
         </ul>
-        <div class="interest-summary">
+        <div class="interest-panel-footer">
             <span id="interestTotal">Total: R$ 0,00</span>
             <button id="openContactModalBtn" class="btn-primary">Solicitar Orçamento</button>
         </div>
@@ -129,6 +135,7 @@
 
     <button id="backToTopBtn" title="Voltar ao Topo"><i class="fas fa-arrow-up"></i></button>
 
-    <script src="assets/js/script.js"></script>
+    <!-- CORREÇÃO AQUI: Caminho do script ajustado -->
+    <script src="js/script.js"></script>
 </body>
 </html>
