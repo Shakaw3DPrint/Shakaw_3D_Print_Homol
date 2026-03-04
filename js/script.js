@@ -1,8 +1,6 @@
 const GITHUB_OWNER = "Shakaw3DPrint";
 const GITHUB_REPO = "Shakaw_3D_Print";
 const GITHUB_BRANCH = "main";
-// A BASE_URL foi removida pois os caminhos das imagens nos JSONs agora são absolutos a partir da raiz do site
-// const BASE_URL = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/`;
 
 let allProducts = [];
 let carouselItems = [];
@@ -28,6 +26,8 @@ let selectedSummary;
 let itemsDataInput;
 let openInterestPanelFromHeaderBtn;
 let interestCountEl; // Elemento para exibir a contagem de itens no carrinho
+let modalProductDescription; // Novo: para a descrição do produto no modal
+let modalThumbnailsContainer; // Novo: para as miniaturas no modal
 
 // Constantes para zoom
 const ZOOM_INCREMENT = 0.1; // Incremento/decremento do zoom
@@ -47,7 +47,6 @@ let interestItems = JSON.parse(localStorage.getItem('interestItems')) || [];
 let interestPanelTimeoutId;
 
 const categoryBadgeMap = {
-    // CORREÇÃO AQUI: Usando < e > diretamente, não < e >
     "diorama-garagem": '<span class="cat-badge cat-diorama-garagem">Diorama Garagem</span>',
     "miniaturas-3d": '<span class="cat-badge cat-miniaturas-3d">Miniaturas 3D</span>',
     "miniaturas-rpg": '<span class="cat-badge cat-miniaturas-rpg">Miniaturas RPG</span>',
@@ -69,6 +68,7 @@ function hideLoader() {
 function parsePrice(priceStr) {
     if (typeof priceStr === 'number') return priceStr;
     if (typeof priceStr === 'string') {
+        // Garante que a string seja tratada corretamente para float
         const cleaned = priceStr.replace('R$', '').replace('.', '').replace(',', '.').trim();
         const parsed = parseFloat(cleaned);
         return isNaN(parsed) ? 0 : parsed;
@@ -83,7 +83,6 @@ function parsePrice(priceStr) {
 async function loadAllData() {
     showLoader();
     try {
-        // Os caminhos para os JSONs permanecem os mesmos, pois são relativos à raiz do site
         const [productsDioramaRes, productsOutrosRes, carouselRes] = await Promise.all([
             fetch("assets/json/products.json?t=" + Date.now()),
             fetch("assets/json/outros_produtos.json?t=" + Date.now()),
@@ -94,22 +93,18 @@ async function loadAllData() {
         const productsOutros = productsOutrosRes.ok ? await productsOutrosRes.json() : [];
         carouselItems = carouselRes.ok ? await carouselRes.json() : [];
 
-        // Garante que todos os produtos tenham uma categoria
         productsDiorama.forEach(p => { if (!p.category) p.category = "diorama-garagem"; });
         productsOutros.forEach(p => {
             if (!p.category) p.category = "produtos-funcionais";
-            // Mapeia "action-figures" para "miniaturas-3d" se a categoria original fosse essa
             if (p.category === "action-figures") p.category = "miniaturas-3d";
         });
 
         allProducts = productsDiorama.concat(productsOutros);
 
-        // Renderiza o carrossel do Instagram na home
         if (document.getElementById("instagramCarousel")) {
             renderInstagramCarousel();
         }
 
-        // Renderiza produtos se estiver em uma página de catálogo
         if (catalogGrid) {
             renderProducts(allProducts);
         }
@@ -135,7 +130,7 @@ function renderInstagramCarousel() {
     const instagramCarouselContainer = document.getElementById("instagramCarousel");
     if (!instagramCarouselContainer) return;
 
-    instagramCarouselContainer.innerHTML = ""; // Limpa o conteúdo existente
+    instagramCarouselContainer.innerHTML = "";
 
     if (carouselItems.length === 0) {
         instagramCarouselContainer.innerHTML = '<p class="loading-message">Nenhum post do Instagram encontrado.</p>';
@@ -145,8 +140,6 @@ function renderInstagramCarousel() {
     carouselItems.forEach(item => {
         const carouselItemDiv = document.createElement("div");
         carouselItemDiv.className = "instagram-carousel-item";
-        // item.src já deve ser o caminho completo /assets/img/...
-        // CORREÇÃO AQUI: A tag <img> estava faltando no innerHTML
         carouselItemDiv.innerHTML = `
             <img src="${item.src}" alt="${item.alt}">
             <div class="instagram-caption">${item.caption || ''}</div>
@@ -155,14 +148,13 @@ function renderInstagramCarousel() {
     });
 }
 
-
 // ============================================================
 // RENDERIZAÇÃO E FILTRO DE PRODUTOS (CATÁLOGO)
 // ============================================================
 
 function renderProducts(productsToRender) {
-    if (!catalogGrid) return; // Garante que só renderiza se estiver na página de catálogo
-    catalogGrid.innerHTML = ""; // Limpa o conteúdo existente
+    if (!catalogGrid) return;
+    catalogGrid.innerHTML = "";
 
     if (productsToRender.length === 0) {
         catalogGrid.innerHTML = '<p class="loading-message">Nenhum produto encontrado nesta categoria.</p>';
@@ -175,7 +167,6 @@ function renderProducts(productsToRender) {
         card.className = "product-card";
         card.dataset.productId = product.id;
 
-        // product.mainImage já deve ser o caminho completo /assets/img/...
         const imgSrc = product.mainImage ? product.mainImage : 'https://via.placeholder.com/200x200?text=Sem+Imagem';
         const categoryBadge = categoryBadgeMap[product.category] || '';
 
@@ -196,7 +187,6 @@ function renderProducts(productsToRender) {
 
     if (resultsCount) resultsCount.textContent = `${productsToRender.length} produtos encontrados.`;
 
-    // Adiciona event listeners para os botões "Adicionar à Lista" e "Ver Detalhes"
     catalogGrid.querySelectorAll('.add-to-interest').forEach(button => {
         button.addEventListener('click', (e) => {
             const productId = e.target.dataset.productId;
@@ -254,7 +244,6 @@ function applyFilters() {
         return matchesCategory && matchesSearch;
     });
 
-    // Ordenação
     filteredProducts.sort((a, b) => {
         const nameA = a.name.toLowerCase();
         const nameB = b.name.toLowerCase();
@@ -276,15 +265,22 @@ function applyFilters() {
 // ============================================================
 
 function openImageModal(product) {
-    if (!imgModal || !modalImg) return;
+    if (!imgModal || !modalImg || !modalProductDescription || !modalThumbnailsContainer) return;
+
+    // Atualiza o título do modal com o nome do produto
+    const modalTitle = imgModal.querySelector('.modal-content h2');
+    if (modalTitle) modalTitle.textContent = product.name;
+
+    // Atualiza a descrição do produto no modal
+    modalProductDescription.innerHTML = product.description || 'Sem descrição.';
 
     modalImages = [];
     if (product.mainImage) {
-        modalImages.push(product.mainImage); // Caminho já completo
+        modalImages.push(product.mainImage);
     }
     if (product.thumbnails && product.thumbnails.length > 0) {
         product.thumbnails.forEach(thumb => {
-            modalImages.push(thumb); // Caminho já completo
+            modalImages.push(thumb);
         });
     }
 
@@ -294,14 +290,15 @@ function openImageModal(product) {
 
     currentModalImageIndex = 0;
     showModalImage(currentModalImageIndex);
-    resetZoomAndPan(); // Garante que o zoom e pan sejam resetados ao abrir o modal
-    imgModal.classList.add('open'); // Adiciona a classe 'open' para exibir o modal
+    renderModalThumbnails(); // Renderiza as miniaturas
+    resetZoomAndPan();
+    imgModal.classList.add('open');
 }
 
 function closeImageModal() {
     if (imgModal) {
-        imgModal.classList.remove('open'); // Remove a classe 'open' para esconder o modal
-        resetZoomAndPan(); // Garante que o zoom e pan sejam resetados ao fechar o modal
+        imgModal.classList.remove('open');
+        resetZoomAndPan();
     }
 }
 
@@ -310,10 +307,39 @@ function showModalImage(index) {
     currentModalImageIndex = (index + modalImages.length) % modalImages.length;
     modalImg.src = modalImages[currentModalImageIndex];
     resetZoomAndPan(); // Reseta zoom e pan ao trocar de imagem
+    updateActiveThumbnail(); // Atualiza a miniatura ativa
 }
 
 function navigateModalImages(direction) {
     showModalImage(currentModalImageIndex + direction);
+}
+
+function renderModalThumbnails() {
+    if (!modalThumbnailsContainer) return;
+    modalThumbnailsContainer.innerHTML = ''; // Limpa miniaturas existentes
+
+    modalImages.forEach((src, index) => {
+        const thumb = document.createElement('img');
+        thumb.src = src;
+        thumb.alt = `Miniatura ${index + 1}`;
+        thumb.className = 'modal-thumbnail';
+        if (index === currentModalImageIndex) {
+            thumb.classList.add('active');
+        }
+        thumb.addEventListener('click', () => showModalImage(index));
+        modalThumbnailsContainer.appendChild(thumb);
+    });
+}
+
+function updateActiveThumbnail() {
+    if (!modalThumbnailsContainer) return;
+    modalThumbnailsContainer.querySelectorAll('.modal-thumbnail').forEach((thumb, index) => {
+        if (index === currentModalImageIndex) {
+            thumb.classList.add('active');
+        } else {
+            thumb.classList.remove('active');
+        }
+    });
 }
 
 function zoomImage(amount) {
@@ -322,7 +348,7 @@ function zoomImage(amount) {
 }
 
 function resetZoomAndPan() {
-    currentZoom = DEFAULT_ZOOM; // Usa o zoom padrão
+    currentZoom = DEFAULT_ZOOM;
     currentImgTranslateX = 0;
     currentImgTranslateY = 0;
     applyZoomAndPan();
@@ -331,12 +357,17 @@ function resetZoomAndPan() {
 function applyZoomAndPan() {
     if (modalImg) {
         modalImg.style.transform = `scale(${currentZoom}) translate(${currentImgTranslateX}px, ${currentImgTranslateY}px)`;
-        modalImg.style.cursor = currentZoom > DEFAULT_ZOOM ? 'grab' : 'zoom-in'; // Cursor muda se houver zoom
+        // Adiciona/remove a classe 'zoomable' para mudar o cursor
+        if (currentZoom > DEFAULT_ZOOM) {
+            modalImg.classList.add('zoomable');
+        } else {
+            modalImg.classList.remove('zoomable');
+        }
     }
 }
 
 function handleWheelZoom(e) {
-    if (!imgModal || !imgModal.classList.contains('open')) return; // Só aplica zoom se o modal estiver aberto
+    if (!imgModal.classList.contains('open')) return; // Só aplica zoom se o modal estiver aberto
     e.preventDefault(); // Impede o scroll da página
     const zoomDirection = e.deltaY < 0 ? ZOOM_INCREMENT : -ZOOM_INCREMENT;
     zoomImage(zoomDirection);
@@ -344,10 +375,17 @@ function handleWheelZoom(e) {
 
 function handlePanStart(e) {
     if (currentZoom <= DEFAULT_ZOOM) return; // Só permite pan se houver zoom
+    e.preventDefault();
     isPanning = true;
     modalImg.style.cursor = 'grabbing';
-    panStartX = e.clientX || e.touches[0].clientX;
-    panStartY = e.clientY || e.touches[0].clientY;
+
+    if (e.type === 'mousedown') {
+        panStartX = e.clientX;
+        panStartY = e.clientY;
+    } else if (e.type === 'touchstart') {
+        panStartX = e.touches[0].clientX;
+        panStartY = e.touches[0].clientY;
+    }
     panStartImgX = currentImgTranslateX;
     panStartImgY = currentImgTranslateY;
 
@@ -359,149 +397,158 @@ function handlePanStart(e) {
 
 function handlePanMove(e) {
     if (!isPanning) return;
-    e.preventDefault(); // Impede o scroll em dispositivos touch
+    let clientX, clientY;
+    if (e.type === 'mousemove') {
+        clientX = e.clientX;
+        clientY = e.clientY;
+    } else if (e.type === 'touchmove') {
+        e.preventDefault(); // Impede o scroll da página em dispositivos touch
+        clientX = e.touches[0].clientX;
+        clientY = e.touches[0].clientY;
+    }
 
-    const clientX = e.clientX || e.touches[0].clientX;
-    const clientY = e.clientY || e.touches[0].clientY;
+    const dx = clientX - panStartX;
+    const dy = clientY - panStartY;
 
-    const dx = (clientX - panStartX) / currentZoom; // Ajusta o movimento pelo zoom
-    const dy = (clientY - panStartY) / currentZoom;
-
-    currentImgTranslateX = panStartImgX + dx;
-    currentImgTranslateY = panStartImgY + dy;
+    currentImgTranslateX = panStartImgX + dx / currentZoom;
+    currentImgTranslateY = panStartImgY + dy / currentZoom;
 
     applyZoomAndPan();
 }
 
 function handlePanEnd() {
     isPanning = false;
-    if (modalImg) modalImg.style.cursor = currentZoom > DEFAULT_ZOOM ? 'grab' : 'zoom-in';
+    if (modalImg) modalImg.style.cursor = 'grab';
     document.removeEventListener('mousemove', handlePanMove);
     document.removeEventListener('mouseup', handlePanEnd);
     document.removeEventListener('touchmove', handlePanMove);
     document.removeEventListener('touchend', handlePanEnd);
 }
 
-// ============================================================
-// PAINEL DE INTERESSES
-// ============================================================
+// =============================================
+// PAINEL DE INTERESSES (CARRINHO)
+// =============================================
+
+function saveInterestItems() {
+    localStorage.setItem('interestItems', JSON.stringify(interestItems));
+    updateInterestCount();
+}
 
 function addToInterest(product) {
     const existingItem = interestItems.find(item => item.id === product.id);
     if (existingItem) {
-        existingItem.quantity++;
+        existingItem.quantity = (existingItem.quantity || 1) + 1;
     } else {
         interestItems.push({
             id: product.id,
             name: product.name,
-            price: parsePrice(product.price),
+            price: parsePrice(product.price), // Garante que o preço é um número aqui
+            mainImage: product.mainImage,
             quantity: 1
         });
     }
     saveInterestItems();
     updateInterestPanel();
-    showInterestPanelTemporarily();
+    showInterestPanel(); // Mostra o painel ao adicionar item
 }
 
 function removeFromInterest(productId) {
     interestItems = interestItems.filter(item => item.id !== productId);
     saveInterestItems();
     updateInterestPanel();
-    showInterestPanelTemporarily();
 }
 
 function updateInterestQuantity(productId, change) {
     const item = interestItems.find(item => item.id === productId);
     if (item) {
-        item.quantity += change;
+        item.quantity = (item.quantity || 1) + change;
         if (item.quantity <= 0) {
             removeFromInterest(productId);
         } else {
             saveInterestItems();
             updateInterestPanel();
-            showInterestPanelTemporarily();
         }
     }
-}
-
-function saveInterestItems() {
-    localStorage.setItem('interestItems', JSON.stringify(interestItems));
 }
 
 function updateInterestPanel() {
     if (!interestList || !interestTotalEl) return;
 
-    interestList.innerHTML = ""; // Limpa o conteúdo existente
+    interestList.innerHTML = "";
     let total = 0;
 
     if (interestItems.length === 0) {
-        interestList.innerHTML = '<li class="empty-message">Sua lista de interesses está vazia.</li>';
+        interestList.innerHTML = '<p class="empty-list-message">Sua lista de interesses está vazia.</p>';
     } else {
         interestItems.forEach(item => {
             const listItem = document.createElement("li");
-            listItem.className = "interest-item";
+            const itemPrice = parsePrice(item.price); // Garante que o preço é um número
+            const subtotal = itemPrice * (item.quantity || 1);
+            total += subtotal;
+
             listItem.innerHTML = `
-                <span>${item.name}</span>
-                <div class="item-controls">
-                    <button class="quantity-btn decrease" data-id="${item.id}">-</button>
-                    <span>${item.quantity}</span>
-                    <button class="quantity-btn increase" data-id="${item.id}">+</button>
-                    <span>R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}</span>
-                    <button class="remove-item" data-id="${item.id}"><i class="fas fa-times"></i></button>
+                <img src="${item.mainImage}" alt="${item.name}" class="interest-item-thumb">
+                <div class="interest-item-details">
+                    <span>${item.name}</span>
+                    <div class="interest-item-controls">
+                        <button class="quantity-btn" data-id="${item.id}" data-change="-1">-</button>
+                        <span>${item.quantity || 1}</span>
+                        <button class="quantity-btn" data-id="${item.id}" data-change="1">+</button>
+                        <span>R$ ${itemPrice.toFixed(2).replace('.', ',')}</span>
+                        <button class="remove-item-btn" data-id="${item.id}"><i class="fas fa-times"></i></button>
+                    </div>
                 </div>
             `;
             interestList.appendChild(listItem);
-            total += item.price * item.quantity;
+        });
+
+        interestList.querySelectorAll('.quantity-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const productId = e.target.dataset.id;
+                const change = parseInt(e.target.dataset.change);
+                updateInterestQuantity(productId, change);
+            });
+        });
+
+        interestList.querySelectorAll('.remove-item-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const productId = e.target.dataset.id;
+                removeFromInterest(productId);
+            });
         });
     }
 
     interestTotalEl.textContent = `Total: R$ ${total.toFixed(2).replace('.', ',')}`;
-
-    // Adiciona event listeners para os botões de controle de quantidade e remoção
-    interestList.querySelectorAll('.quantity-btn.decrease').forEach(button => {
-        button.addEventListener('click', (e) => updateInterestQuantity(e.target.dataset.id, -1));
-    });
-    interestList.querySelectorAll('.quantity-btn.increase').forEach(button => {
-        button.addEventListener('click', (e) => updateInterestQuantity(e.target.dataset.id, 1));
-    });
-    interestList.querySelectorAll('.remove-item').forEach(button => {
-        button.addEventListener('click', (e) => removeFromInterest(e.target.dataset.id));
-    });
-
-    updateInterestCount(); // Garante que a contagem seja atualizada
 }
 
 function toggleInterestPanel() {
-    if (interestPanel) {
-        interestPanel.classList.toggle('open');
-        if (interestPanel.classList.contains('open')) {
-            clearTimeout(interestPanelTimeoutId); // Cancela qualquer timeout existente
-        }
+    if (!interestPanel) return;
+    if (interestPanel.classList.contains('open')) {
+        hideInterestPanel();
+    } else {
+        showInterestPanel();
     }
 }
 
-function showInterestPanelTemporarily() {
-    if (interestPanel) {
-        interestPanel.classList.add('open');
-        clearTimeout(interestPanelTimeoutId);
-        interestPanelTimeoutId = setTimeout(() => {
-            interestPanel.classList.remove('open');
-        }, 5000); // Fecha automaticamente após 5 segundos
-    }
+function showInterestPanel() {
+    if (!interestPanel) return;
+    clearTimeout(interestPanelTimeoutId);
+    interestPanel.classList.add('open');
 }
 
 function hideInterestPanel() {
-    if (interestPanel) {
+    if (!interestPanel) return;
+    // Adiciona um pequeno atraso para permitir interações antes de fechar
+    interestPanelTimeoutId = setTimeout(() => {
         interestPanel.classList.remove('open');
-        clearTimeout(interestPanelTimeoutId);
-    }
+    }, 300); // 300ms de atraso
 }
 
 function updateInterestCount() {
     if (interestCountEl) {
-        const totalItems = interestItems.reduce((sum, item) => sum + item.quantity, 0);
-        interestCountEl.textContent = totalItems;
-        if (totalItems > 0) {
+        const count = interestItems.reduce((sum, item) => sum + (item.quantity || 0), 0);
+        interestCountEl.textContent = count;
+        if (count > 0) {
             interestCountEl.classList.add('has-items');
         } else {
             interestCountEl.classList.remove('has-items');
@@ -523,23 +570,22 @@ function showContactModal() {
     if (interestItems.length === 0) {
         selectedSummary.innerHTML = '<p>Sua lista de interesses está vazia. Adicione itens antes de solicitar um orçamento.</p>';
         itemsDataInput.value = "Nenhum item selecionado.";
-        // Opcional: desabilitar o botão de enviar ou impedir a abertura do modal se a lista estiver vazia
-        // Ou simplesmente permitir que o usuário envie um contato geral
     } else {
         interestItems.forEach(item => {
             const div = document.createElement("div");
-            const label = typeof item.price === 'number' ? `R$ ${item.price.toFixed(2).replace('.', ',')}` : item.price;
-            div.innerHTML = `<strong>${item.quantity}x</strong> ${item.name} (${label})`;
+            const itemPrice = parsePrice(item.price);
+            const subtotal = itemPrice * (item.quantity || 1);
+            div.innerHTML = `<strong>${item.quantity}x</strong> ${item.name} (R$ ${itemPrice.toFixed(2).replace('.', ',')}) - Subtotal: R$ ${subtotal.toFixed(2).replace('.', ',')}`;
             if (selectedSummary) selectedSummary.appendChild(div);
-            text += `${item.quantity}x ${item.name} (${label})\n`;
-            total += parsePrice(item.price) * (item.quantity || 1);
+            text += `${item.quantity}x ${item.name} (R$ ${itemPrice.toFixed(2).replace('.', ',')}) - Subtotal: R$ ${subtotal.toFixed(2).replace('.', ',')}\n`;
+            total += subtotal;
         });
 
         if (total > 0) text += `\nTotal Geral: R$ ${total.toFixed(2).replace(".", ",")}`;
         if (itemsDataInput) itemsDataInput.value = text.trim();
     }
 
-    if (contactModal) contactModal.classList.add('open'); // Usa a classe 'open'
+    if (contactModal) contactModal.classList.add('open');
     hideInterestPanel();
 }
 
@@ -560,16 +606,15 @@ function initContactForm() {
         const orig = btn ? btn.innerHTML : "";
         if (btn) { btn.innerHTML = "Enviando..."; btn.disabled = true; }
 
-        // Usando FormSubmit.co
         fetch(form.action, { method: "POST", body: new FormData(form) })
             .then(response => {
                 if (response.ok) {
                     alert("Sua lista de interesses foi enviada com sucesso!");
                     closeContactModal();
-                    interestItems = []; // Limpa a lista após o envio
-                    saveInterestItems(); // Salva a lista vazia no localStorage
+                    interestItems = [];
+                    saveInterestItems();
                     updateInterestPanel();
-                    window.location.href = "obrigado.html"; // Redireciona para a página de obrigado
+                    window.location.href = "obrigado.html";
                 } else {
                     alert("Erro ao enviar. Tente novamente.");
                 }
@@ -608,7 +653,7 @@ function setupBackToTopButton() {
 
 document.addEventListener("DOMContentLoaded", () => {
     // Atribui elementos DOM às variáveis
-    catalogGrid = document.getElementById("catalog"); // Pode ser nulo se não for página de catálogo
+    catalogGrid = document.getElementById("catalog");
     loader = document.getElementById("loader");
     resultsCount = document.getElementById("resultsCount");
     backToTopBtn = document.getElementById("backToTopBtn");
@@ -621,21 +666,20 @@ document.addEventListener("DOMContentLoaded", () => {
     selectedSummary = document.getElementById("selectedItemsSummary");
     itemsDataInput = document.getElementById("itemsData");
     openInterestPanelFromHeaderBtn = document.getElementById("openInterestPanelFromHeader");
-    interestCountEl = document.querySelector('.interest-count'); // Inicializa o elemento de contagem
+    interestCountEl = document.querySelector('.interest-count');
+    modalProductDescription = document.getElementById("modalProductDescription"); // Inicializa o novo elemento
+    modalThumbnailsContainer = document.getElementById("modalThumbnails"); // Inicializa o novo elemento
 
-    // Carrega todos os dados (produtos e carrossel)
     loadAllData();
-    updateInterestPanel(); // Atualiza o painel de interesses ao carregar a página
-    updateInterestCount(); // Garante que a contagem inicial esteja correta
+    updateInterestPanel();
+    updateInterestCount();
 
-    // Event Listeners para o painel de interesses
     if (openInterestPanelFromHeaderBtn) {
         openInterestPanelFromHeaderBtn.addEventListener("click", toggleInterestPanel);
     }
     const closePanelBtn = document.getElementById("closeInterestPanelBtn");
     if (closePanelBtn) closePanelBtn.addEventListener("click", hideInterestPanel);
 
-    // Event Listeners para o modal de imagem
     if (imgModal) {
         imgModal.addEventListener("wheel", handleWheelZoom, { passive: false });
         imgModal.querySelector('.close').addEventListener('click', closeImageModal);
@@ -644,7 +688,6 @@ document.addEventListener("DOMContentLoaded", () => {
         imgModal.querySelector('#zoomInBtn').addEventListener('click', () => zoomImage(ZOOM_INCREMENT));
         imgModal.querySelector('#zoomOutBtn').addEventListener('click', () => zoomImage(-ZOOM_INCREMENT));
         imgModal.querySelector('#zoomResetBtn').addEventListener('click', resetZoomAndPan);
-        // Fechar modal ao clicar fora da imagem (mas dentro do modal)
         imgModal.addEventListener('click', (e) => {
             if (e.target === e.currentTarget) {
                 closeImageModal();
@@ -654,22 +697,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (modalImg) {
         modalImg.addEventListener("mousedown", handlePanStart);
         modalImg.addEventListener("touchstart", handlePanStart, { passive: false });
-        modalImg.addEventListener("contextmenu", e => e.preventDefault()); // Impede menu de contexto no clique direito
-        modalImg.addEventListener('click', e => e.stopPropagation()); // Impede que o clique na imagem feche o modal
+        modalImg.addEventListener("contextmenu", e => e.preventDefault());
+        modalImg.addEventListener('click', e => e.stopPropagation());
     }
 
-    // Event Listeners para o modal de contato
-    const openContactModalBtn = document.getElementById("openContactModalBtn"); // Botão para abrir o modal de contato (dentro do painel de interesses)
+    const openContactModalBtn = document.getElementById("openContactModalBtn");
     if (openContactModalBtn) openContactModalBtn.addEventListener("click", showContactModal);
     const closeContactModalBtn = document.querySelector('.contact-modal .close-contact');
     if (closeContactModalBtn) closeContactModalBtn.addEventListener('click', closeContactModal);
 
-    initContactForm(); // Inicializa o formulário de contato
+    initContactForm();
 
-    // Inicializa filtros se estiver em uma página de catálogo
     if (document.querySelector('.filter-section')) {
         initFilters();
     }
 
-    setupBackToTopButton(); // Configura o botão "Voltar ao Topo"
+    setupBackToTopButton();
 });
