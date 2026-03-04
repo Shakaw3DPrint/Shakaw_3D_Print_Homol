@@ -4,10 +4,10 @@
     "name": "Suporte Hotweels",
     "description": "Produzido em Filamento PLA",
     "price": "22,00",
-    "mainImage": "assets/img/outros/suporte_hotweels.webp",
+    "mainImage": "/assets/img/outros/suporte_hotweels.webp",
     "thumbnails": [
-      "assets/img/outros/suporte_hotweels_1.webp",
-      "assets/img/outros/suporte_hotweels_2.webp"
+      "/assets/img/outros/suporte_hotweels_1.webp",
+      "/assets/img/outros/suporte_hotweels_2.webp"
     ],
     "category": "produtos-funcionais"
   },
@@ -16,9 +16,9 @@
     "name": "Porta lápis dragão",
     "description": "Produto artesanal produzido em filamento PLA",
     "price": "35,00",
-    "mainImage": "assets/img/outros/porta_lapis_dragao.webp",
+    "mainImage": "/assets/img/outros/porta_lapis_dragao.webp",
     "thumbnails": [
-      "assets/img/outros/porta_lapis_dragao_1.webp"
+      "/assets/img/outros/porta_lapis_dragao_1.webp"
     ],
     "category": "produtos-funcionais"
   },
@@ -27,12 +27,12 @@
     "name": "Deusa da Justiça Themis",
     "description": "Produto artesanal produzido em resina e pintado à mão. Altura aproximada de 16 cm",
     "price": "120,00",
-    "mainImage": "assets/img/outros/deusa_da_justica_themis.webp",
+    "mainImage": "/assets/img/outros/deusa_da_justica_themis.webp",
     "thumbnails": [
-      "assets/img/outros/deusa_da_justica_themis_1.webp",
-      "assets/img/outros/deusa_da_justica_themis_2.webp",
-      "assets/img/outros/deusa_da_justica_themis_3.webp",
-      "assets/img/outros/deusa_da_justica_themis_4.webp"
+      "/assets/img/outros/deusa_da_justica_themis_1.webp",
+      "/assets/img/outros/deusa_da_justica_themis_2.webp",
+      "/assets/img/outros/deusa_da_justica_themis_3.webp",
+      "/assets/img/outros/deusa_da_justica_themis_4.webp"
     ],
     "category": "miniaturas-3d"
   },
@@ -41,21 +41,21 @@
     "name": "Mascotes Futebol",
     "description": "Produto artesanal produzido em resina e pintado à mão. Altura aproximada de 10 cm. Mascotes: Palmeiras, São Paulo, Flamengo, Corinthians e mais.",
     "price": "70,00",
-    "mainImage": "assets/img/outros/mascotes_futebol.webp",
+    "mainImage": "/assets/img/outros/mascotes_futebol.webp",
     "thumbnails": [
-      "assets/img/outros/mascotes_futebol_1.webp",
-      "assets/img/outros/mascotes_futebol_2.webp",
-      "assets/img/outros/mascotes_futebol_3.webp",
-      "assets/img/outros/mascotes_futebol_4.webp",
-      "assets/img/outros/mascotes_futebol_5.webp",
-      "assets/img/outros/mascotes_futebol_6.webp",
-      "assets/img/outros/mascotes_futebol_7.webp",
-      "assets/img/outros/mascotes_futebol_8.webp",
-      "assets/img/outros/mascotes_futebol_9.webp",
-      "assets/img/outros/mascotes_futebol_10.webp",
-      "assets/img/outros/mascotes_futebol_11.webp",
-      "assets/img/outros/mascotes_futebol_12.webp",
-      "assets/img/outros/mascotes_futebol_13.webp"
+      "/assets/img/outros/mascotes_futebol_1.webp",
+      "/assets/img/outros/mascotes_futebol_2.webp",
+      "/assets/img/outros/mascotes_futebol_3.webp",
+      "/assets/img/outros/mascotes_futebol_4.webp",
+      "/assets/img/outros/mascotes_futebol_5.webp",
+      "/assets/img/outros/mascotes_futebol_6.webp",
+      "/assets/img/outros/mascotes_futebol_7.webp",
+      "/assets/img/outros/mascotes_futebol_8.webp",
+      "/assets/img/outros/mascotes_futebol_9.webp",
+      "/assets/img/outros/mascotes_futebol_10.webp",
+      "/assets/img/outros/mascotes_futebol_11.webp",
+      "/assets/img/outros/mascotes_futebol_12.webp",
+      "/assets/img/outros/mascotes_futebol_13.webp"
     ],
     "category": "miniaturas-3d"
   },
@@ -64,7 +64,7 @@
     "name": "Suporte de Mesa para Headset",
     "description": "Produzido em filamento PLA. Informar a espessura da mesa utilizada.",
     "price": "35,00",
-    "mainImage": "assets/img/outros/suporte_de_mesa_para_headset.webp",
+    "mainImage": "/assets/img/outros/suporte_de_mesa_para_headset.webp",
     "thumbnails": [],
     "category": "produtos-funcionais"
   },
@@ -73,9 +73,9 @@
     "name": "Suporte Alexa T800",
     "description": "Produzido em Filamento PLA.",
     "price": "60,00",
-    "mainImage": "assets/img/outros/suporte_alexa_t800.webp",
+    "mainImage": "/assets/img/outros/suporte_alexa_t800.webp",
     "thumbnails": [
-      "assets/img/outros/suporte_alexa_t800_1.webp"
+      "/assets/img/outros/suporte_alexa_t800_1.webp"
     ],
     "category": "produtos-funcionais"
   },
@@ -84,9 +84,9 @@
     "name": "Suporte Alexa Boo – Super Mario World",
     "description": "Produzido em Filamento PLA.",
     "price": "60,00",
-    "mainImage": "assets/img/outros/suporte_alexa_boo_super_mario_world.webp",
+    "mainImage": "/assets/img/outros/suporte_alexa_boo_super_mario_world.webp",
     "thumbnails": [
-      "assets/img/outros/suporte_alexa_boo_super_mario_world_1.webp"
+      "/assets/img/outros/suporte_alexa_boo_super_mario_world_1.webp"
     ],
     "category": "produtos-funcionais"
   },
@@ -95,12 +95,12 @@
     "name": "Scar – O Rei Leão",
     "description": "Produto artesanal produzido em resina e pintado à mão. Altura aproximada de 14 cm",
     "price": "130,00",
-    "mainImage": "assets/img/outros/scar_o_rei_leao.webp",
+    "mainImage": "/assets/img/outros/scar_o_rei_leao.webp",
     "thumbnails": [
-      "assets/img/outros/scar_o_rei_leao_1.webp",
-      "assets/img/outros/scar_o_rei_leao_2.webp",
-      "assets/img/outros/scar_o_rei_leao_3.webp",
-      "assets/img/outros/scar_o_rei_leao_4.webp"
+      "/assets/img/outros/scar_o_rei_leao_1.webp",
+      "/assets/img/outros/scar_o_rei_leao_2.webp",
+      "/assets/img/outros/scar_o_rei_leao_3.webp",
+      "/assets/img/outros/scar_o_rei_leao_4.webp"
     ],
     "category": "miniaturas-3d"
   },
@@ -109,11 +109,11 @@
     "name": "Yennefer – The Witcher",
     "description": "Produto artesanal produzido em resina e pintado à mão. Altura aproximada de 17 cm",
     "price": "150,00",
-    "mainImage": "assets/img/outros/yennefer_the_witcher.webp",
+    "mainImage": "/assets/img/outros/yennefer_the_witcher.webp",
     "thumbnails": [
-      "assets/img/outros/yennefer_the_witcher_1.webp",
-      "assets/img/outros/yennefer_the_witcher_2.webp",
-      "assets/img/outros/yennefer_the_witcher_3.webp"
+      "/assets/img/outros/yennefer_the_witcher_1.webp",
+      "/assets/img/outros/yennefer_the_witcher_2.webp",
+      "/assets/img/outros/yennefer_the_witcher_3.webp"
     ],
     "category": "miniaturas-3d"
   },
@@ -122,7 +122,7 @@
     "name": "Mecha Gengar – Pokémon",
     "description": "Produto artesanal produzido em resina e pintado à mão. Altura aproximada de 13 cm",
     "price": "130,00",
-    "mainImage": "assets/img/outros/mecha_gengar_pokemon.webp",
+    "mainImage": "/assets/img/outros/mecha_gengar_pokemon.webp",
     "thumbnails": [],
     "category": "miniaturas-3d"
   }
