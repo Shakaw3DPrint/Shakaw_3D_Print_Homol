@@ -1,13 +1,13 @@
 const GITHUB_OWNER = "Shakaw3DPrint";
 const GITHUB_REPO = "Shakaw_3D_Print";
 const GITHUB_BRANCH = "main";
-// const BASE_URL = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/`; // Removido ou comentado
+// A BASE_URL foi removida pois os caminhos das imagens nos JSONs agora são absolutos a partir da raiz do site
+// const BASE_URL = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/`;
 
 let allProducts = [];
 let carouselItems = [];
 let currentSlide = 0;
-let slideInterval;
-let currentZoom = 1;
+let currentZoom = 1; // Zoom inicial padrão
 let currentImageIndex = 0;
 let filteredImages = []; // Para o modal de imagem
 let modalImages = []; // Armazena todas as imagens do produto para o modal
@@ -27,11 +27,13 @@ let contactModal;
 let selectedSummary;
 let itemsDataInput;
 let openInterestPanelFromHeaderBtn;
+let interestCountEl; // Elemento para exibir a contagem de itens no carrinho
 
 // Constantes para zoom
 const ZOOM_INCREMENT = 0.1; // Incremento/decremento do zoom
 const MAX_ZOOM = 5;         // Zoom máximo
-const MIN_ZOOM = 0.5;       // Zoom mínimo
+const MIN_ZOOM = 0.2;       // Zoom mínimo (ajustado para permitir mais redução)
+const DEFAULT_ZOOM = 1;     // Zoom padrão ao abrir o modal ou resetar
 
 // Variáveis para pan (movimento da imagem)
 let isPanning = false;
@@ -45,6 +47,7 @@ let interestItems = JSON.parse(localStorage.getItem('interestItems')) || [];
 let interestPanelTimeoutId;
 
 const categoryBadgeMap = {
+    // CORREÇÃO AQUI: Usando < e > diretamente, não < e >
     "diorama-garagem": '<span class="cat-badge cat-diorama-garagem">Diorama Garagem</span>',
     "miniaturas-3d": '<span class="cat-badge cat-miniaturas-3d">Miniaturas 3D</span>',
     "miniaturas-rpg": '<span class="cat-badge cat-miniaturas-rpg">Miniaturas RPG</span>',
@@ -142,7 +145,8 @@ function renderInstagramCarousel() {
     carouselItems.forEach(item => {
         const carouselItemDiv = document.createElement("div");
         carouselItemDiv.className = "instagram-carousel-item";
-        // CORREÇÃO AQUI: item.src já deve ser o caminho completo /assets/img/...
+        // item.src já deve ser o caminho completo /assets/img/...
+        // CORREÇÃO AQUI: A tag <img> estava faltando no innerHTML
         carouselItemDiv.innerHTML = `
             <img src="${item.src}" alt="${item.alt}">
             <div class="instagram-caption">${item.caption || ''}</div>
@@ -171,7 +175,7 @@ function renderProducts(productsToRender) {
         card.className = "product-card";
         card.dataset.productId = product.id;
 
-        // CORREÇÃO AQUI: product.mainImage já deve ser o caminho completo /assets/img/...
+        // product.mainImage já deve ser o caminho completo /assets/img/...
         const imgSrc = product.mainImage ? product.mainImage : 'https://via.placeholder.com/200x200?text=Sem+Imagem';
         const categoryBadge = categoryBadgeMap[product.category] || '';
 
@@ -276,11 +280,11 @@ function openImageModal(product) {
 
     modalImages = [];
     if (product.mainImage) {
-        modalImages.push(product.mainImage); // CORREÇÃO AQUI: Caminho já completo
+        modalImages.push(product.mainImage); // Caminho já completo
     }
     if (product.thumbnails && product.thumbnails.length > 0) {
         product.thumbnails.forEach(thumb => {
-            modalImages.push(thumb); // CORREÇÃO AQUI: Caminho já completo
+            modalImages.push(thumb); // Caminho já completo
         });
     }
 
@@ -290,14 +294,14 @@ function openImageModal(product) {
 
     currentModalImageIndex = 0;
     showModalImage(currentModalImageIndex);
-    resetZoomAndPan();
+    resetZoomAndPan(); // Garante que o zoom e pan sejam resetados ao abrir o modal
     imgModal.classList.add('open'); // Adiciona a classe 'open' para exibir o modal
 }
 
 function closeImageModal() {
     if (imgModal) {
         imgModal.classList.remove('open'); // Remove a classe 'open' para esconder o modal
-        resetZoomAndPan();
+        resetZoomAndPan(); // Garante que o zoom e pan sejam resetados ao fechar o modal
     }
 }
 
@@ -318,7 +322,7 @@ function zoomImage(amount) {
 }
 
 function resetZoomAndPan() {
-    currentZoom = 1;
+    currentZoom = DEFAULT_ZOOM; // Usa o zoom padrão
     currentImgTranslateX = 0;
     currentImgTranslateY = 0;
     applyZoomAndPan();
@@ -327,7 +331,7 @@ function resetZoomAndPan() {
 function applyZoomAndPan() {
     if (modalImg) {
         modalImg.style.transform = `scale(${currentZoom}) translate(${currentImgTranslateX}px, ${currentImgTranslateY}px)`;
-        modalImg.style.cursor = currentZoom > 1 ? 'grab' : 'zoom-in';
+        modalImg.style.cursor = currentZoom > DEFAULT_ZOOM ? 'grab' : 'zoom-in'; // Cursor muda se houver zoom
     }
 }
 
@@ -339,7 +343,7 @@ function handleWheelZoom(e) {
 }
 
 function handlePanStart(e) {
-    if (currentZoom <= 1) return; // Só permite pan se houver zoom
+    if (currentZoom <= DEFAULT_ZOOM) return; // Só permite pan se houver zoom
     isPanning = true;
     modalImg.style.cursor = 'grabbing';
     panStartX = e.clientX || e.touches[0].clientX;
@@ -371,7 +375,7 @@ function handlePanMove(e) {
 
 function handlePanEnd() {
     isPanning = false;
-    if (modalImg) modalImg.style.cursor = currentZoom > 1 ? 'grab' : 'zoom-in';
+    if (modalImg) modalImg.style.cursor = currentZoom > DEFAULT_ZOOM ? 'grab' : 'zoom-in';
     document.removeEventListener('mousemove', handlePanMove);
     document.removeEventListener('mouseup', handlePanEnd);
     document.removeEventListener('touchmove', handlePanMove);
@@ -427,23 +431,23 @@ function saveInterestItems() {
 function updateInterestPanel() {
     if (!interestList || !interestTotalEl) return;
 
-    interestList.innerHTML = "";
+    interestList.innerHTML = ""; // Limpa o conteúdo existente
     let total = 0;
 
     if (interestItems.length === 0) {
-        interestList.innerHTML = '<p class="empty-message">Sua lista de interesses está vazia.</p>';
+        interestList.innerHTML = '<li class="empty-message">Sua lista de interesses está vazia.</li>';
     } else {
         interestItems.forEach(item => {
             const listItem = document.createElement("li");
             listItem.className = "interest-item";
             listItem.innerHTML = `
-                <span class="item-name">${item.name}</span>
+                <span>${item.name}</span>
                 <div class="item-controls">
                     <button class="quantity-btn decrease" data-id="${item.id}">-</button>
-                    <span class="item-quantity">${item.quantity}</span>
+                    <span>${item.quantity}</span>
                     <button class="quantity-btn increase" data-id="${item.id}">+</button>
-                    <span class="item-price">R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}</span>
-                    <button class="remove-item" data-id="${item.id}">x</button>
+                    <span>R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}</span>
+                    <button class="remove-item" data-id="${item.id}"><i class="fas fa-times"></i></button>
                 </div>
             `;
             interestList.appendChild(listItem);
@@ -463,6 +467,8 @@ function updateInterestPanel() {
     interestList.querySelectorAll('.remove-item').forEach(button => {
         button.addEventListener('click', (e) => removeFromInterest(e.target.dataset.id));
     });
+
+    updateInterestCount(); // Garante que a contagem seja atualizada
 }
 
 function toggleInterestPanel() {
@@ -491,6 +497,18 @@ function hideInterestPanel() {
     }
 }
 
+function updateInterestCount() {
+    if (interestCountEl) {
+        const totalItems = interestItems.reduce((sum, item) => sum + item.quantity, 0);
+        interestCountEl.textContent = totalItems;
+        if (totalItems > 0) {
+            interestCountEl.classList.add('has-items');
+        } else {
+            interestCountEl.classList.remove('has-items');
+        }
+    }
+}
+
 // =============================================
 // MODAL DE CONTATO (FINALIZAR PEDIDO)
 // =============================================
@@ -502,17 +520,25 @@ function showContactModal() {
     let text = "";
     let total = 0;
 
-    interestItems.forEach(item => {
-        const div = document.createElement("div");
-        const label = typeof item.price === 'number' ? `R$ ${item.price.toFixed(2).replace('.', ',')}` : item.price;
-        div.innerHTML = `<strong>${item.quantity}x</strong> ${item.name} (${label})`;
-        if (selectedSummary) selectedSummary.appendChild(div);
-        text += `${item.quantity}x ${item.name} (${label})\n`;
-        total += parsePrice(item.price) * (item.quantity || 1);
-    });
+    if (interestItems.length === 0) {
+        selectedSummary.innerHTML = '<p>Sua lista de interesses está vazia. Adicione itens antes de solicitar um orçamento.</p>';
+        itemsDataInput.value = "Nenhum item selecionado.";
+        // Opcional: desabilitar o botão de enviar ou impedir a abertura do modal se a lista estiver vazia
+        // Ou simplesmente permitir que o usuário envie um contato geral
+    } else {
+        interestItems.forEach(item => {
+            const div = document.createElement("div");
+            const label = typeof item.price === 'number' ? `R$ ${item.price.toFixed(2).replace('.', ',')}` : item.price;
+            div.innerHTML = `<strong>${item.quantity}x</strong> ${item.name} (${label})`;
+            if (selectedSummary) selectedSummary.appendChild(div);
+            text += `${item.quantity}x ${item.name} (${label})\n`;
+            total += parsePrice(item.price) * (item.quantity || 1);
+        });
 
-    if (total > 0) text += `\nTotal Geral: R$ ${total.toFixed(2).replace(".", ",")}`;
-    if (itemsDataInput) itemsDataInput.value = text.trim();
+        if (total > 0) text += `\nTotal Geral: R$ ${total.toFixed(2).replace(".", ",")}`;
+        if (itemsDataInput) itemsDataInput.value = text.trim();
+    }
+
     if (contactModal) contactModal.classList.add('open'); // Usa a classe 'open'
     hideInterestPanel();
 }
@@ -541,6 +567,7 @@ function initContactForm() {
                     alert("Sua lista de interesses foi enviada com sucesso!");
                     closeContactModal();
                     interestItems = []; // Limpa a lista após o envio
+                    saveInterestItems(); // Salva a lista vazia no localStorage
                     updateInterestPanel();
                     window.location.href = "obrigado.html"; // Redireciona para a página de obrigado
                 } else {
@@ -593,11 +620,13 @@ document.addEventListener("DOMContentLoaded", () => {
     contactModal = document.getElementById("contactModal");
     selectedSummary = document.getElementById("selectedItemsSummary");
     itemsDataInput = document.getElementById("itemsData");
-    openInterestPanelFromHeaderBtn = document.getElementById("openInterestPanelFromHeader"); // Inicializa aqui
+    openInterestPanelFromHeaderBtn = document.getElementById("openInterestPanelFromHeader");
+    interestCountEl = document.querySelector('.interest-count'); // Inicializa o elemento de contagem
 
     // Carrega todos os dados (produtos e carrossel)
     loadAllData();
     updateInterestPanel(); // Atualiza o painel de interesses ao carregar a página
+    updateInterestCount(); // Garante que a contagem inicial esteja correta
 
     // Event Listeners para o painel de interesses
     if (openInterestPanelFromHeaderBtn) {
